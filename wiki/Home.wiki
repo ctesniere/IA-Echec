@@ -11,7 +11,7 @@ The wiki itself is actually a git repository, which means you can clone it, edit
 Go ahead and try:
 
 {{{
-$ git clone https://bitbucket.org/tesniced/iaechec.git/wiki
+$ git clone https://bitbucket.org/ctesniere/iaechec.git/wiki
 }}}
 
 Wiki pages are normal files, with the .wiki extension. You can edit them locally, as well as creating new ones.
