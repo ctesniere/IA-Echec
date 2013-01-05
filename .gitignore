@@ -1,4 +1,5 @@
 # Divers #
+target/
 *~
 .DS_Store
 .buildpath
