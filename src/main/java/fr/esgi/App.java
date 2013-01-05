@@ -1,8 +1,10 @@
 package fr.esgi;
 
 /**
- * Hello world!
- *
+ * App
+ * 
+ * @author Cédric TESNIERE
+ * @since 5 janv. 2013
  */
 public class App 
 {
