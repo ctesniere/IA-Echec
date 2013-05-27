@@ -2,7 +2,7 @@
 
 ## Équipe
 
-Philippe YUEN, Cédric TESNIERE, Valérie MALET
+Philippe YUEN (@pyuen), Cédric TESNIERE (@ctesniere), Valérie MALET (@vmalet)
 
 ## Sujet
 
