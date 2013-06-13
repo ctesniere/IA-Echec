@@ -1,26 +1,24 @@
-# Divers #
-target/
+# Divers
+*/target/
+*.buildpath
+*.project
+*.settings
+*.classpath
+
+# OS generated files
+*.DS_Store*
+*._*
 *~
-.DS_Store
-.buildpath
-.project
-.settings
-.classpath
+*.Spotlight-V100
+*.Trashes
+*Icon?
+*ehthumbs.db
+*Thumbs.db
 
-# OS generated files #
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Icon?
-ehthumbs.db
-Thumbs.db
-
-# Class generate #
+# Class generate
 *.class
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
