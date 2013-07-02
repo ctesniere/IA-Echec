@@ -4,7 +4,7 @@ package fr.esgi.model;
  * 
  * @author CŽdric TESNIERE
  */
-public class Roi extends Piece {
+public class Roi extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -22,6 +22,11 @@ public class Roi extends Piece {
 	// METHODS
 	// =========================================================================
 
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
+	@Override
 	public boolean CanGoTo(Position _pos) {
 		/*
 		 * try{ // gestion des roques if (couleur.equals(Color.white)){ if
@@ -39,17 +44,13 @@ public class Roi extends Piece {
 				&& _pos.dy(getPosition()) <= 1;
 	}
 
-	// =========================================================================
-	// GETTERS & SETTERS
-	// =========================================================================
-
 	@Override
 	public String toString() {
 		return this.getClass().getName();
 	}
 
 	// =========================================================================
-	// OVERRIDES
+	// GETTERS & SETTERS
 	// =========================================================================
 
 }

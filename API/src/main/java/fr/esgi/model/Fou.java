@@ -4,7 +4,7 @@ package fr.esgi.model;
  * 
  * @author CŽdric TESNIERE
  */
-public class Fou extends Piece {
+public class Fou extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -22,13 +22,14 @@ public class Fou extends Piece {
 	// METHODS
 	// =========================================================================
 
-	public boolean CanGoTo(Position _pos) {
-		return !_pos.equals(getPosition()) && _pos.isInDiagonale(getPosition());
-	}
-
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
+
+	@Override
+	public boolean CanGoTo(Position _pos) {
+		return !_pos.equals(getPosition()) && _pos.isInDiagonale(getPosition());
+	}
 
 	@Override
 	public String toString() {

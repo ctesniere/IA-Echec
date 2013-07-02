@@ -4,7 +4,7 @@ package fr.esgi.model;
  * 
  * @author CŽdric TESNIERE
  */
-public class Pion extends Piece {
+public class Pion extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -22,6 +22,11 @@ public class Pion extends Piece {
 	// METHODS
 	// =========================================================================
 
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
+	@Override
 	public boolean CanGoTo(Position _pos) {
 		// if (prise) {
 		// // System.out.println("pion prend");
@@ -34,10 +39,6 @@ public class Pion extends Piece {
 						: (_pos.y == getPosition().y - 1 || (_pos.y == 4 && getPosition().y == 6)));
 		// }
 	}
-
-	// =========================================================================
-	// OVERRIDES
-	// =========================================================================
 
 	@Override
 	public String toString() {
