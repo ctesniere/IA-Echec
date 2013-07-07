@@ -1,50 +1,66 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
+ * Classe mère pour les différentes pièces du plateau
  * 
  * @author Cédric TESNIERE
  */
-public class Tour extends Piece implements PieceRule {
+public class Piece {
 
 	// =========================================================================
 	// ATTRIBUTES
 	// =========================================================================
 
-	/**
-	 * @see Position
-	 * @see Tour#getPosition()
-	 * @see Tour#setPosition(Position)
-	 */
 	private Position position;
 
-	/**
-	 * @see Color
-	 * @see Tour#getColor()
-	 * @see Tour#setColor(Color)
-	 */
 	private Color color;
 
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Tour() {
-		super();
+	public Piece() {
+
+	}
+
+	public Piece(Position _p) {
+		this.position = _p;
+		this.color = Color.undef;
+	}
+
+	public Piece(Position _p, Color _c) {
+		this.position = _p;
+		this.color = _c;
 	}
 
 	// =========================================================================
 	// METHODS
 	// =========================================================================
 
+	public char GetRepresentation() {
+		if (!color.equals(Color.undef))
+			return (char) ((color.equals(Color.white) ? 'A' - 'a' : '\0'));
+		else
+			return '_';
+	}
+
+	public boolean isEmpty() {
+		return color.equals(Color.undef);
+	}
+	
+	/**
+	 * Permet de savoir si un déplacement vers une position définie en parametre est valide
+	 * 
+	 * @param pos
+	 * @return boolean
+	 */
+	public boolean CanGoTo(Position pos) {
+		return false;
+	}
+
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
-
-	@Override
-	public boolean CanGoTo(Position _pos) {
-		return (!_pos.equals(color) && (_pos.isSameCol(position) || _pos
-				.isSameRow(position)));
-	}
 
 	@Override
 	public String toString() {
@@ -63,7 +79,11 @@ public class Tour extends Piece implements PieceRule {
 		this.position = _position;
 	}
 
-	public void setColor(Color _c) {
-		color = _c;
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color _color) {
+		this.color = _color;
 	}
 }

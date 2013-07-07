@@ -1,10 +1,10 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
  * 
  * @author CŽdric TESNIERE
  */
-public class Dame extends Piece implements PieceRule {
+public class Cavalier extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -14,10 +14,7 @@ public class Dame extends Piece implements PieceRule {
 	// CONSTRUCTORS
 	// =========================================================================
 
-	/**
-	 * Constructor without field
-	 */
-	public Dame() {
+	public Cavalier() {
 		super();
 	}
 
@@ -31,15 +28,8 @@ public class Dame extends Piece implements PieceRule {
 
 	@Override
 	public boolean CanGoTo(Position _pos) {
-		return !_pos.equals(getPosition())
-				&& (_pos.isSameCol(getPosition())
-						|| _pos.isSameRow(getPosition()) || _pos
-							.isInDiagonale(getPosition()));
-	}
-
-	@Override
-	public String toString() {
-		return this.getClass().getName();
+		return (_pos.dx(getPosition()) == 1 && _pos.dy(getPosition()) == 2)
+				|| (_pos.dx(getPosition()) == 2 && _pos.dy(getPosition()) == 1);
 	}
 
 	// =========================================================================

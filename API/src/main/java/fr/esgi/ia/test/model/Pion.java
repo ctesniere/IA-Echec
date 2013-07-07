@@ -1,10 +1,10 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
  * 
  * @author CŽdric TESNIERE
  */
-public class Cavalier extends Piece implements PieceRule {
+public class Pion extends Piece {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -14,7 +14,7 @@ public class Cavalier extends Piece implements PieceRule {
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Cavalier() {
+	public Pion() {
 		super();
 	}
 
@@ -27,14 +27,17 @@ public class Cavalier extends Piece implements PieceRule {
 	// =========================================================================
 
 	@Override
-	public boolean CanGoTo(Position pos) {
-		return (pos.dx(getPosition()) == 1 && pos.dy(getPosition()) == 2)
-				|| (pos.dx(getPosition()) == 2 && pos.dy(getPosition()) == 1);
-	}
-
-	@Override
-	public String toString() {
-		return this.getClass().getName();
+	public boolean CanGoTo(Position _pos) {
+		// if (prise) {
+		// // System.out.println("pion prend");
+		// return pos.isInDiagonale(selfpos)
+		// && (couleur.equals(Color.white) ? (pos.y == selfpos.y + 1)
+		// : (pos.y == selfpos.y - 1));
+		// } else {
+		return _pos.isSameCol(getPosition())
+				&& (getColor().equals(Color.white) ? (_pos.y == getPosition().y + 1 || (_pos.y == 3 && getPosition().y == 1))
+						: (_pos.y == getPosition().y - 1 || (_pos.y == 4 && getPosition().y == 6)));
+		// }
 	}
 
 	// =========================================================================

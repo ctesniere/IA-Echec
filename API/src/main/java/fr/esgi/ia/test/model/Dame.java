@@ -1,74 +1,44 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
- * Classe mère pour les différentes pièces du plateau
  * 
  * @author Cédric TESNIERE
  */
-public class Piece {
+public class Dame extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
 	// =========================================================================
 
-	private Position position;
-
-	private Color color;
-
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Piece() {
-
-	}
-
-	public Piece(Position _p) {
-		this.position = _p;
-		this.color = Color.undef;
-	}
-
-	public Piece(Position _p, Color _c) {
-		this.position = _p;
-		this.color = _c;
+	/**
+	 * Constructor without field
+	 */
+	public Dame() {
+		super();
 	}
 
 	// =========================================================================
 	// METHODS
 	// =========================================================================
 
-	public char GetRepresentation() {
-		if (!color.equals(Color.undef))
-			return (char) ((color.equals(Color.white) ? 'A' - 'a' : '\0'));
-		else
-			return '_';
-	}
-
-	public boolean isEmpty() {
-		return color.equals(Color.undef);
-	}
-
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
+
+	@Override
+	public boolean CanGoTo(Position _pos) {
+		return !_pos.equals(getPosition())
+				&& (_pos.isSameCol(getPosition())
+						|| _pos.isSameRow(getPosition()) || _pos
+							.isInDiagonale(getPosition()));
+	}
 
 	// =========================================================================
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position _position) {
-		this.position = _position;
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color _color) {
-		this.color = _color;
-	}
 }

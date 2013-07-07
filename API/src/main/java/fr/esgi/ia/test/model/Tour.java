@@ -1,20 +1,24 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
  * 
  * @author CŽdric TESNIERE
  */
-public class Pion extends Piece implements PieceRule {
+public class Tour extends Piece implements PieceRule {
 
 	// =========================================================================
 	// ATTRIBUTES
 	// =========================================================================
 
+	private Position position;
+
+	private Color color;
+
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Pion() {
+	public Tour() {
 		super();
 	}
 
@@ -28,21 +32,8 @@ public class Pion extends Piece implements PieceRule {
 
 	@Override
 	public boolean CanGoTo(Position _pos) {
-		// if (prise) {
-		// // System.out.println("pion prend");
-		// return pos.isInDiagonale(selfpos)
-		// && (couleur.equals(Color.white) ? (pos.y == selfpos.y + 1)
-		// : (pos.y == selfpos.y - 1));
-		// } else {
-		return _pos.isSameCol(getPosition())
-				&& (getColor().equals(Color.white) ? (_pos.y == getPosition().y + 1 || (_pos.y == 3 && getPosition().y == 1))
-						: (_pos.y == getPosition().y - 1 || (_pos.y == 4 && getPosition().y == 6)));
-		// }
-	}
-
-	@Override
-	public String toString() {
-		return this.getClass().getName();
+		return (!_pos.equals(color) && (_pos.isSameCol(position) || _pos
+				.isSameRow(position)));
 	}
 
 	// =========================================================================

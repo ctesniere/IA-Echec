@@ -1,4 +1,4 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
  * Cette classe gère le placement des piéces sur l'echiquier

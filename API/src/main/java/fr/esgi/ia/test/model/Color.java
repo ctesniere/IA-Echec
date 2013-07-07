@@ -1,4 +1,4 @@
-package fr.esgi.model;
+package fr.esgi.ia.test.model;
 
 /**
  * 
