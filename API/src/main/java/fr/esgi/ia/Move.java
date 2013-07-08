@@ -19,23 +19,19 @@ public final class Move {
 
 	private boolean colour;
 
-	// ---------------------------//
-
 	private boolean ismangia = true;
-
-	// Promotion: flag and string
 
 	private boolean promo = false;
 
 	private String promotion = null;
 
-	public Move(int startingX, int startingY, int endingX, int endingY,
-			boolean color) {
-		startX = startingX;
-		endX = endingX;
-		startY = startingY;
-		endY = endingY;
-		setColour(color);
+	public Move(int _startingX, int _startingY, int _endingX, int _endingY,
+			boolean _color) {
+		startX = _startingX;
+		endX = _endingX;
+		startY = _startingY;
+		endY = _endingY;
+		setColour(_color);
 	}
 
 	public boolean checkValidity() {
@@ -79,8 +75,6 @@ public final class Move {
 		} // TODO:
 	}
 
-	// ----------- OLD GETTER AND SETTER AND FUNC
-
 	public boolean GetMangia() {
 		return ismangia;
 	}
@@ -98,37 +92,37 @@ public final class Move {
 		}
 	}
 
-	public static Move MossaPromozione(Move move, Chessboard miaScacchiera) {
+	public static Move MossaPromozione(Move _move, Chessboard _miaScacchiera) {
 
 		// se la mossa mi porta in y=7 o in y=0
-		if (((move.isColour()) && (move.getEndY() == 7))
-				|| ((!(move.isColour())) && (move.getEndY() == 0))) {
+		if (((_move.isColour()) && (_move.getEndY() == 7))
+				|| ((!(_move.isColour())) && (_move.getEndY() == 0))) {
 
-			Piece mioPezzo = miaScacchiera.getPieceMuov(move.getStartX(),
-					move.getStartY());
+			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(),
+					_move.getStartY());
 			// se è stato un pedone ad eseguire lamossa
 			if ((mioPezzo != null) && (mioPezzo.getId() <= 16)) {
-				move.SetPromo();
+				_move.SetPromo();
 			} // setto la mossa a promozione
 		}
-		return move;
+		return _move;
 	}
 
-	public static Chessboard FaiPromozione(Move miaMossa,
-			Chessboard miaScacchiera, String promo) {
+	public static Chessboard FaiPromozione(Move _miaMossa,
+			Chessboard _miaScacchiera, String _promo) {
 		// int x=miaMossa.GetXArrivo();
 		// int y=miaMossa.GetYArrivo();
 		// miaScacchiera.GetQuadrato(x,y)=new Regina();
-		return miaScacchiera;
+		return _miaScacchiera;
 	}
 
 	/*
 	 * PRIVATE
 	 */
 
-	private boolean isInBound(int value) {
+	private boolean isInBound(int _value) {
 
-		if ((value >= 0) && (value < 8)) {
+		if ((_value >= 0) && (_value < 8)) {
 			return true;
 		} else {
 			return false;
@@ -139,8 +133,8 @@ public final class Move {
 	 * GETTER AND SETTER
 	 */
 
-	public void setPromotion(String promotion) {
-		this.promotion = promotion;
+	public void setPromotion(String _promotion) {
+		this.promotion = _promotion;
 	}
 
 	public String getPromotion() {

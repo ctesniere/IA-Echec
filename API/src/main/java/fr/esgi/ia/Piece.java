@@ -14,18 +14,22 @@ abstract public class Piece {
 	 */
 	private int value;
 
-	private int id, y, x, enemy;
+	private int y, x, enemy;
 
-	private boolean colour, inDanger, moved;
+	private boolean color, inDanger, moved;
 
 	public int[][] valPos = new int[8][8];
 
 	/** < Array for the position value */
 
-	Piece() {
+	public Piece() {
 		inDanger = false; // No one is in danger at the start
 		moved = false;
 		setEnemy(0);
+	}
+	
+	public Piece(int _id) {
+		
 	}
 
 	public String getStartingPosition(int ID) {
@@ -50,7 +54,7 @@ abstract public class Piece {
 	}
 
 	public int getPositionValue() {
-		if (isColour()) {
+		if (isColor()) {
 			return valPos[y][x];
 		} else {
 			return -(valPos[y][x]);
@@ -58,13 +62,13 @@ abstract public class Piece {
 	}
 
 	/**
-	 * This function needs to be implemented in every subclass.
+	 * Cette fonction doit être mise en œuvre dans chaque sous-classe.
 	 */
 	abstract public ArrayList<Move> generateMovesForThisPiece(
 			Chessboard chessboard);
 
 	/**
-	 * This function needs to be implemented in every subclass.
+	 * Cette fonction doit être mise en œuvre dans chaque sous-classe.
 	 */
 	@Override
 	public Object clone() {
@@ -89,14 +93,6 @@ abstract public class Piece {
 		return y;
 	}
 
-	protected void setId(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
-
 	public void setMoved(boolean moved) {
 		this.moved = moved;
 	}
@@ -113,13 +109,13 @@ abstract public class Piece {
 		return inDanger;
 	}
 
-	protected boolean setColour(boolean colour) {
-		this.colour = colour;
-		return colour;
+	protected boolean setColor(boolean color) {
+		this.color = color;
+		return color;
 	}
 
-	public boolean isColour() {
-		return colour;
+	public boolean isColor() {
+		return color;
 	}
 
 	protected void setValue(int value) {

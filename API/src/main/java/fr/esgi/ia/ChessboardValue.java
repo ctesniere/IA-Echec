@@ -152,68 +152,67 @@ public class ChessboardValue {
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 				// Se la casella non è vuota
-				if (getActualChessboard().getPieceMuov(x, y) != null) {
-					Piece pezzo = getActualChessboard().getPieceMuov(x, y);
+				if (getActualChessboard().getPieceMouv(x, y) != null) {
+					Piece piece = getActualChessboard().getPieceMouv(x, y);
 					// Se il pezzo non è in pericolo ed è del mio colore
-					if ((!pezzo.isInDanger()) && (pezzo.isColour() == color)) {
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) {
 						// e si è mosso
-						if (pezzo.isMoved()) {
+						if (piece.isMoved()) {
 							// Valutazione normale
-							temp = pezzo.getValue() + pezzo.getPositionValue();
+							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
 						}
 						// Se non si è mosso
 						else {
 							// Se è nero
-							if (pezzo.isColour() == false) {
-								// Se sono le mie torri o il re
-								if ((pezzo.getId() == 31)
-										|| (pezzo.getId() == 27)
-										|| (pezzo.getId() == 25)) {
-									// Valutazione normale
-									temp = pezzo.getValue()
-											+ pezzo.getPositionValue();
+							if (piece.isColor() == false) {
+								// Si Tour ou roi
+								if ((piece.getId() == 31)
+										|| (piece.getId() == 27)
+										|| (piece.getId() == 25)) {
+									// Note normale
+									temp = piece.getValue() + piece.getPositionValue();
 									val = val + temp;
 								}
 								// Se è un altro pezzo qualsiasi
 								else {
 									// Dai un vantaggio al bianco di 10
-									temp = pezzo.getValue()
-											+ pezzo.getPositionValue();
+									temp = piece.getValue()
+											+ piece.getPositionValue();
 									val = val + temp + 10;
 								}
 							}
 							// Se è il bianco
 							else {
 								// Se sono le mie torri o il re
-								if ((pezzo.getId() == 32)
-										|| (pezzo.getId() == 28)
-										|| (pezzo.getId() == 26)) {
+								if ((piece.getId() == 32)
+										|| (piece.getId() == 28)
+										|| (piece.getId() == 26)) {
 									// Valutazione normale
-									temp = pezzo.getValue()
-											+ pezzo.getPositionValue();
+									temp = piece.getValue()
+											+ piece.getPositionValue();
 									val = val + temp;
 								}
 								// Se è un altro pezzo qualsiasi
 								else {
 									// Dai un vantaggio al nero di 10
-									temp = pezzo.getValue()
-											+ pezzo.getPositionValue();
+									temp = piece.getValue()
+											+ piece.getPositionValue();
 									val = val + temp - 10;
 								}
 							}
 						}
 					}
 					// Se il pezzo è in pericolo e non è del mio colore
-					if ((pezzo.isInDanger()) && (pezzo.isColour() != color)) {
+					if ((piece.isInDanger()) && (piece.isColor() != color)) {
 						// Dai un vantaggio del 15% del valore del pezzo
-						temp = (int) pezzo.getValue() * 15 / 100;
+						temp = (int) piece.getValue() * 15 / 100;
 						val = val - temp;
 					}
 					// Se il pezzo non è del mio colore
-					if (pezzo.isColour() != color) {
+					if (piece.isColor() != color) {
 						// Valutazione normale
-						temp = pezzo.getValue() + pezzo.getPositionValue();
+						temp = piece.getValue() + piece.getPositionValue();
 						val = val + temp;
 					}
 				}

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/get")
 public class JSONController {
 
-	@RequestMapping(value = "/{pions}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{pions}/{tour}", method = RequestMethod.GET)
 	public @ResponseBody
-	Shop getShopInJSON(@PathVariable String pions) {
+	Shop getShopInJSON(@PathVariable String pions, @PathVariable String tour) {
 
 		Shop shop = new Shop();
 		shop.setName(pions);

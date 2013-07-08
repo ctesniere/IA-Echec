@@ -3,43 +3,42 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * This class represent the Pawn piece.
+ * Cette classe represente les pions
+ * 
+ * Le pion est la pièce la moins mobile du jeu et pour cette raison la moins
+ * forte. Au début de la partie, chaque joueur possède huit pions, placés en
+ * deuxième ligne devant les autres pièces (rangée 2 pour les Blancs et rangée 7
+ * pour les Noirs).
  * 
  * @author Cédric TESNIERE
  */
 public class Pion extends Piece {
 
-	/** Creates a new instance of Pawn from it's ID */
-	public Pion(int _id) {
-
+	/**
+	 * Création d'une instance Pion
+	 * 
+	 * @param _color
+	 */
+	public Pion(boolean _color) {
 		super();
+		setColor(isColor());
 
-		setId(_id);
-		setColour(Helper.IsEven(_id));
-
-		if (isColour() == false)
+		if (isColor() == false)
 			setValue(-100);
 		else
 			setValue(100);
-
-		// Starting position
-		String square = getStartingPosition(_id);
-		setX(Helper.getXfromString(square));
-		setY(Helper.getYfromString(square));
-
 	}
 
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
 	public Object clone() {
-
-		Pion myClone = new Pion(this.getId());
-		myClone.setInDanger(this.isInDanger());
-		myClone.setEnemy(this.getEnemy());
-		myClone.setMoved(this.isMoved());
+		Pion myClone = new Pion(isColor());
+		myClone.setInDanger(isInDanger());
+		myClone.setEnemy(getEnemy());
+		myClone.setMoved(isMoved());
 		myClone.setPosition(getX(), getY());
-		myClone.setValPos(this.getValPos());
+		myClone.setValPos(getValPos());
 		return myClone;
 	}
 
@@ -48,7 +47,7 @@ public class Pion extends Piece {
 	 * other positions. We give all possible moves, not the good ones.
 	 * 
 	 * @param _chessboard
-	 *            The actual chessboard
+	 *            Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
@@ -59,7 +58,7 @@ public class Pion extends Piece {
 		ArrayList<Move> moves = new ArrayList<Move>();
 
 		// Movement
-		if (isColour())
+		if (isColor())
 			toY++;
 		else
 			toY--;
@@ -68,7 +67,7 @@ public class Pion extends Piece {
 
 		if (possiblePiece == null) {
 
-			Move move = new Move(getX(), getY(), toX, toY, this.isColour());
+			Move move = new Move(getX(), getY(), toX, toY, this.isColor());
 			if (toY == 7 || toY == 0)
 				move.SetPromo();
 			if (move.isValid())
@@ -76,7 +75,7 @@ public class Pion extends Piece {
 
 			// Two square
 			if (!(isMoved())) {
-				if (isColour())
+				if (isColor())
 					toY++;
 				else
 					toY--;
@@ -84,7 +83,7 @@ public class Pion extends Piece {
 				possiblePiece = _chessboard.getPiece(toX, toY);
 
 				if (possiblePiece == null) {
-					move = new Move(getX(), getY(), toX, toY, this.isColour());
+					move = new Move(getX(), getY(), toX, toY, this.isColor());
 					// move.SetCatturabile();
 					if (move.isValid())
 						moves.add(move);
@@ -97,7 +96,7 @@ public class Pion extends Piece {
 
 		toX = getX() - 1;
 		// Sx
-		if (isColour())
+		if (isColor())
 			toY = getY() + 1;
 		else
 			toY = getY() - 1;
@@ -105,9 +104,9 @@ public class Pion extends Piece {
 		possiblePiece = _chessboard.getPiece(toX, toY);
 
 		if ((possiblePiece != null)
-				&& (possiblePiece.isColour() != this.isColour())) {
+				&& (possiblePiece.isColor() != this.isColor())) {
 
-			Move move = new Move(getX(), getY(), toX, toY, this.isColour());
+			Move move = new Move(getX(), getY(), toX, toY, this.isColor());
 
 			if (toY == 7 || toY == 0)
 				move.SetPromo();
@@ -117,17 +116,17 @@ public class Pion extends Piece {
 
 		toX = getX() + 1;
 
-		if (isColour())
+		if (isColor())
 			toY = getY() + 1;
 		else
 			toY = getY() - 1;
 
-		possiblePiece = _chessboard.getPieceMuov(toX, toY);
+		possiblePiece = _chessboard.getPieceMouv(toX, toY);
 
 		if ((possiblePiece != null)
-				&& (possiblePiece.isColour() != this.isColour())) {
+				&& (possiblePiece.isColor() != this.isColor())) {
 
-			Move move = new Move(getX(), getY(), toX, toY, this.isColour());
+			Move move = new Move(getX(), getY(), toX, toY, this.isColor());
 
 			if (toY == 7 || toY == 0)
 				move.SetPromo();
@@ -137,43 +136,4 @@ public class Pion extends Piece {
 
 		return moves;
 	}
-
-	/*
-	 * private void setChessValue() {
-	 * 
-	 * int r0=7; int r1=6; int r2=5; int r3=4; int r4=3; int r5=2; int r6=1; int
-	 * r7=0; if (setColour(true)) { r0=0; r1=1; r2=2; r3=3; r4=4; r5=5; r6=6;
-	 * r7=7; }
-	 * 
-	 * // Riga 0 for (int j=0; j<8; j++) valPos[r0][j] = 0;
-	 * 
-	 * // Riga 1 valPos[r1][0] = 0; valPos[r1][1] = 0; valPos[r1][2] = 0;
-	 * valPos[r1][3] = -4; valPos[r1][4] = -4; valPos[r1][5] = 0; valPos[r1][6]
-	 * = 0; valPos[r1][7] = 0;
-	 * 
-	 * // Riga 2 valPos[r2][0] = 1; valPos[r2][1] = 2; valPos[r2][2] = 3;
-	 * valPos[r2][3] = 4; valPos[r2][4] = 4; valPos[r2][5] = 3; valPos[r2][6] =
-	 * 2; valPos[r2][7] = 1;
-	 * 
-	 * // Riga 3 valPos[r3][0] = 2; valPos[r3][1] = 4; valPos[r3][2] = 6;
-	 * valPos[r3][3] = 8; valPos[r3][4] = 8; valPos[r3][5] = 6; valPos[r3][6] =
-	 * 4; valPos[r3][7] = 2;
-	 * 
-	 * // Riga 4 valPos[r4][0] = 3; valPos[r4][1] = 6; valPos[r4][2] = 9;
-	 * valPos[r4][3] = 12; valPos[r4][4] = 12; valPos[r4][5] = 9; valPos[r4][6]
-	 * = 6; valPos[r4][7] = 3;
-	 * 
-	 * // Riga 5 valPos[r5][0] = 4; valPos[r5][1] = 8; valPos[r5][2] = 12;
-	 * valPos[r5][3] = 16; valPos[r5][4] = 16; valPos[r5][5] = 12; valPos[r5][6]
-	 * = 8; valPos[r5][7] = 4;
-	 * 
-	 * // Riga 6 valPos[r6][0] = 5; valPos[r6][1] = 10; valPos[r6][2] = 15;
-	 * valPos[r6][3] = 20; valPos[r6][4] = 20; valPos[r6][5] = 15; valPos[r6][6]
-	 * = 10; valPos[r6][7] = 5;
-	 * 
-	 * // Riga 7 valPos[r7][0] = 35; valPos[r7][1] = 35; valPos[r7][2] = 35;
-	 * valPos[r7][3] = 35; valPos[r7][4] = 35; valPos[r7][5] = 35; valPos[r7][6]
-	 * = 35; valPos[r7][7] = 35; }
-	 */
-
 }

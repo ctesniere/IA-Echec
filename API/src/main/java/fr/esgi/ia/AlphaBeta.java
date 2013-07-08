@@ -21,18 +21,20 @@ public class AlphaBeta extends Algorithm {
 	public Move chooseMove(Chessboard _chessboard, boolean _color) {
 
 		// Starting chessboard
-		ChessboardValue chessboardValue = new ChessboardValue(_chessboard, null, null);
+		ChessboardValue chessboardValue = new ChessboardValue(_chessboard,
+				null, null);
 
-		// alpha
+		// Création de l'alpha
 		ChessboardValue min = new ChessboardValue(_chessboard, null, null);
 		min.setValue(Integer.MIN_VALUE);
 
-		// beta
+		// Création de du beta
 		ChessboardValue max = new ChessboardValue(_chessboard, null, null);
 		max.setValue(Integer.MAX_VALUE);
 
 		// AlphaBeta pruning
-		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, _color, 0);
+		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max,
+				_color, 0);
 
 		return choice.getBestMove();
 	}
