@@ -9,9 +9,9 @@ abstract public class Algorithm {
 
 	protected int profondeur;
 
-	private boolean black = false;
+	private static boolean black = false;
 
-	private boolean white = true;
+	private static boolean white = true;
 
 	static String chessBoard[][] = {
 			{ "r", "k", "b", "q", "a", "b", "k", "r" },
@@ -42,6 +42,14 @@ abstract public class Algorithm {
 
 	public void setProfondeur(int _profondeur) {
 		this.profondeur = _profondeur;
+	}
+
+	static public boolean isBlack() {
+		return black;
+	}
+
+	static public boolean isWhite() {
+		return white;
 	}
 
 }

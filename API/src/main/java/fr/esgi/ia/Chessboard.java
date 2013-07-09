@@ -30,52 +30,52 @@ public class Chessboard implements Cloneable {
 		chessboard = new Piece[8][8];
 
 		// Black
-		chessboard[7][0] = new Tour(25);
-		chessboard[7][1] = new Chevalier(17);
-		chessboard[7][2] = new Fou(21);
+		chessboard[7][0] = new Tour(Algorithm.isBlack());
+		chessboard[7][1] = new Chevalier(Algorithm.isBlack());
+		chessboard[7][2] = new Fou(Algorithm.isBlack());
 
-		chessboard[7][3] = new Dame(29);
-		chessboard[7][4] = new Roi(31);
+		chessboard[7][3] = new Reine(Algorithm.isBlack());
+		chessboard[7][4] = new Roi(Algorithm.isBlack());
 
-		chessboard[7][5] = new Fou(23);
-		chessboard[7][6] = new Chevalier(19);
-		chessboard[7][7] = new Tour(27);
+		chessboard[7][5] = new Fou(Algorithm.isBlack());
+		chessboard[7][6] = new Chevalier(Algorithm.isBlack());
+		chessboard[7][7] = new Tour(Algorithm.isBlack());
 
-		chessboard[6][0] = new Pion(1);
-		chessboard[6][1] = new Pion(3);
-		chessboard[6][2] = new Pion(5);
-		chessboard[6][3] = new Pion(7);
-		chessboard[6][4] = new Pion(9);
-		chessboard[6][5] = new Pion(11);
-		chessboard[6][6] = new Pion(13);
-		chessboard[6][7] = new Pion(15);
+		chessboard[6][0] = new Pion(Algorithm.isBlack());
+		chessboard[6][1] = new Pion(Algorithm.isBlack());
+		chessboard[6][2] = new Pion(Algorithm.isBlack());
+		chessboard[6][3] = new Pion(Algorithm.isBlack());
+		chessboard[6][4] = new Pion(Algorithm.isBlack());
+		chessboard[6][5] = new Pion(Algorithm.isBlack());
+		chessboard[6][6] = new Pion(Algorithm.isBlack());
+		chessboard[6][7] = new Pion(Algorithm.isBlack());
 
 		// White
-		chessboard[0][0] = new Tour(26);
-		chessboard[0][1] = new Chevalier(18);
-		chessboard[0][2] = new Fou(22);
+		chessboard[0][0] = new Tour(Algorithm.isWhite());
+		chessboard[0][1] = new Chevalier(Algorithm.isWhite());
+		chessboard[0][2] = new Fou(Algorithm.isWhite());
 
-		chessboard[0][3] = new Dame(30);
-		chessboard[0][4] = new Roi(32);
+		chessboard[0][3] = new Reine(Algorithm.isWhite());
+		chessboard[0][4] = new Roi(Algorithm.isWhite());
 
-		chessboard[0][5] = new Fou(24);
-		chessboard[0][6] = new Chevalier(20);
-		chessboard[0][7] = new Tour(28);
+		chessboard[0][5] = new Fou(Algorithm.isWhite());
+		chessboard[0][6] = new Chevalier(Algorithm.isWhite());
+		chessboard[0][7] = new Tour(Algorithm.isWhite());
 
-		chessboard[1][0] = new Pion(2);
-		chessboard[1][1] = new Pion(4);
-		chessboard[1][2] = new Pion(6);
-		chessboard[1][3] = new Pion(8);
-		chessboard[1][4] = new Pion(10);
-		chessboard[1][5] = new Pion(12);
-		chessboard[1][6] = new Pion(14);
-		chessboard[1][7] = new Pion(16);
+		chessboard[1][0] = new Pion(Algorithm.isWhite());
+		chessboard[1][1] = new Pion(Algorithm.isWhite());
+		chessboard[1][2] = new Pion(Algorithm.isWhite());
+		chessboard[1][3] = new Pion(Algorithm.isWhite());
+		chessboard[1][4] = new Pion(Algorithm.isWhite());
+		chessboard[1][5] = new Pion(Algorithm.isWhite());
+		chessboard[1][6] = new Pion(Algorithm.isWhite());
+		chessboard[1][7] = new Pion(Algorithm.isWhite());
 
 		// TODO: Not used for now
 		for (int i1 = 0; i1 < 8; i1++) {
 			for (int j = 0; j < 8; j++) {
 				if (chessboard[j][i1] != null) {
-					if (chessboard[j][i1].isColour()) {
+					if (chessboard[j][i1].isColor()) {
 						whites.add((Piece) chessboard[j][i1]);
 					} else {
 						blacks.add((Piece) chessboard[j][i1]);
@@ -86,10 +86,10 @@ public class Chessboard implements Cloneable {
 	}
 
 	/** Creates a new instance of Chessboard (used by clone) */
-	private Chessboard(int nWhite, int nBlack) {
+	private Chessboard(int _nWhite, int _nBlack) {
 
-		nWhiteMoves = nWhite;
-		nBlackMoves = nBlack;
+		nWhiteMoves = _nWhite;
+		nBlackMoves = _nBlack;
 
 		setWhites(new ArrayList<Piece>());
 		setBlacks(new ArrayList<Piece>());
@@ -100,23 +100,22 @@ public class Chessboard implements Cloneable {
 	/**
 	 * Apply a Move to the chessboard.
 	 * 
-	 * @param thisMove
-	 *            Move to apply.
+	 * @param _thisMove
 	 * @return false in case of errors.
 	 */
-	public boolean doMove(Move thisMove) {
+	public boolean doMove(Move _thisMove) {
 
 		int fromX, fromY, toX, toY;
 		ArrayList<Move> moves;
 		Piece piece;
 
-		fromX = thisMove.getStartX();
-		fromY = thisMove.getStartY();
-		toX = thisMove.getEndX();
-		toY = thisMove.getEndY();
+		fromX = _thisMove.getStartX();
+		fromY = _thisMove.getStartY();
+		toX = _thisMove.getEndX();
+		toY = _thisMove.getEndY();
 
 		// Get piece
-		piece = getPieceMuov(fromX, fromY);
+		piece = getPieceMouv(fromX, fromY);
 
 		/* Remove the inDanger flag if a piece is no more in Danger */
 
@@ -127,7 +126,7 @@ public class Chessboard implements Cloneable {
 			Piece enemyPiece = (Piece) chessboard[move.getEndY()][move
 					.getEndX()];
 			if ((enemyPiece != null)
-					&& (enemyPiece.isColour() != piece.isColour())) {
+					&& (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.noMoreInDanger(); // I will no longer set it in
 												// danger
 			}
@@ -137,10 +136,10 @@ public class Chessboard implements Cloneable {
 
 		piece.setPosition(toX, toY);
 
-		if (piece.isColour() && chessboard[toY][toX] != null) {
+		if (piece.isColor() && chessboard[toY][toX] != null) {
 			blacks.remove(chessboard[toY][toX]);
 		}
-		if (!(piece.isColour()) && chessboard[toY][toX] != null) {
+		if (!(piece.isColor()) && chessboard[toY][toX] != null) {
 			whites.remove(chessboard[toY][toX]);
 		}
 
@@ -160,15 +159,10 @@ public class Chessboard implements Cloneable {
 			Piece enemyPiece = (Piece) chessboard[move.getEndY()][move
 					.getEndX()];
 			if ((enemyPiece != null)
-					&& (enemyPiece.isColour() != piece.isColour())) {
+					&& (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.inDanger();
 			}
 		}
-
-		/* TODO: Change my status if i am no more in danger */
-		/* TODO: Make tiaro understand promotion */
-		/* TODO: Make tiaro understand cattura en passant */
-		/* TODO: Make tiaro understand if the king is in peril */
 
 		return (true);
 	}
@@ -176,16 +170,14 @@ public class Chessboard implements Cloneable {
 	/**
 	 * Return the Piece in the x/y position
 	 * 
-	 * @param x
-	 *            The x position
-	 * @param y
-	 *            The y position
+	 * @param _x
+	 * @param _y
 	 * @return The Piece at the position
 	 */
-	public Piece getPieceMuov(int x, int y) {
+	public Piece getPieceMouv(int _x, int _y) {
 
 		try {
-			return this.chessboard[y][x];
+			return this.chessboard[_y][_x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
@@ -194,15 +186,13 @@ public class Chessboard implements Cloneable {
 	/**
 	 * Return the Piece in the x/y position
 	 * 
-	 * @param x
-	 *            The x position
-	 * @param y
-	 *            The y position
+	 * @param _x
+	 * @param _y
 	 * @return The Piece at the position
 	 */
-	public Piece getPiece(int x, int y) {
+	public Piece getPiece(int _x, int _y) {
 		try {
-			return (Piece) chessboard[y][x];
+			return (Piece) chessboard[_y][_x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
@@ -211,16 +201,15 @@ public class Chessboard implements Cloneable {
 	/**
 	 * Return an array of all possible moves for a color.
 	 * 
-	 * @param color
-	 *            The color of interest
+	 * @param _color
 	 * @return An array of all possible moves
 	 */
-	public ArrayList<Move> generateAllPossibleMoves(boolean color) {
+	public ArrayList<Move> generateAllPossibleMoves(boolean _color) {
 
 		ArrayList<Move> moves = new ArrayList<Move>();
 		List<Piece> temp;
 
-		if (color) {
+		if (_color) {
 			temp = whites;
 		} else {
 			temp = blacks;
@@ -235,7 +224,7 @@ public class Chessboard implements Cloneable {
 			}
 		}
 
-		if (color) {
+		if (_color) {
 			setnWhiteMoves(moves.size());
 		} else {
 			setnBlackMoves(moves.size());
@@ -252,7 +241,7 @@ public class Chessboard implements Cloneable {
 	@Override
 	public Object clone() {
 
-		Chessboard chessboardClone = new Chessboard(this.getnWhiteMoves(),
+		Chessboard chessboardClone = new Chessboard(getnWhiteMoves(),
 				this.getnBlackMoves());
 
 		for (int x = 0; x < 8; x++) {
@@ -260,7 +249,7 @@ public class Chessboard implements Cloneable {
 				if (this.chessboard[y][x] != null) {
 					Piece pieceClone = (Piece) chessboard[y][x].clone();
 					chessboardClone.chessboard[y][x] = pieceClone;
-					if (pieceClone.isColour()) {
+					if (pieceClone.isColor()) {
 						chessboardClone.whites.add((Piece) pieceClone);
 					} else {
 						chessboardClone.blacks.add((Piece) pieceClone);
@@ -277,15 +266,14 @@ public class Chessboard implements Cloneable {
 	 * Return the starting position (string) of a piece on the chessboard from
 	 * it's ID.
 	 * 
-	 * @param ID
-	 *            ID of the piece
+	 * @param _id
 	 * @return The string identifying the position of the piece
 	 */
-	public static String startingPosition(int ID) {
+	public static String startingPosition(int _id) {
 
 		String position;
 
-		switch (ID) {
+		switch (_id) {
 
 		// Blacks
 		case 1:
@@ -411,32 +399,32 @@ public class Chessboard implements Cloneable {
 
 	// --- GETTER AND SETTER
 
-	void setnWhiteMoves(int nWhiteMoves) {
-		this.nWhiteMoves = nWhiteMoves;
+	void setnWhiteMoves(int _nWhiteMoves) {
+		this.nWhiteMoves = _nWhiteMoves;
 	}
 
 	int getnWhiteMoves() {
 		return nWhiteMoves;
 	}
 
-	void setnBlackMoves(int nBlackMoves) {
-		this.nBlackMoves = nBlackMoves;
+	void setnBlackMoves(int _nBlackMoves) {
+		this.nBlackMoves = _nBlackMoves;
 	}
 
 	int getnBlackMoves() {
 		return nBlackMoves;
 	}
 
-	private void setBlacks(List<Piece> blacks) {
-		this.blacks = blacks;
+	private void setBlacks(List<Piece> _blacks) {
+		this.blacks = _blacks;
 	}
 
 	public List<Piece> getBlacks() {
 		return blacks;
 	}
 
-	private void setWhites(List<Piece> whites) {
-		this.whites = whites;
+	private void setWhites(List<Piece> _whites) {
+		this.whites = _whites;
 	}
 
 	public List<Piece> getWhites() {
