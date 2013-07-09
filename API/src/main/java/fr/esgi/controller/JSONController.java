@@ -6,19 +6,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fr.esgi.ia.IA;
+
 @Controller
-@RequestMapping("/get")
+@RequestMapping("/alphabeta")
 public class JSONController {
 
-	@RequestMapping(value = "/{pions}/{tour}", method = RequestMethod.GET)
+	@RequestMapping(value = "/p1/{roi}/{reine}/{fou]/{cavalier}/{tour}/{pion}/p2/{roi}/{reine}/{fou]/{cavalier}/{tour}/{pion}",
+			method = RequestMethod.GET)
 	public @ResponseBody
-	Shop getShopInJSON(@PathVariable String pions, @PathVariable String tour) {
+	String getShopInJSON(@PathVariable String pions, @PathVariable String tour) {
 
-		Shop shop = new Shop();
-		shop.setName(pions);
-		shop.setStaffName(new String[] { "mkyong1", "mkyong2" });
+		IA ia = new IA();
+		ia.setMyColor(true);
+		ia.setEnemyColor(false);
+		
+		
+		
+		// Lancement du jeu
+		ia.play();
 
-		return shop;
+		return "{" +
+				"'age':100," +
+				"'name':'mkyong.com'," +
+				"'messages':['msg 1','msg 2','msg 3']" +
+				"}";
 	}
 
 }

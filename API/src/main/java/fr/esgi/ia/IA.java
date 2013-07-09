@@ -16,6 +16,10 @@ public class IA {
 	private boolean black = false;
 
 	private boolean white = true;
+	
+	public IA() {
+
+	}
 
 	public void play() {
 
@@ -23,11 +27,11 @@ public class IA {
 
 		Algorithm anAlgorithm = new AlphaBeta(3);
 
-		this.setGlobalChessboard(new Chessboard());
-		this.setAlgorithm(anAlgorithm);
+		setGlobalChessboard(new Chessboard());
+		setAlgorithm(anAlgorithm);
 
-		this.setMyColor(aColor);
-		this.setEnemyColor(!aColor);
+		setMyColor(aColor);
+		setEnemyColor(!aColor);
 
 		// Boucle principale
 		while (true) {
