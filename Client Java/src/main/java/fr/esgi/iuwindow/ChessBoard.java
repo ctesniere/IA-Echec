@@ -57,14 +57,51 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		// Add a few pieces to the board
 
-		ImageIcon duke = new ImageIcon("C:\\Users\\EndL\\Desktop\\king.png"); // add an image here
+		ImageIcon tour = new ImageIcon("C:\\Users\\EndL\\Desktop\\tour.png"); // add an image here
 
-		JLabel piece = new JLabel(duke);
+		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
 		panel.add(piece);
-		piece = new JLabel(duke);
-		panel = (JPanel) chessBoard.getComponent(15);
+		piece = new JLabel(tour);
+		panel = (JPanel) chessBoard.getComponent(7);
 		panel.add(piece);
+		
+		ImageIcon reine = new ImageIcon("C:\\Users\\EndL\\Desktop\\reine.png");
+		piece = new JLabel(reine);
+		panel = (JPanel) chessBoard.getComponent(4);
+		panel.add(piece);
+		
+		ImageIcon roi = new ImageIcon("C:\\Users\\EndL\\Desktop\\roi.png");
+		piece = new JLabel(roi);
+		panel = (JPanel) chessBoard.getComponent(3);
+		panel.add(piece);
+		
+		ImageIcon cavalier = new ImageIcon("C:\\Users\\EndL\\Desktop\\cavalier.png");
+		piece = new JLabel(cavalier);
+		panel = (JPanel) chessBoard.getComponent(1);
+		panel.add(piece);
+		piece = new JLabel(cavalier);
+		panel = (JPanel) chessBoard.getComponent(6);
+		panel.add(piece);
+		
+		ImageIcon fou = new ImageIcon("C:\\Users\\EndL\\Desktop\\fou.png");
+		piece = new JLabel(fou);
+		panel = (JPanel) chessBoard.getComponent(2);
+		panel.add(piece);
+		piece = new JLabel(fou);
+		panel = (JPanel) chessBoard.getComponent(5);
+		panel.add(piece);
+		
+		ImageIcon pion = new ImageIcon("C:\\Users\\EndL\\Desktop\\pion.png");
+		for(int i=8; i< 16; i++)
+		{
+			piece = new JLabel(pion);
+			panel = (JPanel) chessBoard.getComponent(i);
+			panel.add(piece);
+		}
+		
+		
+		
 	}
 
 	/*
