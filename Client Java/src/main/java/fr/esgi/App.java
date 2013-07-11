@@ -15,6 +15,7 @@ public class App extends JFrame
     public static void main( String[] args )
     {
     	JFrame frame = new MainGraphique();
+    	frame.setTitle("IAEchec");
 		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setResizable(true);
