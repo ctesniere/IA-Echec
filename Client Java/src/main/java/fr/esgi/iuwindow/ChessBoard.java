@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import fr.esgi.service.Connexion;
+
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
 	JLayeredPane layeredPane;
@@ -54,45 +56,47 @@ public class ChessBoard extends JPanel implements MouseListener,
 				chessBoard.add(square);
 			}
 		}
-
+		
 		// Add a few pieces to the board
 
-		ImageIcon tour = new ImageIcon("C:\\Users\\EndL\\Desktop\\tour.png"); // add an image here
-
+		ImageIcon tour = new ImageIcon("./././imgs/tour.png"); // add an image here
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
 		panel.add(piece);
+		
 		piece = new JLabel(tour);
 		panel = (JPanel) chessBoard.getComponent(7);
 		panel.add(piece);
 		
-		ImageIcon reine = new ImageIcon("C:\\Users\\EndL\\Desktop\\reine.png");
+		ImageIcon reine = new ImageIcon("./././imgs/reine.png");
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
 		panel.add(piece);
 		
-		ImageIcon roi = new ImageIcon("C:\\Users\\EndL\\Desktop\\roi.png");
+		ImageIcon roi = new ImageIcon("./././imgs/roi.png");
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
 		panel.add(piece);
 		
-		ImageIcon cavalier = new ImageIcon("C:\\Users\\EndL\\Desktop\\cavalier.png");
+		ImageIcon cavalier = new ImageIcon("./././imgs/cavalier.png");
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
 		panel.add(piece);
+		
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(6);
 		panel.add(piece);
 		
-		ImageIcon fou = new ImageIcon("C:\\Users\\EndL\\Desktop\\fou.png");
+		ImageIcon fou = new ImageIcon("./././imgs/fou.png");
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
 		panel.add(piece);
+		
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(5);
 		panel.add(piece);
 		
-		ImageIcon pion = new ImageIcon("C:\\Users\\EndL\\Desktop\\pion.png");
+		ImageIcon pion = new ImageIcon("./././imgs/pion.png");
 		for(int i=8; i< 16; i++)
 		{
 			piece = new JLabel(pion);
@@ -100,10 +104,35 @@ public class ChessBoard extends JPanel implements MouseListener,
 			panel.add(piece);
 		}
 		
-		
-		
 	}
+	
+	/** Permet d'appeler le WebService et de placer les pions **/
+	public void connexionWS()
+	{
+		
+		int i = chessBoard.getComponentCount();
+		for (int j = 0; j < i; j++) {
+		
+			
+		}
 
+		//Component[] c = chessBoard.getComponents();
+		//chessBoard.get
+		
+		
+		Connexion c = new Connexion();
+		String s = c.Connexion();
+		System.out.println(s);
+		
+		if(s != null)
+		{
+			 
+		}
+		else 
+		{
+			
+		}
+	}
 	/*
 	 * * Add the selected chess piece to the dragging layer so it can be moved
 	 */
