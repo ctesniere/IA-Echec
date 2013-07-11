@@ -121,51 +121,28 @@ public class ChessBoard extends JPanel implements MouseListener,
 		//chessBoard.get
 		
 		
-<<<<<<< HEAD
 		//connexion c = new connexion();
 		//String s = c.Connexion();
 		//System.out.println(s);
-=======
 		Connexion c = new Connexion();
 		String s = c.Connexion();
 		System.out.println(s);
->>>>>>> 7c8a477be7a540939ae99adcca394f8798dfbf10
 		
-		String s = "{ [Black,roi;e1,reine;f4,pion;f5], [White,roi;e1,reine;f4,pion;f5]}";
+		String jsonString = "{ [Black,roi;e1,reine;f4,pion;f5], [White,roi;e1,reine;f4,pion;f5]}";
 		if(s != null)
 		{
 			
-			/*ObjectMapper mapper = new ObjectMapper();
-			RedditComment comment = mapper.readValue(buf, RedditComment.class);
-			Iterator itr = comment.getData().getChildren().listIterator();
+			String[] splitBlackWhite = jsonString.split("],");
+			String blackPieces = splitBlackWhite[0].replace('{', ' ').replace('[', ' ').trim();
+			String whitePieces = splitBlackWhite[1].replace('}', ' ').replace(']', ' ').trim();
 			
+			String[] blackPositions = blackPieces.split(",");
 			
-			JsonFactory f = new JsonFactory();
-			JsonParser jp = f.createJsonParser(json);
-			// advance stream to START_ARRAY first:
-			jp.nextToken();
-			// and then each time, advance to opening START_OBJECT
-			while (jp.nextToken() == JsonToken.START_OBJECT)) {
-				Foo foobar = mapper.readValue(jp, Foo.class);
-				// process
-				// after binding, stream points to closing END_OBJECT
-			}
-			*/
-			
-			
-			 
-			 
-			String as = new String ("["); 
-			String das = new String(""); 
-			String str = s.replace(as, das);
-			
-			String as2 = new String ("]"); 
-			String das2 = new String(""); 
-			String stri = str.replace(as2, das2);
-			
-			int bl = stri.indexOf("Black");
-			int wh = stri.indexOf("White");
-			
+			// tu as toutes les positions des pièces dans les tableaux blackPositions et whitePositions au format
+			// roi;e1
+			// reine;f4
+			// pion;f5
+				
 			
 			/** Traitement pièces Noires **/
 			String ChaineBlack = stri.substring(bl, wh);
