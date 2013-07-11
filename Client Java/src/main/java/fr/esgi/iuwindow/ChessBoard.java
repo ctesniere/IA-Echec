@@ -104,6 +104,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			panel.add(piece);
 		}
 		
+		this.connexionWS();
 	}
 	
 	/** Permet d'appeler le WebService et de placer les pions **/
@@ -120,19 +121,106 @@ public class ChessBoard extends JPanel implements MouseListener,
 		//chessBoard.get
 		
 		
-		connexion c = new connexion();
-		String s = c.Connexion();
-		System.out.println(s);
+		//connexion c = new connexion();
+		//String s = c.Connexion();
+		//System.out.println(s);
 		
+		String s = "{ [Black,roi;e1,reine;f4,pion;f5], [White,roi;e1,reine;f4,pion;f5]}";
 		if(s != null)
 		{
+			
+			/*ObjectMapper mapper = new ObjectMapper();
+			RedditComment comment = mapper.readValue(buf, RedditComment.class);
+			Iterator itr = comment.getData().getChildren().listIterator();
+			
+			
+			JsonFactory f = new JsonFactory();
+			JsonParser jp = f.createJsonParser(json);
+			// advance stream to START_ARRAY first:
+			jp.nextToken();
+			// and then each time, advance to opening START_OBJECT
+			while (jp.nextToken() == JsonToken.START_OBJECT)) {
+				Foo foobar = mapper.readValue(jp, Foo.class);
+				// process
+				// after binding, stream points to closing END_OBJECT
+			}
+			*/
+			
+			
 			 
+			 
+			String as = new String ("["); 
+			String das = new String(""); 
+			String str = s.replace(as, das);
+			
+			String as2 = new String ("]"); 
+			String das2 = new String(""); 
+			String stri = str.replace(as2, das2);
+			
+			int bl = stri.indexOf("Black");
+			int wh = stri.indexOf("White");
+			
+			
+			/** Traitement pièces Noires **/
+			String ChaineBlack = stri.substring(bl, wh);
+			//ChaineBlack = ChaineBlack.replace("Black", "");
+			
+	        String[] result = ChaineBlack.split(",");
+
+	        for(String res : result){
+	            System.out.println(res);
+	            
+	            //String piece = res.substring(0, res.lastIndexOf(";"));
+	            //String extension = res.substring(res.indexOf(";"));
+	            //String extension = res.substring(res.lastIndexOf(";"));
+	            //System.out.println(res.indexOf("roi"));
+	            //System.out.println(extension);
+	        }
+			
+			
+			int roi = ChaineBlack.indexOf("Roi");
+			int tour = ChaineBlack.indexOf("Tour");
+			int fou = ChaineBlack.indexOf("Fou");
+			int pion = ChaineBlack.indexOf("Pion");			
+			
+			/** Traitement pièces Blanches **/ 
+			String ChaineWhite = stri.substring(wh);
+			
+			
+			//System.out.println(ChaineBlack);
+			//System.out.println(ChaineWhite);
+			
+			
+			
+			
+			/*if ((_location.charAt(0) == 'a')) return 0;
+			if ((_location.charAt(0) == 'b')) return 1;
+			if ((_location.charAt(0) == 'c')) return 2;
+			if ((_location.charAt(0) == 'd')) return 3;
+			if ((_location.charAt(0) == 'e')) return 4;
+			if ((_location.charAt(0) == 'f')) return 5;
+			if ((_location.charAt(0) == 'g')) return 6;
+			if ((_location.charAt(0) == 'h')) return 7;
+
+		
+			if ((_location.charAt(1) == '1')) return 0;
+			if ((_location.charAt(1) == '2')) return 1;
+			if ((_location.charAt(1) == '3')) return 2;
+			if ((_location.charAt(1) == '4')) return 3;
+			if ((_location.charAt(1) == '5')) return 4;
+			if ((_location.charAt(1) == '6')) return 5;
+			if ((_location.charAt(1) == '7')) return 6;
+			if ((_location.charAt(1) == '8')) return 7;*/
+			
 		}
 		else 
 		{
 			
 		}
 	}
+	
+	
+	
 	/*
 	 * * Add the selected chess piece to the dragging layer so it can be moved
 	 */
