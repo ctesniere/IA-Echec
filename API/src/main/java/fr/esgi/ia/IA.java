@@ -21,74 +21,40 @@ public class IA {
 
 	}
 
-	public void play() {
+	public void play(boolean _myColor, int _depth) {
+		play(_myColor, _depth, new Chessboard());
+	}
 
-		boolean aColor = black;
+	/**
+	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et
+	 * l'execute
+	 * 
+	 * @param _myColor Coleur
+	 * @param _depth Difficulté de l'application
+	 */
+	public void play(boolean _myColor, int _depth, Chessboard _chessboard) {
 
-		Algorithm anAlgorithm = new AlphaBeta(3);
+		Algorithm anAlgorithm = new AlphaBeta(_depth);
+		Move myMove;
 
 		setGlobalChessboard(new Chessboard());
 		setAlgorithm(anAlgorithm);
 
-		setMyColor(aColor);
-		setEnemyColor(!aColor);
+		setMyColor(_myColor);
+		setEnemyColor(!_myColor);
 
 		// Boucle principale
 		while (true) {
 
-			// waiting for xboard
-			String inputCommunication = Helper.readFromInput();
+			myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
 
-			if ((inputCommunication.charAt(0) == 'u')
-					&& (inputCommunication.charAt(1) == 's')) {
-
-				int startX = Helper.getXfromString(inputCommunication
-						.substring(9, 11));
-				int startY = Helper.getYfromString(inputCommunication
-						.substring(9, 11));
-				int endX = Helper.getXfromString(inputCommunication.substring(
-						11, 13));
-				int endY = Helper.getYfromString(inputCommunication.substring(
-						11, 13));
-
-				Move playerMove = new Move(startX, startY, endX, endY,
-						isEnemyColor());
-
-				// TODO: Make him hunderstand arrocco
-
-				// For now let's assume that it doesn't do illegal move
-				if (playerMove.isValid()) getGlobalChessboard().doMove(
-						playerMove);
-				else {
-					System.err.println("ERROR: This move is not valid");
-					System.out.println("resign");
-					System.exit(0);
-				}
-
-				// if (globalChessboard.doMove(playerMove) == false) {
-				// System.err.println("ERROR: Illegal move.");
-				// continue;
-				// }
-
-				/*
-				 * TODO if (inCaseOfPromotion != null) miaScacchiera =
-				 * Libreria.FaiPromozione(SuaMossa,miaScacchiera,
-				 * inCaseOfPromotion);
-				 */
-
-				/** MyTurn **/
-
-				Move myMove = anAlgorithm.chooseMove(getGlobalChessboard(),
-						isMyColor());
-				if (myMove == null) {
-					System.err.println("ERROR: No possible move.");
-					System.out.println("resign");
-					System.exit(0);
-				} else {
-					getGlobalChessboard().doMove(myMove); // TODO: Check return
-															// value?
-					System.out.println(myMove.moveOutputString());
-				}
+			if (myMove == null) {
+				System.err.println("ERROR: Pas de mouvement possible.");
+				System.exit(0);
+			} else {
+				getGlobalChessboard().doMove(myMove); // TODO: Check return
+														// value?
+				System.out.println(myMove.moveOutputString());
 			}
 		}
 	}
