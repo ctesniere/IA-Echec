@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import fr.esgi.service.connexion;
+import fr.esgi.service.Connexion;
 
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
@@ -120,7 +120,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		//chessBoard.get
 		
 		
-		connexion c = new connexion();
+		Connexion c = new Connexion();
 		String s = c.Connexion();
 		System.out.println(s);
 		

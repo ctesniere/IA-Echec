@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class connexion {
+public class Connexion {
 
 	// http://localhost:8080/RESTfulExample/json/product/get
 		
