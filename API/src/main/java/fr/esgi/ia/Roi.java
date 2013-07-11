@@ -25,8 +25,10 @@ public class Roi extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false) setValue(-200);
-		else setValue(200);
+		if (isColor() == false)
+			setValue(-200);
+		else
+			setValue(200);
 	}
 
 	/**
@@ -91,7 +93,8 @@ public class Roi extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, _chessboard);
-			if (move != null) moves.add(move);
+			if (move != null)
+				moves.add(move);
 
 		}
 
@@ -114,11 +117,13 @@ public class Roi extends Piece {
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
 				move = new Move(getX(), getY(), _toX, _toY, isColor());
-				if (move.isValid()) return move;
+				if (move.isValid())
+					return move;
 			}
 		} else {
 			move = new Move(getX(), getY(), _toX, _toY, isColor());
-			if (move.isValid()) return move;
+			if (move.isValid())
+				return move;
 		}
 
 		return null;

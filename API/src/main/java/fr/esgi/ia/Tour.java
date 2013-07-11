@@ -22,8 +22,10 @@ public class Tour extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false) setValue(-500);
-		else setValue(500);
+		if (isColor() == false)
+			setValue(-500);
+		else
+			setValue(500);
 	}
 
 	/**
@@ -103,8 +105,7 @@ public class Tour extends Piece {
 	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkMove(int _toX, int _toY, Chessboard _chessboard,
-			ArrayList<Move> _moves) {
+	private Move checkMove(int _toX, int _toY, Chessboard _chessboard, ArrayList<Move> _moves) {
 
 		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
 		Move move;
@@ -112,13 +113,15 @@ public class Tour extends Piece {
 		if (destination != null) { // If is not empty
 			if (destination.isColor() != isColor()) { // Another color
 				move = new Move(getX(), getY(), _toX, _toY, isColor());
-				if (move.isValid()) _moves.add(move); // Add move
+				if (move.isValid())
+					_moves.add(move); // Add move
 			}
 			// Mine or not, if there is a piece STOP
 			return null; // You must stop
 		} else {
 			move = new Move(getX(), getY(), _toX, _toY, isColor());
-			if (move.isValid()) _moves.add(move); // Add move
+			if (move.isValid())
+				_moves.add(move); // Add move
 		}
 
 		return move;
