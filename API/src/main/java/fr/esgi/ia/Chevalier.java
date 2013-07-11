@@ -20,8 +20,10 @@ public class Chevalier extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false) setValue(-300);
-		else setValue(300);
+		if (isColor() == false)
+			setValue(-300);
+		else
+			setValue(300);
 	}
 
 	/**
@@ -86,7 +88,8 @@ public class Chevalier extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, _chessboard);
-			if (move != null) moves.add(move);
+			if (move != null)
+				moves.add(move);
 
 		}
 
@@ -109,11 +112,13 @@ public class Chevalier extends Piece {
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
 				move = new Move(getX(), getY(), _toX, _toY, isColor());
-				if (move.isValid()) return move;
+				if (move.isValid())
+					return move;
 			}
 		} else {
 			move = new Move(getX(), getY(), _toX, _toY, isColor());
-			if (move.isValid()) return move;
+			if (move.isValid())
+				return move;
 		}
 
 		return null;

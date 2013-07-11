@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import fr.esgi.service.connexion;
+import fr.esgi.service.Connexion;
 
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
@@ -121,9 +121,15 @@ public class ChessBoard extends JPanel implements MouseListener,
 		//chessBoard.get
 		
 		
+<<<<<<< HEAD
 		//connexion c = new connexion();
 		//String s = c.Connexion();
 		//System.out.println(s);
+=======
+		Connexion c = new Connexion();
+		String s = c.Connexion();
+		System.out.println(s);
+>>>>>>> 7c8a477be7a540939ae99adcca394f8798dfbf10
 		
 		String s = "{ [Black,roi;e1,reine;f4,pion;f5], [White,roi;e1,reine;f4,pion;f5]}";
 		if(s != null)

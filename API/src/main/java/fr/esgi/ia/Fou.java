@@ -24,8 +24,10 @@ public class Fou extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false) setValue(-325);
-		else setValue(325);
+		if (isColor() == false)
+			setValue(-325);
+		else
+			setValue(325);
 	}
 
 	@Override
@@ -75,7 +77,8 @@ public class Fou extends Piece {
 				}
 
 				Move move = checkThis(toX, toY, _chessboard, moves);
-				if (move == null) break;
+				if (move == null)
+					break;
 			}
 
 		return moves;
@@ -89,8 +92,7 @@ public class Fou extends Piece {
 	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkThis(int _toX, int _toY, Chessboard _chessboard,
-			ArrayList<Move> _moves) {
+	private Move checkThis(int _toX, int _toY, Chessboard _chessboard, ArrayList<Move> _moves) {
 
 		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
 		Move move;
@@ -98,12 +100,14 @@ public class Fou extends Piece {
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
 				move = new Move(getX(), getY(), _toX, _toY, isColor());
-				if (move.isValid()) _moves.add(move);
+				if (move.isValid())
+					_moves.add(move);
 			}
 			return null;
 		} else {
 			move = new Move(getX(), getY(), _toX, _toY, isColor());
-			if (move.isValid()) _moves.add(move);
+			if (move.isValid())
+				_moves.add(move);
 		}
 
 		return move;

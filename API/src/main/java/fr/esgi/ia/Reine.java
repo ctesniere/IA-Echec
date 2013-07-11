@@ -31,8 +31,10 @@ public class Reine extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false) setValue(-900);
-		else setValue(900);
+		if (isColor() == false)
+			setValue(-900);
+		else
+			setValue(900);
 	}
 
 	/**
@@ -102,7 +104,8 @@ public class Reine extends Piece {
 
 				// TODO: Change checkThis to return a Boolean
 				Move mossa = checkThis(toX, toY, _chessboard, moves);
-				if (mossa == null) break;
+				if (mossa == null)
+					break;
 			}
 
 		return moves;
@@ -116,8 +119,7 @@ public class Reine extends Piece {
 	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkThis(int _toX, int _toY, Chessboard _chessboard,
-			ArrayList<Move> _moves) {
+	private Move checkThis(int _toX, int _toY, Chessboard _chessboard, ArrayList<Move> _moves) {
 
 		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
 		Move move;
@@ -125,12 +127,14 @@ public class Reine extends Piece {
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
 				move = new Move(getX(), getY(), _toX, _toY, isColor());
-				if (move.isValid()) _moves.add(move);
+				if (move.isValid())
+					_moves.add(move);
 			}
 			return null;
 		} else {
 			move = new Move(getX(), getY(), _toX, _toY, isColor());
-			if (move.isValid()) _moves.add(move);
+			if (move.isValid())
+				_moves.add(move);
 		}
 		return move;
 	}
