@@ -70,15 +70,15 @@ public final class Move {
 			return "Illegal move";
 	}
 
-	public boolean GetMangia() {
+	public boolean getMangia() {
 		return ismangia;
 	}
 
-	public boolean GetPromo() {
+	public boolean getPromo() {
 		return promo;
 	}
 
-	public void SetPromo() {
+	public void setPromo() {
 
 		if (isColour() == true)
 			promo = true;
@@ -86,7 +86,7 @@ public final class Move {
 			setPromotion("q");
 	}
 
-	public static Move MossaPromozione(Move _move, Chessboard _miaScacchiera) {
+	public static Move mossaPromozione(Move _move, Chessboard _miaScacchiera) {
 
 		// se la mossa mi porta in y=7 o in y=0
 		if (((_move.isColour()) && (_move.getEndY() == 7))
@@ -96,12 +96,12 @@ public final class Move {
 			// se è stato un pedone ad eseguire lamossa
 			// if ((mioPezzo != null) && (mioPezzo.getId() <= 16))
 			if (true)
-				_move.SetPromo();
+				_move.setPromo();
 		}
 		return _move;
 	}
 
-	public static Chessboard FaiPromozione(Move _miaMossa, Chessboard _miaScacchiera, String _promo) {
+	public static Chessboard faiPromozione(Move _miaMossa, Chessboard _miaScacchiera, String _promo) {
 		// int x=miaMossa.GetXArrivo();
 		// int y=miaMossa.GetYArrivo();
 		// miaScacchiera.GetQuadrato(x,y)=new Regina();

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * 2 pour les Blancs et rangée 7 pour les Noirs).
  * 
  * @author Cédric TESNIERE
+ * @since 1
  */
 public class Pion extends Piece {
 
@@ -28,7 +29,7 @@ public class Pion extends Piece {
 	}
 
 	/**
-	 * Used when a chessboard must be cloned.
+	 * Utilisé quand un échiquier doit être cloné.
 	 */
 	@Override
 	public Object clone() {
@@ -42,11 +43,12 @@ public class Pion extends Piece {
 	}
 
 	/**
-	 * The Pawn can move until it finds an enemy of an ally piece. He can eat in
-	 * other positions. We give all possible moves, not the good ones.
+	 * Le pion peut se déplacer jusqu'à ce qu'il trouve un ennemi ou une pièce
+	 * allié. Il peut manger dans d'autres positions. Nous donnons tous les
+	 * coups possibles, pas les bons.
 	 * 
 	 * @param _chessboard Actuel chessboard
-	 * @return An array of all possible moves (not the good ones!)
+	 * @return Un tableau de tous les coups possibles (pas les bons!)
 	 */
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
@@ -56,7 +58,7 @@ public class Pion extends Piece {
 
 		ArrayList<Move> moves = new ArrayList<Move>();
 
-		// Movement
+		// Direction du mouvement
 		if (isColor())
 			toY++;
 		else
@@ -64,11 +66,12 @@ public class Pion extends Piece {
 
 		Piece possiblePiece = _chessboard.getPiece(toX, toY);
 
+		// Si aucune piece au nouvelle position du pion
 		if (possiblePiece == null) {
 
 			Move move = new Move(getX(), getY(), toX, toY, isColor());
 			if ((toY == 7) || (toY == 0))
-				move.SetPromo();
+				move.setPromo();
 			if (move.isValid())
 				moves.add(move);
 
@@ -107,7 +110,7 @@ public class Pion extends Piece {
 			Move move = new Move(getX(), getY(), toX, toY, isColor());
 
 			if ((toY == 7) || (toY == 0))
-				move.SetPromo();
+				move.setPromo();
 			if (move.isValid())
 				moves.add(move);
 		}
@@ -126,7 +129,7 @@ public class Pion extends Piece {
 			Move move = new Move(getX(), getY(), toX, toY, isColor());
 
 			if ((toY == 7) || (toY == 0))
-				move.SetPromo();
+				move.setPromo();
 			if (move.isValid())
 				moves.add(move);
 		}
