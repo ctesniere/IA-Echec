@@ -4,104 +4,83 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represent a chessboard.
+ * Cette classe represente l'Échiquier.
+ * 
+ * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille
+ * carrée de 8 cases de côté, soit 64 cases en tout, en alternance sombres
+ * (appelées noires) et claires (appelées blanches). Un échiquier est intégré à
+ * la surface supérieure des tables d'échecs. Dans une partie d'échecs, on
+ * dispose l'échiquier de façon à ce que, pour chacun des adversaires, la case
+ * du coin gauche (le plus proche) de l'échiquier soit noire. De plus, mais ce
+ * n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les
+ * Blancs placent leur pièces sur la rangée 1, leurs pions sur la rangée 2,
+ * tandis que Noirs disposent leurs pièces sur la rangée 8, et leurs pions sur
+ * la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés en
+ * bas, les Noirs en haut.
  * 
  * @author Cédric TESNIERE
  */
 public class Chessboard implements Cloneable {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	// Number of possible moves. Used to calculate mobility.
 	private int nWhiteMoves;
+
 	private int nBlackMoves;
 
 	private Piece[][] chessboard;
 
 	private List<Piece> blacks;
+
 	private List<Piece> whites;
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public Chessboard() {
-
-		nWhiteMoves = 0;
-		nBlackMoves = 0;
-
-		this.setWhites(new ArrayList<Piece>());
-		this.setBlacks(new ArrayList<Piece>());
+		setBlacks(new ArrayList<Piece>());
+		setWhites(new ArrayList<Piece>());
 
 		chessboard = new Piece[8][8];
 
-		// Black
-		chessboard[7][0] = new Tour(Algorithm.isBlack());
-		chessboard[7][1] = new Chevalier(Algorithm.isBlack());
-		chessboard[7][2] = new Fou(Algorithm.isBlack());
+		nBlackMoves = 0;
+		nWhiteMoves = 0;
 
-		chessboard[7][3] = new Reine(Algorithm.isBlack());
-		chessboard[7][4] = new Roi(Algorithm.isBlack());
-
-		chessboard[7][5] = new Fou(Algorithm.isBlack());
-		chessboard[7][6] = new Chevalier(Algorithm.isBlack());
-		chessboard[7][7] = new Tour(Algorithm.isBlack());
-
-		chessboard[6][0] = new Pion(Algorithm.isBlack());
-		chessboard[6][1] = new Pion(Algorithm.isBlack());
-		chessboard[6][2] = new Pion(Algorithm.isBlack());
-		chessboard[6][3] = new Pion(Algorithm.isBlack());
-		chessboard[6][4] = new Pion(Algorithm.isBlack());
-		chessboard[6][5] = new Pion(Algorithm.isBlack());
-		chessboard[6][6] = new Pion(Algorithm.isBlack());
-		chessboard[6][7] = new Pion(Algorithm.isBlack());
-
-		// White
-		chessboard[0][0] = new Tour(Algorithm.isWhite());
-		chessboard[0][1] = new Chevalier(Algorithm.isWhite());
-		chessboard[0][2] = new Fou(Algorithm.isWhite());
-
-		chessboard[0][3] = new Reine(Algorithm.isWhite());
-		chessboard[0][4] = new Roi(Algorithm.isWhite());
-
-		chessboard[0][5] = new Fou(Algorithm.isWhite());
-		chessboard[0][6] = new Chevalier(Algorithm.isWhite());
-		chessboard[0][7] = new Tour(Algorithm.isWhite());
-
-		chessboard[1][0] = new Pion(Algorithm.isWhite());
-		chessboard[1][1] = new Pion(Algorithm.isWhite());
-		chessboard[1][2] = new Pion(Algorithm.isWhite());
-		chessboard[1][3] = new Pion(Algorithm.isWhite());
-		chessboard[1][4] = new Pion(Algorithm.isWhite());
-		chessboard[1][5] = new Pion(Algorithm.isWhite());
-		chessboard[1][6] = new Pion(Algorithm.isWhite());
-		chessboard[1][7] = new Pion(Algorithm.isWhite());
-
-		// TODO: Not used for now
-		for (int i1 = 0; i1 < 8; i1++) {
-			for (int j = 0; j < 8; j++) {
-				if (chessboard[j][i1] != null) {
-					if (chessboard[j][i1].isColor()) {
-						whites.add((Piece) chessboard[j][i1]);
-					} else {
-						blacks.add((Piece) chessboard[j][i1]);
-					}
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++)
+				if (chessboard[x][y] != null) if (chessboard[x][y].isColor()) {
+					whites.add(chessboard[x][y]);
+				} else {
+					blacks.add(chessboard[x][y]);
 				}
-			}
 		}
 	}
 
-	/** Creates a new instance of Chessboard (used by clone) */
+	/**
+	 * Utilisée par la méthode clone() 
+	 * 
+	 * @param _nWhite
+	 * @param _nBlack
+	 */
 	private Chessboard(int _nWhite, int _nBlack) {
-
+		this();
 		nWhiteMoves = _nWhite;
 		nBlackMoves = _nBlack;
-
-		setWhites(new ArrayList<Piece>());
-		setBlacks(new ArrayList<Piece>());
-
-		chessboard = new Piece[8][8];
 	}
 
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
 	/**
-	 * Apply a Move to the chessboard.
+	 * Appliquer un mouvement de l'échiquier.
 	 * 
 	 * @param _thisMove
-	 * @return false in case of errors.
+	 * @return Retourne faux dans un cas d'erreurs
 	 */
 	public boolean doMove(Move _thisMove) {
 
@@ -123,12 +102,10 @@ public class Chessboard implements Cloneable {
 		moves = piece.generateMovesForThisPiece(this);
 		// For each move find if it eats something
 		for (Move move : moves) {
-			Piece enemyPiece = (Piece) chessboard[move.getEndY()][move
-					.getEndX()];
-			if ((enemyPiece != null)
-					&& (enemyPiece.isColor() != piece.isColor())) {
+			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.noMoreInDanger(); // I will no longer set it in
-												// danger
+				// danger
 			}
 		}
 
@@ -136,10 +113,10 @@ public class Chessboard implements Cloneable {
 
 		piece.setPosition(toX, toY);
 
-		if (piece.isColor() && chessboard[toY][toX] != null) {
+		if (piece.isColor() && (chessboard[toY][toX] != null)) {
 			blacks.remove(chessboard[toY][toX]);
 		}
-		if (!(piece.isColor()) && chessboard[toY][toX] != null) {
+		if (!(piece.isColor()) && (chessboard[toY][toX] != null)) {
 			whites.remove(chessboard[toY][toX]);
 		}
 
@@ -156,10 +133,8 @@ public class Chessboard implements Cloneable {
 
 		// For each move find if it eats something
 		for (Move move : moves) {
-			Piece enemyPiece = (Piece) chessboard[move.getEndY()][move
-					.getEndX()];
-			if ((enemyPiece != null)
-					&& (enemyPiece.isColor() != piece.isColor())) {
+			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.inDanger();
 			}
 		}
@@ -168,44 +143,42 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Return the Piece in the x/y position
+	 * Retourne la piece de la position x/y
 	 * 
 	 * @param _x
 	 * @param _y
-	 * @return The Piece at the position
+	 * @return La piece de la position x/y
 	 */
 	public Piece getPieceMouv(int _x, int _y) {
-
 		try {
-			return this.chessboard[_y][_x];
+			return chessboard[_y][_x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
 	}
 
 	/**
-	 * Return the Piece in the x/y position
+	 * Retourne la piece de la position x/y
 	 * 
 	 * @param _x
 	 * @param _y
-	 * @return The Piece at the position
+	 * @return La piece de la position x/y
 	 */
 	public Piece getPiece(int _x, int _y) {
 		try {
-			return (Piece) chessboard[_y][_x];
+			return chessboard[_y][_x];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
 	}
 
 	/**
-	 * Return an array of all possible moves for a color.
+	 * Retourne un tableau de tous les mouvements posible pour la couleur
 	 * 
 	 * @param _color
-	 * @return An array of all possible moves
+	 * @return Un tableau de toutes les mouvements
 	 */
 	public ArrayList<Move> generateAllPossibleMoves(boolean _color) {
-
 		ArrayList<Move> moves = new ArrayList<Move>();
 		List<Piece> temp;
 
@@ -233,174 +206,89 @@ public class Chessboard implements Cloneable {
 		return moves;
 	}
 
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
 	@Override
 	public Object clone() {
-
-		Chessboard chessboardClone = new Chessboard(getnWhiteMoves(),
-				this.getnBlackMoves());
+		Chessboard chessboardClone = new Chessboard(getnWhiteMoves(), getnBlackMoves());
 
 		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
-				if (this.chessboard[y][x] != null) {
+			for (int y = 0; y < 8; y++)
+				if (chessboard[y][x] != null) {
 					Piece pieceClone = (Piece) chessboard[y][x].clone();
 					chessboardClone.chessboard[y][x] = pieceClone;
 					if (pieceClone.isColor()) {
-						chessboardClone.whites.add((Piece) pieceClone);
+						chessboardClone.whites.add(pieceClone);
 					} else {
-						chessboardClone.blacks.add((Piece) pieceClone);
+						chessboardClone.blacks.add(pieceClone);
 					}
 				} else {
 					chessboardClone.chessboard[y][x] = null;
 				}
-			}
 		}
 		return chessboardClone;
 	}
 
 	/**
-	 * Return the starting position (string) of a piece on the chessboard from
-	 * it's ID.
+	 * Définie l'emplacement de la piece roi
 	 * 
-	 * @param _id
-	 * @return The string identifying the position of the piece
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
 	 */
-	public static String startingPosition(int _id) {
-
-		String position;
-
-		switch (_id) {
-
-		// Blacks
-		case 1:
-			return "a7";
-		case 3:
-			return "b7";
-		case 5:
-			return "c7";
-		case 7:
-			return "d7";
-		case 9:
-			return "e7";
-		case 11:
-			return "f7";
-		case 13:
-			return "g7";
-		case 15:
-			return "h7";
-		case 25:
-			return "a8";
-		case 17:
-			return "b8";
-		case 21:
-			return "c8";
-		case 29:
-			return "d8";
-		case 31:
-			return "e8";
-		case 23:
-			return "f8";
-		case 19:
-			return "g8";
-		case 27:
-			return "h8";
-
-			// Whites TODO
-			// pedone
-		case 2: {
-			position = "a2";
-			break;
-		}
-		// pedone
-		case 4: {
-			position = "b2";
-			break;
-		}
-		// pedone
-		case 6: {
-			position = "c2";
-			break;
-		}
-		// pedone
-		case 8: {
-			position = "d2";
-			break;
-		}
-		// pedone
-		case 10: {
-			position = "e2";
-			break;
-		}
-		// pedone
-		case 12: {
-			position = "f2";
-			break;
-		}
-		// pedone
-		case 14: {
-			position = "g2";
-			break;
-		}
-		// pedone
-		case 16: {
-			position = "h2";
-			break;
-		}
-		// torre sx
-		case 26: {
-			position = "a1";
-			break;
-		}
-		// cavallo sx
-		case 18: {
-			position = "b1";
-			break;
-		}
-		// alfiere sx
-		case 22: {
-			position = "c1";
-			break;
-		}
-		// regina
-		case 30: {
-			position = "d1";
-			break;
-		}
-		// re
-		case 32: {
-			position = "e1";
-			break;
-		}
-		// alfiere dx
-		case 24: {
-			position = "f1";
-			break;
-		}
-		// cavallo dx
-		case 20: {
-			position = "g1";
-			break;
-		}
-		// torre dx
-		case 28: {
-			position = "h1";
-			break;
-		}
-
-		default:
-			return null;
-		}
-		return position;
+	public void setPositionKing(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Roi(_color);
 	}
 
-	// --- GETTER AND SETTER
+	/**
+	 * Définie l'emplacement de la piece reine
+	 * 
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
+	 */
+	public void setPositionQueen(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Reine(_color);
+	}
+
+	/**
+	 * Définie l'emplacement de la piece tour
+	 * 
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
+	 */
+	public void setPositionTower(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Tour(_color);
+	}
+
+	/**
+	 * Définie l'emplacement de la piece chevalier
+	 * 
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
+	 */
+	public void setPositionKnight(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Chevalier(_color);
+	}
+
+	/**
+	 * Définie l'emplacement de la piece fou
+	 * 
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
+	 */
+	public void setPositionCrazy(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Fou(_color);
+	}
+
+	/**
+	 * Définie l'emplacement de la piece pion
+	 * 
+	 * @param _location Emplacement sur l'echiquier
+	 * @param _color La couleur de la piece
+	 */
+	public void setPositionPawn(String _location, boolean _color) {
+		chessboard[Helper.getYfromString(_location)][Helper.getXfromString(_location)] = new Pion(_color);
+	}
 
 	void setnWhiteMoves(int _nWhiteMoves) {
-		this.nWhiteMoves = _nWhiteMoves;
+		nWhiteMoves = _nWhiteMoves;
 	}
 
 	int getnWhiteMoves() {
@@ -408,7 +296,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	void setnBlackMoves(int _nBlackMoves) {
-		this.nBlackMoves = _nBlackMoves;
+		nBlackMoves = _nBlackMoves;
 	}
 
 	int getnBlackMoves() {
@@ -416,7 +304,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	private void setBlacks(List<Piece> _blacks) {
-		this.blacks = _blacks;
+		blacks = _blacks;
 	}
 
 	public List<Piece> getBlacks() {
@@ -424,7 +312,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	private void setWhites(List<Piece> _whites) {
-		this.whites = _whites;
+		whites = _whites;
 	}
 
 	public List<Piece> getWhites() {

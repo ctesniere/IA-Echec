@@ -27,13 +27,9 @@ abstract public class Piece {
 		moved = false;
 		setEnemy(0);
 	}
-	
-	public Piece(int _id) {
-		
-	}
 
-	public String getStartingPosition(int ID) {
-		return Chessboard.startingPosition(ID);
+	public Piece(int _id) {
+
 	}
 
 	public void setPosition(int x, int y) {
@@ -43,9 +39,7 @@ abstract public class Piece {
 
 	public void noMoreInDanger() {
 		setEnemy(getEnemy() - 1);
-		if (getEnemy() == 0) {
-			inDanger = false;
-		}
+		if (getEnemy() == 0) inDanger = false;
 	}
 
 	public void inDanger() {
@@ -54,11 +48,8 @@ abstract public class Piece {
 	}
 
 	public int getPositionValue() {
-		if (isColor()) {
-			return valPos[y][x];
-		} else {
-			return -(valPos[y][x]);
-		}
+		if (isColor()) return valPos[y][x];
+		else return -(valPos[y][x]);
 	}
 
 	/**

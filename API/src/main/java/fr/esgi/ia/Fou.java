@@ -3,14 +3,13 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente le fou.
- * 
- * Cette pièce est à longue portée, c’est-à-dire qu'elle peut être déplacée
- * d'autant de cases qu'on le souhaite, sans pouvoir sauter par dessus une autre
- * pièce. Il ne peut changer de couleur de case durant la partie et ne balaie
- * donc que la moitié de l'échiquier. À l'instar du cavalier, le fou est une
- * pièce mineure. En général, on lui attribue la même valeur que le cavalier, la
- * différence dépendant de la position sur l'échiquier.
+ * Cette classe represente le fou. Cette pièce est à longue portée, c’est-à-dire
+ * qu'elle peut être déplacée d'autant de cases qu'on le souhaite, sans pouvoir
+ * sauter par dessus une autre pièce. Il ne peut changer de couleur de case
+ * durant la partie et ne balaie donc que la moitié de l'échiquier. À l'instar
+ * du cavalier, le fou est une pièce mineure. En général, on lui attribue la
+ * même valeur que le cavalier, la différence dépendant de la position sur
+ * l'échiquier.
  * 
  * @author Cédric TESNIERE
  */
@@ -23,12 +22,10 @@ public class Fou extends Piece {
 	 */
 	public Fou(boolean _color) {
 		super();
-		this.setColor(_color);
+		setColor(_color);
 
-		if (isColor() == false)
-			this.setValue(-325);
-		else
-			this.setValue(325);
+		if (isColor() == false) setValue(-325);
+		else setValue(325);
 	}
 
 	@Override
@@ -56,8 +53,7 @@ public class Fou extends Piece {
 		ArrayList<Move> moves = new ArrayList<Move>();
 
 		// 4 direction
-		for (int direction = 0; direction < 4; direction++) {
-
+		for (int direction = 0; direction < 4; direction++)
 			// Max 8 moves
 			for (int length = 1; length < 9; length++) {
 
@@ -79,11 +75,8 @@ public class Fou extends Piece {
 				}
 
 				Move move = checkThis(toX, toY, _chessboard, moves);
-				if (move == null) {
-					break;
-				}
+				if (move == null) break;
 			}
-		}
 
 		return moves;
 	}
@@ -93,8 +86,7 @@ public class Fou extends Piece {
 	 * 
 	 * @param _toX
 	 * @param _toY
-	 * @param _chessboard
-	 *            Actuel chessboard
+	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
 	private Move checkThis(int _toX, int _toY, Chessboard _chessboard,
@@ -104,18 +96,14 @@ public class Fou extends Piece {
 		Move move;
 
 		if (destination != null) {
-			if (destination.isColor() != this.isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-				if (move.isValid()) {
-					_moves.add(move);
-				}
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				if (move.isValid()) _moves.add(move);
 			}
 			return null;
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-			if (move.isValid()) {
-				_moves.add(move);
-			}
+			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			if (move.isValid()) _moves.add(move);
 		}
 
 		return move;

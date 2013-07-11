@@ -3,15 +3,13 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente le roi.
- * 
- * Un roi peut se déplacer d'une case dans toutes les directions
- * (horizontalement, verticalement, ou diagonalement), mais il ne peut aller sur
- * une case où il serait menacé par une pièce ennemie (se mettre en prise, en
- * échec). En conséquence, on ne verra jamais les deux rois ennemis côte à côte.
- * Comme toutes les autres pièces, il ne peut aller sur une case déjà occupée
- * par une pièce de son camp, et il prend en se déplaçant sur la case occupée
- * par une pièce ennemie.
+ * Cette classe represente le roi. Un roi peut se déplacer d'une case dans
+ * toutes les directions (horizontalement, verticalement, ou diagonalement),
+ * mais il ne peut aller sur une case où il serait menacé par une pièce ennemie
+ * (se mettre en prise, en échec). En conséquence, on ne verra jamais les deux
+ * rois ennemis côte à côte. Comme toutes les autres pièces, il ne peut aller
+ * sur une case déjà occupée par une pièce de son camp, et il prend en se
+ * déplaçant sur la case occupée par une pièce ennemie.
  * 
  * @author Cédric TESNIERE
  * @since 1
@@ -27,10 +25,8 @@ public class Roi extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false)
-			setValue(-200);
-		else
-			setValue(200);
+		if (isColor() == false) setValue(-200);
+		else setValue(200);
 	}
 
 	/**
@@ -50,8 +46,7 @@ public class Roi extends Piece {
 	/**
 	 * We give all possible moves, not the good ones.
 	 * 
-	 * @param _chessboard
-	 *            Actuel chessboard
+	 * @param _chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
@@ -96,9 +91,7 @@ public class Roi extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, _chessboard);
-			if (move != null) {
-				moves.add(move);
-			}
+			if (move != null) moves.add(move);
 
 		}
 
@@ -110,8 +103,7 @@ public class Roi extends Piece {
 	 * 
 	 * @param _toX
 	 * @param _toY
-	 * @param _chessboard
-	 *            Actuel chessboard
+	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
 	private Move checkThis(int _toX, int _toY, Chessboard _chessboard) {
@@ -120,17 +112,13 @@ public class Roi extends Piece {
 		Move move;
 
 		if (destination != null) {
-			if (destination.isColor() != this.isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-				if (move.isValid()) {
-					return move;
-				}
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				if (move.isValid()) return move;
 			}
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-			if (move.isValid()) {
-				return move;
-			}
+			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			if (move.isValid()) return move;
 		}
 
 		return null;

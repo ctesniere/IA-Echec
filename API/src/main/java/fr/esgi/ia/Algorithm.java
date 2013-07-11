@@ -13,16 +13,6 @@ abstract public class Algorithm {
 
 	private static boolean white = true;
 
-	static String chessBoard[][] = {
-			{ "r", "k", "b", "q", "a", "b", "k", "r" },
-			{ "p", "p", "p", "p", "p", "p", "p", "p" },
-			{ " ", " ", " ", " ", " ", " ", " ", " " },
-			{ " ", " ", " ", " ", " ", " ", " ", " " },
-			{ " ", " ", " ", " ", " ", " ", " ", " " },
-			{ " ", " ", " ", " ", " ", " ", " ", " " },
-			{ "P", "P", "P", "P", "P", "P", "P", "P" },
-			{ "R", "K", "B", "Q", "A", "B", "K", "R" } };
-
 	public Algorithm(int _profondeur) {
 		profondeur = _profondeur;
 	}
@@ -41,15 +31,15 @@ abstract public class Algorithm {
 	}
 
 	public void setProfondeur(int _profondeur) {
-		this.profondeur = _profondeur;
+		profondeur = _profondeur;
 	}
 
 	static public boolean isBlack() {
-		return black;
+		return Algorithm.black;
 	}
 
 	static public boolean isWhite() {
-		return white;
+		return Algorithm.white;
 	}
 
 }

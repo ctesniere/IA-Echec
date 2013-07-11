@@ -25,7 +25,8 @@ public final class Move {
 
 	private String promotion = null;
 
-	public Move(int _startingX, int _startingY, int _endingX, int _endingY,
+	public Move(
+			int _startingX, int _startingY, int _endingX, int _endingY,
 			boolean _color) {
 		startX = _startingX;
 		endX = _endingX;
@@ -42,11 +43,8 @@ public final class Move {
 		// valid
 
 		if (isInBound(startX) && isInBound(startY) && isInBound(endX)
-				&& isInBound(endY)) {
-			setValid(true);
-		} else {
-			setValid(false);
-		}
+				&& isInBound(endY)) setValid(true);
+		else setValid(false);
 
 		return true;
 	}
@@ -65,14 +63,9 @@ public final class Move {
 		cA = Helper.getStringFromPosition(endX, endY);
 
 		if (isValid()) {
-			if (promo == true) {
-				return "move " + cP + cA + getPromotion();
-			} else {
-				return "move " + cP + cA;
-			}
-		} else {
-			return "Illegal move";
-		} // TODO:
+			if (promo == true) return "move " + cP + cA + getPromotion();
+			else return "move " + cP + cA;
+		} else return "Illegal move";
 	}
 
 	public boolean GetMangia() {
@@ -85,11 +78,8 @@ public final class Move {
 
 	public void SetPromo() {
 
-		if (isColour() == true) {
-			promo = true;
-		} else {
-			setPromotion("q");
-		}
+		if (isColour() == true) promo = true;
+		else setPromotion("q");
 	}
 
 	public static Move MossaPromozione(Move _move, Chessboard _miaScacchiera) {
@@ -101,9 +91,8 @@ public final class Move {
 			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(),
 					_move.getStartY());
 			// se è stato un pedone ad eseguire lamossa
-			if ((mioPezzo != null) && (mioPezzo.getId() <= 16)) {
+			if ((mioPezzo != null) && (mioPezzo.getId() <= 16))
 				_move.SetPromo();
-			} // setto la mossa a promozione
 		}
 		return _move;
 	}
@@ -122,11 +111,8 @@ public final class Move {
 
 	private boolean isInBound(int _value) {
 
-		if ((_value >= 0) && (_value < 8)) {
-			return true;
-		} else {
-			return false;
-		}
+		if ((_value >= 0) && (_value < 8)) return true;
+		else return false;
 	}
 
 	/*
@@ -134,7 +120,7 @@ public final class Move {
 	 */
 
 	public void setPromotion(String _promotion) {
-		this.promotion = _promotion;
+		promotion = _promotion;
 	}
 
 	public String getPromotion() {

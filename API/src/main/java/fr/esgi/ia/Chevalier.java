@@ -3,15 +3,14 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente le chevalier
- * 
- * Chacun des joueurs commence avec deux cavaliers, placés en b1 et g1 pour les
- * blancs, et b8 et g8 pour les noirs. Le déplacement du cavalier est original.
- * Il se déplace en L, c’est-à-dire de deux cases dans une direction puis d'une
- * perpendiculairement. C'est la seule pièce du jeu qui ne soit pas bloquée dans
- * son déplacement par les autres pièces. Cette particularité le rend très utile
- * dans les positions fermées. Le cavalier permet aussi de faire des fourchettes
- * (menace de deux pièces à la fois).
+ * Cette classe représente le chevalier Chacun des joueurs commence avec deux
+ * cavaliers, placés en b1 et g1 pour les blancs, et b8 et g8 pour les noirs. Le
+ * déplacement du cavalier est original. Il se déplace en L, c’est-à-dire de
+ * deux cases dans une direction puis d'une perpendiculairement. C'est la seule
+ * pièce du jeu qui ne soit pas bloquée dans son déplacement par les autres
+ * pièces. Cette particularité le rend très utile dans les positions fermées. Le
+ * cavalier permet aussi de faire des fourchettes (menace de deux pièces à la
+ * fois).
  * 
  * @author Cédric TESNIERE
  */
@@ -21,21 +20,20 @@ public class Chevalier extends Piece {
 		super();
 		setColor(_color);
 
-		if (isColor() == false)
-			setValue(-300);
-		else
-			setValue(300);
+		if (isColor() == false) setValue(-300);
+		else setValue(300);
 	}
 
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
+	@Override
 	public Object clone() {
 		Chevalier myClone = new Chevalier(isColor());
-		myClone.setValPos(this.getValPos());
-		myClone.setInDanger(this.isInDanger());
-		myClone.setEnemy(this.getEnemy());
-		myClone.setMoved(this.isMoved());
+		myClone.setValPos(getValPos());
+		myClone.setInDanger(isInDanger());
+		myClone.setEnemy(getEnemy());
+		myClone.setMoved(isMoved());
 		myClone.setPosition(getX(), getY());
 		return myClone;
 	}
@@ -43,8 +41,7 @@ public class Chevalier extends Piece {
 	/**
 	 * Donne tous les coups possibles, pas les bons.
 	 * 
-	 * @param _chessboard
-	 *            Actuel chessboard
+	 * @param _chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
@@ -89,8 +86,7 @@ public class Chevalier extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, _chessboard);
-			if (move != null)
-				moves.add(move);
+			if (move != null) moves.add(move);
 
 		}
 
@@ -102,8 +98,7 @@ public class Chevalier extends Piece {
 	 * 
 	 * @param _toX
 	 * @param _toY
-	 * @param _chessboard
-	 *            Actuel chessboard
+	 * @param _chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
 	private Move checkThis(int _toX, int _toY, Chessboard _chessboard) {
@@ -112,15 +107,13 @@ public class Chevalier extends Piece {
 		Move move;
 
 		if (destination != null) {
-			if (destination.isColor() != this.isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-				if (move.isValid())
-					return move;
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				if (move.isValid()) return move;
 			}
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, this.isColor());
-			if (move.isValid())
-				return move;
+			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			if (move.isValid()) return move;
 		}
 
 		return null;
