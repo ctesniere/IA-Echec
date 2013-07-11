@@ -276,7 +276,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionKing(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Roi(_color);
+		chessboard[x][y] = new Roi(_color);
 	}
 
 	/**
@@ -288,7 +288,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionQueen(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Reine(_color);
+		chessboard[x][y] = new Reine(_color);
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionTower(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Tour(_color);
+		chessboard[x][y] = new Tour(_color);
 	}
 
 	/**
@@ -312,7 +312,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionKnight(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Chevalier(_color);
+		chessboard[x][y] = new Chevalier(_color);
 	}
 
 	/**
@@ -324,7 +324,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionCrazy(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Fou(_color);
+		chessboard[x][y] = new Fou(_color);
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionPawn(String _location, boolean _color) {
 		int y = Helper.getYfromString(_location);
 		int x = Helper.getXfromString(_location);
-		chessboard[y][x] = new Pion(_color);
+		chessboard[x][y] = new Pion(_color);
 	}
 
 	void setnWhiteMoves(int _nWhiteMoves) {

@@ -20,15 +20,18 @@ import fr.esgi.ia.IA;
 @RequestMapping("/alphabeta")
 public class JSONController {
 
-	@RequestMapping(value = "/black/{bKing}/{bQueen}/{bCrazy}/{bKnight}/{bTower}/{bPawn}",
+	@RequestMapping(value = "/black/{bKing}/{bQueen}/{bCrazy}/{bKnight}/{bTower}/{bPawn}/white/{wKing}/{wQueen}/{wCrazy}/{wKnight}/{wTower}/{wPawn}",
 			method = RequestMethod.GET)
 	@ResponseBody
 	public String getShopInJSON(@PathVariable String bKing, @PathVariable String bQueen,
 			@PathVariable String bCrazy, @PathVariable String bKnight, @PathVariable String bTower,
-			@PathVariable String bPawn) {
+			@PathVariable String bPawn, @PathVariable String wKing, @PathVariable String wQueen,
+			@PathVariable String wCrazy, @PathVariable String wKnight, @PathVariable String wTower,
+			@PathVariable String wPawn) {
 
 		Chessboard chessboard = new Chessboard();
 		chessboard = insertPieceChessboard(chessboard, false, bKing, bQueen, bCrazy, bKnight, bTower, bPawn);
+		chessboard = insertPieceChessboard(chessboard, true, wKing, wQueen, wCrazy, wKnight, wTower, wPawn);
 
 		IA ia = new IA();
 
@@ -59,7 +62,7 @@ public class JSONController {
 		if (_queen != null) {
 			listLocation = _queen.split(":");
 			for (int i = 0; i < listLocation.length; i++)
-				_chessboard.setPositionKing(listLocation[i], _color);
+				_chessboard.setPositionQueen(listLocation[i], _color);
 		}
 
 		// Traitement pour le fou
@@ -80,14 +83,14 @@ public class JSONController {
 		if (_tower != null) {
 			listLocation = _tower.split(":");
 			for (int i = 0; i < listLocation.length; i++)
-				_chessboard.setPositionKnight(listLocation[i], _color);
+				_chessboard.setPositionTower(listLocation[i], _color);
 		}
 
 		// Traitement pour le pion
 		if (_pawn != null) {
 			listLocation = _pawn.split(":");
 			for (int i = 0; i < listLocation.length; i++)
-				_chessboard.setPositionKnight(listLocation[i], _color);
+				_chessboard.setPositionPawn(listLocation[i], _color);
 		}
 
 		return _chessboard;
