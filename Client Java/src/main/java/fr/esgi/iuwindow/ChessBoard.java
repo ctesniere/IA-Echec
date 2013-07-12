@@ -59,7 +59,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		// Add a few pieces to the board
 
-		ImageIcon tour = new ImageIcon("./././imgs/tour.png"); // add an image here
+		ImageIcon tour = new ImageIcon(getClass().getResource("/tour.png")); // add an image here
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
 		panel.add(piece);
@@ -68,17 +68,17 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(7);
 		panel.add(piece);
 		
-		ImageIcon reine = new ImageIcon("./././imgs/reine.png");
+		ImageIcon reine = new ImageIcon(getClass().getResource("/reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
 		panel.add(piece);
 		
-		ImageIcon roi = new ImageIcon("./././imgs/roi.png");
+		ImageIcon roi = new ImageIcon(getClass().getResource("/roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
 		panel.add(piece);
 		
-		ImageIcon cavalier = new ImageIcon("./././imgs/cavalier.png");
+		ImageIcon cavalier = new ImageIcon(getClass().getResource("/cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
 		panel.add(piece);
@@ -87,7 +87,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(6);
 		panel.add(piece);
 		
-		ImageIcon fou = new ImageIcon("./././imgs/fou.png");
+		ImageIcon fou = new ImageIcon(getClass().getResource("/fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
 		panel.add(piece);
@@ -96,7 +96,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(5);
 		panel.add(piece);
 		
-		ImageIcon pion = new ImageIcon("./././imgs/pion.png");
+		ImageIcon pion = new ImageIcon(getClass().getResource("/pion.png"));
 		for(int i=8; i< 16; i++)
 		{
 			piece = new JLabel(pion);
@@ -107,7 +107,11 @@ public class ChessBoard extends JPanel implements MouseListener,
 		//this.connexionWS();
 	}
 	
-	/** Permet d'appeler le WebService et de placer les pions **/
+	/**
+	 * Permet d'appeler le WebService et de placer les pions
+	 * 
+	 * @author Valérie MALET
+	 */
 //	public void connexionWS()
 //	{
 //		
