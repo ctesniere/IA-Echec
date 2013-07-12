@@ -3,46 +3,57 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * This class, used in the AlphaBeta process, store a chessboard, it's value and
- * other useful information.
+ * Cette classe, utilisé dans le processus AlphaBeta, stocke un échiquier, la valeur et d'autres informations
+ * utiles.
  * 
  * @author Cédric TESNIERE
  */
 public class ChessboardValue {
 
-	private Chessboard actualChessboardClone = null; /* < The chessboard */
+	private Chessboard actualChessboardClone = null;
+
 	private Move lastMove = null;
+
 	private ArrayList<Move> moves;
+
 	private int value;
+
 	private boolean color;
 
-	public ChessboardValue(Chessboard chessboard, Move move, ArrayList<Move> earlyMoves) {
+	/**
+	 * Création d'un objet de type ChessboardValue
+	 * 
+	 * @param _chessboard
+	 * @param _move
+	 * @param _earlyMoves
+	 */
+	public ChessboardValue(Chessboard _chessboard, Move _move, ArrayList<Move> _earlyMoves) {
 
-		actualChessboardClone = (Chessboard) chessboard.clone();
+		actualChessboardClone = (Chessboard) _chessboard.clone();
 		moves = new ArrayList<Move>();
 
-		// If it's not the first time [<>null(=> <> form alpha or beta)]
-		if (move != null) {
-			color = move.isColour();
-			// Do the move and set the validity
-			if (!(actualChessboardClone.doMove(move)))
-				move.setValid(false);
-			else {
-				lastMove = move;
+		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou bêta)]
+		if (_move != null) {
+			color = _move.isColour();
+			// Faire le mouvement et définir la validité
+			if (!(actualChessboardClone.doMove(_move))) {
+				_move.setValid(false);
+			} else {
+				lastMove = _move;
 				lastMove.setValid(true);
 
 				// Let's copy the moves
 				// TODO: Clone?
-				if (earlyMoves != null)
-					for (Move thisMove : earlyMoves)
+				if (_earlyMoves != null) {
+					for (Move thisMove : _earlyMoves)
 						moves.add(thisMove);
-
-				// Add this move
-				moves.add(move);
+				}
+				// Ajout de ce mouvement
+				moves.add(_move);
 			}
 		}
 
-		// Find and save the value of the chessboard
+		// Trouvez et sauvegarder la valeur de l'échiquier
 		value = chessboardValue(color);
 	}
 
@@ -59,60 +70,57 @@ public class ChessboardValue {
 	}
 
 	/**
-	 * Return the min between this chessboard and the passed one.
+	 * Retour au min entre cet échiquier et celle passée.
 	 * 
-	 * @param elseVChessboard The other chessboard
-	 * @return The min between the two
+	 * @param _elseVChessboard L'autre échiquier
+	 * @return Le min entre les deux
 	 */
-	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
+	public ChessboardValue VSmin(ChessboardValue _elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
-			if (getValue() < elseVChessboard.getValue())
+		if ((lastMove == null) && (_elseVChessboard.lastMove == null))
+			if (getValue() < _elseVChessboard.getValue())
 				return this;
 			else
-				return elseVChessboard;
+				return _elseVChessboard;
 
 		if (lastMove == null)
-			return elseVChessboard;
+			return _elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (_elseVChessboard.lastMove == null)
 			return this;
 
-		if (getValue() < elseVChessboard.getValue())
+		if (getValue() < _elseVChessboard.getValue())
 			return this;
 		else
-			return elseVChessboard;
+			return _elseVChessboard;
 	}
 
 	/**
-	 * Return the max between this chessboard and the passed one.
+	 * Retour au maximum entre cet échiquier et celle passée.
 	 * 
-	 * @param elseVChessboard The other chessboard
-	 * @return The max between the two
+	 * @param _elseVChessboard Les autres échiquiers
+	 * @return Le max entre les deux
 	 */
-	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
+	public ChessboardValue VSmax(ChessboardValue _elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
-			if (getValue() > elseVChessboard.getValue())
+		if ((lastMove == null) && (_elseVChessboard.lastMove == null))
+			if (getValue() > _elseVChessboard.getValue())
 				return this;
 			else
-				return elseVChessboard;
+				return _elseVChessboard;
 
 		if (lastMove == null)
-			return elseVChessboard;
+			return _elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (_elseVChessboard.lastMove == null)
 			return this;
 
-		if (getValue() > elseVChessboard.getValue())
+		if (getValue() > _elseVChessboard.getValue())
 			return this;
 		else
-			return elseVChessboard;
+			return _elseVChessboard;
 	}
 
-	/**
-     * 
-     */
 	public boolean isLastMoveValid() {
 		if (lastMove != null)
 			return lastMove.isValid();
@@ -121,31 +129,28 @@ public class ChessboardValue {
 	}
 
 	/**
-	 * Return the value of the chessboard for a color.
+	 * Retourner la valeur de l'échiquier pour une couleur
 	 * 
-	 * @param color The color of the player
-	 * @return The value of the chessboard
+	 * @param _color La couleur du joueur
+	 * @return La valeur de l'echiquier
 	 */
-	public int chessboardValue(boolean color) {
+	public int chessboardValue(boolean _color) {
 
 		int val = 0;
 		int temp;
 
 		for (int x = 0; x < 8; x++)
 			for (int y = 0; y < 8; y++)
-				// Se la casella non √® vuota
+				// Si la case n'est pas un blanc
 				if (getActualChessboard().getPieceMouv(x, y) != null) {
 					Piece piece = getActualChessboard().getPieceMouv(x, y);
-					// Se il pezzo non √® in pericolo ed √® del mio colore
-					if ((!piece.isInDanger()) && (piece.isColor() == color)) // e
-																				// si
-																				// √®
-																				// mosso
+					// Si la pièce n'est pas en danger et il est ma couleur
+					if ((!piece.isInDanger()) && (piece.isColor() == _color)) // et déplacé
 						if (piece.isMoved()) {
-							// Valutazione normale
+							// Note normale
 							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
-						} else // Se √® nero
+						} else // Si elle est noire
 						if (piece.isColor() == false) {
 							// Si Tour ou roi
 							// if ((piece.getId() == 31) || (piece.getId() ==
@@ -155,13 +160,13 @@ public class ChessboardValue {
 								temp = piece.getValue() + piece.getPositionValue();
 								val = val + temp;
 							}
-							// Se √® un altro pezzo qualsiasi
+							// Si une pièce est un autre
 							else {
-								// Dai un vantaggio al bianco di 10
+								// D'un avantage pour le blanc 10
 								temp = piece.getValue() + piece.getPositionValue();
 								val = val + temp + 10;
 							}
-						} else // Se sono le mie torri o il re
+						} else // Si vous êtes une de mes tours ou mon roi
 						// if ((piece.getId() == 32) || (piece.getId() == 28) ||
 						// (piece.getId() == 26)) {
 						if (true) {
@@ -169,26 +174,26 @@ public class ChessboardValue {
 							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
 						}
-						// Se √® un altro pezzo qualsiasi
+						// Si une pièce est un autre
 						else {
-							// Dai un vantaggio al nero di 10
+							// Par un bord noir avec 10
 							temp = piece.getValue() + piece.getPositionValue();
 							val = (val + temp) - 10;
 						}
-					// Se il pezzo √® in pericolo e non √® del mio colore
-					if ((piece.isInDanger()) && (piece.isColor() != color)) {
+					// Si la pièce est en danger et ce n'est pas ma couleur
+					if ((piece.isInDanger()) && (piece.isColor() != _color)) {
 						// Dai un vantaggio del 15% del valore del pezzo
 						temp = (piece.getValue() * 15) / 100;
 						val = val - temp;
 					}
-					// Se il pezzo non √® del mio colore
-					if (piece.isColor() != color) {
-						// Valutazione normale
+					// Si la pièce n'est pas ma couleur
+					if (piece.isColor() != _color) {
+						// Note normale
 						temp = piece.getValue() + piece.getPositionValue();
 						val = val + temp;
 					}
 				}
-		// Valuta la mobilit√†
+		// Noter cette mobilité
 		temp = getActualChessboard().getnWhiteMoves() - getActualChessboard().getnBlackMoves();
 		val += temp * 2;
 		return val;
@@ -201,7 +206,7 @@ public class ChessboardValue {
 	public int getValue() {
 		return value;
 	}
-
+	
 	private void setMoves(ArrayList<Move> moves) {
 		this.moves = moves;
 	}

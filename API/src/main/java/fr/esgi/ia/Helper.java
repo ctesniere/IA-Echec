@@ -255,5 +255,4 @@ public class Helper {
 			return "h8";
 		return null;
 	}
-
 }

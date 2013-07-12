@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * fois).
  * 
  * @author CŽdric TESNIERE
+ * @since 1
  */
 public class Chevalier extends Piece {
 

@@ -35,11 +35,6 @@ public final class Move {
 
 	public boolean checkValidity() {
 
-		// TODO If there is a piece of the same color in this position the move
-		// is not valid
-		// TODO if there is a king you cannot eat it but is a good move so it's
-		// valid
-
 		if (isInBound(startX) && isInBound(startY) && isInBound(endX) && isInBound(endY))
 			setValid(true);
 		else
@@ -49,7 +44,7 @@ public final class Move {
 	}
 
 	/**
-	 * Return the the string representing the move.
+	 * Retourne le string représentant le déplacement
 	 * 
 	 * @return The string representing the move
 	 */
@@ -88,12 +83,12 @@ public final class Move {
 
 	public static Move mossaPromozione(Move _move, Chessboard _miaScacchiera) {
 
-		// se la mossa mi porta in y=7 o in y=0
+		// Si le mouvement me faut pour y = 7 ou y = 0
 		if (((_move.isColour()) && (_move.getEndY() == 7))
 				|| ((!(_move.isColour())) && (_move.getEndY() == 0))) {
 
 			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(), _move.getStartY());
-			// se √® stato un pedone ad eseguire lamossa
+			// si c'était un gage de faire un geste
 			// if ((mioPezzo != null) && (mioPezzo.getId() <= 16))
 			if (true)
 				_move.setPromo();

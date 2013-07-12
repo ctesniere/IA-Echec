@@ -21,42 +21,42 @@ public class IA {
 
 	}
 
-	public void play(boolean _myColor, int _depth) {
-		play(_myColor, _depth, new Chessboard());
-	}
-
 	/**
-	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et
-	 * l'execute
+	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute
 	 * 
-	 * @param _myColor Coleur
-	 * @param _depth Difficulté de l'application
+	 * @param _myColor
+	 * @param _depth
+	 * @param _chessboard
+	 * @return Le meilleur mouvement
 	 */
-	public void play(boolean _myColor, int _depth, Chessboard _chessboard) {
+	public String play(boolean _myColor, int _depth, Chessboard _chessboard) {
+
+		String output = "";
+		boolean exitWhile = true;
 
 		Algorithm anAlgorithm = new AlphaBeta(_depth);
 		Move myMove;
 
-		setGlobalChessboard(new Chessboard());
+		setGlobalChessboard(_chessboard);
 		setAlgorithm(anAlgorithm);
 
 		setMyColor(_myColor);
 		setEnemyColor(!_myColor);
 
 		// Boucle principale
-		while (true) {
+		while (exitWhile) {
 
 			myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
 
 			if (myMove == null) {
-				System.err.println("ERROR: Pas de mouvement possible.");
-				System.exit(0);
+				output+= "ERROR: Pas de mouvement possible.";
+				exitWhile = false;
 			} else {
-				getGlobalChessboard().doMove(myMove); // TODO: Check return
-														// value?
-				System.out.println(myMove.moveOutputString());
+				getGlobalChessboard().doMove(myMove);
+				output+= myMove.moveOutputString() + " ";
 			}
 		}
+		return output;
 	}
 
 	public boolean isMyColor() {

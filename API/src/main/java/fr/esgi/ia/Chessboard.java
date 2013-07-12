@@ -6,17 +6,14 @@ import java.util.List;
 /**
  * Cette classe represente l'Échiquier.
  * 
- * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille
- * carrée de 8 cases de côté, soit 64 cases en tout, en alternance sombres
- * (appelées noires) et claires (appelées blanches). Un échiquier est intégré à
- * la surface supérieure des tables d'échecs. Dans une partie d'échecs, on
- * dispose l'échiquier de façon à ce que, pour chacun des adversaires, la case
- * du coin gauche (le plus proche) de l'échiquier soit noire. De plus, mais ce
- * n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les
- * Blancs placent leur pièces sur la rangée 1, leurs pions sur la rangée 2,
- * tandis que Noirs disposent leurs pièces sur la rangée 8, et leurs pions sur
- * la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés en
- * bas, les Noirs en haut.
+ * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille carrée de 8 cases de côté, soit 64
+ * cases en tout, en alternance sombres (appelées noires) et claires (appelées blanches). Un échiquier est
+ * intégré à la surface supérieure des tables d'échecs. Dans une partie d'échecs, on dispose l'échiquier de
+ * façon à ce que, pour chacun des adversaires, la case du coin gauche (le plus proche) de l'échiquier soit
+ * noire. De plus, mais ce n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les Blancs
+ * placent leur pièces sur la rangée 1, leurs pions sur la rangée 2, tandis que Noirs disposent leurs pièces
+ * sur la rangée 8, et leurs pions sur la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés
+ * en bas, les Noirs en haut.
  * 
  * @author Cédric TESNIERE
  */
@@ -26,7 +23,7 @@ public class Chessboard implements Cloneable {
 	// ATTRIBUTES
 	// =========================================================================
 
-	// Number of possible moves. Used to calculate mobility.
+	// Nombre de coups possibles. Utilisé pour calculer la mobilité
 	private int nWhiteMoves;
 
 	private int nBlackMoves;
@@ -236,6 +233,11 @@ public class Chessboard implements Cloneable {
 		return chessboardClone;
 	}
 
+	/**
+	 * Génere le Json a retourner au client
+	 * 
+	 * @return Un array d'un array de position au format "piece:position"
+	 */
 	public List<List<String>> getChessboardForJson() {
 		initListPieceBalckAndWhite();
 
@@ -265,6 +267,66 @@ public class Chessboard implements Cloneable {
 		listPiece.add(listWhite);
 
 		return listPiece;
+	}
+
+	/**
+	 * Insert les pièces dans l'echiquier
+	 * 
+	 * @param _color
+	 * @param _king
+	 * @param _queen
+	 * @param _crazy
+	 * @param _knight
+	 * @param _tower
+	 * @param _pawn
+	 * @return
+	 */
+	public void insertPieceChessboard(boolean _color, String _king, String _queen, String _crazy,
+			String _knight, String _tower, String _pawn) {
+
+		String[] listLocation;
+
+		// Traitement pour le roi
+		if (_king != null) {
+			listLocation = _king.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionKing(listLocation[i], _color);
+		}
+
+		// Traitement pour la reine
+		if (_queen != null) {
+			listLocation = _queen.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionQueen(listLocation[i], _color);
+		}
+
+		// Traitement pour le fou
+		if (_crazy != null) {
+			listLocation = _crazy.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionCrazy(listLocation[i], _color);
+		}
+
+		// Traitement pour le cavalier
+		if (_knight != null) {
+			listLocation = _knight.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionKnight(listLocation[i], _color);
+		}
+
+		// Traitement pour la tour
+		if (_tower != null) {
+			listLocation = _tower.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionTower(listLocation[i], _color);
+		}
+
+		// Traitement pour le pion
+		if (_pawn != null) {
+			listLocation = _pawn.split(":");
+			for (int i = 0; i < listLocation.length; i++)
+				setPositionPawn(listLocation[i], _color);
+		}
 	}
 
 	/**
