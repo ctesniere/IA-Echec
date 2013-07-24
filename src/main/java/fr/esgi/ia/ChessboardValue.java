@@ -23,33 +23,33 @@ public class ChessboardValue {
 	/**
 	 * Création d'un objet de type ChessboardValue
 	 * 
-	 * @param _chessboard
-	 * @param _move
-	 * @param _earlyMoves
+	 * @param chessboard
+	 * @param move
+	 * @param earlyMoves
 	 */
-	public ChessboardValue(Chessboard _chessboard, Move _move, ArrayList<Move> _earlyMoves) {
+	public ChessboardValue(Chessboard chessboard, Move move, ArrayList<Move> earlyMoves) {
 
-		actualChessboardClone = (Chessboard) _chessboard.clone();
+		actualChessboardClone = (Chessboard) chessboard.clone();
 		moves = new ArrayList<Move>();
 
 		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou bêta)]
-		if (_move != null) {
-			color = _move.isColour();
+		if (move != null) {
+			color = move.isColor();
 			// Faire le mouvement et définir la validité
-			if (!(actualChessboardClone.doMove(_move))) {
-				_move.setValid(false);
+			if (!(actualChessboardClone.doMove(move))) {
+				move.setValid(false);
 			} else {
-				lastMove = _move;
+				lastMove = move;
 				lastMove.setValid(true);
 
 				// Let's copy the moves
 				// TODO: Clone?
-				if (_earlyMoves != null) {
-					for (Move thisMove : _earlyMoves)
+				if (earlyMoves != null) {
+					for (Move thisMove : earlyMoves)
 						moves.add(thisMove);
 				}
 				// Ajout de ce mouvement
-				moves.add(_move);
+				moves.add(move);
 			}
 		}
 
@@ -72,53 +72,53 @@ public class ChessboardValue {
 	/**
 	 * Retour au min entre cet échiquier et celle passée.
 	 * 
-	 * @param _elseVChessboard L'autre échiquier
+	 * @param elseVChessboard L'autre échiquier
 	 * @return Le min entre les deux
 	 */
-	public ChessboardValue VSmin(ChessboardValue _elseVChessboard) {
+	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (_elseVChessboard.lastMove == null))
-			if (getValue() < _elseVChessboard.getValue())
+		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+			if (getValue() < elseVChessboard.getValue())
 				return this;
 			else
-				return _elseVChessboard;
+				return elseVChessboard;
 
 		if (lastMove == null)
-			return _elseVChessboard;
+			return elseVChessboard;
 
-		if (_elseVChessboard.lastMove == null)
+		if (elseVChessboard.lastMove == null)
 			return this;
 
-		if (getValue() < _elseVChessboard.getValue())
+		if (getValue() < elseVChessboard.getValue())
 			return this;
 		else
-			return _elseVChessboard;
+			return elseVChessboard;
 	}
 
 	/**
 	 * Retour au maximum entre cet échiquier et celle passée.
 	 * 
-	 * @param _elseVChessboard Les autres échiquiers
+	 * @param elseVChessboard Les autres échiquiers
 	 * @return Le max entre les deux
 	 */
-	public ChessboardValue VSmax(ChessboardValue _elseVChessboard) {
+	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (_elseVChessboard.lastMove == null))
-			if (getValue() > _elseVChessboard.getValue())
+		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+			if (getValue() > elseVChessboard.getValue())
 				return this;
 			else
-				return _elseVChessboard;
+				return elseVChessboard;
 
 		if (lastMove == null)
-			return _elseVChessboard;
+			return elseVChessboard;
 
-		if (_elseVChessboard.lastMove == null)
+		if (elseVChessboard.lastMove == null)
 			return this;
 
-		if (getValue() > _elseVChessboard.getValue())
+		if (getValue() > elseVChessboard.getValue())
 			return this;
 		else
-			return _elseVChessboard;
+			return elseVChessboard;
 	}
 
 	public boolean isLastMoveValid() {
@@ -131,10 +131,10 @@ public class ChessboardValue {
 	/**
 	 * Retourner la valeur de l'échiquier pour une couleur
 	 * 
-	 * @param _color La couleur du joueur
+	 * @param color La couleur du joueur
 	 * @return La valeur de l'echiquier
 	 */
-	public int chessboardValue(boolean _color) {
+	public int chessboardValue(boolean color) {
 
 		int val = 0;
 		int temp;
@@ -142,10 +142,10 @@ public class ChessboardValue {
 		for (int x = 0; x < 8; x++)
 			for (int y = 0; y < 8; y++)
 				// Si la case n'est pas un blanc
-				if (getActualChessboard().getPieceMouv(x, y) != null) {
-					Piece piece = getActualChessboard().getPieceMouv(x, y);
+				if (getActualChessboardClone().getPieceMouv(x, y) != null) {
+					Piece piece = getActualChessboardClone().getPieceMouv(x, y);
 					// Si la pièce n'est pas en danger et il est ma couleur
-					if ((!piece.isInDanger()) && (piece.isColor() == _color)) // et déplacé
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) // et déplacé
 						if (piece.isMoved()) {
 							// Note normale
 							temp = piece.getValue() + piece.getPositionValue();
@@ -181,46 +181,61 @@ public class ChessboardValue {
 							val = (val + temp) - 10;
 						}
 					// Si la pièce est en danger et ce n'est pas ma couleur
-					if ((piece.isInDanger()) && (piece.isColor() != _color)) {
+					if ((piece.isInDanger()) && (piece.isColor() != color)) {
 						// Dai un vantaggio del 15% del valore del pezzo
 						temp = (piece.getValue() * 15) / 100;
 						val = val - temp;
 					}
 					// Si la pièce n'est pas ma couleur
-					if (piece.isColor() != _color) {
+					if (piece.isColor() != color) {
 						// Note normale
 						temp = piece.getValue() + piece.getPositionValue();
 						val = val + temp;
 					}
 				}
 		// Noter cette mobilité
-		temp = getActualChessboard().getnWhiteMoves() - getActualChessboard().getnBlackMoves();
+		temp = getActualChessboardClone().getNbWhiteMoves() - getActualChessboardClone().getNbBlackMoves();
 		val += temp * 2;
 		return val;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
+	public Chessboard getActualChessboardClone() {
+		return actualChessboardClone;
 	}
 
-	public int getValue() {
-		return value;
+	public void setActualChessboardClone(Chessboard actualChessboardClone) {
+		this.actualChessboardClone = actualChessboardClone;
 	}
-	
-	private void setMoves(ArrayList<Move> moves) {
-		this.moves = moves;
+
+	public Move getLastMove() {
+		return lastMove;
+	}
+
+	public void setLastMove(Move lastMove) {
+		this.lastMove = lastMove;
 	}
 
 	public ArrayList<Move> getMoves() {
 		return moves;
 	}
 
-	public void setActualChessboard(Chessboard actualChessboard) {
-		actualChessboardClone = actualChessboard;
+	public void setMoves(ArrayList<Move> moves) {
+		this.moves = moves;
 	}
 
-	public Chessboard getActualChessboard() {
-		return actualChessboardClone;
+	public int getValue() {
+		return value;
 	}
 
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public boolean isColor() {
+		return color;
+	}
+
+	public void setColor(boolean color) {
+		this.color = color;
+	}
 }

@@ -11,7 +11,7 @@ public class IA {
 
 	private Chessboard globalChessboard;
 
-	private Algorithm anAlgorithm;
+	private Algorithm algorithm;
 
 	private boolean black = false;
 
@@ -24,24 +24,24 @@ public class IA {
 	/**
 	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute
 	 * 
-	 * @param _myColor
-	 * @param _depth
-	 * @param _chessboard
+	 * @param myColor
+	 * @param depth
+	 * @param chessboard
 	 * @return Le meilleur mouvement
 	 */
-	public String play(boolean _myColor, int _depth, Chessboard _chessboard) {
+	public String play(boolean myColor, int depth, Chessboard chessboard) {
 
 		String output = "";
 		boolean exitWhile = true;
 
-		Algorithm anAlgorithm = new AlphaBeta(_depth);
+		Algorithm anAlgorithm = new AlphaBeta(depth);
 		Move myMove;
 
-		setGlobalChessboard(_chessboard);
+		setGlobalChessboard(chessboard);
 		setAlgorithm(anAlgorithm);
 
-		setMyColor(_myColor);
-		setEnemyColor(!_myColor);
+		setMyColor(myColor);
+		setEnemyColor(!myColor);
 
 		// Boucle principale
 		while (exitWhile) {
@@ -63,48 +63,47 @@ public class IA {
 		return myColor;
 	}
 
-	public void setMyColor(boolean _myColor) {
-		myColor = _myColor;
+	public void setMyColor(boolean myColor) {
+		this.myColor = myColor;
 	}
 
 	public boolean isEnemyColor() {
 		return enemyColor;
 	}
 
-	public void setEnemyColor(boolean _enemyColor) {
-		enemyColor = _enemyColor;
+	public void setEnemyColor(boolean enemyColor) {
+		this.enemyColor = enemyColor;
 	}
 
 	public Chessboard getGlobalChessboard() {
 		return globalChessboard;
 	}
 
-	public void setGlobalChessboard(Chessboard _globalChessboard) {
-		globalChessboard = _globalChessboard;
+	public void setGlobalChessboard(Chessboard globalChessboard) {
+		this.globalChessboard = globalChessboard;
 	}
 
 	public Algorithm getAlgorithm() {
-		return anAlgorithm;
+		return algorithm;
 	}
 
-	public void setAlgorithm(Algorithm _algorithm) {
-		anAlgorithm = _algorithm;
+	public void setAlgorithm(Algorithm algorithm) {
+		this.algorithm = algorithm;
 	}
 
 	public boolean isBlack() {
 		return black;
 	}
 
-	public void setBlack(boolean _black) {
-		black = _black;
+	public void setBlack(boolean black) {
+		this.black = black;
 	}
 
 	public boolean isWhite() {
 		return white;
 	}
 
-	public void setWhite(boolean _white) {
-		white = _white;
+	public void setWhite(boolean white) {
+		this.white = white;
 	}
-
 }

@@ -13,18 +13,18 @@ abstract public class Algorithm {
 
 	private static boolean white = true;
 
-	public Algorithm(int _profondeur) {
-		profondeur = _profondeur;
+	public Algorithm(int profondeur) {
+		setProfondeur(profondeur);
 	}
 
 	/**
 	 * Return to me the best move that can be done.
 	 * 
-	 * @param _chessboard
-	 * @param _color
+	 * @param chessboard
+	 * @param color
 	 * @return The best move or NULL if no move is possible
 	 */
-	abstract public Move chooseMove(Chessboard _chessboard, boolean _color);
+	abstract public Move chooseMove(Chessboard chessboard, boolean color);
 
 	public int getProfondeur() {
 		return profondeur;

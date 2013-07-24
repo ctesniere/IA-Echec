@@ -16,9 +16,9 @@ public class Pion extends Piece {
 	/**
 	 * Création d'une instance Pion
 	 * 
-	 * @param _color
+	 * @param color
 	 */
-	public Pion(boolean _color) {
+	public Pion(boolean color) {
 		super();
 		setColor(isColor());
 
@@ -47,11 +47,11 @@ public class Pion extends Piece {
 	 * allié. Il peut manger dans d'autres positions. Nous donnons tous les
 	 * coups possibles, pas les bons.
 	 * 
-	 * @param _chessboard Actuel chessboard
+	 * @param chessboard Actuel chessboard
 	 * @return Un tableau de tous les coups possibles (pas les bons!)
 	 */
 	@Override
-	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
+	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = getX();
 		int toY = getY();
@@ -64,7 +64,7 @@ public class Pion extends Piece {
 		else
 			toY--;
 
-		Piece possiblePiece = _chessboard.getPiece(toX, toY);
+		Piece possiblePiece = chessboard.getPiece(toX, toY);
 
 		// Si aucune piece au nouvelle position du pion
 		if (possiblePiece == null) {
@@ -82,7 +82,7 @@ public class Pion extends Piece {
 				else
 					toY--;
 
-				possiblePiece = _chessboard.getPiece(toX, toY);
+				possiblePiece = chessboard.getPiece(toX, toY);
 
 				if (possiblePiece == null) {
 					move = new Move(getX(), getY(), toX, toY, isColor());
@@ -103,7 +103,7 @@ public class Pion extends Piece {
 		else
 			toY = getY() - 1;
 
-		possiblePiece = _chessboard.getPiece(toX, toY);
+		possiblePiece = chessboard.getPiece(toX, toY);
 
 		if ((possiblePiece != null) && (possiblePiece.isColor() != isColor())) {
 
@@ -122,7 +122,7 @@ public class Pion extends Piece {
 		else
 			toY = getY() - 1;
 
-		possiblePiece = _chessboard.getPieceMouv(toX, toY);
+		possiblePiece = chessboard.getPieceMouv(toX, toY);
 
 		if ((possiblePiece != null) && (possiblePiece.isColor() != isColor())) {
 

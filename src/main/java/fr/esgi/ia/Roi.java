@@ -19,11 +19,11 @@ public class Roi extends Piece {
 	/**
 	 * Création d'une instance Roi
 	 * 
-	 * @param _color
+	 * @param color
 	 */
-	public Roi(boolean _color) {
+	public Roi(boolean color) {
 		super();
-		setColor(_color);
+		setColor(color);
 
 		if (isColor() == false)
 			setValue(-200);
@@ -48,11 +48,11 @@ public class Roi extends Piece {
 	/**
 	 * We give all possible moves, not the good ones.
 	 * 
-	 * @param _chessboard Actuel chessboard
+	 * @param chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
-	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
+	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = 0, toY = 0;
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -92,7 +92,7 @@ public class Roi extends Piece {
 				toY = getY() - 1;
 			}
 
-			Move move = checkThis(toX, toY, _chessboard);
+			Move move = checkThis(toX, toY, chessboard);
 			if (move != null)
 				moves.add(move);
 
@@ -104,24 +104,24 @@ public class Roi extends Piece {
 	/**
 	 * Test the possible move.
 	 * 
-	 * @param _toX
-	 * @param _toY
-	 * @param _chessboard Actuel chessboard
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkThis(int _toX, int _toY, Chessboard _chessboard) {
+	private Move checkThis(int toX, int toY, Chessboard chessboard) {
 
-		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
+		Piece destination = chessboard.getPieceMouv(toX, toY);
 		Move move;
 
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				move = new Move(getX(), getY(), toX, toY, isColor());
 				if (move.isValid())
 					return move;
 			}
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			move = new Move(getX(), getY(), toX, toY, isColor());
 			if (move.isValid())
 				return move;
 		}

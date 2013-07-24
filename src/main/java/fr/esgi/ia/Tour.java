@@ -16,11 +16,11 @@ public class Tour extends Piece {
 	/**
 	 * Création d'une instance d'une tour
 	 * 
-	 * @param _color
+	 * @param color
 	 */
-	public Tour(boolean _color) {
+	public Tour(boolean color) {
 		super();
-		setColor(_color);
+		setColor(color);
 
 		if (isColor() == false)
 			setValue(-500);
@@ -46,11 +46,11 @@ public class Tour extends Piece {
 	 * The Rook can move until it finds an enemy of an ally piece. We give all
 	 * possible moves, not the good ones.
 	 * 
-	 * @param _chessboard Actuel chessboard
+	 * @param chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
-	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
+	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = 0, toY = 0;
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -88,7 +88,7 @@ public class Tour extends Piece {
 				 */
 
 				// TODO: Change checkThis to return a Boolean
-				Move move = checkMove(toX, toY, _chessboard, moves);
+				Move move = checkMove(toX, toY, chessboard, moves);
 				if (move == null) // If move is null, no more possible moves in
 									// this direction
 					break; // Stop going in this direction
@@ -100,28 +100,28 @@ public class Tour extends Piece {
 	/**
 	 * Test the possible move.
 	 * 
-	 * @param _toX
-	 * @param _toY
-	 * @param _chessboard Actuel chessboard
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkMove(int _toX, int _toY, Chessboard _chessboard, ArrayList<Move> _moves) {
+	private Move checkMove(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
 
-		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
+		Piece destination = chessboard.getPieceMouv(toX, toY);
 		Move move;
 
 		if (destination != null) { // If is not empty
 			if (destination.isColor() != isColor()) { // Another color
-				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				move = new Move(getX(), getY(), toX, toY, isColor());
 				if (move.isValid())
-					_moves.add(move); // Add move
+					moves.add(move); // Add move
 			}
 			// Mine or not, if there is a piece STOP
 			return null; // You must stop
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			move = new Move(getX(), getY(), toX, toY, isColor());
 			if (move.isValid())
-				_moves.add(move); // Add move
+				moves.add(move); // Add move
 		}
 
 		return move;

@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 public class Chevalier extends Piece {
 
-	public Chevalier(boolean _color) {
+	public Chevalier(boolean color) {
 		super();
-		setColor(_color);
+		setColor(color);
 
 		if (isColor() == false)
 			setValue(-300);
@@ -44,11 +44,11 @@ public class Chevalier extends Piece {
 	/**
 	 * Donne tous les coups possibles, pas les bons.
 	 * 
-	 * @param _chessboard Actuel chessboard
+	 * @param chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
-	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
+	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = 0, toY = 0;
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -88,7 +88,7 @@ public class Chevalier extends Piece {
 				toY = getY() - 2;
 			}
 
-			Move move = checkThis(toX, toY, _chessboard);
+			Move move = checkThis(toX, toY, chessboard);
 			if (move != null)
 				moves.add(move);
 
@@ -100,24 +100,24 @@ public class Chevalier extends Piece {
 	/**
 	 * Test le possible déplacement
 	 * 
-	 * @param _toX
-	 * @param _toY
-	 * @param _chessboard Actuel chessboard
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkThis(int _toX, int _toY, Chessboard _chessboard) {
+	private Move checkThis(int toX, int toY, Chessboard chessboard) {
 
-		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
+		Piece destination = chessboard.getPieceMouv(toX, toY);
 		Move move;
 
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				move = new Move(getX(), getY(), toX, toY, isColor());
 				if (move.isValid())
 					return move;
 			}
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			move = new Move(getX(), getY(), toX, toY, isColor());
 			if (move.isValid())
 				return move;
 		}
