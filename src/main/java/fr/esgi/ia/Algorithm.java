@@ -30,16 +30,24 @@ abstract public class Algorithm {
 		return profondeur;
 	}
 
-	public void setProfondeur(int _profondeur) {
-		profondeur = _profondeur;
+	public void setProfondeur(int profondeur) {
+		this.profondeur = profondeur;
 	}
 
-	static public boolean isBlack() {
-		return Algorithm.black;
+	public static boolean isBlack() {
+		return black;
 	}
 
-	static public boolean isWhite() {
-		return Algorithm.white;
+	public static void setBlack(boolean black) {
+		Algorithm.black = black;
+	}
+
+	public static boolean isWhite() {
+		return white;
+	}
+
+	public static void setWhite(boolean white) {
+		Algorithm.white = white;
 	}
 
 }

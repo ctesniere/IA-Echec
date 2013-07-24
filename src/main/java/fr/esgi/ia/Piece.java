@@ -10,9 +10,14 @@ import java.util.ArrayList;
 abstract public class Piece {
 
 	/**
-	 * < If black the value is negative, positive otherwise
+	 * Si la valeur des noir est nŽgative, positive pour les blancs
 	 */
 	private int value;
+
+	/**
+	 * Nom de la piece
+	 */
+	private String name;
 
 	private int y, x, enemy;
 
@@ -27,6 +32,7 @@ abstract public class Piece {
 		setInDanger(false); // No one is in danger at the start
 		setMoved(false);
 		setEnemy(0);
+		setName(this.getClass().getSimpleName());
 	}
 
 	public void setPosition(int x, int y) {
@@ -37,12 +43,12 @@ abstract public class Piece {
 	public void noMoreInDanger() {
 		setEnemy(getEnemy() - 1);
 		if (getEnemy() == 0)
-			inDanger = false;
+			setInDanger(false);
 	}
 
 	public void inDanger() {
 		setEnemy(getEnemy() + 1);
-		inDanger = true;
+		setInDanger(true);
 	}
 
 	public int getPositionValue() {
@@ -130,6 +136,14 @@ abstract public class Piece {
 
 	protected int[][] getValPos() {
 		return valPos;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
