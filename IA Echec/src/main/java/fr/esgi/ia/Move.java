@@ -17,20 +17,20 @@ public final class Move {
 
 	private boolean isValid;
 
-	private boolean colour;
+	private boolean color;
 
-	private boolean ismangia = true;
+	private boolean isEating = true;
 
 	private boolean promo = false;
 
 	private String promotion = null;
 
-	public Move(int _startingX, int _startingY, int _endingX, int _endingY, boolean _color) {
-		startX = _startingX;
-		endX = _endingX;
-		startY = _startingY;
-		endY = _endingY;
-		setColour(_color);
+	public Move(int startX, int startY, int endX, int endY, boolean color) {
+		setStartX(startX);
+		setEndX(endX);
+		setStartY(startY);
+		setEndY(endY);
+		setColor(color);
 	}
 
 	public boolean checkValidity() {
@@ -66,7 +66,7 @@ public final class Move {
 	}
 
 	public boolean getMangia() {
-		return ismangia;
+		return isEating;
 	}
 
 	public boolean getPromo() {
@@ -75,7 +75,7 @@ public final class Move {
 
 	public void setPromo() {
 
-		if (isColour() == true)
+		if (isColor() == true)
 			promo = true;
 		else
 			setPromotion("q");
@@ -84,8 +84,8 @@ public final class Move {
 	public static Move mossaPromozione(Move _move, Chessboard _miaScacchiera) {
 
 		// Si le mouvement me faut pour y = 7 ou y = 0
-		if (((_move.isColour()) && (_move.getEndY() == 7))
-				|| ((!(_move.isColour())) && (_move.getEndY() == 0))) {
+		if (((_move.isColor()) && (_move.getEndY() == 7))
+				|| ((!(_move.isColor())) && (_move.getEndY() == 0))) {
 
 			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(), _move.getStartY());
 			// si c'Žtait un gage de faire un geste
@@ -115,48 +115,71 @@ public final class Move {
 			return false;
 	}
 
-	/*
-	 * GETTER AND SETTER
-	 */
-
-	public void setPromotion(String _promotion) {
-		promotion = _promotion;
-	}
-
-	public String getPromotion() {
-		return promotion;
-	}
-
 	public int getStartX() {
 		return startX;
 	}
 
-	public int getStartY() {
-		return startY;
+	public void setStartX(int startX) {
+		this.startX = startX;
 	}
 
 	public int getEndX() {
 		return endX;
 	}
 
+	public void setEndX(int endX) {
+		this.endX = endX;
+	}
+
+	public int getStartY() {
+		return startY;
+	}
+
+	public void setStartY(int startY) {
+		this.startY = startY;
+	}
+
 	public int getEndY() {
 		return endY;
 	}
 
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
+	public void setEndY(int endY) {
+		this.endY = endY;
 	}
 
 	public boolean isValid() {
 		return isValid;
 	}
 
-	public void setColour(boolean colour) {
-		this.colour = colour;
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
 	}
 
-	public boolean isColour() {
-		return colour;
+	public boolean isColor() {
+		return color;
 	}
 
+	public void setColor(boolean color) {
+		this.color = color;
+	}
+
+	public boolean isEating() {
+		return isEating;
+	}
+
+	public void setEating(boolean isEating) {
+		this.isEating = isEating;
+	}
+
+	public String getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(String promotion) {
+		this.promotion = promotion;
+	}
+
+	public void setPromo(boolean promo) {
+		this.promo = promo;
+	}
 }

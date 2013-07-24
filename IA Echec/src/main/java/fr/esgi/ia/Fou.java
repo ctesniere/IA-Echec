@@ -18,11 +18,11 @@ public class Fou extends Piece {
 	/**
 	 * Création d'une instance fou
 	 * 
-	 * @param _color
+	 * @param color
 	 */
-	public Fou(boolean _color) {
+	public Fou(boolean color) {
 		super();
-		setColor(_color);
+		setColor(color);
 
 		if (isColor() == false)
 			setValue(-325);
@@ -45,11 +45,11 @@ public class Fou extends Piece {
 	 * The Bishop can move until it finds an enemy of an ally piece. We give all
 	 * possible moves, not the good ones.
 	 * 
-	 * @param _chessboard Actuel chessboard
+	 * @param chessboard Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
-	public ArrayList<Move> generateMovesForThisPiece(Chessboard _chessboard) {
+	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = 0, toY = 0;
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -76,7 +76,7 @@ public class Fou extends Piece {
 					toY = getY() - length;
 				}
 
-				Move move = checkThis(toX, toY, _chessboard, moves);
+				Move move = checkThis(toX, toY, chessboard, moves);
 				if (move == null)
 					break;
 			}
@@ -87,27 +87,27 @@ public class Fou extends Piece {
 	/**
 	 * Test the possible move.
 	 * 
-	 * @param _toX
-	 * @param _toY
-	 * @param _chessboard Actuel chessboard
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkThis(int _toX, int _toY, Chessboard _chessboard, ArrayList<Move> _moves) {
+	private Move checkThis(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
 
-		Piece destination = _chessboard.getPieceMouv(_toX, _toY);
+		Piece destination = chessboard.getPieceMouv(toX, toY);
 		Move move;
 
 		if (destination != null) {
 			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), _toX, _toY, isColor());
+				move = new Move(getX(), getY(), toX, toY, isColor());
 				if (move.isValid())
-					_moves.add(move);
+					moves.add(move);
 			}
 			return null;
 		} else {
-			move = new Move(getX(), getY(), _toX, _toY, isColor());
+			move = new Move(getX(), getY(), toX, toY, isColor());
 			if (move.isValid())
-				_moves.add(move);
+				moves.add(move);
 		}
 
 		return move;

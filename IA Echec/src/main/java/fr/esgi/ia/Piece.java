@@ -23,13 +23,10 @@ abstract public class Piece {
 	/** < Array for the position value */
 
 	public Piece() {
-		inDanger = false; // No one is in danger at the start
-		moved = false;
+		setInDanger(false);
+		setInDanger(false); // No one is in danger at the start
+		setMoved(false);
 		setEnemy(0);
-	}
-
-	public Piece(int _id) {
-
 	}
 
 	public void setPosition(int x, int y) {

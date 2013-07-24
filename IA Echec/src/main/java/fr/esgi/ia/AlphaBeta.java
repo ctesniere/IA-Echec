@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class AlphaBeta extends Algorithm {
 
-	public AlphaBeta(int _profondeur) {
-		super(_profondeur);
+	public AlphaBeta(int profondeur) {
+		super(profondeur);
 	}
 
 	public AlphaBeta() {
@@ -18,21 +18,21 @@ public class AlphaBeta extends Algorithm {
 	}
 
 	@Override
-	public Move chooseMove(Chessboard _chessboard, boolean _color) {
+	public Move chooseMove(Chessboard chessboard, boolean color) {
 
 		// Démarrage de l'échiquier
-		ChessboardValue chessboardValue = new ChessboardValue(_chessboard, null, null);
+		ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
 
 		// Création de la variable l'alpha
-		ChessboardValue min = new ChessboardValue(_chessboard, null, null);
+		ChessboardValue min = new ChessboardValue(chessboard, null, null);
 		min.setValue(Integer.MIN_VALUE);
 
 		// Création de la variable beta
-		ChessboardValue max = new ChessboardValue(_chessboard, null, null);
+		ChessboardValue max = new ChessboardValue(chessboard, null, null);
 		max.setValue(Integer.MAX_VALUE);
 
 		// AlphaBeta pruning
-		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, _color, 0);
+		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, color, 0);
 
 		return choice.getBestMove();
 	}
@@ -40,50 +40,50 @@ public class AlphaBeta extends Algorithm {
 	/**
 	 * Algorithme Alpha beta
 	 * 
-	 * @param _chessValue
-	 * @param _alpha
-	 * @param _beta
-	 * @param _color
-	 * @param _counter
+	 * @param chessValue
+	 * @param alpha
+	 * @param beta
+	 * @param color
+	 * @param counter
 	 * @return ChessboardValue
 	 */
-	private ChessboardValue alphaBetaAlg(ChessboardValue _chessValue, ChessboardValue _alpha,
-			ChessboardValue _beta, boolean _color, int _counter) {
+	private ChessboardValue alphaBetaAlg(ChessboardValue chessValue, ChessboardValue alpha,
+			ChessboardValue beta, boolean color, int counter) {
 
 		// Si le noeud == feuille alors retourne la valeur heuristique de échiquier
-		if (_counter >= profondeur) {	
-			return (_chessValue);
+		if (counter >= profondeur) {	
+			return (chessValue);
 		} else {
-			_counter++;
+			counter++;
 		}
 
 		// Génère tous les fils de ce noeud (tous les coups possibles pour cette couleur sur cet échiquier)
-		ArrayList<Move> allPossibleMove = _chessValue.getActualChessboard().generateAllPossibleMoves(_color);
+		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone().generateAllPossibleMoves(color);
 
 		for (Move thisMove : allPossibleMove) {
 
 			// Nouvelle valeur de l'échiquier qui ont mon fils (déplacé) et mon chemin
-			ChessboardValue thisSon = new ChessboardValue(_chessValue.getActualChessboard(), thisMove,
-					_chessValue.getMoves());
+			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(), thisMove,
+					chessValue.getMoves());
 			if (thisSon.isLastMoveValid()) {
-				if (_color) {
-					_alpha = _alpha.VSmax(alphaBetaAlg(thisSon, _alpha, _beta, !(_color), _counter));
+				if (color) {
+					alpha = alpha.VSmax(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
 				} else {
-					_beta = _beta.VSmin(alphaBetaAlg(thisSon, _alpha, _beta, !(_color), _counter));
+					beta = beta.VSmin(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
 				}
 			}
 		}
 
-		if (_color) {
-			if (_beta.getValue() <= _alpha.getValue())
-				return _beta;
+		if (color) {
+			if (beta.getValue() <= alpha.getValue())
+				return beta;
 			else
-				return _alpha;
+				return alpha;
 		} else { // Retourne le minimum (Alpha)
-			if (_beta.getValue() <= _alpha.getValue())
-				return _alpha;
+			if (beta.getValue() <= alpha.getValue())
+				return alpha;
 			else
-				return _beta;
+				return beta;
 		}
 	}
 
