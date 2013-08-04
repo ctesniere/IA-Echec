@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class Tour extends Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	/**
 	 * Création d'une instance d'une tour
 	 * 

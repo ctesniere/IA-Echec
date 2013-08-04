@@ -11,6 +11,14 @@ import java.io.InputStreamReader;
  */
 public class Helper {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	/**
 	 * Return the number representing the position on the chessboard from a
 	 * string. Use only the first char of the string.

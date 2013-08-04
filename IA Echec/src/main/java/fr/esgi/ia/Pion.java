@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class Pion extends Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	/**
 	 * Création d'une instance Pion
 	 * 
@@ -20,6 +24,7 @@ public class Pion extends Piece {
 	 */
 	public Pion(boolean color) {
 		super();
+		setName(this.getClass().getSimpleName());
 		setColor(isColor());
 
 		if (isColor() == false)
