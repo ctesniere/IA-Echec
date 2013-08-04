@@ -17,6 +17,14 @@ import java.util.ArrayList;
  */
 public class Chevalier extends Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public Chevalier(boolean color) {
 		super();
 		setColor(color);
@@ -26,6 +34,42 @@ public class Chevalier extends Piece {
 		else
 			setValue(300);
 	}
+	
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
+	/**
+	 * Test le possible déplacement
+	 * 
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
+	 * @return A Move or NULL.
+	 */
+	private Move checkThis(int toX, int toY, Chessboard chessboard) {
+
+		Piece destination = chessboard.getPieceMouv(toX, toY);
+		Move move;
+
+		if (destination != null) {
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), toX, toY, isColor());
+				if (move.isValid())
+					return move;
+			}
+		} else {
+			move = new Move(getX(), getY(), toX, toY, isColor());
+			if (move.isValid())
+				return move;
+		}
+
+		return null;
+	}
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
 
 	/**
 	 * Used when a chessboard must be cloned.
@@ -97,31 +141,7 @@ public class Chevalier extends Piece {
 		return moves;
 	}
 
-	/**
-	 * Test le possible déplacement
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					return move;
-			}
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				return move;
-		}
-
-		return null;
-	}
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 }

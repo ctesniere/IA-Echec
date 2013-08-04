@@ -7,15 +7,27 @@ package fr.esgi.ia;
  */
 abstract public class Algorithm {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	protected int profondeur;
 
 	private static boolean black = false;
 
 	private static boolean white = true;
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public Algorithm(int profondeur) {
 		setProfondeur(profondeur);
 	}
+
+	// =========================================================================
+	// METHODS
+	// =========================================================================
 
 	/**
 	 * Return to me the best move that can be done.
@@ -25,6 +37,14 @@ abstract public class Algorithm {
 	 * @return The best move or NULL if no move is possible
 	 */
 	abstract public Move chooseMove(Chessboard chessboard, boolean color);
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 
 	public int getProfondeur() {
 		return profondeur;

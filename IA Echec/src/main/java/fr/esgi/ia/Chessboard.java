@@ -208,27 +208,6 @@ public class Chessboard implements Cloneable {
 		return moves;
 	}
 
-	@Override
-	public Object clone() {
-		Chessboard chessboardClone = new Chessboard(getNbWhiteMoves(), getNbBlackMoves());
-
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++)
-				if (chessboard[y][x] != null) {
-					Piece pieceClone = (Piece) chessboard[y][x].clone();
-					chessboardClone.chessboard[y][x] = pieceClone;
-					if (pieceClone.isColor()) {
-						chessboardClone.whites.add(pieceClone);
-					} else {
-						chessboardClone.blacks.add(pieceClone);
-					}
-				} else {
-					chessboardClone.chessboard[y][x] = null;
-				}
-		}
-		return chessboardClone;
-	}
-
 	/**
 	 * GŽnere le Json a retourner au client
 	 * 
@@ -397,6 +376,35 @@ public class Chessboard implements Cloneable {
 		chessboard[x][y] = new Pion(color);
 	}
 
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
+	@Override
+	public Object clone() {
+		Chessboard chessboardClone = new Chessboard(getNbWhiteMoves(), getNbBlackMoves());
+
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++)
+				if (chessboard[y][x] != null) {
+					Piece pieceClone = (Piece) chessboard[y][x].clone();
+					chessboardClone.chessboard[y][x] = pieceClone;
+					if (pieceClone.isColor()) {
+						chessboardClone.whites.add(pieceClone);
+					} else {
+						chessboardClone.blacks.add(pieceClone);
+					}
+				} else {
+					chessboardClone.chessboard[y][x] = null;
+				}
+		}
+		return chessboardClone;
+	}
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
+
 	public int getNbWhiteMoves() {
 		return nbWhiteMoves;
 	}
@@ -436,7 +444,4 @@ public class Chessboard implements Cloneable {
 	public void setWhites(List<Piece> whites) {
 		this.whites = whites;
 	}
-
-	
-
 }

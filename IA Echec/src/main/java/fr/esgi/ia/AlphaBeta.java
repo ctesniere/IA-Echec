@@ -9,6 +9,14 @@ import java.util.ArrayList;
  */
 public class AlphaBeta extends Algorithm {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public AlphaBeta(int profondeur) {
 		super(profondeur);
 	}
@@ -17,25 +25,9 @@ public class AlphaBeta extends Algorithm {
 		super(2);
 	}
 
-	@Override
-	public Move chooseMove(Chessboard chessboard, boolean color) {
-
-		// Démarrage de l'échiquier
-		ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
-
-		// Création de la variable l'alpha
-		ChessboardValue min = new ChessboardValue(chessboard, null, null);
-		min.setValue(Integer.MIN_VALUE);
-
-		// Création de la variable beta
-		ChessboardValue max = new ChessboardValue(chessboard, null, null);
-		max.setValue(Integer.MAX_VALUE);
-
-		// AlphaBeta pruning
-		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, color, 0);
-
-		return choice.getBestMove();
-	}
+	// =========================================================================
+	// METHODS
+	// =========================================================================
 
 	/**
 	 * Algorithme Alpha beta
@@ -86,5 +78,33 @@ public class AlphaBeta extends Algorithm {
 				return beta;
 		}
 	}
+	
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+	
 
+	@Override
+	public Move chooseMove(Chessboard chessboard, boolean color) {
+
+		// Démarrage de l'échiquier
+		ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
+
+		// Création de la variable l'alpha
+		ChessboardValue min = new ChessboardValue(chessboard, null, null);
+		min.setValue(Integer.MIN_VALUE);
+
+		// Création de la variable beta
+		ChessboardValue max = new ChessboardValue(chessboard, null, null);
+		max.setValue(Integer.MAX_VALUE);
+
+		// AlphaBeta pruning
+		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, color, 0);
+
+		return choice.getBestMove();
+	}
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 }

@@ -29,6 +29,10 @@ public class IA {
 
 	}
 
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
 	/**
 	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute
 	 * 
@@ -66,6 +70,10 @@ public class IA {
 		}
 		return output;
 	}
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 
 	public boolean isMyColor() {
 		return myColor;
