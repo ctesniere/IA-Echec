@@ -5,6 +5,10 @@ package fr.esgi.ia;
  */
 public class IA {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	private boolean myColor;
 
 	private boolean enemyColor;
@@ -16,6 +20,10 @@ public class IA {
 	private boolean black = false;
 
 	private boolean white = true;
+
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
 
 	public IA() {
 

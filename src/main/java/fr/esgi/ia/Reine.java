@@ -22,6 +22,10 @@ import java.util.ArrayList;
  */
 public class Reine extends Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	/**
 	 * Création d'une instance d'une reine
 	 * 

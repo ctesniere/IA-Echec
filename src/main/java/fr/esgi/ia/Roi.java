@@ -16,6 +16,10 @@ import java.util.ArrayList;
  */
 public class Roi extends Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	/**
 	 * Création d'une instance Roi
 	 * 
