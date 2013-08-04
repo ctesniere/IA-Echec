@@ -26,6 +26,10 @@ public class Reine extends Piece {
 	// ATTRIBUTES
 	// =========================================================================
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	/**
 	 * Création d'une instance d'une reine
 	 * 
@@ -41,6 +45,38 @@ public class Reine extends Piece {
 			setValue(900);
 	}
 
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
+	/**
+	 * Test the possible move.
+	 * 
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
+	 * @return A Move or NULL.
+	 */
+	private Move checkThis(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
+
+		Piece destination = chessboard.getPieceMouv(toX, toY);
+		Move move;
+
+		if (destination != null) {
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), toX, toY, isColor());
+				if (move.isValid())
+					moves.add(move);
+			}
+			return null;
+		} else {
+			move = new Move(getX(), getY(), toX, toY, isColor());
+			if (move.isValid())
+				moves.add(move);
+		}
+		return move;
+	}
+	
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
@@ -115,31 +151,7 @@ public class Reine extends Piece {
 		return moves;
 	}
 
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					moves.add(move);
-			}
-			return null;
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				moves.add(move);
-		}
-		return move;
-	}
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 }

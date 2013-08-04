@@ -20,6 +20,10 @@ public class Roi extends Piece {
 	// ATTRIBUTES
 	// =========================================================================
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	/**
 	 * Création d'une instance Roi
 	 * 
@@ -33,6 +37,38 @@ public class Roi extends Piece {
 			setValue(-200);
 		else
 			setValue(200);
+	}
+
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
+	/**
+	 * Test the possible move.
+	 * 
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
+	 * @return A Move or NULL.
+	 */
+	private Move checkThis(int toX, int toY, Chessboard chessboard) {
+
+		Piece destination = chessboard.getPieceMouv(toX, toY);
+		Move move;
+
+		if (destination != null) {
+			if (destination.isColor() != isColor()) {
+				move = new Move(getX(), getY(), toX, toY, isColor());
+				if (move.isValid())
+					return move;
+			}
+		} else {
+			move = new Move(getX(), getY(), toX, toY, isColor());
+			if (move.isValid())
+				return move;
+		}
+
+		return null;
 	}
 
 	/**
@@ -105,31 +141,7 @@ public class Roi extends Piece {
 		return moves;
 	}
 
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					return move;
-			}
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				return move;
-		}
-
-		return null;
-	}
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 }

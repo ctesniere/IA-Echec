@@ -17,6 +17,10 @@ public class Tour extends Piece {
 	// ATTRIBUTES
 	// =========================================================================
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	/**
 	 * Création d'une instance d'une tour
 	 * 
@@ -32,6 +36,40 @@ public class Tour extends Piece {
 			setValue(500);
 	}
 
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
+	/**
+	 * Test the possible move.
+	 * 
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
+	 * @return A Move or NULL.
+	 */
+	private Move checkMove(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
+
+		Piece destination = chessboard.getPieceMouv(toX, toY);
+		Move move;
+
+		if (destination != null) { // If is not empty
+			if (destination.isColor() != isColor()) { // Another color
+				move = new Move(getX(), getY(), toX, toY, isColor());
+				if (move.isValid())
+					moves.add(move); // Add move
+			}
+			// Mine or not, if there is a piece STOP
+			return null; // You must stop
+		} else {
+			move = new Move(getX(), getY(), toX, toY, isColor());
+			if (move.isValid())
+				moves.add(move); // Add move
+		}
+
+		return move;
+	}
+	
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
@@ -101,33 +139,7 @@ public class Tour extends Piece {
 		return moves;
 	}
 
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkMove(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) { // If is not empty
-			if (destination.isColor() != isColor()) { // Another color
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					moves.add(move); // Add move
-			}
-			// Mine or not, if there is a piece STOP
-			return null; // You must stop
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				moves.add(move); // Add move
-		}
-
-		return move;
-	}
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 }

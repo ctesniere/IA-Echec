@@ -9,6 +9,10 @@ import java.util.ArrayList;
  */
 abstract public class Piece {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	/**
 	 * Si la valeur des noir est négative, positive pour les blancs
 	 */
@@ -27,6 +31,10 @@ abstract public class Piece {
 
 	/** < Array for the position value */
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public Piece() {
 		setInDanger(false);
 		setInDanger(false); // No one is in danger at the start
@@ -34,6 +42,10 @@ abstract public class Piece {
 		setEnemy(0);
 		setName(this.getClass().getSimpleName());
 	}
+
+	// =========================================================================
+	// METHODS
+	// =========================================================================
 
 	public void setPosition(int x, int y) {
 		setX(x);
@@ -71,7 +83,11 @@ abstract public class Piece {
 		return new Object();
 	}
 
-	// GETTER AND SETTER
+
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 
 	protected void setX(int x) {
 		this.x = x;

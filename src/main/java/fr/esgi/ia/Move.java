@@ -25,6 +25,10 @@ public final class Move {
 
 	private String promotion = null;
 
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
+
 	public Move(int startX, int startY, int endX, int endY, boolean color) {
 		setStartX(startX);
 		setEndX(endX);
@@ -32,6 +36,10 @@ public final class Move {
 		setEndY(endY);
 		setColor(color);
 	}
+
+	// =========================================================================
+	// METHODS
+	// =========================================================================
 
 	public boolean checkValidity() {
 
@@ -103,9 +111,11 @@ public final class Move {
 		return _miaScacchiera;
 	}
 
-	/*
-	 * PRIVATE
-	 */
+
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 
 	private boolean isInBound(int _value) {
 

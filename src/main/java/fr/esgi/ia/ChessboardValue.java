@@ -10,6 +10,10 @@ import java.util.ArrayList;
  */
 public class ChessboardValue {
 
+	// =========================================================================
+	// ATTRIBUTES
+	// =========================================================================
+
 	private Chessboard actualChessboardClone = null;
 
 	private Move lastMove = null;
@@ -19,6 +23,10 @@ public class ChessboardValue {
 	private int value;
 
 	private boolean color;
+
+	// =========================================================================
+	// CONSTRUCTORS
+	// =========================================================================
 
 	/**
 	 * Création d'un objet de type ChessboardValue
@@ -56,6 +64,10 @@ public class ChessboardValue {
 		// Trouvez et sauvegarder la valeur de l'échiquier
 		value = chessboardValue(color);
 	}
+
+	// =========================================================================
+	// METHODS
+	// =========================================================================
 
 	/**
 	 * Get the better move on the list.
@@ -198,6 +210,14 @@ public class ChessboardValue {
 		val += temp * 2;
 		return val;
 	}
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
+	// =========================================================================
+	// GETTERS & SETTERS
+	// =========================================================================
 
 	public Chessboard getActualChessboardClone() {
 		return actualChessboardClone;
