@@ -3,10 +3,10 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe, utilisé dans le processus AlphaBeta, stocke un échiquier, la valeur et d'autres informations
+ * Cette classe, utilis√© dans le processus AlphaBeta, stocke un √©chiquier, la valeur et d'autres informations
  * utiles.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class ChessboardValue {
 
@@ -29,7 +29,7 @@ public class ChessboardValue {
 	// =========================================================================
 
 	/**
-	 * Création d'un objet de type ChessboardValue
+	 * Cr√©ation d'un objet de type ChessboardValue
 	 * 
 	 * @param chessboard
 	 * @param move
@@ -40,10 +40,10 @@ public class ChessboardValue {
 		actualChessboardClone = (Chessboard) chessboard.clone();
 		moves = new ArrayList<Move>();
 
-		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou bêta)]
+		// Si ce n'est pas la premi√®re fois [<> NULL (=> <> forme alpha ou b√©ta)]
 		if (move != null) {
 			color = move.isColor();
-			// Faire le mouvement et définir la validité
+			// Faire le mouvement et d√©finir la validit√©
 			if (!(actualChessboardClone.doMove(move))) {
 				move.setValid(false);
 			} else {
@@ -61,7 +61,7 @@ public class ChessboardValue {
 			}
 		}
 
-		// Trouvez et sauvegarder la valeur de l'échiquier
+		// Trouvez et sauvegarder la valeur de l'√©chiquier
 		value = chessboardValue(color);
 	}
 
@@ -82,9 +82,9 @@ public class ChessboardValue {
 	}
 
 	/**
-	 * Retour au min entre cet échiquier et celle passée.
+	 * Retour au min entre cet √©chiquier et celle pass√©e.
 	 * 
-	 * @param elseVChessboard L'autre échiquier
+	 * @param elseVChessboard L'autre √©chiquier
 	 * @return Le min entre les deux
 	 */
 	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
@@ -108,9 +108,9 @@ public class ChessboardValue {
 	}
 
 	/**
-	 * Retour au maximum entre cet échiquier et celle passée.
+	 * Retour au maximum entre cet √©chiquier et celle pass√©e.
 	 * 
-	 * @param elseVChessboard Les autres échiquiers
+	 * @param elseVChessboard Les autres √©chiquiers
 	 * @return Le max entre les deux
 	 */
 	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
@@ -141,7 +141,7 @@ public class ChessboardValue {
 	}
 
 	/**
-	 * Retourner la valeur de l'échiquier pour une couleur
+	 * Retourner la valeur de l'√©chiquier pour une couleur
 	 * 
 	 * @param color La couleur du joueur
 	 * @return La valeur de l'echiquier
@@ -156,8 +156,8 @@ public class ChessboardValue {
 				// Si la case n'est pas un blanc
 				if (getActualChessboardClone().getPieceMouv(x, y) != null) {
 					Piece piece = getActualChessboardClone().getPieceMouv(x, y);
-					// Si la pièce n'est pas en danger et il est ma couleur
-					if ((!piece.isInDanger()) && (piece.isColor() == color)) // et déplacé
+					// Si la pi√®ce n'est pas en danger et il est ma couleur
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) // et d√©plac√©
 						if (piece.isMoved()) {
 							// Note normale
 							temp = piece.getValue() + piece.getPositionValue();
@@ -172,13 +172,13 @@ public class ChessboardValue {
 								temp = piece.getValue() + piece.getPositionValue();
 								val = val + temp;
 							}
-							// Si une pièce est un autre
+							// Si une pi√®ce est un autre
 							else {
 								// D'un avantage pour le blanc 10
 								temp = piece.getValue() + piece.getPositionValue();
 								val = val + temp + 10;
 							}
-						} else // Si vous êtes une de mes tours ou mon roi
+						} else // Si vous √™tes une de mes tours ou mon roi
 						// if ((piece.getId() == 32) || (piece.getId() == 28) ||
 						// (piece.getId() == 26)) {
 						if (true) {
@@ -186,26 +186,26 @@ public class ChessboardValue {
 							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
 						}
-						// Si une pièce est un autre
+						// Si une pi√®ce est un autre
 						else {
 							// Par un bord noir avec 10
 							temp = piece.getValue() + piece.getPositionValue();
 							val = (val + temp) - 10;
 						}
-					// Si la pièce est en danger et ce n'est pas ma couleur
+					// Si la pi√®ce est en danger et ce n'est pas ma couleur
 					if ((piece.isInDanger()) && (piece.isColor() != color)) {
 						// Dai un vantaggio del 15% del valore del pezzo
 						temp = (piece.getValue() * 15) / 100;
 						val = val - temp;
 					}
-					// Si la pièce n'est pas ma couleur
+					// Si la pi√®ce n'est pas ma couleur
 					if (piece.isColor() != color) {
 						// Note normale
 						temp = piece.getValue() + piece.getPositionValue();
 						val = val + temp;
 					}
 				}
-		// Noter cette mobilité
+		// Noter cette mobilit√©
 		temp = getActualChessboardClone().getNbWhiteMoves() - getActualChessboardClone().getNbBlackMoves();
 		val += temp * 2;
 		return val;

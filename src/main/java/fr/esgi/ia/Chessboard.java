@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Cette classe represente l'Échiquier.
+ * Cette classe represente l'√©chiquier.
  * 
- * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille carrée de 8 cases de côté, soit 64
- * cases en tout, en alternance sombres (appelées noires) et claires (appelées blanches). Un échiquier est
- * intégré à la surface supérieure des tables d'échecs. Dans une partie d'échecs, on dispose l'échiquier de
- * façon à ce que, pour chacun des adversaires, la case du coin gauche (le plus proche) de l'échiquier soit
- * noire. De plus, mais ce n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les Blancs
- * placent leur pièces sur la rangée 1, leurs pions sur la rangée 2, tandis que Noirs disposent leurs pièces
- * sur la rangée 8, et leurs pions sur la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés
+ * L'√©chiquier est le tablier ou plateau du jeu d'√©checs. C'est une grille carr√©e de 8 cases de c√¥t√©, soit 64
+ * cases en tout, en alternance sombres (appel√©es noires) et claires (appel√©es blanches). Un √©chiquier est
+ * int√©gr√© √† la surface sup√©rieure des tables d'√©checs. Dans une partie d'√©checs, on dispose l'√©chiquier de
+ * fa√ßon √† ce que, pour chacun des adversaires, la case du coin gauche (le plus proche) de l'√©chiquier soit
+ * noire. De plus, mais ce n'est pas une obligation, si l'√©chiquier est dot√© d'un rep√®re cart√©sien, les Blancs
+ * placent leur p√®ces sur la rang√©e 1, leurs pions sur la rang√©e 2, tandis que Noirs disposent leurs pi√®ces
+ * sur la rang√©e 8, et leurs pions sur la rang√©e 7. Dans les diagrammes, les Blancs sont toujours repr√©sent√©s
  * en bas, les Noirs en haut.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class Chessboard implements Cloneable {
 
@@ -23,7 +23,7 @@ public class Chessboard implements Cloneable {
 	// ATTRIBUTES
 	// =========================================================================
 
-	// Nombre de coups possibles. Utilisé pour calculer la mobilité
+	// Nombre de coups possibles. Utilis√© pour calculer la mobilit√©
 	private int nbWhiteMoves, nbBlackMoves;
 
 	private Piece[][] chessboard;
@@ -44,7 +44,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Utilisée par la méthode clone()
+	 * Utilis√©e par la m√©thode clone()
 	 * 
 	 * @param nbWhite
 	 * @param nbBlack
@@ -79,7 +79,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Appliquer un mouvement de l'échiquier.
+	 * Appliquer un mouvement de l'√©chiquier.
 	 * 
 	 * @param thisMove
 	 * @return Retourne faux dans un cas d'erreurs
@@ -209,7 +209,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Génere le Json a retourner au client
+	 * G√©nere le Json a retourner au client
 	 * 
 	 * @return Un array d'un array de position au format "piece:position"
 	 */
@@ -245,7 +245,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Insert les pièces dans l'echiquier
+	 * Insert les pi√®ces dans l'echiquier
 	 * 
 	 * @param color
 	 * @param king
@@ -305,7 +305,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece roi
+	 * D√©finie l'emplacement de la piece roi
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece
@@ -317,7 +317,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece reine
+	 * D√©finie l'emplacement de la piece reine
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece
@@ -329,7 +329,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece tour
+	 * D√©finie l'emplacement de la piece tour
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece
@@ -341,7 +341,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece chevalier
+	 * D√©finie l'emplacement de la piece chevalier
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece
@@ -353,7 +353,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece fou
+	 * D√©finie l'emplacement de la piece fou
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece
@@ -365,7 +365,7 @@ public class Chessboard implements Cloneable {
 	}
 
 	/**
-	 * Définie l'emplacement de la piece pion
+	 * D√©finie l'emplacement de la piece pion
 	 * 
 	 * @param location Emplacement sur l'echiquier
 	 * @param color La couleur de la piece

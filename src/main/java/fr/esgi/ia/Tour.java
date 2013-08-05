@@ -3,13 +3,13 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente la tour. La tour peut se déplacer horizontalement ou
- * verticalement. Cette pièce est à longue portée, c'est-à-dire qu'elle peut
- * être déplacée d'autant de cases qu'on le souhaite, sans pouvoir sauter par
- * dessus une autre pièce. Chaque camp possède deux tours. Elles se positionnent
+ * Cette classe repr√©sente la tour. La tour peut se d√©placer horizontalement ou
+ * verticalement. Cette pi√®ce est √† longue port√©e, c'est-√†-dire qu'elle peut
+ * √™tre d√©plac√©e d'autant de cases qu'on le souhaite, sans pouvoir sauter par
+ * dessus une autre pi√®ce. Chaque camp poss√®de deux tours. Elles se positionnent
  * sur les cases a1 et h1 pour les blancs et a8 et h8 pour les noirs.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class Tour extends Piece {
 
@@ -22,7 +22,7 @@ public class Tour extends Piece {
 	// =========================================================================
 
 	/**
-	 * Création d'une instance d'une tour
+	 * Cr√©ation d'une instance d'une tour
 	 * 
 	 * @param color
 	 */
@@ -69,6 +69,10 @@ public class Tour extends Piece {
 
 		return move;
 	}
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
 	
 	/**
 	 * Used when a chessboard must be cloned.

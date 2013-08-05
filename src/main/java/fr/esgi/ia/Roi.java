@@ -3,15 +3,15 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente le roi. Un roi peut se déplacer d'une case dans
+ * Cette classe represente le roi. Un roi peut se d√©placer d'une case dans
  * toutes les directions (horizontalement, verticalement, ou diagonalement),
- * mais il ne peut aller sur une case où il serait menacé par une pièce ennemie
- * (se mettre en prise, en échec). En conséquence, on ne verra jamais les deux
- * rois ennemis côte à côte. Comme toutes les autres pièces, il ne peut aller
- * sur une case déjà occupée par une pièce de son camp, et il prend en se
- * déplaçant sur la case occupée par une pièce ennemie.
+ * mais il ne peut aller sur une case o√π il serait menac√© par une pi√®ce ennemie
+ * (se mettre en prise, en √©chec). En cons√©quence, on ne verra jamais les deux
+ * rois ennemis c√¥te √† c√¥te. Comme toutes les autres pi√®ces, il ne peut aller
+ * sur une case d√©j√† occup√©e par une pi√®ce de son camp, et il prend en se
+ * d√©pla√ßant sur la case occup√©e par une pi√®ce ennemie.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  * @since 1
  */
 public class Roi extends Piece {
@@ -25,7 +25,7 @@ public class Roi extends Piece {
 	// =========================================================================
 
 	/**
-	 * Création d'une instance Roi
+	 * Cr√©ation d'une instance Roi
 	 * 
 	 * @param color
 	 */
@@ -70,6 +70,10 @@ public class Roi extends Piece {
 
 		return null;
 	}
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
 
 	/**
 	 * Used when a chessboard must be cloned.

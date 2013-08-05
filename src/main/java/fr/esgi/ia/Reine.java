@@ -3,21 +3,21 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente la Reine. La dame est une pièce à longue portée,
+ * Cette classe repr√©sente la Reine. La dame est une pi√®ce √† longue port√©e,
  * capable de se mouvoir en ligne droite, verticalement, horizontalement, et
- * diagonalement, sur un nombre quelconque de cases inoccupées comme le montre
- * le diagramme sur la gauche, combinant ainsi le déplacement de la tour et
- * celui du fou. Comme pour les autres pièces du jeu d'échecs (excepté pour le
+ * diagonalement, sur un nombre quelconque de cases inoccup√©es comme le montre
+ * le diagramme sur la gauche, combinant ainsi le d√©placement de la tour et
+ * celui du fou. Comme pour les autres pi√®ces du jeu d'√©checs (except√© pour le
  * pion lors de la prise en passant), la reine capture en occupant la case
- * occupée par une pièce adverse. Ordinairement, la dame est légèrement plus
- * puissante qu'une tour et un fou associés, alors qu'elle est légèrement moins
- * puissante que deux tours. Elle vaut l'équivalent de neuf à dix pions (cette
+ * occup√©e par une pi√®ce adverse. Ordinairement, la dame est l√©gerement plus
+ * puissante qu'une tour et un fou associ√©s, alors qu'elle est l√©gerement moins
+ * puissante que deux tours. Elle vaut l'√©quivalent de neuf √† dix pions (cette
  * valeur n'est qu'une estimation de l'importance relative de la dame par
- * rapport aux autres pièces, ce n'est pas un élément du jeu). Puisque la dame a
- * plus de valeur qu'aucune autre pièce, il est presque toujours défavorable
- * d'échanger la dame contre une autre pièce que la dame adverse.
+ * rapport aux autres pi√®ces, ce n'est pas un √©lement du jeu). Puisque la dame a
+ * plus de valeur qu'aucune autre pi√®ce, il est presque toujours d√©favorable
+ * d'√©changer la dame contre une autre p√®ce que la dame adverse.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  * @since 1
  */
 public class Reine extends Piece {
@@ -31,7 +31,7 @@ public class Reine extends Piece {
 	// =========================================================================
 
 	/**
-	 * Création d'une instance d'une reine
+	 * Cr√©ation d'une instance d'une reine
 	 * 
 	 * @param color
 	 */
@@ -76,6 +76,10 @@ public class Reine extends Piece {
 		}
 		return move;
 	}
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
 	
 	/**
 	 * Used when a chessboard must be cloned.

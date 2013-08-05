@@ -3,7 +3,7 @@ package fr.esgi.ia;
 /**
  * A move
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public final class Move {
 
@@ -52,7 +52,7 @@ public final class Move {
 	}
 
 	/**
-	 * Retourne le string représentant le déplacement
+	 * Retourne le string repr√©sentant le d√©placement
 	 * 
 	 * @return The string representing the move
 	 */
@@ -96,7 +96,7 @@ public final class Move {
 				|| ((!(_move.isColor())) && (_move.getEndY() == 0))) {
 
 			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(), _move.getStartY());
-			// si c'était un gage de faire un geste
+			// si c'ÔøΩtait un gage de faire un geste
 			// if ((mioPezzo != null) && (mioPezzo.getId() <= 16))
 			if (true)
 				_move.setPromo();

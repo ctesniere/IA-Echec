@@ -3,15 +3,15 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente le fou. Cette pièce est à longue portée, c’est-à-dire
- * qu'elle peut être déplacée d'autant de cases qu'on le souhaite, sans pouvoir
- * sauter par dessus une autre pièce. Il ne peut changer de couleur de case
- * durant la partie et ne balaie donc que la moitié de l'échiquier. À l'instar
- * du cavalier, le fou est une pièce mineure. En général, on lui attribue la
- * même valeur que le cavalier, la différence dépendant de la position sur
- * l'échiquier.
+ * Cette classe represente le fou. Cette pi√®ce est √† longue port√©e, c'est-√†-dire
+ * qu'elle peut √™tre d√©plac√©e d'autant de cases qu'on le souhaite, sans pouvoir
+ * sauter par dessus une autre pi√®ce. Il ne peut changer de couleur de case
+ * durant la partie et ne balaie donc que la moiti√© de l'√©chiquier. A l'instar
+ * du cavalier, le fou est une pi√®ce mineure. En g√©n√©ral, on lui attribue la
+ * m√™me valeur que le cavalier, la diff√©rence d√©pendant de la position sur
+ * l'√©chiquier.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class Fou extends Piece {
 
@@ -24,7 +24,7 @@ public class Fou extends Piece {
 	// =========================================================================
 
 	/**
-	 * Création d'une instance fou
+	 * Cr√©ation d'une instance fou
 	 * 
 	 * @param color
 	 */

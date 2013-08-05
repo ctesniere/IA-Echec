@@ -1,7 +1,7 @@
 package fr.esgi.ia;
 
 /**
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class IA {
 
@@ -34,7 +34,7 @@ public class IA {
 	// =========================================================================
 
 	/**
-	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute
+	 * Appel un algorithme est lui donne la profondeur (difficult√© de l'ia) et l'execute
 	 * 
 	 * @param myColor
 	 * @param depth
