@@ -3,12 +3,12 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente les pions Le pion est la pièce la moins mobile du jeu
- * et pour cette raison la moins forte. Au début de la partie, chaque joueur
- * possède huit pions, placés en deuxième ligne devant les autres pièces (rangée
- * 2 pour les Blancs et rangée 7 pour les Noirs).
+ * Cette classe represente les pions Le pion est la pi√®ce la moins mobile du jeu
+ * et pour cette raison la moins forte. Au d√©but de la partie, chaque joueur
+ * poss√®de huit pions, plac√©s en deuxi√®me ligne devant les autres pi√©ces (rang√©e
+ * 2 pour les Blancs et rang√©e 7 pour les Noirs).
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  * @since 1
  */
 public class Pion extends Piece {
@@ -22,7 +22,7 @@ public class Pion extends Piece {
 	// =========================================================================
 
 	/**
-	 * Création d'une instance Pion
+	 * Cr√©ation d'une instance Pion
 	 * 
 	 * @param color
 	 */
@@ -41,8 +41,12 @@ public class Pion extends Piece {
 	// METHODS
 	// =========================================================================
 
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
 	/**
-	 * Utilisé quand un échiquier doit être cloné.
+	 * Utilis√© quand un √©chiquier doit √™tre clon√©.
 	 */
 	@Override
 	public Object clone() {
@@ -56,8 +60,8 @@ public class Pion extends Piece {
 	}
 
 	/**
-	 * Le pion peut se déplacer jusqu'à ce qu'il trouve un ennemi ou une pièce
-	 * allié. Il peut manger dans d'autres positions. Nous donnons tous les
+	 * Le pion peut se d√©placer jusqu'√† ce qu'il trouve un ennemi ou une pi√®ce
+	 * alli√©. Il peut manger dans d'autres positions. Nous donnons tous les
 	 * coups possibles, pas les bons.
 	 * 
 	 * @param chessboard Actuel chessboard

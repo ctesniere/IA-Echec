@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /**
  * Helper class. It's main role is to work with strings.
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 public class Helper {
 
@@ -50,7 +50,7 @@ public class Helper {
 	 * Return the number representing the position on the chessboard from a
 	 * string. Use only the second char of the string.
 	 * 
-	 * @param location Représente une position sur l'echiquier
+	 * @param location Repr√©sente une position sur l'echiquier
 	 * @return int Un nombre representant l'echiquier
 	 */
 	public static int getYfromString(String location) {

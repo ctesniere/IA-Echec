@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Generic Piece
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 abstract public class Piece {
 
@@ -14,7 +14,7 @@ abstract public class Piece {
 	// =========================================================================
 
 	/**
-	 * Si la valeur des noir est négative, positive pour les blancs
+	 * Si la valeur des noir est n√©gative, positive pour les blancs
 	 */
 	private int value;
 
@@ -71,12 +71,17 @@ abstract public class Piece {
 	}
 
 	/**
-	 * Cette fonction doit être mise en œuvre dans chaque sous-classe.
+	 * Cette fonction doit √™tre mise en oeuvre dans chaque sous-classe.
 	 */
 	abstract public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard);
 
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
 	/**
-	 * Cette fonction doit être mise en œuvre dans chaque sous-classe.
+	 * Cette fonction doit √™tre mise en oeuvre dans chaque sous-classe.
 	 */
 	@Override
 	public Object clone() {

@@ -1,9 +1,9 @@
 package fr.esgi.ia;
 
 /**
- * Classe mère des différents algo
+ * Classe mere des diff√©rents algo
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  */
 abstract public class Algorithm {
 

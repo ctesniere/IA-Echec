@@ -3,16 +3,16 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe représente le chevalier Chacun des joueurs commence avec deux
- * cavaliers, placés en b1 et g1 pour les blancs, et b8 et g8 pour les noirs. Le
- * déplacement du cavalier est original. Il se déplace en L, c’est-à-dire de
+ * Cette classe repr√©sente le chevalier Chacun des joueurs commence avec deux
+ * cavaliers, plac√©s en b1 et g1 pour les blancs, et b8 et g8 pour les noirs. Le
+ * d√©placement du cavalier est original. Il se d√©place en L, c'est-√†-dire de
  * deux cases dans une direction puis d'une perpendiculairement. C'est la seule
- * pièce du jeu qui ne soit pas bloquée dans son déplacement par les autres
- * pièces. Cette particularité le rend très utile dans les positions fermées. Le
- * cavalier permet aussi de faire des fourchettes (menace de deux pièces à la
+ * pi√®ce du jeu qui ne soit pas bloqu√©e dans son d√©placement par les autres
+ * pi√®ces. Cette particulari√© le rend tr√®s utile dans les positions ferm√©es. Le
+ * cavalier permet aussi de faire des fourchettes (menace de deux pi√®ces √† la
  * fois).
  * 
- * @author Cédric TESNIERE
+ * @author C√©dric TESNIERE
  * @since 1
  */
 public class Chevalier extends Piece {
@@ -40,7 +40,7 @@ public class Chevalier extends Piece {
 	// =========================================================================
 
 	/**
-	 * Test le possible déplacement
+	 * Test le possible d√©placement
 	 * 
 	 * @param toX
 	 * @param toY
