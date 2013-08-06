@@ -172,6 +172,7 @@ public class Chessboard implements Cloneable {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
+		
 	}
 
 	/**
@@ -313,7 +314,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionKing(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Roi(color);
+		chessboard[y][x] = new Roi(color);
 	}
 
 	/**
@@ -325,7 +326,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionQueen(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Reine(color);
+		chessboard[y][x] = new Reine(color);
 	}
 
 	/**
@@ -337,7 +338,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionTower(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Tour(color);
+		chessboard[y][x] = new Tour(color);
 	}
 
 	/**
@@ -349,7 +350,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionKnight(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Chevalier(color);
+		chessboard[y][x] = new Chevalier(color);
 	}
 
 	/**
@@ -361,7 +362,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionCrazy(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Fou(color);
+		chessboard[y][x] = new Fou(color);
 	}
 
 	/**
@@ -373,7 +374,7 @@ public class Chessboard implements Cloneable {
 	public void setPositionPawn(String location, boolean color) {
 		int y = Helper.getYfromString(location);
 		int x = Helper.getXfromString(location);
-		chessboard[x][y] = new Pion(color);
+		chessboard[y][x] = new Pion(color);
 	}
 
 	// =========================================================================
