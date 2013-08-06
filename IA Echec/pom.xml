@@ -12,6 +12,7 @@
 		<spring.version>3.2.2.RELEASE</spring.version>
 		<jackson.version>1.9.10</jackson.version>
 		<jdk.version>1.6</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
