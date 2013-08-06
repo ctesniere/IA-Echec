@@ -52,33 +52,25 @@ public final class Move {
 	}
 
 	/**
-	 * Retourne le string représentant le déplacement
+	 * Retourne une chaine représentant le déplacement
 	 * 
 	 * @return The string representing the move
 	 */
 	public String moveOutputString() {
 
-		String cP;
-		String cA;
+		String positionStart;
+		String positionEnd;
 
-		cP = Helper.getStringFromPosition(startX, startY);
-		cA = Helper.getStringFromPosition(endX, endY);
+		positionStart = Helper.getStringFromPosition(startX, startY);
+		positionEnd = Helper.getStringFromPosition(endX, endY);
 
 		if (isValid()) {
 			if (promo == true)
-				return "move " + cP + cA + getPromotion();
+				return "move " + positionStart + positionEnd + getPromotion();
 			else
-				return "move " + cP + cA;
+				return "move " + positionStart + positionEnd;
 		} else
 			return "Illegal move";
-	}
-
-	public boolean getMangia() {
-		return isEating;
-	}
-
-	public boolean getPromo() {
-		return promo;
 	}
 
 	public void setPromo() {
@@ -89,26 +81,26 @@ public final class Move {
 			setPromotion("q");
 	}
 
-	public static Move mossaPromozione(Move _move, Chessboard _miaScacchiera) {
+	public static Move movePromotion(Move move, Chessboard chessboard) {
 
 		// Si le mouvement me faut pour y = 7 ou y = 0
-		if (((_move.isColor()) && (_move.getEndY() == 7))
-				|| ((!(_move.isColor())) && (_move.getEndY() == 0))) {
+		if (((move.isColor()) && (move.getEndY() == 7))
+				|| ((!(move.isColor())) && (move.getEndY() == 0))) {
 
-			Piece mioPezzo = _miaScacchiera.getPieceMouv(_move.getStartX(), _move.getStartY());
-			// si c'�tait un gage de faire un geste
-			// if ((mioPezzo != null) && (mioPezzo.getId() <= 16))
-			if (true)
-				_move.setPromo();
+			Piece piece = chessboard.getPieceMouv(move.getStartX(), move.getStartY());
+			
+			// si c'était un gage de faire un geste
+			if ((piece != null) && (piece.getName() != Pion.class.getSimpleName()))
+				move.setPromo();
 		}
-		return _move;
+		return move;
 	}
 
-	public static Chessboard faiPromozione(Move _miaMossa, Chessboard _miaScacchiera, String _promo) {
+	public static Chessboard doPromotion(Move move, Chessboard chessboard, String promo) {
 		// int x=miaMossa.GetXArrivo();
 		// int y=miaMossa.GetYArrivo();
 		// miaScacchiera.GetQuadrato(x,y)=new Regina();
-		return _miaScacchiera;
+		return chessboard;
 	}
 
 
@@ -117,9 +109,18 @@ public final class Move {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	private boolean isInBound(int _value) {
 
-		if ((_value >= 0) && (_value < 8))
+	public boolean getMangia() {
+		return isEating;
+	}
+
+	public boolean getPromo() {
+		return promo;
+	}
+
+	private boolean isInBound(int value) {
+
+		if ((value >= 0) && (value < 8))
 			return true;
 		else
 			return false;
