@@ -15,8 +15,6 @@ public class IA {
 
 	private Chessboard globalChessboard;
 
-	private Algorithm algorithm;
-
 	private boolean black = false;
 
 	private boolean white = true;
@@ -50,7 +48,6 @@ public class IA {
 		Move myMove;
 
 		setGlobalChessboard(chessboard);
-		setAlgorithm(anAlgorithm);
 
 		setMyColor(myColor);
 		setEnemyColor(!myColor);
@@ -97,14 +94,6 @@ public class IA {
 
 	public void setGlobalChessboard(Chessboard globalChessboard) {
 		this.globalChessboard = globalChessboard;
-	}
-
-	public Algorithm getAlgorithm() {
-		return algorithm;
-	}
-
-	public void setAlgorithm(Algorithm algorithm) {
-		this.algorithm = algorithm;
 	}
 
 	public boolean isBlack() {
