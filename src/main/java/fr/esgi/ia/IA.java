@@ -26,10 +26,12 @@ public class IA {
 	// =========================================================================
 
 	/**
-	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute
+	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et
+	 * l'execute. Déplace le meilleur pion sur le chessboard
 	 * 
-	 * @param myColor
-	 * @param depth
+	 * @param myColor Ma couleur (Voir la classe Algorithm pour avoir les
+	 *            valeurs)
+	 * @param depth Profondeur de l'algorithme
 	 * @param chessboard
 	 * @return Le meilleur mouvement
 	 */
@@ -48,11 +50,11 @@ public class IA {
 			Move myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
 
 			if (myMove == null) {
-				output+= "ERROR: Pas de mouvement possible.";
+				output += "ERROR: Pas de mouvement possible.";
 				exitWhile = false;
 			} else {
 				getGlobalChessboard().doMove(myMove);
-				output+= myMove.moveOutputString() + " ";
+				output += myMove.moveOutputString() + " ";
 			}
 		}
 		return output;
