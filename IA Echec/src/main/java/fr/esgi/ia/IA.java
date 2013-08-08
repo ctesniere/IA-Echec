@@ -11,13 +11,7 @@ public class IA {
 
 	private boolean myColor;
 
-	private boolean enemyColor;
-
 	private Chessboard globalChessboard;
-
-	private boolean black = false;
-
-	private boolean white = true;
 
 	// =========================================================================
 	// CONSTRUCTORS
@@ -43,19 +37,15 @@ public class IA {
 
 		String output = "";
 		boolean exitWhile = true;
-
 		Algorithm anAlgorithm = new AlphaBeta(depth);
-		Move myMove;
 
 		setGlobalChessboard(chessboard);
-
 		setMyColor(myColor);
-		setEnemyColor(!myColor);
 
 		// Boucle principale
 		while (exitWhile) {
 
-			myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
+			Move myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
 
 			if (myMove == null) {
 				output+= "ERROR: Pas de mouvement possible.";
@@ -80,35 +70,11 @@ public class IA {
 		this.myColor = myColor;
 	}
 
-	public boolean isEnemyColor() {
-		return enemyColor;
-	}
-
-	public void setEnemyColor(boolean enemyColor) {
-		this.enemyColor = enemyColor;
-	}
-
 	public Chessboard getGlobalChessboard() {
 		return globalChessboard;
 	}
 
 	public void setGlobalChessboard(Chessboard globalChessboard) {
 		this.globalChessboard = globalChessboard;
-	}
-
-	public boolean isBlack() {
-		return black;
-	}
-
-	public void setBlack(boolean black) {
-		this.black = black;
-	}
-
-	public boolean isWhite() {
-		return white;
-	}
-
-	public void setWhite(boolean white) {
-		this.white = white;
 	}
 }
