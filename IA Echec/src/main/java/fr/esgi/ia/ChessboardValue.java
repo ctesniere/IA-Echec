@@ -151,53 +151,55 @@ public class ChessboardValue {
 		int val = 0;
 		int temp;
 
-		for (int x = 0; x < 8; x++)
-			for (int y = 0; y < 8; y++)
+		// On parcours l'échiquier
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+
 				// Si la case n'est pas un blanc
 				if (getActualChessboardClone().getPieceMouv(x, y) != null) {
 					Piece piece = getActualChessboardClone().getPieceMouv(x, y);
+
 					// Si la pièce n'est pas en danger et il est ma couleur
-					if ((!piece.isInDanger()) && (piece.isColor() == color)) // et déplacé
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) { // et déplacé
+
 						if (piece.isMoved()) {
 							// Note normale
 							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
-						} else // Si elle est noire
-						if (piece.isColor() == false) {
-							// Si Tour ou roi
-							// if ((piece.getId() == 31) || (piece.getId() ==
-							// 27) || (piece.getId() == 25)) {
-							if (true) {
-								// Note normale
-								temp = piece.getValue() + piece.getPositionValue();
-								val = val + temp;
+						} else {
+							if (piece.isColor() == Algorithm.isBlack()) { // Si la pièce est noire
+								// Si Tour ou roi
+								if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
+									// Note normale
+									temp = piece.getValue() + piece.getPositionValue();
+									val = val + temp;
+								} else { // Si une pièce est un autre
+									// D'un avantage pour le blanc 10
+									temp = piece.getValue() + piece.getPositionValue();
+									val = val + temp + 10;
+								}
+							} else {
+								// Si vous êtes une de mes tours ou mon roi
+								if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
+									// Valutazione normale
+									temp = piece.getValue() + piece.getPositionValue();
+									val = val + temp;
+								} else { // Si une pièce est un autre
+									// Par un bord noir avec 10
+									temp = piece.getValue() + piece.getPositionValue();
+									val = (val + temp) - 10;
+								}
 							}
-							// Si une pièce est un autre
-							else {
-								// D'un avantage pour le blanc 10
-								temp = piece.getValue() + piece.getPositionValue();
-								val = val + temp + 10;
-							}
-						} else // Si vous êtes une de mes tours ou mon roi
-						// if ((piece.getId() == 32) || (piece.getId() == 28) ||
-						// (piece.getId() == 26)) {
-						if (true) {
-							// Valutazione normale
-							temp = piece.getValue() + piece.getPositionValue();
-							val = val + temp;
 						}
-						// Si une pièce est un autre
-						else {
-							// Par un bord noir avec 10
-							temp = piece.getValue() + piece.getPositionValue();
-							val = (val + temp) - 10;
-						}
+					}
+
 					// Si la pièce est en danger et ce n'est pas ma couleur
 					if ((piece.isInDanger()) && (piece.isColor() != color)) {
 						// Dai un vantaggio del 15% del valore del pezzo
 						temp = (piece.getValue() * 15) / 100;
 						val = val - temp;
 					}
+
 					// Si la pièce n'est pas ma couleur
 					if (piece.isColor() != color) {
 						// Note normale
@@ -205,6 +207,8 @@ public class ChessboardValue {
 						val = val + temp;
 					}
 				}
+			}
+		}
 		// Noter cette mobilité
 		temp = getActualChessboardClone().getNbWhiteMoves() - getActualChessboardClone().getNbBlackMoves();
 		val += temp * 2;
