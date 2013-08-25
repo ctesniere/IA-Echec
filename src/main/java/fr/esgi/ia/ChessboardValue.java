@@ -167,24 +167,17 @@ public class ChessboardValue {
 							temp = piece.getValue() + piece.getPositionValue();
 							val = val + temp;
 						} else {
-							if (piece.isColor() == Algorithm.isBlack()) { // Si la pièce est noire
-								// Si Tour ou roi
-								if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
-									// Note normale
-									temp = piece.getValue() + piece.getPositionValue();
-									val = val + temp;
-								} else { // Si une pièce est un autre
+							// Si Tour ou Roi
+							if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
+								// Note normale
+								temp = piece.getValue() + piece.getPositionValue();
+								val = val + temp;
+							} else { // Si une pièce est un autre
+								if (piece.isColor() == Algorithm.isBlack()) { // Si la pièce est noire
 									// D'un avantage pour le blanc 10
 									temp = piece.getValue() + piece.getPositionValue();
 									val = val + temp + 10;
-								}
-							} else {
-								// Si vous êtes une de mes tours ou mon roi
-								if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
-									// Valutazione normale
-									temp = piece.getValue() + piece.getPositionValue();
-									val = val + temp;
-								} else { // Si une pièce est un autre
+								} else {
 									// Par un bord noir avec 10
 									temp = piece.getValue() + piece.getPositionValue();
 									val = (val + temp) - 10;
@@ -209,6 +202,7 @@ public class ChessboardValue {
 				}
 			}
 		}
+
 		// Noter cette mobilité
 		temp = getActualChessboardClone().getNbWhiteMoves() - getActualChessboardClone().getNbBlackMoves();
 		val += temp * 2;
