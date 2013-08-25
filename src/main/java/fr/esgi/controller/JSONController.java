@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fr.esgi.ia.Algorithm;
 import fr.esgi.ia.Chessboard;
 import fr.esgi.ia.IA;
 
@@ -25,8 +26,8 @@ public class JSONController {
 		IA ia = new IA();
 		
 		Chessboard chessboard = new Chessboard();
-		chessboard.insertPieceChessboard(ia.isBlack(), bKing, bQueen, bCrazy, bKnight, bTower, bPawn);
-		chessboard.insertPieceChessboard(ia.isWhite(), wKing, wQueen, wCrazy, wKnight, wTower, wPawn);
+		chessboard.insertPieceChessboard(Algorithm.isBlack(), bKing, bQueen, bCrazy, bKnight, bTower, bPawn);
+		chessboard.insertPieceChessboard(Algorithm.isWhite(), wKing, wQueen, wCrazy, wKnight, wTower, wPawn);
 		
 		// Retourne le meilleur coup
 		return ia.play(ia.isMyColor(), 3, chessboard);
