@@ -147,9 +147,9 @@ public class Reine extends Piece {
 				}
 
 				// TODO: Change checkThis to return a Boolean
-				Move mossa = checkThis(toX, toY, chessboard, moves);
-				if (mossa == null)
-					break;
+				Move move = checkThis(toX, toY, chessboard, moves);
+				if (move != null) // If move is null, no more possible moves in this direction
+					moves.add(move);
 			}
 
 		return moves;
