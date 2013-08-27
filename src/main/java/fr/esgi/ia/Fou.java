@@ -85,8 +85,8 @@ public class Fou extends Piece {
 				}
 
 				Move move = checkThis(toX, toY, chessboard, moves);
-				if (move == null)
-					break;
+				if (move != null) // If move is null, no more possible moves in this direction
+					moves.add(move);
 			}
 
 		return moves;

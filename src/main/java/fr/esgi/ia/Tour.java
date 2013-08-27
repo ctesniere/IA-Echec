@@ -48,22 +48,24 @@ public class Tour extends Piece {
 	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	private Move checkMove(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
+	private Move checkMove(int toX, int toY, Chessboard chessboard,
+			ArrayList<Move> moves) {
 
 		Piece destination = chessboard.getPieceMouv(toX, toY);
 		Move move;
 
-		if (destination != null) { // If is not empty
+		if (destination != null) {
 			if (destination.isColor() != isColor()) { // Another color
 				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
+				if (move.isValid()) // TODO : isValid() ne fonctionne pas
 					moves.add(move); // Add move
 			}
+
 			// Mine or not, if there is a piece STOP
 			return null; // You must stop
 		} else {
 			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
+			if (move.isValid()) // TODO : isValid() ne fonctionne pas
 				moves.add(move); // Add move
 		}
 
@@ -73,7 +75,7 @@ public class Tour extends Piece {
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
-	
+
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
@@ -92,7 +94,8 @@ public class Tour extends Piece {
 	 * The Rook can move until it finds an enemy of an ally piece. We give all
 	 * possible moves, not the good ones.
 	 * 
-	 * @param chessboard Actuel chessboard
+	 * @param chessboard
+	 *            Actuel chessboard
 	 * @return An array of all possible moves (not the good ones!)
 	 */
 	@Override
@@ -123,21 +126,9 @@ public class Tour extends Piece {
 					toY = getY() - length;
 				}
 
-				/*
-				 * OLD CODE
-				 */
-				/*
-				 * Move move = checkMove(toX, toY, chessboard); if (move !=
-				 * null) { moves.add(move); } else { //If move is null, no more
-				 * possible moves in this direction break; //Stop going in this
-				 * direction }
-				 */
-
-				// TODO: Change checkThis to return a Boolean
 				Move move = checkMove(toX, toY, chessboard, moves);
-				if (move == null) // If move is null, no more possible moves in
-									// this direction
-					break; // Stop going in this direction
+				if (move != null) // If move is null, no more possible moves in this direction
+					moves.add(move);
 			}
 
 		return moves;
@@ -146,4 +137,5 @@ public class Tour extends Piece {
 	// =========================================================================
 	// GETTERS & SETTERS
 	// =========================================================================
+
 }

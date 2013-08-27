@@ -137,7 +137,7 @@ public class Roi extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, chessboard);
-			if (move != null)
+			if (move != null) // If move is null, no more possible moves in this direction
 				moves.add(move);
 
 		}
