@@ -27,13 +27,7 @@ public class Tour extends Piece {
 	 * @param color
 	 */
 	public Tour(boolean color) {
-		super();
-		setColor(color);
-
-		if (isColor() == false)
-			setValue(-500);
-		else
-			setValue(500);
+		super(color, 500);
 	}
 
 	// =========================================================================

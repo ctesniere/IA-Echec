@@ -36,13 +36,7 @@ public class Reine extends Piece {
 	 * @param color
 	 */
 	public Reine(boolean color) {
-		super();
-		setColor(color);
-
-		if (isColor() == false)
-			setValue(-900);
-		else
-			setValue(900);
+		super(color, 900);
 	}
 
 	// =========================================================================

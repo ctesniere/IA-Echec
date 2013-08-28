@@ -26,13 +26,7 @@ public class Chevalier extends Piece {
 	// =========================================================================
 
 	public Chevalier(boolean color) {
-		super();
-		setColor(color);
-
-		if (isColor() == false)
-			setValue(-300);
-		else
-			setValue(300);
+		super(color, 300);
 	}
 
 	// =========================================================================
