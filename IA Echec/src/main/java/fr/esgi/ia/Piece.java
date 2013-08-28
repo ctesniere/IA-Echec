@@ -43,6 +43,17 @@ abstract public class Piece {
 		setName(this.getClass().getSimpleName());
 	}
 
+	public Piece(boolean color, int value) {
+		this();
+
+		setColor(color);
+
+		if (isColor() == false)
+			setValue(value * (-1));
+		else
+			setValue(value);
+	}
+
 	// =========================================================================
 	// METHODS
 	// =========================================================================

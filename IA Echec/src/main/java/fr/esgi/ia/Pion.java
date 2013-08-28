@@ -3,10 +3,15 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe represente les pions Le pion est la pièce la moins mobile du jeu
- * et pour cette raison la moins forte. Au début de la partie, chaque joueur
+ * Cette classe represente les pions. Le pion est la pièce la moins mobile du
+ * jeu et pour cette raison la moins forte. Au début de la partie, chaque joueur
  * possède huit pions, placés en deuxième ligne devant les autres piéces (rangée
- * 2 pour les Blancs et rangée 7 pour les Noirs).
+ * 2 pour les Blancs et rangée 7 pour les Noirs). Depuis sa position d'origine,
+ * le pion peut avancer d'une ou deux cases, au choix du joueur. Par la suite,
+ * le pion avance d'une seule case à la fois, sans changer de colonne. Le pion
+ * ne peut ni reculer, ni prendre vers l'arrière. Le pion prend en diagonale. Le
+ * pion prend une pièce adverse en avançant d'une case en diagonale. La prise
+ * n'est pas obligatoire.
  * 
  * @author Cédric TESNIERE
  * @since 1
@@ -27,14 +32,7 @@ public class Pion extends Piece {
 	 * @param color
 	 */
 	public Pion(boolean color) {
-		super();
-		setName(this.getClass().getSimpleName());
-		setColor(isColor());
-
-		if (isColor() == false)
-			setValue(-100);
-		else
-			setValue(100);
+		super(color, 100);
 	}
 
 	// =========================================================================
@@ -61,8 +59,7 @@ public class Pion extends Piece {
 
 	/**
 	 * Le pion peut se déplacer jusqu'à ce qu'il trouve un ennemi ou une pièce
-	 * allié. Il peut manger dans d'autres positions. Nous donnons tous les
-	 * coups possibles, pas les bons.
+	 * allié. Il peut manger dans d'autres positions.
 	 * 
 	 * @param chessboard Actuel chessboard
 	 * @return Un tableau de tous les coups possibles (pas les bons!)

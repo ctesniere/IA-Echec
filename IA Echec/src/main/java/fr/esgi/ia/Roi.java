@@ -30,13 +30,7 @@ public class Roi extends Piece {
 	 * @param color
 	 */
 	public Roi(boolean color) {
-		super();
-		setColor(color);
-
-		if (isColor() == false)
-			setValue(-200);
-		else
-			setValue(200);
+		super(color, 200);
 	}
 
 	// =========================================================================

@@ -29,13 +29,7 @@ public class Fou extends Piece {
 	 * @param color
 	 */
 	public Fou(boolean color) {
-		super();
-		setColor(color);
-
-		if (isColor() == false)
-			setValue(-325);
-		else
-			setValue(325);
+		super(color, 325);
 	}
 
 	// =========================================================================
