@@ -38,6 +38,14 @@ public class Fou extends Piece {
 			setValue(325);
 	}
 
+	// =========================================================================
+	// METHODS
+	// =========================================================================
+
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
+
 	@Override
 	public Object clone() {
 		Fou myClone = new Fou(isColor());
@@ -84,41 +92,17 @@ public class Fou extends Piece {
 					toY = getY() - length;
 				}
 
-				Move move = checkThis(toX, toY, chessboard, moves);
-				if (move != null) // If move is null, no more possible moves in this direction
+				Move move = checkThis(toX, toY, chessboard);
+
+				// Si déplacement est nul, plus possible de ce déplacer dans
+				// cette direction pour le fou
+				if (move != null)
 					moves.add(move);
+				else
+					break;
 			}
 
 		return moves;
-	}
-
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					moves.add(move);
-			}
-			return null;
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				moves.add(move);
-		}
-
-		return move;
 	}
 
 	// =========================================================================

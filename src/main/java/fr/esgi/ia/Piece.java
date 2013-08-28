@@ -47,6 +47,10 @@ abstract public class Piece {
 	// METHODS
 	// =========================================================================
 
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void setPosition(int x, int y) {
 		setX(x);
 		setY(y);
@@ -71,10 +75,34 @@ abstract public class Piece {
 	}
 
 	/**
+	 * Test le possible mouvement, si il est correcte alors on retourne un objet
+	 * 'Move' sinon on retourne null
+	 * 
+	 * @param toX
+	 * @param toY
+	 * @param chessboard Actuel chessboard
+	 * @return A Move or NULL.
+	 */
+	public Move checkThis(int toX, int toY, Chessboard chessboard) {
+
+		Piece destination = chessboard.getPieceMouv(toX, toY);
+
+		// Si c'est une pièce enemie ou si la case est vide
+		if (destination.isColor() != isColor() && destination.equals(null)) {
+			Move move = new Move(getX(), getY(), toX, toY, isColor());
+
+			// Si le mouvement est valide, on le retourne
+			if (move.isValid())
+				return move;
+		}
+
+		return null;
+	}
+
+	/**
 	 * Cette fonction doit être mise en oeuvre dans chaque sous-classe.
 	 */
 	abstract public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard);
-
 
 	// =========================================================================
 	// OVERRIDES
@@ -87,8 +115,6 @@ abstract public class Piece {
 	public Object clone() {
 		return new Object();
 	}
-
-
 
 	// =========================================================================
 	// GETTERS & SETTERS
