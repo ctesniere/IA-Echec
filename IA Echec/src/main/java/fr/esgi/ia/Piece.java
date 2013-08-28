@@ -85,15 +85,18 @@ abstract public class Piece {
 	 */
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
 
-		Piece destination = chessboard.getPieceMouv(toX, toY);
+		// Vérifie si le déplacement ce trouve sur l'échiquier du Chessboard
+		if (Helper.getStringFromPosition(toX, toY) != null) {
+			Piece destination = chessboard.getPieceMouv(toX, toY);
 
-		// Si c'est une pièce enemie ou si la case est vide
-		if (destination.isColor() != isColor() && destination.equals(null)) {
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
+			// Si c'est une pièce enemie ou si la case est vide
+			if (destination.isColor() != isColor() && destination.equals(null)) {
+				Move move = new Move(getX(), getY(), toX, toY, isColor());
 
-			// Si le mouvement est valide, on le retourne
-			if (move.isValid())
-				return move;
+				// Si le mouvement est valide, on le retourne
+				if (move.isValid())
+					return move;
+			}
 		}
 
 		return null;
