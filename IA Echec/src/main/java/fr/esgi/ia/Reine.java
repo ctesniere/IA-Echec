@@ -49,38 +49,10 @@ public class Reine extends Piece {
 	// METHODS
 	// =========================================================================
 
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard, ArrayList<Move> moves) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					moves.add(move);
-			}
-			return null;
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				moves.add(move);
-		}
-		return move;
-	}
-
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
-	
+
 	/**
 	 * Used when a chessboard must be cloned.
 	 */
@@ -146,10 +118,14 @@ public class Reine extends Piece {
 					toY = getY() - length;
 				}
 
-				// TODO: Change checkThis to return a Boolean
-				Move move = checkThis(toX, toY, chessboard, moves);
-				if (move != null) // If move is null, no more possible moves in this direction
+				Move move = checkThis(toX, toY, chessboard);
+
+				// Si déplacement est nul, plus possible de ce déplacer dans
+				// cette direction pour la reine
+				if (move != null)
 					moves.add(move);
+				else
+					break;
 			}
 
 		return moves;

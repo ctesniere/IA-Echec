@@ -43,34 +43,6 @@ public class Roi extends Piece {
 	// METHODS
 	// =========================================================================
 
-	/**
-	 * Test the possible move.
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard) {
-
-		Piece destination = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destination != null) {
-			if (destination.isColor() != isColor()) {
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					return move;
-			}
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				return move;
-		}
-
-		return null;
-	}
-
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
@@ -101,43 +73,44 @@ public class Roi extends Piece {
 		int toX = 0, toY = 0;
 		ArrayList<Move> moves = new ArrayList<Move>();
 
-		for (int i2 = 0; i2 < 10; i2++) {
+		for (int direction = 0; direction < 8; direction++) {
 
-			if (i2 == 0) {
+			if (direction == 0) {
 				toX = getX() + 1;
 				toY = getY() + 1;
 			}
-			if (i2 == 1) {
+			if (direction == 1) {
 				toX = getX() - 1;
 				toY = getY() + 1;
 			}
-			if (i2 == 2) {
+			if (direction == 2) {
 				toX = getX() - 1;
 				toY = getY() - 1;
 			}
-			if (i2 == 3) {
+			if (direction == 3) {
 				toX = getX() + 1;
 				toY = getY() - 1;
 			}
-			if (i2 == 4) {
+			if (direction == 4) {
 				toX = getX() + 1;
 				toY = getY();
 			}
-			if (i2 == 5) {
+			if (direction == 5) {
 				toX = getX();
 				toY = getY() + 1;
 			}
-			if (i2 == 6) {
+			if (direction == 6) {
 				toX = getX() - 1;
 				toY = getY();
 			}
-			if (i2 == 7) {
+			if (direction == 7) {
 				toX = getX();
 				toY = getY() - 1;
 			}
 
 			Move move = checkThis(toX, toY, chessboard);
-			if (move != null) // If move is null, no more possible moves in this direction
+
+			if (move != null)
 				moves.add(move);
 
 		}

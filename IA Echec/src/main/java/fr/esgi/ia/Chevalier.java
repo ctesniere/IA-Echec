@@ -34,38 +34,10 @@ public class Chevalier extends Piece {
 		else
 			setValue(300);
 	}
-	
+
 	// =========================================================================
 	// METHODS
 	// =========================================================================
-
-	/**
-	 * Test le possible déplacement
-	 * 
-	 * @param toX
-	 * @param toY
-	 * @param chessboard Actuel chessboard
-	 * @return A Move or NULL.
-	 */
-	private Move checkThis(int toX, int toY, Chessboard chessboard) {
-
-		Piece destinationTarget = chessboard.getPieceMouv(toX, toY);
-		Move move;
-
-		if (destinationTarget != null) { //Si une piece existe a la destination cible
-			if (destinationTarget.isColor() != isColor()) { //Si la piece cible est un enemi
-				move = new Move(getX(), getY(), toX, toY, isColor());
-				if (move.isValid())
-					return move;
-			}
-		} else {
-			move = new Move(getX(), getY(), toX, toY, isColor());
-			if (move.isValid())
-				return move;
-		}
-
-		return null;
-	}
 
 	// =========================================================================
 	// OVERRIDES
@@ -133,7 +105,8 @@ public class Chevalier extends Piece {
 			}
 
 			Move move = checkThis(toX, toY, chessboard);
-			if (move != null) // If move is null, no more possible moves in this direction
+
+			if (move != null)
 				moves.add(move);
 
 		}
