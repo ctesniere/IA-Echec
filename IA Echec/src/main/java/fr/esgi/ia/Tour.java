@@ -62,7 +62,7 @@ public class Tour extends Piece {
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
-		int toX = 0, toY = 0;
+		int toX = -1, toY = -1;
 		ArrayList<Move> moves = new ArrayList<Move>();
 
 		// 4 direction
