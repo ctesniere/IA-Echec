@@ -45,10 +45,10 @@ public class ChessboardValue {
 			color = move.isColor();
 			// Faire le mouvement et définir la validité
 			if (!(actualChessboardClone.doMove(move))) {
-				move.setValid(false);
+				//move.setValid(false);
 			} else {
 				lastMove = move;
-				lastMove.setValid(true);
+				//lastMove.setValid(true);
 
 				// Let's copy the moves
 				// TODO: Clone?
@@ -135,7 +135,7 @@ public class ChessboardValue {
 
 	public boolean isLastMoveValid() {
 		if (lastMove != null)
-			return lastMove.isValid();
+			return lastMove.checkValidity();
 		else
 			return false;
 	}
@@ -156,8 +156,8 @@ public class ChessboardValue {
 			for (int y = 0; y < 8; y++) {
 
 				// Si la case n'est pas un blanc
-				if (getActualChessboardClone().getPieceMouv(x, y) != null) {
-					Piece piece = getActualChessboardClone().getPieceMouv(x, y);
+				if (getActualChessboardClone().getPiece(x, y) != null) {
+					Piece piece = getActualChessboardClone().getPiece(x, y);
 
 					// Si la pièce n'est pas en danger et il est ma couleur
 					if ((!piece.isInDanger()) && (piece.isColor() == color)) { // et déplacé
