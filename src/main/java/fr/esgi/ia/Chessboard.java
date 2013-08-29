@@ -96,7 +96,7 @@ public class Chessboard implements Cloneable {
 		toY = thisMove.getEndY();
 
 		// Get piece
-		piece = getPieceMouv(fromX, fromY);
+		piece = getPiece(fromX, fromY);
 
 		/* Remove the inDanger flag if a piece is no more in Danger */
 
@@ -104,7 +104,10 @@ public class Chessboard implements Cloneable {
 		moves = piece.generateMovesForThisPiece(this);
 		// For each move find if it eats something
 		for (Move move : moves) {
-			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+			int y = (move.getEndY());
+			int x = (move.getEndX());
+			System.out.println(x + ":" + y);
+			Piece enemyPiece = chessboard[y][x];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.noMoreInDanger(); // I will no longer set it in
 				// danger
@@ -151,21 +154,6 @@ public class Chessboard implements Cloneable {
 	 * @param y
 	 * @return La piece de la position x/y
 	 */
-	public Piece getPieceMouv(int x, int y) {
-		try {
-			return chessboard[y][x];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * Retourne la piece de la position x/y
-	 * 
-	 * @param x
-	 * @param y
-	 * @return La piece de la position x/y
-	 */
 	public Piece getPiece(int x, int y) {
 		try {
 			return chessboard[y][x];
@@ -183,16 +171,18 @@ public class Chessboard implements Cloneable {
 	 */
 	public ArrayList<Move> generateAllPossibleMoves(boolean color) {
 		ArrayList<Move> moves = new ArrayList<Move>();
-		List<Piece> temp;
+		List<Piece> listPiece;
 
+		// Sélectionne la liste des pièces selon la couleur
 		if (color) {
-			temp = whites;
+			listPiece = whites;
 		} else {
-			temp = blacks;
+			listPiece = blacks;
 		}
 
-		for (Piece thisPiece : temp) {
-			ArrayList<Move> movesForThisPiece = thisPiece.generateMovesForThisPiece(this);
+		// Parcours les pièces afin de 
+		for (Piece piece : listPiece) {
+			ArrayList<Move> movesForThisPiece = piece.generateMovesForThisPiece(this);
 			if (!(movesForThisPiece.isEmpty())) {
 				for (Move move : movesForThisPiece) {
 					moves.add(move);

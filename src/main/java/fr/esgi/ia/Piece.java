@@ -79,10 +79,17 @@ abstract public class Piece {
 	}
 
 	public int getPositionValue() {
-		if (isColor())
+		if (isColorWhite())
 			return valPos[y][x];
 		else
 			return -(valPos[y][x]);
+	}
+
+	public boolean isColorWhite() {
+		if(Algorithm.isWhite() == isColor())
+			return Algorithm.isWhite();
+		else
+			return Algorithm.isBlack();
 	}
 
 	/**
@@ -98,7 +105,7 @@ abstract public class Piece {
 
 		// Vérifie si le déplacement ce trouve sur l'échiquier du Chessboard
 		if (Helper.getStringFromPosition(toX, toY) != null) {
-			Piece destination = chessboard.getPieceMouv(toX, toY);
+			Piece destination = chessboard.getPiece(toX, toY);
 
 			// Si c'est une pièce enemie ou si la case est vide
 			if (destination.isColor() != isColor() && destination.equals(null)) {
