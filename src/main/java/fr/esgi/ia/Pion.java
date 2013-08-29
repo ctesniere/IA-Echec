@@ -66,33 +66,24 @@ public class Pion extends Piece {
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
-		int toX = getX(), toY = getY();
-
+		int toX = getX();
+		int toY = getY();
+		int nbCaseLimite = 1;
 		ArrayList<Move> moves = new ArrayList<Move>();
-
-		// Direction du mouvement
-		if (isColorWhite())
-			toY++;
-		else
-			toY--;
-
 		Move move = checkThis(toX, toY, chessboard);
+
+		// Avance d'une case
+		toY += directionMovementY();
 
 		// Si aucune piece au nouvelle position du pion
 		if (move == null) {
-
-			if ((toY == 7) || (toY == 0))
-				move.setPromo();
-
 			moves.add(move);
 
-			// Deuxieme deplacement
-			if ((!isColorWhite() && getY() != 6) || (isColorWhite() && getY() != 1)) {
-				if (isColor())
-					toY++;
-				else
-					toY--;
-
+			// Deuxieme deplacement si le pion est toujours à sa position
+			// initial
+			if ((!isColorWhite() && getY() == 6) || (isColorWhite() && getY() == 1)) {
+				nbCaseLimite++;
+				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard);
 
 				if (move == null) {
@@ -102,44 +93,22 @@ public class Pion extends Piece {
 			}
 		}
 
-		// Probleme car ces ligne ne seront affecter selement au deuxieme
+		// Probleme car ces ligne ne seront affecter seulement au deuxieme
 		// deplacement
 
-		for (int length = 1; length < 3; length++) {
+		for (int lenght = -1; lenght < 2; lenght++) {
+			for (int nbCase = 1; nbCase <= nbCaseLimite; nbCase++) {
+				if (lenght != 0) {
+					toX = getX() + lenght; // -1 ou 1
+					toY = getY() + (directionMovementY() * nbCase); // 1 ou 2
 
-			toX = getX() - 1;
+					move = checkThis(toX, toY, chessboard);
 
-			if (isColorWhite())
-				toY = getY() + 1;
-			else
-				toY = getY() - 1;
-
-			move = checkThis(toX, toY, chessboard);
-
-			if ((move != null) && (move.isColor() != isColor())) {
-				if ((toY == 7) || (toY == 0))
-					move.setPromo();
-				if (move.checkValidity())
-					moves.add(move);
-			}
-
-
-
-
-			toX = getX() + 1;
-
-			if (isColorWhite())
-				toY = getY() + 1;
-			else
-				toY = getY() - 1;
-
-			move = checkThis(toX, toY, chessboard);
-
-			if ((move != null) && (move.isColor() != isColor())) {
-				if ((toY == 7) || (toY == 0))
-					move.setPromo();
-				if (move.checkValidity())
-					moves.add(move);
+					if ((move != null) && (move.isColor() != isColor())) {
+						if (move.checkValidity())
+							moves.add(move);
+					}
+				}
 			}
 		}
 
@@ -149,18 +118,15 @@ public class Pion extends Piece {
 	@Override
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
 
-		// Vérifie si le déplacement ce trouve sur l'échiquier du Chessboard
-		if (Helper.getStringFromPosition(toX, toY) != null) {
-			Piece destination = chessboard.getPiece(toX, toY);
+		Piece destination = chessboard.getPiece(toX, toY);
 
-			// Si la case est vide
-			if (destination == null) {
-				Move move = new Move(getX(), getY(), toX, toY, isColor());
+		// Si c'est une pièce enemie ou si la case est vide
+		if (destination == null) {
+			Move move = new Move(getX(), getY(), toX, toY, isColor());
 
-				// Si le mouvement est valide, on le retourne
-				if (move.checkValidity())
-					return move;
-			}
+			// Si le mouvement est valide, on le retourne
+			if (move.checkValidity())
+				return move;
 		}
 
 		return null;
