@@ -17,6 +17,11 @@ public class AlphaBeta extends Algorithm {
 	// CONSTRUCTORS
 	// =========================================================================
 
+	/**
+	 * Constructeur par défaut
+	 * 
+	 * @param profondeur
+	 */
 	public AlphaBeta(int profondeur) {
 		super(profondeur);
 	}
@@ -38,21 +43,25 @@ public class AlphaBeta extends Algorithm {
 	private ChessboardValue alphaBetaAlg(ChessboardValue chessValue, ChessboardValue alpha,
 			ChessboardValue beta, boolean color, int counter) {
 
-		// Si le noeud == feuille alors retourne la valeur heuristique de échiquier
-		if (counter >= profondeur) {	
+		// Si le noeud == feuille alors retourne la valeur heuristique de
+		// échiquier
+		if (counter >= profondeur) {
 			return (chessValue);
 		} else {
 			counter++;
 		}
 
-		// Génère tous les fils de ce noeud (tous les coups possibles pour cette couleur sur cet échiquier)
-		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone().generateAllPossibleMoves(color);
+		// Génère tous les fils de ce noeud (tous les coups possibles pour cette
+		// couleur sur cet échiquier)
+		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
+				.generateAllPossibleMoves(color);
 
 		for (Move thisMove : allPossibleMove) {
 
-			// Nouvelle valeur de l'échiquier qui ont mon fils (déplacé) et mon chemin
-			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(), thisMove,
-					chessValue.getMoves());
+			// Nouvelle valeur de l'échiquier qui ont mon fils (déplacé) et mon
+			// chemin
+			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
+					thisMove, chessValue.getMoves());
 			if (thisSon.isLastMoveValid()) {
 				if (color) {
 					alpha = alpha.VSmax(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
@@ -74,11 +83,10 @@ public class AlphaBeta extends Algorithm {
 				return beta;
 		}
 	}
-	
+
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
-	
 
 	@Override
 	public Move chooseMove(Chessboard chessboard, boolean color) {
