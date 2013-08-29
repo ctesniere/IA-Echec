@@ -79,17 +79,10 @@ abstract public class Piece {
 	}
 
 	public int getPositionValue() {
-		if (isColorWhite())
+		if (Helper.isColorWhite(isColor()))
 			return valPos[y][x];
 		else
 			return -(valPos[y][x]);
-	}
-
-	public boolean isColorWhite() {
-		if(Algorithm.isWhite() == isColor())
-			return Algorithm.isWhite();
-		else
-			return Algorithm.isBlack();
 	}
 	
 	/**
@@ -98,7 +91,7 @@ abstract public class Piece {
 	 * @return Retourne -1 ou 1 selon la couleur de la piece
 	 */
 	public int directionMovementY() {
-		if (isColorWhite())
+		if (Helper.isColorWhite(isColor()))
 			return 1;
 		else
 			return -1;

@@ -45,10 +45,9 @@ public class ChessboardValue {
 			color = move.isColor();
 			// Faire le mouvement et définir la validité
 			if (!(actualChessboardClone.doMove(move))) {
-				//move.setValid(false);
+
 			} else {
 				lastMove = move;
-				//lastMove.setValid(true);
 
 				// Let's copy the moves
 				// TODO: Clone?

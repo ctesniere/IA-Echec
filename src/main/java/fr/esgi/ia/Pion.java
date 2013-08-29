@@ -81,7 +81,7 @@ public class Pion extends Piece {
 
 			// Deuxieme deplacement si le pion est toujours à sa position
 			// initial
-			if ((!isColorWhite() && getY() == 6) || (isColorWhite() && getY() == 1)) {
+			if ((!Helper.isColorWhite(isColor()) && getY() == 6) || (Helper.isColorWhite(isColor()) && getY() == 1)) {
 				nbCaseLimite++;
 				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard);
