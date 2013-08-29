@@ -52,10 +52,10 @@ public class JSONController {
 		IA ia = new IA();
 
 		Chessboard chessboard = new Chessboard();
-		chessboard.insertPieceChessboard(Algorithm.isBlack(), "d1", "e1", "c1:f1", "b1:g1",
-				"a1:h1", "a2:b2:c2:d2:e2:f2:g2:h2");
-		chessboard.insertPieceChessboard(Algorithm.isWhite(), "d8", "e8", "c8:f8", "b8:g8",
+		chessboard.insertPieceChessboard(Algorithm.isBlack(), "d8", "e8", "c8:f8", "b8:g8",
 				"a8:h8", "a7:b7:c7:d7:e7:f7:g7:h7");
+		chessboard.insertPieceChessboard(Algorithm.isWhite(), "d1", "e1", "c1:f1", "b1:g1",
+				"a1:h1", "a2:b2:c2:d2:e2:f2:g2:h2");
 
 		// Retourne le meilleur coup
 		return ia.play(Algorithm.isWhite(), 3, chessboard);
