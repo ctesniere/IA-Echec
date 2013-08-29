@@ -67,88 +67,105 @@ public class Pion extends Piece {
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
-		int toX = getX();
-		int toY = getY();
+		int toX = getX(), toY = getY();
 
 		ArrayList<Move> moves = new ArrayList<Move>();
-
+		/*
 		// Direction du mouvement
-		if (isColor())
+		if (isColorWhite())
 			toY++;
 		else
 			toY--;
 
-		Piece possiblePiece = chessboard.getPiece(toX, toY);
+		Move move = checkThis(toX, toY, chessboard);
 
 		// Si aucune piece au nouvelle position du pion
-		if (possiblePiece == null) {
+		if (move == null) {
 
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
 			if ((toY == 7) || (toY == 0))
 				move.setPromo();
+
 			if (move.isValid())
 				moves.add(move);
 
-			// Two square
-			if (!(isMoved())) {
+			// Deuxieme deplacement
+			if ((!isColorWhite() && getY() != 6) || (isColorWhite() && getY() != 1)) {
 				if (isColor())
 					toY++;
 				else
 					toY--;
 
-				possiblePiece = chessboard.getPiece(toX, toY);
+				move = checkThis(toX, toY, chessboard);
 
-				if (possiblePiece == null) {
-					move = new Move(getX(), getY(), toX, toY, isColor());
-					// move.SetCatturabile();
-					if (move.isValid())
-						moves.add(move);
+				if (move == null) {
+					moves.add(move);
 				}
 
 			}
 		}
 
-		// Can i ate?
+		// Probleme car ces ligne ne seront affecter selement au deuxieme
+		// deplacement
 
-		toX = getX() - 1;
-		// Sx
-		if (isColor())
-			toY = getY() + 1;
-		else
-			toY = getY() - 1;
+		for (int length = 1; length < 3; length++) {
 
-		possiblePiece = chessboard.getPiece(toX, toY);
+			toX = getX() - 1;
 
-		if ((possiblePiece != null) && (possiblePiece.isColor() != isColor())) {
+			if (isColorWhite())
+				toY = getY() + 1;
+			else
+				toY = getY() - 1;
 
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
+			move = checkThis(toX, toY, chessboard);
 
-			if ((toY == 7) || (toY == 0))
-				move.setPromo();
-			if (move.isValid())
-				moves.add(move);
+			if ((move != null) && (move.isColor() != isColor())) {
+				if ((toY == 7) || (toY == 0))
+					move.setPromo();
+				if (move.isValid())
+					moves.add(move);
+			}
+
+
+
+
+			toX = getX() + 1;
+
+			if (isColorWhite())
+				toY = getY() + 1;
+			else
+				toY = getY() - 1;
+
+			move = checkThis(toX, toY, chessboard);
+
+			if ((move != null) && (move.isColor() != isColor())) {
+				if ((toY == 7) || (toY == 0))
+					move.setPromo();
+				if (move.isValid())
+					moves.add(move);
+			}
 		}
-
-		toX = getX() + 1;
-
-		if (isColor())
-			toY = getY() + 1;
-		else
-			toY = getY() - 1;
-
-		possiblePiece = chessboard.getPieceMouv(toX, toY);
-
-		if ((possiblePiece != null) && (possiblePiece.isColor() != isColor())) {
-
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
-
-			if ((toY == 7) || (toY == 0))
-				move.setPromo();
-			if (move.isValid())
-				moves.add(move);
-		}
-
+*/
 		return moves;
+	}
+
+	@Override
+	public Move checkThis(int toX, int toY, Chessboard chessboard) {
+
+		// Vérifie si le déplacement ce trouve sur l'échiquier du Chessboard
+		if (Helper.getStringFromPosition(toX, toY) != null) {
+			Piece destination = chessboard.getPiece(toX, toY);
+
+			// Si la case est vide
+			if (destination.equals(null)) {
+				Move move = new Move(getX(), getY(), toX, toY, isColor());
+
+				// Si le mouvement est valide, on le retourne
+				if (move.isValid())
+					return move;
+			}
+		}
+
+		return null;
 	}
 
 	// =========================================================================
