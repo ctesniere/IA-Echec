@@ -91,6 +91,18 @@ abstract public class Piece {
 		else
 			return Algorithm.isBlack();
 	}
+	
+	/**
+	 * Direction du mouvement
+	 * 
+	 * @return Retourne -1 ou 1 selon la couleur de la piece
+	 */
+	public int directionMovementY() {
+		if (isColorWhite())
+			return 1;
+		else
+			return -1;
+	}
 
 	/**
 	 * Test le possible mouvement, si il est correcte alors on retourne un objet
