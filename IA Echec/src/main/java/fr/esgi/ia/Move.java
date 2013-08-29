@@ -15,8 +15,6 @@ public final class Move {
 
 	private int endY;
 
-	private boolean isValid;
-
 	private boolean color;
 
 	private boolean isEating = true;
@@ -35,20 +33,24 @@ public final class Move {
 		setStartY(startY);
 		setEndY(endY);
 		setColor(color);
+		checkValidity();
 	}
 
 	// =========================================================================
 	// METHODS
 	// =========================================================================
 
+	/**
+	 * Vérifie si la pièce ce situe dans l'échiquier
+	 * 
+	 * @return true si c'est valide, sinon false
+	 */
 	public boolean checkValidity() {
 
-		if (isInBound(startX) && isInBound(startY) && isInBound(endX) && isInBound(endY))
-			setValid(true);
+		if (Helper.getStringFromPosition(startX, startY) != null && Helper.getStringFromPosition(endX, endY) != null)
+			return true;
 		else
-			setValid(false);
-
-		return true;
+			return false;
 	}
 
 	/**
@@ -64,7 +66,7 @@ public final class Move {
 		positionStart = Helper.getStringFromPosition(startX, startY);
 		positionEnd = Helper.getStringFromPosition(endX, endY);
 
-		if (isValid()) {
+		if (checkValidity()) {
 			if (promo == true)
 				return "move " + positionStart + positionEnd + getPromotion();
 			else
@@ -73,6 +75,7 @@ public final class Move {
 			return "Illegal move";
 	}
 
+	// TODO : revoir cette méthode
 	public void setPromo() {
 
 		if (isColor() == true)
@@ -84,13 +87,12 @@ public final class Move {
 	public static Move movePromotion(Move move, Chessboard chessboard) {
 
 		// Si le mouvement me faut pour y = 7 ou y = 0
-		if (((move.isColor()) && (move.getEndY() == 7))
-				|| ((!(move.isColor())) && (move.getEndY() == 0))) {
+		if ((move.isColor() && move.getEndY() == 7) || (!move.isColor() && move.getEndY() == 0)) {
 
-			Piece piece = chessboard.getPieceMouv(move.getStartX(), move.getStartY());
+			Piece piece = chessboard.getPiece(move.getStartX(), move.getStartY());
 			
-			// si c'était un gage de faire un geste
-			if ((piece != null) && (piece.getName() != Pion.class.getSimpleName()))
+			// Si c'était un gage de faire un geste
+			if ((piece != null) && (piece.getClass().equals(Pion.class)))
 				move.setPromo();
 		}
 		return move;
@@ -103,7 +105,9 @@ public final class Move {
 		return chessboard;
 	}
 
-
+	// =========================================================================
+	// OVERRIDES
+	// =========================================================================
 
 	// =========================================================================
 	// GETTERS & SETTERS
@@ -116,14 +120,6 @@ public final class Move {
 
 	public boolean getPromo() {
 		return promo;
-	}
-
-	private boolean isInBound(int value) {
-
-		if ((value >= 0) && (value < 8))
-			return true;
-		else
-			return false;
 	}
 
 	public int getStartX() {
@@ -156,14 +152,6 @@ public final class Move {
 
 	public void setEndY(int endY) {
 		this.endY = endY;
-	}
-
-	public boolean isValid() {
-		return isValid;
-	}
-
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
 	}
 
 	public boolean isColor() {

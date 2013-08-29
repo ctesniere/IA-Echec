@@ -108,11 +108,11 @@ abstract public class Piece {
 			Piece destination = chessboard.getPiece(toX, toY);
 
 			// Si c'est une pièce enemie ou si la case est vide
-			if (destination.isColor() != isColor() && destination.equals(null)) {
+			if (destination == null || destination.isColor() != isColor()) {
 				Move move = new Move(getX(), getY(), toX, toY, isColor());
 
 				// Si le mouvement est valide, on le retourne
-				if (move.isValid())
+				if (move.checkValidity())
 					return move;
 			}
 		}

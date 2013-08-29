@@ -70,7 +70,7 @@ public class Pion extends Piece {
 		int toX = getX(), toY = getY();
 
 		ArrayList<Move> moves = new ArrayList<Move>();
-		/*
+
 		// Direction du mouvement
 		if (isColorWhite())
 			toY++;
@@ -85,8 +85,7 @@ public class Pion extends Piece {
 			if ((toY == 7) || (toY == 0))
 				move.setPromo();
 
-			if (move.isValid())
-				moves.add(move);
+			moves.add(move);
 
 			// Deuxieme deplacement
 			if ((!isColorWhite() && getY() != 6) || (isColorWhite() && getY() != 1)) {
@@ -121,7 +120,7 @@ public class Pion extends Piece {
 			if ((move != null) && (move.isColor() != isColor())) {
 				if ((toY == 7) || (toY == 0))
 					move.setPromo();
-				if (move.isValid())
+				if (move.checkValidity())
 					moves.add(move);
 			}
 
@@ -140,11 +139,11 @@ public class Pion extends Piece {
 			if ((move != null) && (move.isColor() != isColor())) {
 				if ((toY == 7) || (toY == 0))
 					move.setPromo();
-				if (move.isValid())
+				if (move.checkValidity())
 					moves.add(move);
 			}
 		}
-*/
+
 		return moves;
 	}
 
@@ -156,11 +155,11 @@ public class Pion extends Piece {
 			Piece destination = chessboard.getPiece(toX, toY);
 
 			// Si la case est vide
-			if (destination.equals(null)) {
+			if (destination == null) {
 				Move move = new Move(getX(), getY(), toX, toY, isColor());
 
 				// Si le mouvement est valide, on le retourne
-				if (move.isValid())
+				if (move.checkValidity())
 					return move;
 			}
 		}
