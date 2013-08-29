@@ -33,7 +33,6 @@ public final class Move {
 		setStartY(startY);
 		setEndY(endY);
 		setColor(color);
-		checkValidity();
 	}
 
 	// =========================================================================
@@ -41,7 +40,7 @@ public final class Move {
 	// =========================================================================
 
 	/**
-	 * Vérifie si la pièce ce situe dans l'échiquier
+	 * Vérifie si le déplacement ce trouve sur l'échiquier du Chessboard
 	 * 
 	 * @return true si c'est valide, sinon false
 	 */

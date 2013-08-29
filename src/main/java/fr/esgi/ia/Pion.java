@@ -58,11 +58,10 @@ public class Pion extends Piece {
 	}
 
 	/**
-	 * Le pion peut se déplacer jusqu'à ce qu'il trouve un ennemi ou une pièce
-	 * allié. Il peut manger dans d'autres positions.
+	 * Génère la liste des mouvement posible pour le pion
 	 * 
 	 * @param chessboard Actuel chessboard
-	 * @return Un tableau de tous les coups possibles (pas les bons!)
+	 * @return Un tableau de tous les coups possibles
 	 */
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
