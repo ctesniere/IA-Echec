@@ -5,7 +5,7 @@ import fr.esgi.ia.Algorithm;
 import fr.esgi.ia.Chessboard;
 import fr.esgi.ia.IA;
 
-public class TestIA {
+public class TestIAController {
 
 	@Test
 	public void testIA() {
