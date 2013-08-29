@@ -174,13 +174,13 @@ public class Chessboard implements Cloneable {
 		List<Piece> listPiece;
 
 		// Sélectionne la liste des pièces selon la couleur
-		if (color) {
+		if (Helper.isColorWhite(color)) {
 			listPiece = whites;
 		} else {
 			listPiece = blacks;
 		}
 
-		// Parcours les pièces afin de 
+		// Parcours les pièces afin de lister les mouvements possibles
 		for (Piece piece : listPiece) {
 			ArrayList<Move> movesForThisPiece = piece.generateMovesForThisPiece(this);
 			if (!(movesForThisPiece.isEmpty())) {
@@ -190,49 +190,13 @@ public class Chessboard implements Cloneable {
 			}
 		}
 
-		if (color) {
+		if (Helper.isColorWhite(color)) {
 			setNbWhiteMoves(moves.size());
 		} else {
 			setNbBlackMoves(moves.size());
 		}
 
 		return moves;
-	}
-
-	/**
-	 * Génere le Json a retourner au client
-	 * 
-	 * @return Un array d'un array de position au format "piece:position"
-	 */
-	public List<List<String>> getExportChessboard() {
-		initListPieceBalckAndWhite();
-
-		List<List<String>> listPiece = new ArrayList<List<String>>();
-		List<String> listBlack = new ArrayList<String>();
-		List<String> listWhite = new ArrayList<String>();
-		Piece piece;
-
-		listWhite.add("White");
-		listBlack.add("Black");
-
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++)
-				if (chessboard[x][y] != null)
-					if (chessboard[x][y].isColor()) {
-						piece = chessboard[x][y];
-						listWhite.add(piece.getClass().getSimpleName() + ";"
-								+ Helper.getStringFromPosition(x, y));
-					} else {
-						piece = chessboard[x][y];
-						listBlack.add(piece.getClass().getSimpleName() + ";"
-								+ Helper.getStringFromPosition(x, y));
-					}
-		}
-
-		listPiece.add(listBlack);
-		listPiece.add(listWhite);
-
-		return listPiece;
 	}
 
 	/**
