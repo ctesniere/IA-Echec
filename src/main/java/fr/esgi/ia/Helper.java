@@ -263,9 +263,9 @@ public class Helper {
 			return "h8";
 		return null;
 	}
-	
+
 	public static boolean isColorWhite(boolean color) {
-		if(Algorithm.isWhite() == color)
+		if (Algorithm.isWhite() == color)
 			return Algorithm.isWhite();
 		else
 			return Algorithm.isBlack();

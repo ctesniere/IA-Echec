@@ -12,9 +12,9 @@ public class Export {
 	// =========================================================================
 
 	private List<PieceEx> listPiece = new ArrayList<PieceEx>();
-	
+
 	private PieceEx chooseMovePiece;
-	
+
 	private PieceEx bestMovePiece;
 
 	// =========================================================================

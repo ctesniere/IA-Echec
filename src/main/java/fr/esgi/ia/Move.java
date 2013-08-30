@@ -46,7 +46,8 @@ public final class Move {
 	 */
 	public boolean checkValidity() {
 
-		if (Helper.getStringFromPosition(startX, startY) != null && Helper.getStringFromPosition(endX, endY) != null)
+		if (Helper.getStringFromPosition(startX, startY) != null
+				&& Helper.getStringFromPosition(endX, endY) != null)
 			return true;
 		else
 			return false;
@@ -89,7 +90,7 @@ public final class Move {
 		if ((move.isColor() && move.getEndY() == 7) || (!move.isColor() && move.getEndY() == 0)) {
 
 			Piece piece = chessboard.getPiece(move.getStartX(), move.getStartY());
-			
+
 			// Si c'était un gage de faire un geste
 			if ((piece != null) && (piece.getClass().equals(Pion.class)))
 				move.setPromo();
@@ -111,7 +112,6 @@ public final class Move {
 	// =========================================================================
 	// GETTERS & SETTERS
 	// =========================================================================
-
 
 	public boolean getMangia() {
 		return isEating;

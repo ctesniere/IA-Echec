@@ -19,9 +19,9 @@ public class TestIAController {
 
 		Piece piece = chessboard.getPiece(0, 1);
 		String positionPiece = chessboard.getPositionPiece(piece);
-		
+
 		Assert.assertEquals(positionPiece, "a2");
-		
+
 		IA ia = new IA();
 		System.out.println(ia.play(Algorithm.isWhite(), 2, chessboard));
 		Assert.assertNotEquals(ia.play(Algorithm.isWhite(), 2, chessboard),
