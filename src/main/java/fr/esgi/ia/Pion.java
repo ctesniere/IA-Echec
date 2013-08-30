@@ -70,14 +70,14 @@ public class Pion extends Piece {
 		int toX = getX, toY = getY;
 
 		int nbCaseLimite = 1;
-		ArrayList<Move> moves = new ArrayList<Move>();
-		Move move = checkThis(toX, toY, chessboard);
 
 		// Avance d'une case
 		toY += directionMovementY();
+		ArrayList<Move> moves = new ArrayList<Move>();
+		Move move = checkThis(toX, toY, chessboard);
 
 		// Si aucune piece au nouvelle position du pion
-		if (move == null) {
+		if (move != null) {
 			moves.add(move);
 
 			// Deuxieme deplacement si le pion est toujours à sa position
@@ -126,7 +126,7 @@ public class Pion extends Piece {
 
 		Piece destination = chessboard.getPiece(toX, toY);
 
-		// Si c'est une pièce enemie ou si la case est vide
+		// Si la case est vide
 		if (destination == null) {
 			Move move = new Move(getX, getY, toX, toY, isColor());
 
