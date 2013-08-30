@@ -43,8 +43,8 @@ public class AlphaBeta extends Algorithm {
 	private ChessboardValue alphaBetaAlg(ChessboardValue chessValue, ChessboardValue alpha,
 			ChessboardValue beta, boolean color, int counter) {
 
-		// Si le noeud == feuille alors retourne la valeur heuristique de
-		// échiquier
+		// Si counter (noeud) == profondeur, alors retourne la valeur
+		// heuristique de échiquier
 		if (counter >= profondeur) {
 			return (chessValue);
 		} else {
@@ -54,7 +54,7 @@ public class AlphaBeta extends Algorithm {
 		// Génère tous les fils de ce noeud (tous les coups possibles pour cette
 		// couleur sur cet échiquier)
 		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
-				.generateAllPossibleMoves(color);
+				.generateAllPossibleMoves(Helper.isColorWhite(color));
 
 		for (Move thisMove : allPossibleMove) {
 
@@ -62,6 +62,7 @@ public class AlphaBeta extends Algorithm {
 			// chemin
 			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
 					thisMove, chessValue.getMoves());
+
 			if (thisSon.isLastMoveValid()) {
 				if (color) {
 					alpha = alpha.VSmax(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
@@ -71,7 +72,7 @@ public class AlphaBeta extends Algorithm {
 			}
 		}
 
-		if (color) {
+		if (Helper.isColorWhite(color)) {
 			if (beta.getValue() <= alpha.getValue())
 				return beta;
 			else
