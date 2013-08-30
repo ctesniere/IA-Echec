@@ -2,6 +2,7 @@ package fr.esgi.ia;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Cette classe represente l'échiquier.
@@ -54,8 +55,8 @@ public class Chessboard implements Cloneable {
 	 */
 	private Chessboard(int nbWhite, int nbBlack) {
 		this();
-		setNbBlackMoves(nbBlack);
-		setNbWhiteMoves(nbWhite);
+		setNbBlackMoves(nbBlack); // 0
+		setNbWhiteMoves(nbWhite); // 0
 	}
 
 	// =========================================================================
@@ -72,13 +73,47 @@ public class Chessboard implements Cloneable {
 
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++)
-				if (chessboard[y][x] != null) // chessboard vide
+				if (chessboard[y][x] != null)
 					if (chessboard[y][x].isColor()) {
 						whites.add(chessboard[y][x]);
 					} else {
 						blacks.add(chessboard[y][x]);
 					}
 		}
+	}
+
+	/**
+	 * Retourne un id generer
+	 * 
+	 * @return Un ID (int) unique dans l'echiquier
+	 */
+	public int generateID() {
+
+		int min = 1, max = 40;
+		int randomNumber;
+
+		// Continue jusqu'a trouver un nombre unique
+		while (true) {
+			boolean numberExist = false;
+
+			// Genére un nombre aleatoire
+			Random rand = new Random();
+			randomNumber = rand.nextInt(max - min + 1) + min;
+
+			// Vérifie que le nombre aleatoire generer n'est pas deja utiliser
+			for (int y = 0; y < 8; y++) {
+				for (int x = 0; x < 8; x++) {
+					if (chessboard[y][x] != null && chessboard[y][x].getId() == randomNumber) {
+						numberExist = true;
+					}
+				}
+			}
+
+			if (!numberExist)
+				break;
+		}
+
+		return randomNumber;
 	}
 
 	/**
@@ -226,7 +261,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Roi(color);
+				chessboard[y][x] = new Roi(generateID(), color);
 			}
 		}
 
@@ -236,7 +271,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Reine(color);
+				chessboard[y][x] = new Reine(generateID(), color);
 			}
 		}
 
@@ -246,7 +281,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Fou(color);
+				chessboard[y][x] = new Fou(generateID(), color);
 			}
 		}
 
@@ -256,7 +291,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Chevalier(color);
+				chessboard[y][x] = new Chevalier(generateID(), color);
 			}
 		}
 
@@ -266,7 +301,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Tour(color);
+				chessboard[y][x] = new Tour(generateID(), color);
 			}
 		}
 
@@ -276,7 +311,7 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Pion(color);
+				chessboard[y][x] = new Pion(generateID(), color);
 			}
 		}
 	}
@@ -287,7 +322,8 @@ public class Chessboard implements Cloneable {
 			for (int x = 0; x < 8; x++) {
 				if (chessboard[y][x] != null) {
 					if (chessboard[y][x].getClass().equals(piece.getClass())
-							&& piece.isColor() == chessboard[y][x].isColor()) {
+							&& chessboard[y][x].isColor() == piece.isColor()
+							&& chessboard[y][x].getId() == piece.getId()) {
 						return Helper.getStringFromPosition(x, y);
 					}
 				}

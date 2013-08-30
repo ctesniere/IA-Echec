@@ -88,7 +88,7 @@ public class Helper {
 			input = BR.readLine();
 		} catch (IOException e) {
 			input = null;
-		};
+		}
 
 		return input;
 	}

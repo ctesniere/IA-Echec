@@ -29,8 +29,8 @@ public class Roi extends Piece {
 	 * 
 	 * @param color
 	 */
-	public Roi(boolean color) {
-		super(color, 200);
+	public Roi(int id, boolean color) {
+		super(id, color, 200);
 	}
 
 	// =========================================================================
@@ -46,7 +46,7 @@ public class Roi extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Roi myClone = new Roi(isColor());
+		Roi myClone = new Roi(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());

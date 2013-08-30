@@ -35,8 +35,8 @@ public class Reine extends Piece {
 	 * 
 	 * @param color
 	 */
-	public Reine(boolean color) {
-		super(color, 900);
+	public Reine(int id, boolean color) {
+		super(id, color, 900);
 	}
 
 	// =========================================================================
@@ -52,7 +52,7 @@ public class Reine extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Reine myClone = new Reine(isColor());
+		Reine myClone = new Reine(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());

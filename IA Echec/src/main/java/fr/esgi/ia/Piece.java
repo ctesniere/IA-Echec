@@ -14,6 +14,12 @@ abstract public class Piece {
 	// =========================================================================
 
 	/**
+	 * Identifiant de la piece, permet d'identifier deux pieces identique comme
+	 * des Tours
+	 */
+	private int id;
+
+	/**
 	 * Si la valeur des noir est négative, positive pour les blancs
 	 */
 	private int value;
@@ -21,8 +27,6 @@ abstract public class Piece {
 	private int enemy;
 
 	private boolean color, inDanger, moved;
-
-	/** < Array for the position value */
 
 	// =========================================================================
 	// CONSTRUCTORS
@@ -35,15 +39,18 @@ abstract public class Piece {
 		setEnemy(0);
 	}
 
-	public Piece(boolean color, int value) {
+	public Piece(int id, boolean color, int value) {
 		this();
-
+		
+		setId(id);
 		setColor(color);
 
 		if (isColor() == false)
 			setValue(value * (-1));
 		else
 			setValue(value);
+		
+		
 	}
 
 	// =========================================================================
@@ -162,6 +169,14 @@ abstract public class Piece {
 
 	protected int getEnemy() {
 		return enemy;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

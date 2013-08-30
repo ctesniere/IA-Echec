@@ -26,8 +26,8 @@ public class Tour extends Piece {
 	 * 
 	 * @param color
 	 */
-	public Tour(boolean color) {
-		super(color, 500);
+	public Tour(int id, boolean color) {
+		super(id, color, 500);
 	}
 
 	// =========================================================================
@@ -43,7 +43,7 @@ public class Tour extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Tour myClone = new Tour(isColor());
+		Tour myClone = new Tour(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());

@@ -31,8 +31,8 @@ public class Pion extends Piece {
 	 * 
 	 * @param color
 	 */
-	public Pion(boolean color) {
-		super(color, 100);
+	public Pion(int id, boolean color) {
+		super(id, color, 100);
 	}
 
 	// =========================================================================
@@ -48,7 +48,7 @@ public class Pion extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Pion myClone = new Pion(isColor());
+		Pion myClone = new Pion(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
