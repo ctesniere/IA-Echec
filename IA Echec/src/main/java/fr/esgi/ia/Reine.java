@@ -71,7 +71,7 @@ public class Reine extends Piece {
 
 		int toX = -1, toY = -1;
 		ArrayList<Move> moves = new ArrayList<Move>();
-		
+
 		String positionPiece = chessboard.getPositionPiece(this);
 		int getX = Helper.getXfromString(positionPiece);
 		int getY = Helper.getYfromString(positionPiece);

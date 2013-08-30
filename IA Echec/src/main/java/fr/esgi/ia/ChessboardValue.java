@@ -3,8 +3,8 @@ package fr.esgi.ia;
 import java.util.ArrayList;
 
 /**
- * Cette classe, utilisé dans le processus AlphaBeta, stocke un échiquier, la valeur et d'autres informations
- * utiles.
+ * Cette classe, utilisé dans le processus AlphaBeta, stocke un échiquier, la
+ * valeur et d'autres informations utiles.
  * 
  * @author Cédric TESNIERE
  */
@@ -40,7 +40,8 @@ public class ChessboardValue {
 		actualChessboardClone = (Chessboard) chessboard.clone();
 		moves = new ArrayList<Move>();
 
-		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou béta)]
+		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou
+		// béta)]
 		if (move != null) {
 			color = move.isColor();
 			lastMove = move;
@@ -154,7 +155,8 @@ public class ChessboardValue {
 					Piece piece = getActualChessboardClone().getPiece(x, y);
 
 					// Si la pièce n'est pas en danger et il est ma couleur
-					if ((!piece.isInDanger()) && (piece.isColor() == color)) { // et déplacé
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) { // et
+																				// déplacé
 
 						if (piece.isMoved()) {
 							// Note normale
@@ -162,12 +164,17 @@ public class ChessboardValue {
 							val = val + temp;
 						} else {
 							// Si Tour ou Roi
-							if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
+							if (piece.getClass().getSimpleName().equals(TypePiece.KING)
+									|| piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
 								// Note normale
 								temp = piece.getValue();
 								val = val + temp;
 							} else { // Si une pièce est un autre
-								if (piece.isColor() == Algorithm.isBlack()) { // Si la pièce est noire
+								if (piece.isColor() == Algorithm.isBlack()) { // Si
+																				// la
+																				// pièce
+																				// est
+																				// noire
 									// D'un avantage pour le blanc 10
 									temp = piece.getValue();
 									val = val + temp + 10;
@@ -198,7 +205,8 @@ public class ChessboardValue {
 		}
 
 		// Noter cette mobilité
-		temp = getActualChessboardClone().getNbWhiteMoves() - getActualChessboardClone().getNbBlackMoves();
+		temp = getActualChessboardClone().getNbWhiteMoves()
+				- getActualChessboardClone().getNbBlackMoves();
 		val += temp * 2;
 		return val;
 	}

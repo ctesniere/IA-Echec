@@ -26,10 +26,11 @@ public class IA {
 	// =========================================================================
 
 	/**
-	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et l'execute. Déplace le
-	 * meilleur pion sur le chessboard
+	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et
+	 * l'execute. Déplace le meilleur pion sur le chessboard
 	 * 
-	 * @param myColor Ma couleur (Voir la classe Algorithm pour avoir les valeurs)
+	 * @param myColor Ma couleur (Voir la classe Algorithm pour avoir les
+	 *            valeurs)
 	 * @param depth Profondeur de l'algorithme
 	 * @param chessboard
 	 * @return Le meilleur mouvement

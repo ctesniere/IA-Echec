@@ -41,7 +41,7 @@ abstract public class Piece {
 
 	public Piece(int id, boolean color, int value) {
 		this();
-		
+
 		setId(id);
 		setColor(color);
 
@@ -49,8 +49,7 @@ abstract public class Piece {
 			setValue(value * (-1));
 		else
 			setValue(value);
-		
-		
+
 	}
 
 	// =========================================================================
@@ -67,7 +66,7 @@ abstract public class Piece {
 		setEnemy(getEnemy() + 1);
 		setInDanger(true);
 	}
-	
+
 	/**
 	 * Direction du mouvement
 	 * 
@@ -92,7 +91,7 @@ abstract public class Piece {
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
 
 		Piece destination = chessboard.getPiece(toX, toY);
-		
+
 		String positionPiece = chessboard.getPositionPiece(this);
 		int getX = Helper.getXfromString(positionPiece);
 		int getY = Helper.getYfromString(positionPiece);

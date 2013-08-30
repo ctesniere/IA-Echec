@@ -63,7 +63,7 @@ public class Pion extends Piece {
 	 */
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
-		
+
 		String positionPiece = chessboard.getPositionPiece(this);
 		int getX = Helper.getXfromString(positionPiece);
 		int getY = Helper.getYfromString(positionPiece);
@@ -82,7 +82,8 @@ public class Pion extends Piece {
 
 			// Deuxieme deplacement si le pion est toujours à sa position
 			// initial
-			if ((!Helper.isColorWhite(isColor()) && getY == 6) || (Helper.isColorWhite(isColor()) && getY == 1)) {
+			if ((!Helper.isColorWhite(isColor()) && getY == 6)
+					|| (Helper.isColorWhite(isColor()) && getY == 1)) {
 				nbCaseLimite++;
 				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard);
@@ -118,7 +119,7 @@ public class Pion extends Piece {
 
 	@Override
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
-		
+
 		String positionPiece = chessboard.getPositionPiece(this);
 		int getX = Helper.getXfromString(positionPiece);
 		int getY = Helper.getYfromString(positionPiece);
