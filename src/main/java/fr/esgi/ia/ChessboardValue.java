@@ -43,21 +43,16 @@ public class ChessboardValue {
 		// Si ce n'est pas la première fois [<> NULL (=> <> forme alpha ou béta)]
 		if (move != null) {
 			color = move.isColor();
-			// Faire le mouvement et définir la validité
-			if (!(actualChessboardClone.doMove(move))) {
+			lastMove = move;
 
-			} else {
-				lastMove = move;
-
-				// Let's copy the moves
-				// TODO: Clone?
-				if (earlyMoves != null) {
-					for (Move thisMove : earlyMoves)
-						moves.add(thisMove);
-				}
-				// Ajout de ce mouvement
-				moves.add(move);
+			// Let's copy the moves
+			// TODO: Clone?
+			if (earlyMoves != null) {
+				for (Move thisMove : earlyMoves)
+					moves.add(thisMove);
 			}
+			// Ajout de ce mouvement
+			moves.add(move);
 		}
 
 		// Trouvez et sauvegarder la valeur de l'échiquier

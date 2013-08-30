@@ -119,7 +119,8 @@ public class Chessboard implements Cloneable {
 
 		/* Apply changes */
 
-		piece.setPosition(toX, toY);
+		// Corriger
+		// piece.setPosition(toX, toY);
 
 		if (piece.isColor() && (chessboard[toY][toX] != null)) {
 			blacks.remove(chessboard[toY][toX]);
@@ -280,8 +281,20 @@ public class Chessboard implements Cloneable {
 		}
 	}
 
+	public String getPositionPiece(Piece piece) {
 
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				if (chessboard[y][x] != null) {
+					if (chessboard[y][x].getClass().equals(piece.getClass())
+							&& piece.isColor() == chessboard[y][x].isColor()) {
+						return Helper.getStringFromPosition(x, y);
+					}
+				}
+			}
+		}
 
+		return null;
 	}
 
 	// =========================================================================

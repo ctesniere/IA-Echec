@@ -50,8 +50,6 @@ public class Roi extends Piece {
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
-		myClone.setPosition(getX(), getY());
-		myClone.setValPos(getValPos());
 		return myClone;
 	}
 
@@ -66,40 +64,44 @@ public class Roi extends Piece {
 
 		int toX = -1, toY = -1;
 		ArrayList<Move> moves = new ArrayList<Move>();
+		
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
 
 		for (int direction = 0; direction < 8; direction++) {
 
 			if (direction == 0) {
-				toX = getX() + 1;
-				toY = getY() + 1;
+				toX = getX + 1;
+				toY = getY + 1;
 			}
 			if (direction == 1) {
-				toX = getX() - 1;
-				toY = getY() + 1;
+				toX = getX - 1;
+				toY = getY + 1;
 			}
 			if (direction == 2) {
-				toX = getX() - 1;
-				toY = getY() - 1;
+				toX = getX - 1;
+				toY = getY - 1;
 			}
 			if (direction == 3) {
-				toX = getX() + 1;
-				toY = getY() - 1;
+				toX = getX + 1;
+				toY = getY - 1;
 			}
 			if (direction == 4) {
-				toX = getX() + 1;
-				toY = getY();
+				toX = getX + 1;
+				toY = getY;
 			}
 			if (direction == 5) {
-				toX = getX();
-				toY = getY() + 1;
+				toX = getX;
+				toY = getY + 1;
 			}
 			if (direction == 6) {
-				toX = getX() - 1;
-				toY = getY();
+				toX = getX - 1;
+				toY = getY;
 			}
 			if (direction == 7) {
-				toX = getX();
-				toY = getY() - 1;
+				toX = getX;
+				toY = getY - 1;
 			}
 
 			Move move = checkThis(toX, toY, chessboard);

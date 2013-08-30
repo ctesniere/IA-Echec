@@ -43,11 +43,9 @@ public class Chevalier extends Piece {
 	@Override
 	public Object clone() {
 		Chevalier myClone = new Chevalier(isColor());
-		myClone.setValPos(getValPos());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
-		myClone.setPosition(getX(), getY());
 		return myClone;
 	}
 
@@ -62,40 +60,44 @@ public class Chevalier extends Piece {
 
 		int toX = -1, toY = -1;
 		ArrayList<Move> moves = new ArrayList<Move>();
+		
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
 
 		for (int i = 0; i < 8; i++) {
 
 			if (i == 0) {
-				toX = getX() + 2;
-				toY = getY() + 1;
+				toX = getX + 2;
+				toY = getY + 1;
 			}
 			if (i == 1) {
-				toX = getX() + 2;
-				toY = getY() - 1;
+				toX = getX + 2;
+				toY = getY - 1;
 			}
 			if (i == 2) {
-				toX = getX() - 2;
-				toY = getY() + 1;
+				toX = getX - 2;
+				toY = getY + 1;
 			}
 			if (i == 3) {
-				toX = getX() - 2;
-				toY = getY() - 1;
+				toX = getX - 2;
+				toY = getY - 1;
 			}
 			if (i == 4) {
-				toX = getX() + 1;
-				toY = getY() + 2;
+				toX = getX + 1;
+				toY = getY + 2;
 			}
 			if (i == 5) {
-				toX = getX() - 1;
-				toY = getY() + 2;
+				toX = getX - 1;
+				toY = getY + 2;
 			}
 			if (i == 6) {
-				toX = getX() - 1;
-				toY = getY() - 2;
+				toX = getX - 1;
+				toY = getY - 2;
 			}
 			if (i == 7) {
-				toX = getX() + 1;
-				toY = getY() - 2;
+				toX = getX + 1;
+				toY = getY - 2;
 			}
 
 			Move move = checkThis(toX, toY, chessboard);

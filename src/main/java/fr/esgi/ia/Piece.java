@@ -18,11 +18,9 @@ abstract public class Piece {
 	 */
 	private int value;
 
-	private int y, x, enemy;
+	private int enemy;
 
 	private boolean color, inDanger, moved;
-
-	public int[][] valPos = new int[8][8];
 
 	/** < Array for the position value */
 
@@ -52,15 +50,6 @@ abstract public class Piece {
 	// METHODS
 	// =========================================================================
 
-	/**
-	 * @param x
-	 * @param y
-	 */
-	public void setPosition(int x, int y) {
-		setX(x);
-		setY(y);
-	}
-
 	public void noMoreInDanger() {
 		setEnemy(getEnemy() - 1);
 		if (getEnemy() == 0)
@@ -70,13 +59,6 @@ abstract public class Piece {
 	public void inDanger() {
 		setEnemy(getEnemy() + 1);
 		setInDanger(true);
-	}
-
-	public int getPositionValue() {
-		if (Helper.isColorWhite(isColor()))
-			return valPos[y][x];
-		else
-			return -(valPos[y][x]);
 	}
 	
 	/**
@@ -103,10 +85,14 @@ abstract public class Piece {
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
 
 		Piece destination = chessboard.getPiece(toX, toY);
+		
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
 
 		// Si c'est une pièce enemie ou si la case est vide
 		if (destination == null || destination.isColor() != isColor()) {
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
+			Move move = new Move(getX, getY, toX, toY, isColor());
 
 			// Si le mouvement est valide, on le retourne
 			if (move.checkValidity())
@@ -136,22 +122,6 @@ abstract public class Piece {
 	// =========================================================================
 	// GETTERS & SETTERS
 	// =========================================================================
-
-	protected void setX(int x) {
-		this.x = x;
-	}
-
-	protected int getX() {
-		return x;
-	}
-
-	protected void setY(int y) {
-		this.y = y;
-	}
-
-	protected int getY() {
-		return y;
-	}
 
 	public void setMoved(boolean moved) {
 		this.moved = moved;
@@ -192,14 +162,6 @@ abstract public class Piece {
 
 	protected int getEnemy() {
 		return enemy;
-	}
-
-	protected void setValPos(int[][] valPos) {
-		this.valPos = valPos;
-	}
-
-	protected int[][] getValPos() {
-		return valPos;
 	}
 
 }
