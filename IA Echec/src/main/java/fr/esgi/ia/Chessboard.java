@@ -6,14 +6,17 @@ import java.util.List;
 /**
  * Cette classe represente l'échiquier.
  * 
- * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille carrée de 8 cases de côté, soit 64
- * cases en tout, en alternance sombres (appelées noires) et claires (appelées blanches). Un échiquier est
- * intégré à la surface supérieure des tables d'échecs. Dans une partie d'échecs, on dispose l'échiquier de
- * façon à ce que, pour chacun des adversaires, la case du coin gauche (le plus proche) de l'échiquier soit
- * noire. De plus, mais ce n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les Blancs
- * placent leur pèces sur la rangée 1, leurs pions sur la rangée 2, tandis que Noirs disposent leurs pièces
- * sur la rangée 8, et leurs pions sur la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés
- * en bas, les Noirs en haut.
+ * L'échiquier est le tablier ou plateau du jeu d'échecs. C'est une grille
+ * carrée de 8 cases de côté, soit 64 cases en tout, en alternance sombres
+ * (appelées noires) et claires (appelées blanches). Un échiquier est intégré à
+ * la surface supérieure des tables d'échecs. Dans une partie d'échecs, on
+ * dispose l'échiquier de façon à ce que, pour chacun des adversaires, la case
+ * du coin gauche (le plus proche) de l'échiquier soit noire. De plus, mais ce
+ * n'est pas une obligation, si l'échiquier est doté d'un repère cartésien, les
+ * Blancs placent leur pèces sur la rangée 1, leurs pions sur la rangée 2,
+ * tandis que Noirs disposent leurs pièces sur la rangée 8, et leurs pions sur
+ * la rangée 7. Dans les diagrammes, les Blancs sont toujours représentés en
+ * bas, les Noirs en haut.
  * 
  * @author Cédric TESNIERE
  */
@@ -69,11 +72,11 @@ public class Chessboard implements Cloneable {
 
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++)
-				if (chessboard[x][y] != null)
-					if (chessboard[x][y].isColor()) {
-						whites.add(chessboard[x][y]);
+				if (chessboard[y][x] != null) // chessboard vide
+					if (chessboard[y][x].isColor()) {
+						whites.add(chessboard[y][x]);
 					} else {
-						blacks.add(chessboard[x][y]);
+						blacks.add(chessboard[y][x]);
 					}
 		}
 	}
@@ -160,7 +163,6 @@ public class Chessboard implements Cloneable {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			return null;
 		}
-		
 	}
 
 	/**
@@ -215,120 +217,71 @@ public class Chessboard implements Cloneable {
 			String _knight, String _tower, String _pawn) {
 
 		String[] listLocation;
+		int y, x;
 
 		// Traitement pour le roi
 		if (king != null) {
 			listLocation = king.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionKing(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Roi(color);
+			}
 		}
 
 		// Traitement pour la reine
 		if (queen != null) {
 			listLocation = queen.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionQueen(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Reine(color);
+			}
 		}
 
 		// Traitement pour le fou
 		if (crazy != null) {
 			listLocation = crazy.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionCrazy(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Fou(color);
+			}
 		}
 
 		// Traitement pour le cavalier
 		if (_knight != null) {
 			listLocation = _knight.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionKnight(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Chevalier(color);
+			}
 		}
 
 		// Traitement pour la tour
 		if (_tower != null) {
 			listLocation = _tower.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionTower(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Tour(color);
+			}
 		}
 
 		// Traitement pour le pion
 		if (_pawn != null) {
 			listLocation = _pawn.split(":");
-			for (int i = 0; i < listLocation.length; i++)
-				setPositionPawn(listLocation[i], color);
+			for (int i = 0; i < listLocation.length; i++) {
+				y = Helper.getYfromString(listLocation[i]);
+				x = Helper.getXfromString(listLocation[i]);
+				chessboard[y][x] = new Pion(color);
+			}
 		}
 	}
 
-	/**
-	 * Définie l'emplacement de la piece roi
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionKing(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Roi(color);
-	}
 
-	/**
-	 * Définie l'emplacement de la piece reine
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionQueen(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Reine(color);
-	}
 
-	/**
-	 * Définie l'emplacement de la piece tour
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionTower(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Tour(color);
-	}
-
-	/**
-	 * Définie l'emplacement de la piece chevalier
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionKnight(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Chevalier(color);
-	}
-
-	/**
-	 * Définie l'emplacement de la piece fou
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionCrazy(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Fou(color);
-	}
-
-	/**
-	 * Définie l'emplacement de la piece pion
-	 * 
-	 * @param location Emplacement sur l'echiquier
-	 * @param color La couleur de la piece
-	 */
-	public void setPositionPawn(String location, boolean color) {
-		int y = Helper.getYfromString(location);
-		int x = Helper.getXfromString(location);
-		chessboard[y][x] = new Pion(color);
 	}
 
 	// =========================================================================
