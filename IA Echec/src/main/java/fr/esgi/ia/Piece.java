@@ -18,11 +18,6 @@ abstract public class Piece {
 	 */
 	private int value;
 
-	/**
-	 * Nom de la piece
-	 */
-	private String name;
-
 	private int y, x, enemy;
 
 	private boolean color, inDanger, moved;
@@ -40,7 +35,6 @@ abstract public class Piece {
 		setInDanger(false); // No one is in danger at the start
 		setMoved(false);
 		setEnemy(0);
-		setName(this.getClass().getSimpleName());
 	}
 
 	public Piece(boolean color, int value) {
@@ -206,14 +200,6 @@ abstract public class Piece {
 
 	protected int[][] getValPos() {
 		return valPos;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }
