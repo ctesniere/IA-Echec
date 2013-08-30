@@ -25,8 +25,8 @@ public class Chevalier extends Piece {
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Chevalier(boolean color) {
-		super(color, 300);
+	public Chevalier(int id, boolean color) {
+		super(id, color, 300);
 	}
 
 	// =========================================================================
@@ -42,7 +42,7 @@ public class Chevalier extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Chevalier myClone = new Chevalier(isColor());
+		Chevalier myClone = new Chevalier(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());

@@ -56,7 +56,7 @@ public class ChessboardValue {
 		}
 
 		// Trouvez et sauvegarder la valeur de l'échiquier
-		value = chessboardValue(color);
+		value = chessboardValueForColor(color); // INFO value : 160
 	}
 
 	// =========================================================================
@@ -140,7 +140,7 @@ public class ChessboardValue {
 	 * @param color La couleur du joueur
 	 * @return La valeur de l'echiquier
 	 */
-	public int chessboardValue(boolean color) {
+	public int chessboardValueForColor(boolean color) {
 
 		int val = 0;
 		int temp;
@@ -158,22 +158,22 @@ public class ChessboardValue {
 
 						if (piece.isMoved()) {
 							// Note normale
-							temp = piece.getValue() + piece.getPositionValue();
+							temp = piece.getValue();
 							val = val + temp;
 						} else {
 							// Si Tour ou Roi
 							if (piece.getClass().getSimpleName().equals(TypePiece.KING) || piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
 								// Note normale
-								temp = piece.getValue() + piece.getPositionValue();
+								temp = piece.getValue();
 								val = val + temp;
 							} else { // Si une pièce est un autre
 								if (piece.isColor() == Algorithm.isBlack()) { // Si la pièce est noire
 									// D'un avantage pour le blanc 10
-									temp = piece.getValue() + piece.getPositionValue();
+									temp = piece.getValue();
 									val = val + temp + 10;
 								} else {
 									// Par un bord noir avec 10
-									temp = piece.getValue() + piece.getPositionValue();
+									temp = piece.getValue();
 									val = (val + temp) - 10;
 								}
 							}
@@ -190,7 +190,7 @@ public class ChessboardValue {
 					// Si la pièce n'est pas ma couleur
 					if (piece.isColor() != color) {
 						// Note normale
-						temp = piece.getValue() + piece.getPositionValue();
+						temp = piece.getValue();
 						val = val + temp;
 					}
 				}

@@ -28,8 +28,8 @@ public class Fou extends Piece {
 	 * 
 	 * @param color
 	 */
-	public Fou(boolean color) {
-		super(color, 325);
+	public Fou(int id, boolean color) {
+		super(id, color, 325);
 	}
 
 	// =========================================================================
@@ -42,7 +42,7 @@ public class Fou extends Piece {
 
 	@Override
 	public Object clone() {
-		Fou myClone = new Fou(isColor());
+		Fou myClone = new Fou(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
