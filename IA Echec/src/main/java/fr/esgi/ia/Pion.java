@@ -52,8 +52,6 @@ public class Pion extends Piece {
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
-		myClone.setPosition(getX(), getY());
-		myClone.setValPos(getValPos());
 		return myClone;
 	}
 
@@ -65,9 +63,12 @@ public class Pion extends Piece {
 	 */
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
+		
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
+		int toX = getX, toY = getY;
 
-		int toX = getX();
-		int toY = getY();
 		int nbCaseLimite = 1;
 		ArrayList<Move> moves = new ArrayList<Move>();
 		Move move = checkThis(toX, toY, chessboard);
@@ -81,7 +82,7 @@ public class Pion extends Piece {
 
 			// Deuxieme deplacement si le pion est toujours à sa position
 			// initial
-			if ((!Helper.isColorWhite(isColor()) && getY() == 6) || (Helper.isColorWhite(isColor()) && getY() == 1)) {
+			if ((!Helper.isColorWhite(isColor()) && getY == 6) || (Helper.isColorWhite(isColor()) && getY == 1)) {
 				nbCaseLimite++;
 				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard);
@@ -99,8 +100,8 @@ public class Pion extends Piece {
 		for (int lenght = -1; lenght < 2; lenght++) {
 			for (int nbCase = 1; nbCase <= nbCaseLimite; nbCase++) {
 				if (lenght != 0) {
-					toX = getX() + lenght; // -1 ou 1
-					toY = getY() + (directionMovementY() * nbCase); // 1 ou 2
+					toX = getX + lenght; // -1 ou 1
+					toY = getY + (directionMovementY() * nbCase); // 1 ou 2
 
 					move = checkThis(toX, toY, chessboard);
 
@@ -117,12 +118,16 @@ public class Pion extends Piece {
 
 	@Override
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
+		
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
 
 		Piece destination = chessboard.getPiece(toX, toY);
 
 		// Si c'est une pièce enemie ou si la case est vide
 		if (destination == null) {
-			Move move = new Move(getX(), getY(), toX, toY, isColor());
+			Move move = new Move(getX, getY, toX, toY, isColor());
 
 			// Si le mouvement est valide, on le retourne
 			if (move.checkValidity())

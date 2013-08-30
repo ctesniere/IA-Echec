@@ -4,6 +4,7 @@ import org.junit.Test;
 import fr.esgi.ia.Algorithm;
 import fr.esgi.ia.Chessboard;
 import fr.esgi.ia.IA;
+import fr.esgi.ia.Piece;
 
 public class TestIAController {
 
@@ -16,6 +17,11 @@ public class TestIAController {
 		chessboard.insertPieceChessboard(Algorithm.isWhite(), "d1", "e1", "c1:f1", "b1:g1",
 				"a1:h1", "a2:b2:c2:d2:e2:f2:g2:h2");
 
+		Piece piece = chessboard.getPiece(0, 1);
+		String positionPiece = chessboard.getPositionPiece(piece);
+		
+		Assert.assertEquals(positionPiece, "a2");
+		
 		IA ia = new IA();
 		System.out.println(ia.play(Algorithm.isWhite(), 2, chessboard));
 		Assert.assertNotEquals(ia.play(Algorithm.isWhite(), 2, chessboard),
