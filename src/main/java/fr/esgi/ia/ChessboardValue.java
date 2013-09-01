@@ -154,9 +154,7 @@ public class ChessboardValue {
 					Piece piece = getActualChessboardClone().getPiece(x, y);
 
 					// Si la pièce n'est pas en danger et il est ma couleur
-					if ((!piece.isInDanger()) && (piece.isColor() == color)) { // et
-																				// déplacé
-
+					if ((!piece.isInDanger()) && (piece.isColor() == color)) {
 						if (piece.isMoved()) {
 							// Note normale
 							temp = piece.getValue();
@@ -169,11 +167,7 @@ public class ChessboardValue {
 								temp = piece.getValue();
 								val = val + temp;
 							} else { // Si une pièce est un autre
-								if (piece.isColor() == Algorithm.isBlack()) { // Si
-																				// la
-																				// pièce
-																				// est
-																				// noire
+								if (piece.isColor() == Algorithm.isBlack()) {
 									// D'un avantage pour le blanc 10
 									temp = piece.getValue();
 									val = val + temp + 10;
