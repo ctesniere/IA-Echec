@@ -88,7 +88,7 @@ public class Pion extends Piece {
 				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard);
 
-				if (move == null) {
+				if (move != null) {
 					moves.add(move);
 				}
 
