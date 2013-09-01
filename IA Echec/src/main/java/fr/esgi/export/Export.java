@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.esgi.ia.Chessboard;
+import fr.esgi.ia.Helper;
+import fr.esgi.ia.Piece;
 
 public class Export {
 
@@ -13,16 +15,28 @@ public class Export {
 
 	private List<PieceEx> listPiece = new ArrayList<PieceEx>();
 
-	private PieceEx chooseMovePiece;
-
 	private PieceEx bestMovePiece;
 
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Export(Chessboard _chessboard) {
-		super();
+	public Export(Chessboard chessboard) {
+
+		Piece piece;
+		PieceEx pieceEx;
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				piece = chessboard.getPiece(x, y);
+				if (piece != null) {
+					pieceEx = new PieceEx();
+					pieceEx.setLocation(Helper.getStringFromPosition(x, y));
+					pieceEx.setName(piece.getClass().getSimpleName());
+					// pieceEx.setColor(piece.getColor()); // Probleme
+					listPiece.add(pieceEx);
+				}
+			}
+		}
 	}
 
 	// =========================================================================
@@ -43,14 +57,6 @@ public class Export {
 
 	public void setListPiece(List<PieceEx> listPiece) {
 		this.listPiece = listPiece;
-	}
-
-	public PieceEx getChooseMovePiece() {
-		return chooseMovePiece;
-	}
-
-	public void setChooseMovePiece(PieceEx chooseMovePiece) {
-		this.chooseMovePiece = chooseMovePiece;
 	}
 
 	public PieceEx getBestMovePiece() {

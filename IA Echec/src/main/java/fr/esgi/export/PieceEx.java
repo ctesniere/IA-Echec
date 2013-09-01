@@ -1,7 +1,5 @@
 package fr.esgi.export;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class PieceEx {
 
@@ -9,7 +7,7 @@ public class PieceEx {
 	// ATTRIBUTES
 	// =========================================================================
 
-	private List<String> location = new ArrayList<String>();
+	private String location;
 
 	private String color;
 
@@ -35,11 +33,11 @@ public class PieceEx {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public List<String> getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocation(List<String> location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 
