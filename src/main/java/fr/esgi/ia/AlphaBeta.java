@@ -56,6 +56,17 @@ public class AlphaBeta extends Algorithm {
 		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
 				.generateAllPossibleMoves(Helper.isColorWhite(color));
 
+		// INFO Ce bloc de code existe a titre d'information pour le debug
+		// Affichage des mouvements possible avant de continuer
+		for (Move thisMove : allPossibleMove) {
+			Piece piece = chessValue.getActualChessboardClone().getPiece(thisMove.getStartX(),
+					thisMove.getStartY());
+			System.out.println("Piece : " + piece.getClass().getSimpleName() + "("
+					+ thisMove.getStartX() + ":" + thisMove.getStartY() + ") vers " + "("
+					+ thisMove.getEndX() + ":" + thisMove.getEndY() + ")");
+		}
+		System.out.println("-----");
+
 		for (Move thisMove : allPossibleMove) {
 
 			// Nouvelle valeur de l'échiquier qui ont mon fils (déplacé) et mon
@@ -64,7 +75,7 @@ public class AlphaBeta extends Algorithm {
 					thisMove, chessValue.getMoves());
 
 			if (thisSon.isLastMoveValid()) {
-				if (color) {
+				if (Helper.isColorWhite(color)) {
 					alpha = alpha.VSmax(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
 				} else {
 					beta = beta.VSmin(alphaBetaAlg(thisSon, alpha, beta, !(color), counter));
