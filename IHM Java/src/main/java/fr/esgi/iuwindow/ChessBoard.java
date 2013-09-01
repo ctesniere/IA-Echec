@@ -17,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import fr.esgi.service.Connexion;
-
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
 	JLayeredPane layeredPane;
@@ -30,15 +28,11 @@ public class ChessBoard extends JPanel implements MouseListener,
 	public ChessBoard() {
 		Dimension boardSize = new Dimension(400, 400);
 
-		// Use a Layered Pane for this this application
-
 		layeredPane = new JLayeredPane();
 		layeredPane.setPreferredSize(boardSize);
 		layeredPane.addMouseListener(this);
 		layeredPane.addMouseMotionListener(this);
 		add(layeredPane);
-
-		// Add a chess board to the Layered Pane
 
 		chessBoard = new JPanel();
 		chessBoard.setLayout(new GridLayout(8, 8));
@@ -46,20 +40,16 @@ public class ChessBoard extends JPanel implements MouseListener,
 		chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
 		layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
 
-		// Build the Chess Board squares
-
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				JPanel square = new JPanel(new BorderLayout());
 				square.setBackground((i + j) % 2 == 0 ? Color.white
-						: Color.black);
+						: Color.gray);
 				chessBoard.add(square);
 			}
 		}
 		
-		// Add a few pieces to the board
-
-		ImageIcon tour = new ImageIcon(getClass().getResource("/tour.png")); // add an image here
+		ImageIcon tour = new ImageIcon(getClass().getResource("/black_tour.png"));
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
 		panel.add(piece);
@@ -68,17 +58,17 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(7);
 		panel.add(piece);
 		
-		ImageIcon reine = new ImageIcon(getClass().getResource("/reine.png"));
+		ImageIcon reine = new ImageIcon(getClass().getResource("/black_reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
 		panel.add(piece);
 		
-		ImageIcon roi = new ImageIcon(getClass().getResource("/roi.png"));
+		ImageIcon roi = new ImageIcon(getClass().getResource("/black_roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
 		panel.add(piece);
 		
-		ImageIcon cavalier = new ImageIcon(getClass().getResource("/cavalier.png"));
+		ImageIcon cavalier = new ImageIcon(getClass().getResource("/black_cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
 		panel.add(piece);
@@ -87,7 +77,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(6);
 		panel.add(piece);
 		
-		ImageIcon fou = new ImageIcon(getClass().getResource("/fou.png"));
+		ImageIcon fou = new ImageIcon(getClass().getResource("/black_fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
 		panel.add(piece);
@@ -96,15 +86,13 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(5);
 		panel.add(piece);
 		
-		ImageIcon pion = new ImageIcon(getClass().getResource("/pion.png"));
+		ImageIcon pion = new ImageIcon(getClass().getResource("/black_pion.png"));
 		for(int i=8; i< 16; i++)
 		{
 			piece = new JLabel(pion);
 			panel = (JPanel) chessBoard.getComponent(i);
 			panel.add(piece);
-		}
-		
-		//this.connexionWS();
+		}		
 	}
 	
 	/**
