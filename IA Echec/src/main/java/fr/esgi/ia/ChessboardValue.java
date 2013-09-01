@@ -47,8 +47,7 @@ public class ChessboardValue {
 			lastMove = move;
 
 			// Let's copy the moves
-			// TODO: Clone?
-			if (earlyMoves != null) {
+			if (earlyMoves != null && earlyMoves.size()>0) {
 				for (Move thisMove : earlyMoves)
 					moves.add(thisMove);
 			}
@@ -57,7 +56,7 @@ public class ChessboardValue {
 		}
 
 		// Trouvez et sauvegarder la valeur de l'échiquier
-		value = chessboardValueForColor(color); // INFO value : 160
+		value = chessboardValueForColor(color);
 	}
 
 	// =========================================================================
