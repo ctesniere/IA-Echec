@@ -144,7 +144,9 @@ public class Chessboard implements Cloneable {
 		for (Move move : moves) {
 			int y = (move.getEndY());
 			int x = (move.getEndX());
-			System.out.println(x + ":" + y);
+			System.out.println("Coordonnée Move " + piece.getClass().getSimpleName() + " "
+					+ Helper.getStringFromPosition(move.getStartX(), move.getStartY()) + " ("
+					+ Helper.getStringFromPosition(x, y) + ")");
 			Piece enemyPiece = chessboard[y][x];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.noMoreInDanger(); // I will no longer set it in
@@ -346,7 +348,7 @@ public class Chessboard implements Cloneable {
 				if (chessboard[y][x] != null) {
 					Piece pieceClone = (Piece) chessboard[y][x].clone();
 					chessboardClone.chessboard[y][x] = pieceClone;
-					if (pieceClone.isColor()) {
+					if (Helper.isColorWhite(pieceClone.isColor())) {
 						chessboardClone.whites.add(pieceClone);
 					} else {
 						chessboardClone.blacks.add(pieceClone);
