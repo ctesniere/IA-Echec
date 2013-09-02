@@ -24,6 +24,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 	JLabel chessPiece;
 	int xAdjustment;
 	int yAdjustment;
+	String movingPiece;
 
 	public ChessBoard() {
 		Dimension boardSize = new Dimension(400, 400);
@@ -52,38 +53,46 @@ public class ChessBoard extends JPanel implements MouseListener,
 		ImageIcon tour = new ImageIcon(getClass().getResource("/black_tour.png"));
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
+		chessBoard.getComponent(0).setName("Tour");
 		panel.add(piece);
 		
 		piece = new JLabel(tour);
 		panel = (JPanel) chessBoard.getComponent(7);
+		chessBoard.getComponent(7).setName("Tour");
 		panel.add(piece);
 		
 		ImageIcon reine = new ImageIcon(getClass().getResource("/black_reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
+		chessBoard.getComponent(4).setName("Reine");
 		panel.add(piece);
 		
 		ImageIcon roi = new ImageIcon(getClass().getResource("/black_roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
+		chessBoard.getComponent(3).setName("Roi");
 		panel.add(piece);
 		
 		ImageIcon cavalier = new ImageIcon(getClass().getResource("/black_cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
+		chessBoard.getComponent(1).setName("Cavalier");
 		panel.add(piece);
 		
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(6);
+		chessBoard.getComponent(6).setName("Cavalier");
 		panel.add(piece);
 		
 		ImageIcon fou = new ImageIcon(getClass().getResource("/black_fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
+		chessBoard.getComponent(2).setName("Fou");
 		panel.add(piece);
 		
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(5);
+		chessBoard.getComponent(5).setName("Fou");
 		panel.add(piece);
 		
 		ImageIcon pion = new ImageIcon(getClass().getResource("/black_pion.png"));
@@ -91,9 +100,12 @@ public class ChessBoard extends JPanel implements MouseListener,
 		{
 			piece = new JLabel(pion);
 			panel = (JPanel) chessBoard.getComponent(i);
+			chessBoard.getComponent(i).setName("pion");
 			panel.add(piece);
-		}		
+		}
 	}
+	
+	
 	
 	/**
 	 * Permet d'appeler le WebService et de placer les pions
@@ -202,7 +214,8 @@ public class ChessBoard extends JPanel implements MouseListener,
 	public void mousePressed(MouseEvent e) {
 		chessPiece = null;
 		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
-
+		movingPiece = c.getParent().getName();
+		c.getParent().setName(null);
 		if (c instanceof JPanel)
 			return;
 
@@ -269,10 +282,13 @@ public class ChessBoard extends JPanel implements MouseListener,
 			Container parent = c.getParent();
 			parent.remove(0);
 			parent.add(chessPiece);
+			parent.setName(movingPiece);
 			parent.validate();
+			
 		} else {
 			Container parent = (Container) c;
 			parent.add(chessPiece);
+			parent.setName(movingPiece);
 			parent.validate();
 		}
 	}
