@@ -47,7 +47,7 @@ public class ChessboardValue {
 			lastMove = move;
 
 			// Let's copy the moves
-			if (earlyMoves != null && earlyMoves.size()>0) {
+			if (earlyMoves != null && earlyMoves.size() > 0) {
 				for (Move thisMove : earlyMoves)
 					moves.add(thisMove);
 			}
@@ -83,7 +83,7 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
 			if (getValue() < elseVChessboard.getValue())
 				return this;
 			else
@@ -92,7 +92,7 @@ public class ChessboardValue {
 		if (lastMove == null)
 			return elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (elseVChessboard.getLastMove() == null)
 			return this;
 
 		if (getValue() < elseVChessboard.getValue())
@@ -109,7 +109,7 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
 			if (getValue() > elseVChessboard.getValue())
 				return this;
 			else
@@ -118,7 +118,7 @@ public class ChessboardValue {
 		if (lastMove == null)
 			return elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (elseVChessboard.getLastMove() == null)
 			return this;
 
 		if (getValue() > elseVChessboard.getValue())
@@ -149,7 +149,7 @@ public class ChessboardValue {
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
 
-				// Si la case n'est pas un blanc
+				// Si la case n'est pas un vide
 				if (getActualChessboardClone().getPiece(x, y) != null) {
 					Piece piece = getActualChessboardClone().getPiece(x, y);
 
@@ -182,7 +182,7 @@ public class ChessboardValue {
 
 					// Si la pièce est en danger et ce n'est pas ma couleur
 					if ((piece.isInDanger()) && (piece.isColor() != color)) {
-						// Dai un vantaggio del 15% del valore del pezzo
+						// Avantage de 15% de la valeur de la pièce
 						temp = (piece.getValue() * 15) / 100;
 						val = val - temp;
 					}

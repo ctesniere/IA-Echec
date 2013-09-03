@@ -53,6 +53,7 @@ public class IA {
 			} else {
 				getGlobalChessboard().doMove(myMove);
 				output += myMove.moveOutputString() + " ";
+				break;
 			}
 		}
 		return output;
