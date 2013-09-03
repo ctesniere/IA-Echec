@@ -50,49 +50,57 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 		
+		initPieces();
+		
+	}
+	
+	public void initPieces() {
+		/*
+		 * Placing black pieces on the chessboard
+		 */
 		ImageIcon tour = new ImageIcon(getClass().getResource("/black_tour.png"));
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
-		chessBoard.getComponent(0).setName("Tour");
+		chessBoard.getComponent(0).setName("black_tour");
 		panel.add(piece);
 		
 		piece = new JLabel(tour);
 		panel = (JPanel) chessBoard.getComponent(7);
-		chessBoard.getComponent(7).setName("Tour");
+		chessBoard.getComponent(7).setName("black_tour");
 		panel.add(piece);
 		
 		ImageIcon reine = new ImageIcon(getClass().getResource("/black_reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
-		chessBoard.getComponent(4).setName("Reine");
+		chessBoard.getComponent(4).setName("black_reine");
 		panel.add(piece);
 		
 		ImageIcon roi = new ImageIcon(getClass().getResource("/black_roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
-		chessBoard.getComponent(3).setName("Roi");
+		chessBoard.getComponent(3).setName("black_roi");
 		panel.add(piece);
 		
 		ImageIcon cavalier = new ImageIcon(getClass().getResource("/black_cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
-		chessBoard.getComponent(1).setName("Cavalier");
+		chessBoard.getComponent(1).setName("black_cavalier");
 		panel.add(piece);
 		
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(6);
-		chessBoard.getComponent(6).setName("Cavalier");
+		chessBoard.getComponent(6).setName("black_cavalier");
 		panel.add(piece);
 		
 		ImageIcon fou = new ImageIcon(getClass().getResource("/black_fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
-		chessBoard.getComponent(2).setName("Fou");
+		chessBoard.getComponent(2).setName("black_fou");
 		panel.add(piece);
 		
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(5);
-		chessBoard.getComponent(5).setName("Fou");
+		chessBoard.getComponent(5).setName("black_fou");
 		panel.add(piece);
 		
 		ImageIcon pion = new ImageIcon(getClass().getResource("/black_pion.png"));
@@ -100,11 +108,71 @@ public class ChessBoard extends JPanel implements MouseListener,
 		{
 			piece = new JLabel(pion);
 			panel = (JPanel) chessBoard.getComponent(i);
-			chessBoard.getComponent(i).setName("pion");
+			chessBoard.getComponent(i).setName("black_pion");
 			panel.add(piece);
 		}
-	}
+		
+		/*
+		 * Placing black pieces on the chessboard
+		 */
+		tour = new ImageIcon(getClass().getResource("/white_tour.png"));
+		piece = new JLabel(tour);
+		panel = (JPanel) chessBoard.getComponent(56);
+		chessBoard.getComponent(56).setName("white_tour");
+		panel.add(piece);
+		
+		piece = new JLabel(tour);
+		panel = (JPanel) chessBoard.getComponent(63);
+		chessBoard.getComponent(63).setName("white_tour");
+		panel.add(piece);
+		
+		reine = new ImageIcon(getClass().getResource("/white_reine.png"));
+		piece = new JLabel(reine);
+		panel = (JPanel) chessBoard.getComponent(60);
+		chessBoard.getComponent(60).setName("white_reine");
+		panel.add(piece);
+		
+		roi = new ImageIcon(getClass().getResource("/white_roi.png"));
+		piece = new JLabel(roi);
+		panel = (JPanel) chessBoard.getComponent(59);
+		chessBoard.getComponent(59).setName("black_roi");
+		panel.add(piece);
+		
+		cavalier = new ImageIcon(getClass().getResource("/white_cavalier.png"));
+		piece = new JLabel(cavalier);
+		panel = (JPanel) chessBoard.getComponent(57);
+		chessBoard.getComponent(57).setName("white_cavalier");
+		panel.add(piece);
+		
+		piece = new JLabel(cavalier);
+		panel = (JPanel) chessBoard.getComponent(62);
+		chessBoard.getComponent(62).setName("white_cavalier");
+		panel.add(piece);
+		
+		fou = new ImageIcon(getClass().getResource("/white_fou.png"));
+		piece = new JLabel(fou);
+		panel = (JPanel) chessBoard.getComponent(58);
+		chessBoard.getComponent(58).setName("white_fou");
+		panel.add(piece);
+		
+		piece = new JLabel(fou);
+		panel = (JPanel) chessBoard.getComponent(61);
+		chessBoard.getComponent(61).setName("white_fou");
+		panel.add(piece);
+		
+		pion = new ImageIcon(getClass().getResource("/white_pion.png"));
+		for(int i=48; i< 56; i++)
+		{
+			piece = new JLabel(pion);
+			panel = (JPanel) chessBoard.getComponent(i);
+			chessBoard.getComponent(i).setName("white_pion");
+			panel.add(piece);
+		}
 	
+		// debug purpose only
+		for(int i=0;i<64; i++)
+			System.out.println(chessBoard.getComponent(i).getName());
+	}
 	
 	
 	/**
