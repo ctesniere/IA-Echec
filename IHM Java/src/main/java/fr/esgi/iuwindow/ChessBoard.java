@@ -194,7 +194,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		List<PieceEx> piece = export.getListPiece();
 		
-		for(PieceEx res : piece){
+		for(PieceEx res : piece) {
 			
 			String pos = res.getLocation();
 			int location = 0;
@@ -216,10 +216,10 @@ public class ChessBoard extends JPanel implements MouseListener,
 			if ((pos.charAt(1) == '7')) location += 6;
 			if ((pos.charAt(1) == '8')) location += 7;
 			
-			 ImageIcon somePiece = new ImageIcon(getClass().getResource("/"+res.getColor()+"_"+res.getName()+".png"));
-			 JLabel myPiece = new JLabel(somePiece);
-			 JPanel panel = (JPanel) chessBoard.getComponent(location); // à modifier selon le format renvoyé par getLocation()
-			 panel.add(myPiece);
+			ImageIcon somePiece = new ImageIcon(getClass().getResource("/"+res.getColor()+"_"+res.getName()+".png"));
+			JLabel myPiece = new JLabel(somePiece);
+			JPanel panel = (JPanel) chessBoard.getComponent(location); // à modifier selon le format renvoyé par getLocation()
+			panel.add(myPiece);
         }
 	}
 	
@@ -229,12 +229,10 @@ public class ChessBoard extends JPanel implements MouseListener,
 	public List<PieceEx> reponse() {
 		List<PieceEx> listPiece = new ArrayList<PieceEx>();
 		String pieceName;
-		for(int i=0; i<64; i++) 
-		{
+		for(int i=0; i<64; i++) {
 			pieceName = chessBoard.getComponent(i).getName();
 			
-			if(null != pieceName)
-			{
+			if(null != pieceName) {
 				int columnPosition = i%8;
 				PieceEx piece = new PieceEx();
 				
