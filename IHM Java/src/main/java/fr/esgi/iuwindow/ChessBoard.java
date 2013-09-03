@@ -186,12 +186,9 @@ public class ChessBoard extends JPanel implements MouseListener,
 	}
 
 		
-	public void connexion() throws JsonParseException, JsonMappingException, IOException
-	{
+	public void connexion() throws JsonParseException, JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.Connexion();
-//		System.out.println(s);
-		
 		ObjectMapper mapper = new ObjectMapper();
 		Export export = mapper.readValue(s, Export.class);
 		
@@ -209,7 +206,6 @@ public class ChessBoard extends JPanel implements MouseListener,
 			if ((pos.charAt(0) == 'f')) location = 40;
 			if ((pos.charAt(0) == 'g')) location = 48;
 			if ((pos.charAt(0) == 'h')) location = 56;
-
 		
 			if ((pos.charAt(1) == '1')) location += 0;
 			if ((pos.charAt(1) == '2')) location += 1;
@@ -230,156 +226,44 @@ public class ChessBoard extends JPanel implements MouseListener,
 	/**
 	 * Permet de récupèrer la liste des pièces et de le renvoyer a l'ia
 	 */
-	public List<PieceEx> reponse()
-	{
+	public List<PieceEx> reponse() {
 		List<PieceEx> listPiece = new ArrayList<PieceEx>();
-
+		String pieceName;
 		for(int i=0; i<64; i++) 
 		{
-			String n = chessBoard.getComponent(i).getName();
-
-			if(n != null)
+			pieceName = chessBoard.getComponent(i).getName();
+			
+			if(null != pieceName)
 			{
+				int columnPosition = i%8;
 				PieceEx piece = new PieceEx();
 				
-				/** Localisation **/
-				String location = null;
-				if(i>=0 && i<=7) location = "a";
-				if(i>=8 && i<=15) location = "b";
-				if(i>=16 && i<=23) location = "c";
-				if(i>=24 && i<=31) location = "d";
-				if(i>=32 && i<=39) location = "e";
-				if(i>=40 && i<=47) location = "f";
-				if(i>=48 && i<=55) location = "g";
-				if(i>=56 && i<=63) location = "h";
+				StringBuilder location = new StringBuilder();
+				if(i>=0 && i<=7) location.append("a");
+				if(i>=8 && i<=15) location.append("b");
+				if(i>=16 && i<=23) location.append("c");
+				if(i>=24 && i<=31) location.append("d");
+				if(i>=32 && i<=39) location.append("e");
+				if(i>=40 && i<=47) location.append("f");
+				if(i>=48 && i<=55) location.append("g");
+				if(i>=56 && i<=63) location.append("h");				
+							
+				location.append(columnPosition);
 				
-				int pos = i%8;
-				String pl = Integer.toString(pos);
-				location += pl;
-				/** **/ 
 
-				/** couleur **/
-				String color = "white";
-				boolean c = chessBoard.getComponent(i).getName().startsWith("black_");
-				if(c == true) color = "black";
-				/** **/
+				// Determines the color of the piece
+				String color = chessBoard.getComponent(i).getName().startsWith("black_") ? "black" : "white";				
 				
-				/** nom **/
-				String nom = chessBoard.getComponent(i).getName();
-				String name = nom.substring(6);
-				/** **/
 				piece.setColor(color);
-				piece.setLocation(location);
-				piece.setName(name);
+				piece.setLocation(location.toString());
+				piece.setName(chessBoard.getComponent(i).getName().substring(6));
 				
 				listPiece.add(piece);
 			}
 		}
 		return listPiece;
 	}
-	
-	
-	/**
-	 * Permet d'appeler le WebService et de placer les pions
-	 * 
-	 * @author Valérie MALET
-	 */
-//	public void connexionWS()
-//	{
-//		
-//		int i = chessBoard.getComponentCount();
-//		for (int j = 0; j < i; j++) {
-//		
-//			
-//		}
-//
-//		//Component[] c = chessBoard.getComponents();
-//		//chessBoard.get
-//		
-//		
-//		//connexion c = new connexion();
-//		//String s = c.Connexion();
-//		//System.out.println(s);
-//		Connexion c = new Connexion();
-//		String s = c.Connexion();
-//		System.out.println(s);
-//		
-//		String jsonString = "{ [Black,roi;e1,reine;f4,pion;f5], [White,roi;e1,reine;f4,pion;f5]}";
-//		if(s != null)
-//		{
-//			
-//			String[] splitBlackWhite = jsonString.split("],");
-//			String blackPieces = splitBlackWhite[0].replace('{', ' ').replace('[', ' ').trim();
-//			String whitePieces = splitBlackWhite[1].replace('}', ' ').replace(']', ' ').trim();
-//			
-//						
-//			String[] blackPositions = blackPieces.split(",");
-//			
-//			// tu as toutes les positions des pièces dans les tableaux blackPositions et whitePositions au format
-//			// roi;e1
-//			// reine;f4
-//			// pion;f5
-//				
-//			
-//			/** Traitement pièces Noires **/
-//			//String ChaineBlack = stri.substring(bl, wh);
-//			//ChaineBlack = ChaineBlack.replace("Black", "");
-//			
-//	        String[] result = ChaineBlack.split(",");
-//
-//	        for(String res : result){
-//	            System.out.println(res);
-//	            
-//	            //String piece = res.substring(0, res.lastIndexOf(";"));
-//	            //String extension = res.substring(res.indexOf(";"));
-//	            //String extension = res.substring(res.lastIndexOf(";"));
-//	            //System.out.println(res.indexOf("roi"));
-//	            //System.out.println(extension);
-//	        }
-//			
-//			
-//			int roi = ChaineBlack.indexOf("Roi");
-//			int tour = ChaineBlack.indexOf("Tour");
-//			int fou = ChaineBlack.indexOf("Fou");
-//			int pion = ChaineBlack.indexOf("Pion");			
-//			
-//			/** Traitement pièces Blanches **/ 
-//			String ChaineWhite = stri.substring(wh);
-//			
-//			
-//			//System.out.println(ChaineBlack);
-//			//System.out.println(ChaineWhite);
-//			
-//			
-//			
-//			
-//			/*if ((_location.charAt(0) == 'a')) return 0;
-//			if ((_location.charAt(0) == 'b')) return 1;
-//			if ((_location.charAt(0) == 'c')) return 2;
-//			if ((_location.charAt(0) == 'd')) return 3;
-//			if ((_location.charAt(0) == 'e')) return 4;
-//			if ((_location.charAt(0) == 'f')) return 5;
-//			if ((_location.charAt(0) == 'g')) return 6;
-//			if ((_location.charAt(0) == 'h')) return 7;
-//
-//		
-//			if ((_location.charAt(1) == '1')) return 0;
-//			if ((_location.charAt(1) == '2')) return 1;
-//			if ((_location.charAt(1) == '3')) return 2;
-//			if ((_location.charAt(1) == '4')) return 3;
-//			if ((_location.charAt(1) == '5')) return 4;
-//			if ((_location.charAt(1) == '6')) return 5;
-//			if ((_location.charAt(1) == '7')) return 6;
-//			if ((_location.charAt(1) == '8')) return 7;*/
-//			
-//		}
-//		else 
-//		{
-//			
-//		}
-//	}
-	
-	
+
 	/*
 	 * * Add the selected chess piece to the dragging layer so it can be moved
 	 */
@@ -455,8 +339,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			parent.remove(0);
 			parent.add(chessPiece);
 			parent.setName(movingPiece);
-			parent.validate();
-			
+			parent.validate();			
 		} else {
 			Container parent = (Container) c;
 			parent.add(chessPiece);
