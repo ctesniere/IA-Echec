@@ -11,11 +11,22 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import fr.esgi.export.Export;
+import fr.esgi.export.PieceEx;
+import fr.esgi.service.Connexion;
 
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
@@ -172,6 +183,99 @@ public class ChessBoard extends JPanel implements MouseListener,
 		// debug purpose only
 		for(int i=0;i<64; i++)
 			System.out.println(chessBoard.getComponent(i).getName());
+	}
+
+		
+	public void connexion() throws JsonParseException, JsonMappingException, IOException
+	{
+		Connexion c = new Connexion();
+		String s = c.Connexion();
+//		System.out.println(s);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Export export = mapper.readValue(s, Export.class);
+		
+		List<PieceEx> piece = export.getListPiece();
+		
+		for(PieceEx res : piece){
+			
+			String pos = res.getLocation();
+			int location = 0;
+			if ((pos.charAt(0) == 'a')) location = 0;
+			if ((pos.charAt(0) == 'b')) location = 8;
+			if ((pos.charAt(0) == 'c')) location = 16;
+			if ((pos.charAt(0) == 'd')) location = 24;
+			if ((pos.charAt(0) == 'e')) location = 32;
+			if ((pos.charAt(0) == 'f')) location = 40;
+			if ((pos.charAt(0) == 'g')) location = 48;
+			if ((pos.charAt(0) == 'h')) location = 56;
+
+		
+			if ((pos.charAt(1) == '1')) location += 0;
+			if ((pos.charAt(1) == '2')) location += 1;
+			if ((pos.charAt(1) == '3')) location += 2;
+			if ((pos.charAt(1) == '4')) location += 3;
+			if ((pos.charAt(1) == '5')) location += 4;
+			if ((pos.charAt(1) == '6')) location += 5;
+			if ((pos.charAt(1) == '7')) location += 6;
+			if ((pos.charAt(1) == '8')) location += 7;
+			
+			 ImageIcon somePiece = new ImageIcon(getClass().getResource("/"+res.getColor()+"_"+res.getName()+".png"));
+			 JLabel myPiece = new JLabel(somePiece);
+			 JPanel panel = (JPanel) chessBoard.getComponent(location); // à modifier selon le format renvoyé par getLocation()
+			 panel.add(myPiece);
+        }
+	}
+	
+	/**
+	 * Permet de récupèrer la liste des pièces et de le renvoyer a l'ia
+	 */
+	public List<PieceEx> reponse()
+	{
+		List<PieceEx> listPiece = new ArrayList<PieceEx>();
+
+		for(int i=0; i<64; i++) 
+		{
+			String n = chessBoard.getComponent(i).getName();
+
+			if(n != null)
+			{
+				PieceEx piece = new PieceEx();
+				
+				/** Localisation **/
+				String location = null;
+				if(i>=0 && i<=7) location = "a";
+				if(i>=8 && i<=15) location = "b";
+				if(i>=16 && i<=23) location = "c";
+				if(i>=24 && i<=31) location = "d";
+				if(i>=32 && i<=39) location = "e";
+				if(i>=40 && i<=47) location = "f";
+				if(i>=48 && i<=55) location = "g";
+				if(i>=56 && i<=63) location = "h";
+				
+				int pos = i%8;
+				String pl = Integer.toString(pos);
+				location += pl;
+				/** **/ 
+
+				/** couleur **/
+				String color = "white";
+				boolean c = chessBoard.getComponent(i).getName().startsWith("black_");
+				if(c == true) color = "black";
+				/** **/
+				
+				/** nom **/
+				String nom = chessBoard.getComponent(i).getName();
+				String name = nom.substring(6);
+				/** **/
+				piece.setColor(color);
+				piece.setLocation(location);
+				piece.setName(name);
+				
+				listPiece.add(piece);
+			}
+		}
+		return listPiece;
 	}
 	
 	
