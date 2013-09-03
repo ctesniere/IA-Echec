@@ -83,7 +83,7 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
 			if (getValue() < elseVChessboard.getValue())
 				return this;
 			else
@@ -92,7 +92,7 @@ public class ChessboardValue {
 		if (lastMove == null)
 			return elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (elseVChessboard.getLastMove() == null)
 			return this;
 
 		if (getValue() < elseVChessboard.getValue())
@@ -109,7 +109,7 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.lastMove == null))
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
 			if (getValue() > elseVChessboard.getValue())
 				return this;
 			else
@@ -118,7 +118,7 @@ public class ChessboardValue {
 		if (lastMove == null)
 			return elseVChessboard;
 
-		if (elseVChessboard.lastMove == null)
+		if (elseVChessboard.getLastMove() == null)
 			return this;
 
 		if (getValue() > elseVChessboard.getValue())
