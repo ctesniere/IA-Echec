@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.esgi.ia.Chessboard;
 import fr.esgi.ia.Helper;
+import fr.esgi.ia.Move;
 import fr.esgi.ia.Piece;
 
 public class Export {
@@ -15,14 +16,15 @@ public class Export {
 
 	private List<PieceEx> listPiece = new ArrayList<PieceEx>();
 
-	private PieceEx bestMovePiece;
+	private MoveEx bestMovePiece;
 
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Export(Chessboard chessboard) {
+	public Export(Chessboard chessboard, Move move) {
 
+		// Ajout dans la liste des pièces
 		Piece piece;
 		PieceEx pieceEx;
 		for (int y = 0; y < 8; y++) {
@@ -32,17 +34,27 @@ public class Export {
 					pieceEx = new PieceEx();
 					pieceEx.setLocation(Helper.getStringFromPosition(x, y));
 					pieceEx.setName(piece.getClass().getSimpleName());
-					// pieceEx.setColor(piece.getColor()); // Probleme
+					pieceEx.setColor(getColorInString(piece.isColor()));
 					listPiece.add(pieceEx);
 				}
 			}
 		}
+		
+		// Ajout du meilleur coups
+		bestMovePiece = new MoveEx(move.getStartX(), move.getStartY(), move.getEndX(), move.getEndY(), getColorInString(move.isColor()));
 	}
 
 	// =========================================================================
 	// METHODS
 	// =========================================================================
 
+	public String getColorInString(boolean color) {
+		if(Helper.isColorWhite(color))
+			return "White";
+		else
+			return "Black";
+	}
+	
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================
@@ -59,11 +71,11 @@ public class Export {
 		this.listPiece = listPiece;
 	}
 
-	public PieceEx getBestMovePiece() {
+	public MoveEx getBestMovePiece() {
 		return bestMovePiece;
 	}
 
-	public void setBestMovePiece(PieceEx bestMovePiece) {
+	public void setBestMovePiece(MoveEx bestMovePiece) {
 		this.bestMovePiece = bestMovePiece;
 	}
 
