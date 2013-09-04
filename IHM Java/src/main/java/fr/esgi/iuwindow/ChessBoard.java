@@ -263,27 +263,97 @@ public class ChessBoard extends JPanel implements MouseListener,
 		}
 		
 		String url = "192.168.X.X/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String tab[] = url.split("/");
+		String bCavalier = null;
+		String bTour = null;
+		String bPion = null;
 		for (PieceEx maPiece : listPiece) 
 		{
-			System.out.println(maPiece.getColor());
-			if(maPiece.getColor().equals("black"))
+			if(maPiece.getColor() == "black")
 			{
 				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
 				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
-				if (maPiece.getName().equals("fou")) url = url.replace("bCrazy", maPiece.getLocation());
-				if (maPiece.getName().equals("cavalier")) url = url.replace("bKnight", maPiece.getLocation());
-				if (maPiece.getName().equals("tour")) url = url.replace("bTower", maPiece.getLocation());
-				if (maPiece.getName().equals("pion")) url = url.replace("bPawn", maPiece.getLocation());
+				
+				if (maPiece.getName().equals("fou")) {			
+					if(tab[5] == "bCrazy")
+					{
+						tab[5] = maPiece.getLocation();
+					} else {
+						tab[5] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("bKnight")){
+					if(tab[6] == "bKnight")
+					{
+						tab[6] = maPiece.getLocation();
+					} else {
+						tab[6] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("tour")) {
+					if(tab[7] == "bTower")
+					{
+						tab[7] = maPiece.getLocation();
+					} else {
+						tab[7] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("pion")) {
+					if(tab[8] == "bPawn")
+					{
+						tab[8] = maPiece.getLocation();
+					} else {
+						tab[8] += ":" + maPiece.getLocation();
+					}
+				}
 			}
-			else if(maPiece.getColor().equals("white"))
+			else if(maPiece.getColor() == "white")
 			{
 				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
 				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
-				if (maPiece.getName().equals("fou")) url = url.replace("wCrazy", maPiece.getLocation());
-				if (maPiece.getName().equals("cavalier")) url = url.replace("wKnight", maPiece.getLocation());
-				if (maPiece.getName().equals("tour")) url = url.replace("wTower", maPiece.getLocation());
-				if (maPiece.getName().equals("pion")) url = url.replace("wPawn", maPiece.getLocation());
+				
+				if (maPiece.getName().equals("fou")) {			
+					if(tab[12] == "bCrazy")
+					{
+						tab[12] = maPiece.getLocation();
+					} else {
+						tab[12] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("cavalier")){
+					if(tab[13] == "bKnight")
+					{
+						tab[13] = maPiece.getLocation();
+					} else {
+						tab[13] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("tour")) {
+					if(tab[14] == "bTower")
+					{
+						tab[14] = maPiece.getLocation();
+					} else {
+						tab[14] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("pion")) {
+					if(tab[15] == "wPawn")
+					{
+						tab[15] = maPiece.getLocation();
+					} else {
+						tab[15] += ":" + maPiece.getLocation();
+					}
+				}
 			}
+			
+			url.replace("bCrazy", tab[5]);
+			url.replace("bKnight", tab[6]);
+			url.replace("bTower", tab[7]);
+			url.replace("bPawn", tab[8]);
+			url.replace("wCrazy", tab[12]);
+			url.replace("wKnight", tab[13]);
+			url.replace("wTower", tab[14]);
+			url.replace("wPawn", tab[15]);
 		}
 		
 		System.out.println("l url est: "+url);
