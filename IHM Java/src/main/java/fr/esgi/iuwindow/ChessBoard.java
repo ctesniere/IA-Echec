@@ -186,10 +186,11 @@ public class ChessBoard extends JPanel implements MouseListener,
 	}
 
 		
-	public void connexion() throws JsonParseException, JsonMappingException, IOException {
+	public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
 		Connexion c = new Connexion();
-		String s = c.Connexion();
+		String s = c.Connexion(_url);
 		ObjectMapper mapper = new ObjectMapper();
+//		Export export = mapper.readValue("ia.json"), Export.class);
 		Export export = mapper.readValue(s, Export.class);
 		
 		List<PieceEx> piece = export.getListPiece();
@@ -226,7 +227,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 	/**
 	 * Permet de récupèrer la liste des pièces et de le renvoyer a l'ia
 	 */
-	public List<PieceEx> reponse() {
+	public String reponse() {
 		List<PieceEx> listPiece = new ArrayList<PieceEx>();
 		String pieceName;
 		for(int i=0; i<64; i++) {
@@ -257,9 +258,142 @@ public class ChessBoard extends JPanel implements MouseListener,
 				piece.setName(chessBoard.getComponent(i).getName().substring(6));
 				
 				listPiece.add(piece);
+				
 			}
 		}
-		return listPiece;
+		
+		String url = "192.168.X.X/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String tab[] = url.split("/");
+		String bCavalier = null;
+		String bTour = null;
+		String bPion = null;
+		for (PieceEx maPiece : listPiece) 
+		{
+			if(maPiece.getColor() == "black")
+			{
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
+				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
+				
+				if (maPiece.getName().equals("fou")) {			
+=======
+				if (maPiece.getName() == "roi") url = url.replace("bKing", maPiece.getLocation());
+				if (maPiece.getName() == "reine") url = url.replace("bQueen", maPiece.getLocation());
+				if (maPiece.getName() == "fou") {			
+>>>>>>> Stashed changes
+					if(tab[5] == "bCrazy")
+					{
+						tab[5] = maPiece.getLocation();
+					} else {
+						tab[5] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("bKnight")){
+=======
+				if (maPiece.getName() == "bKnight"){
+>>>>>>> Stashed changes
+					if(tab[6] == "bKnight")
+					{
+						tab[6] = maPiece.getLocation();
+					} else {
+						tab[6] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("tour")) {
+=======
+				if (maPiece.getName() == "tour") {
+>>>>>>> Stashed changes
+					if(tab[7] == "bTower")
+					{
+						tab[7] = maPiece.getLocation();
+					} else {
+						tab[7] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("pion")) {
+=======
+				if (maPiece.getName() == "pion") {
+>>>>>>> Stashed changes
+					if(tab[8] == "bPawn")
+					{
+						tab[8] = maPiece.getLocation();
+					} else {
+						tab[8] += ":" + maPiece.getLocation();
+					}
+				}
+			}
+			else if(maPiece.getColor() == "white")
+			{
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
+				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
+				
+				if (maPiece.getName().equals("fou")) {			
+=======
+				if (maPiece.getName() == "roi") url = url.replace("wKing", maPiece.getLocation());
+				if (maPiece.getName() == "reine") url = url.replace("wQueen", maPiece.getLocation());
+				if (maPiece.getName() == "fou") {			
+>>>>>>> Stashed changes
+					if(tab[12] == "bCrazy")
+					{
+						tab[12] = maPiece.getLocation();
+					} else {
+						tab[12] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("cavalier")){
+=======
+				if (maPiece.getName() == "cavalier"){
+>>>>>>> Stashed changes
+					if(tab[13] == "bKnight")
+					{
+						tab[13] = maPiece.getLocation();
+					} else {
+						tab[13] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("tour")) {
+=======
+				if (maPiece.getName() == "tour") {
+>>>>>>> Stashed changes
+					if(tab[14] == "bTower")
+					{
+						tab[14] = maPiece.getLocation();
+					} else {
+						tab[14] += ":" + maPiece.getLocation();
+					}
+				}
+<<<<<<< Updated upstream
+				if (maPiece.getName().equals("pion")) {
+=======
+				if (maPiece.getName() == "pion") {
+>>>>>>> Stashed changes
+					if(tab[15] == "wPawn")
+					{
+						tab[15] = maPiece.getLocation();
+					} else {
+						tab[15] += ":" + maPiece.getLocation();
+					}
+				}
+			}
+			
+			url.replace("bCrazy", tab[5]);
+			url.replace("bKnight", tab[6]);
+			url.replace("bTower", tab[7]);
+			url.replace("bPawn", tab[8]);
+			url.replace("wCrazy", tab[12]);
+			url.replace("wKnight", tab[13]);
+			url.replace("wTower", tab[14]);
+			url.replace("wPawn", tab[15]);
+		}
+		
+		System.out.println("l url est: "+url);
+		return url;
 	}
 
 	/*

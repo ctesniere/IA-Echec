@@ -37,16 +37,4 @@ public class Export {
 		return listPiece;
 	}
 
-	public void setListPiece(List<PieceEx> listPiece) {
-		this.listPiece = listPiece;
-	}
-
-	public PieceEx getBestMovePiece() {
-		return bestMovePiece;
-	}
-
-	public void setBestMovePiece(PieceEx bestMovePiece) {
-		this.bestMovePiece = bestMovePiece;
-	}
-
 }

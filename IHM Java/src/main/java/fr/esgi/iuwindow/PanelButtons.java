@@ -1,33 +1,30 @@
 package fr.esgi.iuwindow;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PanelButtons extends JPanel{
 
 public PanelButtons() {
 		
-		JButton btnStart = new JButton("Start");
+		JButton btnStart = new JButton("Coup suivant");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Starting game");
-//				btnStart.getParent().getParent().getCompo
+				// Retrieving the chessBoard, component #0 being the panel containing the button
+				ChessBoard generalBoard = (ChessBoard) getParent().getComponent(1);
+				// Retrieving the URL based on the current chessboard state
+				String url = generalBoard.reponse();
+				try {
+					generalBoard.connexion(url);
+				} catch (Exception e1) {
+					System.out.println("Error while trying to retrieve the JSON object...");
+				}
 			}
 		});
 		add(btnStart);
-		
-		JButton btnStop = new JButton("Stop");
-		btnStop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			System.out.println("Stopping game");
-			}
-		});
-		add(btnStop);
 
 	}
 }
