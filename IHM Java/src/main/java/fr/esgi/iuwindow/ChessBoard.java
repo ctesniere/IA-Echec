@@ -247,7 +247,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 				if(i>=48 && i<=55) location.append("g");
 				if(i>=56 && i<=63) location.append("h");				
 							
-				location.append(columnPosition);
+				location.append(columnPosition+1);
 				
 
 				// Determines the color of the piece
@@ -262,7 +262,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 		
-		String url = "localhost:8080/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		String tab[] = url.split("/");
 		for (PieceEx maPiece : listPiece) 
 		{

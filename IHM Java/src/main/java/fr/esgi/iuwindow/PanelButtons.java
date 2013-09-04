@@ -21,6 +21,7 @@ public PanelButtons() {
 					generalBoard.connexion(url);
 				} catch (Exception e1) {
 					System.out.println("Error while trying to retrieve the JSON object...");
+					e1.printStackTrace();
 				}
 			}
 		});
