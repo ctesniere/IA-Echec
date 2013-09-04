@@ -262,7 +262,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 		
-		String url = "192.168.X.X/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String url = "localhost:8080/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		String tab[] = url.split("/");
 		for (PieceEx maPiece : listPiece) 
 		{
