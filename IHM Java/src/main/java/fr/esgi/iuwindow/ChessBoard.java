@@ -186,9 +186,9 @@ public class ChessBoard extends JPanel implements MouseListener,
 	}
 
 		
-	public void connexion() throws JsonParseException, JsonMappingException, IOException {
+	public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
 		Connexion c = new Connexion();
-		String s = c.Connexion();
+		String s = c.Connexion(_url);
 		ObjectMapper mapper = new ObjectMapper();
 //		Export export = mapper.readValue("ia.json"), Export.class);
 		Export export = mapper.readValue(s, Export.class);
