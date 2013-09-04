@@ -227,7 +227,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 	/**
 	 * Permet de récupèrer la liste des pièces et de le renvoyer a l'ia
 	 */
-	public void reponse() {
+	public String reponse() {
 		List<PieceEx> listPiece = new ArrayList<PieceEx>();
 		String pieceName;
 		for(int i=0; i<64; i++) {
@@ -265,27 +265,29 @@ public class ChessBoard extends JPanel implements MouseListener,
 		String url = "192.168.X.X/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		for (PieceEx maPiece : listPiece) 
 		{
-			if(maPiece.getColor() == "black")
+			System.out.println(maPiece.getColor());
+			if(maPiece.getColor().equals("black"))
 			{
-				if (maPiece.getName() == "roi") url = url.replace("bKing", maPiece.getLocation());
-				if (maPiece.getName() == "reine") url = url.replace("bQueen", maPiece.getLocation());
-				if (maPiece.getName() == "fou") url = url.replace("bCrazy", maPiece.getLocation());
-				if (maPiece.getName() == "cavalier") url = url.replace("bKnight", maPiece.getLocation());
-				if (maPiece.getName() == "tour") url = url.replace("bTower", maPiece.getLocation());
-				if (maPiece.getName() == "pion") url = url.replace("bPawn", maPiece.getLocation());
+				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
+				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
+				if (maPiece.getName().equals("fou")) url = url.replace("bCrazy", maPiece.getLocation());
+				if (maPiece.getName().equals("cavalier")) url = url.replace("bKnight", maPiece.getLocation());
+				if (maPiece.getName().equals("tour")) url = url.replace("bTower", maPiece.getLocation());
+				if (maPiece.getName().equals("pion")) url = url.replace("bPawn", maPiece.getLocation());
 			}
-			else if(maPiece.getColor() == "white")
+			else if(maPiece.getColor().equals("white"))
 			{
-				if (maPiece.getName() == "roi") url = url.replace("wKing", maPiece.getLocation());
-				if (maPiece.getName() == "reine") url = url.replace("wQueen", maPiece.getLocation());
-				if (maPiece.getName() == "fou") url = url.replace("wCrazy", maPiece.getLocation());
-				if (maPiece.getName() == "cavalier") url = url.replace("wKnight", maPiece.getLocation());
-				if (maPiece.getName() == "tour") url = url.replace("wTower", maPiece.getLocation());
-				if (maPiece.getName() == "pion") url = url.replace("wPawn", maPiece.getLocation());
+				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
+				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
+				if (maPiece.getName().equals("fou")) url = url.replace("wCrazy", maPiece.getLocation());
+				if (maPiece.getName().equals("cavalier")) url = url.replace("wKnight", maPiece.getLocation());
+				if (maPiece.getName().equals("tour")) url = url.replace("wTower", maPiece.getLocation());
+				if (maPiece.getName().equals("pion")) url = url.replace("wPawn", maPiece.getLocation());
 			}
 		}
 		
 		System.out.println("l url est: "+url);
+		return url;
 	}
 
 	/*
