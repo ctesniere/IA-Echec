@@ -13,9 +13,15 @@ public PanelButtons() {
 		JButton btnStart = new JButton("Coup suivant");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Retrieving the chessBoard, component #0 being the panel containing the button
 				ChessBoard generalBoard = (ChessBoard) getParent().getComponent(1);
+				// Retrieving the URL based on the current chessboard state
 				String url = generalBoard.reponse();
-				
+				try {
+					generalBoard.connexion(url);
+				} catch (Exception e1) {
+					System.out.println("Error while trying to retrieve the JSON object...");
+				}
 			}
 		});
 		add(btnStart);

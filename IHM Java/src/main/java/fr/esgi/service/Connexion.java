@@ -9,14 +9,11 @@ import java.net.URL;
 
 public class Connexion {
 
-	// http://localhost:8080/RESTfulExample/json/product/get
-		
-	public String Connexion()
+	public String Connexion(String _url)
 	{
 	  try {
  
-		//URL url = new URL("http://localhost:8080/RESTfulExample/json/product/get");
-		  URL url = new URL("https://raw.github.com/bulyshko/config.json/master/package.json");
+		URL url = new URL(_url);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Accept", "application/json");
