@@ -32,17 +32,6 @@ public class JSONController {
 
 		// Retourne le meilleur coup
 		return ia.play(Algorithm.isWhite(), 3, chessboard);
-
-		// try {
-		// ObjectMapper mapper = new ObjectMapper();
-		// return mapper.writeValueAsString(chessboard.getChessboardForJson());
-		// } catch (JsonGenerationException e) {
-		// return e.getMessage();
-		// } catch (JsonMappingException e) {
-		// return e.getMessage();
-		// } catch (IOException e) {
-		// return e.getMessage();
-		// }
 	}
 
 	@RequestMapping(value = "/init", method = RequestMethod.GET)

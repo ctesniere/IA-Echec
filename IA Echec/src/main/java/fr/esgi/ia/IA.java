@@ -1,5 +1,13 @@
 package fr.esgi.ia;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import fr.esgi.export.Export;
+
 /**
  * @author Cédric TESNIERE
  */
@@ -52,7 +60,19 @@ public class IA {
 				break; // Sort de la boucle
 			} else {
 				getGlobalChessboard().doMove(myMove);
-				output += myMove.moveOutputString() + " ";
+				Export export = new Export(getGlobalChessboard(), myMove);
+
+				try {
+					ObjectMapper mapper = new ObjectMapper();
+					output = mapper.writeValueAsString(export);
+				} catch (JsonGenerationException e) {
+					output = e.getMessage();
+				} catch (JsonMappingException e) {
+					output = e.getMessage();
+				} catch (IOException e) {
+					output = e.getMessage();
+				}
+				//output += myMove.moveOutputString() + " ";
 				break;
 			}
 		}
