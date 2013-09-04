@@ -264,23 +264,13 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		String url = "192.168.X.X/iaechec/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		String tab[] = url.split("/");
-		String bCavalier = null;
-		String bTour = null;
-		String bPion = null;
 		for (PieceEx maPiece : listPiece) 
 		{
 			if(maPiece.getColor() == "black")
 			{
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
 				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
-				
-				if (maPiece.getName().equals("fou")) {			
-=======
-				if (maPiece.getName() == "roi") url = url.replace("bKing", maPiece.getLocation());
-				if (maPiece.getName() == "reine") url = url.replace("bQueen", maPiece.getLocation());
-				if (maPiece.getName() == "fou") {			
->>>>>>> Stashed changes
+				if (maPiece.getName().equals("fou")) {					
 					if(tab[5] == "bCrazy")
 					{
 						tab[5] = maPiece.getLocation();
@@ -288,11 +278,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 						tab[5] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("bKnight")){
-=======
-				if (maPiece.getName() == "bKnight"){
->>>>>>> Stashed changes
 					if(tab[6] == "bKnight")
 					{
 						tab[6] = maPiece.getLocation();
@@ -300,11 +286,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 						tab[6] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("tour")) {
-=======
-				if (maPiece.getName() == "tour") {
->>>>>>> Stashed changes
 					if(tab[7] == "bTower")
 					{
 						tab[7] = maPiece.getLocation();
@@ -312,11 +294,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 						tab[7] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("pion")) {
-=======
-				if (maPiece.getName() == "pion") {
->>>>>>> Stashed changes
 					if(tab[8] == "bPawn")
 					{
 						tab[8] = maPiece.getLocation();
@@ -327,52 +305,34 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 			else if(maPiece.getColor() == "white")
 			{
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
 				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
 				
-				if (maPiece.getName().equals("fou")) {			
-=======
-				if (maPiece.getName() == "roi") url = url.replace("wKing", maPiece.getLocation());
-				if (maPiece.getName() == "reine") url = url.replace("wQueen", maPiece.getLocation());
-				if (maPiece.getName() == "fou") {			
->>>>>>> Stashed changes
-					if(tab[12] == "bCrazy")
+				if (maPiece.getName().equals("fou")) {				
+					if(tab[12] == "wCrazy")
 					{
 						tab[12] = maPiece.getLocation();
 					} else {
 						tab[12] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("cavalier")){
-=======
-				if (maPiece.getName() == "cavalier"){
->>>>>>> Stashed changes
-					if(tab[13] == "bKnight")
+					if(tab[13] == "wKnight")
 					{
 						tab[13] = maPiece.getLocation();
 					} else {
 						tab[13] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("tour")) {
-=======
-				if (maPiece.getName() == "tour") {
->>>>>>> Stashed changes
-					if(tab[14] == "bTower")
+					if(tab[14] == "wTower")
 					{
 						tab[14] = maPiece.getLocation();
 					} else {
 						tab[14] += ":" + maPiece.getLocation();
 					}
 				}
-<<<<<<< Updated upstream
 				if (maPiece.getName().equals("pion")) {
-=======
-				if (maPiece.getName() == "pion") {
->>>>>>> Stashed changes
 					if(tab[15] == "wPawn")
 					{
 						tab[15] = maPiece.getLocation();
