@@ -252,13 +252,13 @@ public class Chessboard implements Cloneable {
 	 * @return
 	 */
 	public void insertPieceChessboard(boolean color, String king, String queen, String crazy,
-			String _knight, String _tower, String _pawn) {
+			String knight, String tower, String pawn) {
 
 		String[] listLocation;
 		int y, x;
 
 		// Traitement pour le roi
-		if (king != null) {
+		if (!king.equals("null")) {
 			listLocation = king.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
@@ -268,7 +268,7 @@ public class Chessboard implements Cloneable {
 		}
 
 		// Traitement pour la reine
-		if (queen != null) {
+		if (!queen.equals("null")) {
 			listLocation = queen.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
@@ -278,7 +278,7 @@ public class Chessboard implements Cloneable {
 		}
 
 		// Traitement pour le fou
-		if (crazy != null) {
+		if (!crazy.equals("null")) {
 			listLocation = crazy.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
@@ -288,8 +288,8 @@ public class Chessboard implements Cloneable {
 		}
 
 		// Traitement pour le cavalier
-		if (_knight != null) {
-			listLocation = _knight.split(":");
+		if (!knight.equals("null")) {
+			listLocation = knight.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
@@ -298,8 +298,8 @@ public class Chessboard implements Cloneable {
 		}
 
 		// Traitement pour la tour
-		if (_tower != null) {
-			listLocation = _tower.split(":");
+		if (!tower.equals("null")) {
+			listLocation = tower.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
@@ -308,8 +308,8 @@ public class Chessboard implements Cloneable {
 		}
 
 		// Traitement pour le pion
-		if (_pawn != null) {
-			listLocation = _pawn.split(":");
+		if (!pawn.equals("null")) {
+			listLocation = pawn.split(":");
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
