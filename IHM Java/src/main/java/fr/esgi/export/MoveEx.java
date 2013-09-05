@@ -1,23 +1,28 @@
 package fr.esgi.export;
 
-public class PieceEx {
+/**
+ * Classe pour le meilleur mouvement à exporter
+ * 
+ * @author Cédric TESNIERE
+ */
+public final class MoveEx {
 
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
+	private int startX;
 
-	private String location;
+	private int endX;
+
+	private int startY;
+
+	private int endY;
 
 	private String color;
-
-	private String name;
 
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public PieceEx() {
-
+	public MoveEx() {
+		
 	}
 
 	// =========================================================================
@@ -32,27 +37,23 @@ public class PieceEx {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public String getLocation() {
-		return location;
+	public int getStartX() {
+		return startX;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public int getEndX() {
+		return endX;
+	}
+
+	public int getStartY() {
+		return startY;
+	}
+
+	public int getEndY() {
+		return endY;
 	}
 
 	public String getColor() {
 		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 }

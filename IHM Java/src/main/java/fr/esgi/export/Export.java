@@ -11,7 +11,7 @@ public class Export {
 
 	private List<PieceEx> listPiece = new ArrayList<PieceEx>();
 
-	private PieceEx bestMovePiece;
+	private MoveEx bestMovePiece;
 
 	// =========================================================================
 	// CONSTRUCTORS
@@ -36,5 +36,10 @@ public class Export {
 	public List<PieceEx> getListPiece() {
 		return listPiece;
 	}
+	
+	public MoveEx getBestMovePiece() {
+		return bestMovePiece;
+	}
+
 
 }
