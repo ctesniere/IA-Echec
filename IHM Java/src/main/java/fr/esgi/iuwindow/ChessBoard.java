@@ -60,69 +60,72 @@ public class ChessBoard extends JPanel implements MouseListener,
 				chessBoard.add(square);
 			}
 		}
-		
+
 		initPieces();
-		
+
 	}
-	
+
 	public void initPieces() {
 		/*
 		 * Placing black pieces on the chessboard
 		 */
-		ImageIcon tour = new ImageIcon(getClass().getResource("/black_tour.png"));
+		ImageIcon tour = new ImageIcon(getClass()
+				.getResource("/black_tour.png"));
 		JLabel piece = new JLabel(tour);
 		JPanel panel = (JPanel) chessBoard.getComponent(0);
 		chessBoard.getComponent(0).setName("black_tour");
 		panel.add(piece);
-		
+
 		piece = new JLabel(tour);
 		panel = (JPanel) chessBoard.getComponent(7);
 		chessBoard.getComponent(7).setName("black_tour");
 		panel.add(piece);
-		
-		ImageIcon reine = new ImageIcon(getClass().getResource("/black_reine.png"));
+
+		ImageIcon reine = new ImageIcon(getClass().getResource(
+				"/black_reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(4);
 		chessBoard.getComponent(4).setName("black_reine");
 		panel.add(piece);
-		
+
 		ImageIcon roi = new ImageIcon(getClass().getResource("/black_roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(3);
 		chessBoard.getComponent(3).setName("black_roi");
 		panel.add(piece);
-		
-		ImageIcon cavalier = new ImageIcon(getClass().getResource("/black_cavalier.png"));
+
+		ImageIcon cavalier = new ImageIcon(getClass().getResource(
+				"/black_cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(1);
 		chessBoard.getComponent(1).setName("black_cavalier");
 		panel.add(piece);
-		
+
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(6);
 		chessBoard.getComponent(6).setName("black_cavalier");
 		panel.add(piece);
-		
+
 		ImageIcon fou = new ImageIcon(getClass().getResource("/black_fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(2);
 		chessBoard.getComponent(2).setName("black_fou");
 		panel.add(piece);
-		
+
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(5);
 		chessBoard.getComponent(5).setName("black_fou");
 		panel.add(piece);
-		
-		ImageIcon pion = new ImageIcon(getClass().getResource("/black_pion.png"));
-		for(int i=8; i< 16; i++)
-		{
+
+		ImageIcon pion = new ImageIcon(getClass()
+				.getResource("/black_pion.png"));
+		for (int i = 8; i < 16; i++) {
 			piece = new JLabel(pion);
 			panel = (JPanel) chessBoard.getComponent(i);
 			chessBoard.getComponent(i).setName("black_pion");
 			panel.add(piece);
 		}
-		
+
 		/*
 		 * Placing black pieces on the chessboard
 		 */
@@ -131,228 +134,308 @@ public class ChessBoard extends JPanel implements MouseListener,
 		panel = (JPanel) chessBoard.getComponent(56);
 		chessBoard.getComponent(56).setName("white_tour");
 		panel.add(piece);
-		
+
 		piece = new JLabel(tour);
 		panel = (JPanel) chessBoard.getComponent(63);
 		chessBoard.getComponent(63).setName("white_tour");
 		panel.add(piece);
-		
+
 		reine = new ImageIcon(getClass().getResource("/white_reine.png"));
 		piece = new JLabel(reine);
 		panel = (JPanel) chessBoard.getComponent(60);
 		chessBoard.getComponent(60).setName("white_reine");
 		panel.add(piece);
-		
+
 		roi = new ImageIcon(getClass().getResource("/white_roi.png"));
 		piece = new JLabel(roi);
 		panel = (JPanel) chessBoard.getComponent(59);
-		chessBoard.getComponent(59).setName("black_roi");
+		chessBoard.getComponent(59).setName("white_roi");
 		panel.add(piece);
-		
+
 		cavalier = new ImageIcon(getClass().getResource("/white_cavalier.png"));
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(57);
 		chessBoard.getComponent(57).setName("white_cavalier");
 		panel.add(piece);
-		
+
 		piece = new JLabel(cavalier);
 		panel = (JPanel) chessBoard.getComponent(62);
 		chessBoard.getComponent(62).setName("white_cavalier");
 		panel.add(piece);
-		
+
 		fou = new ImageIcon(getClass().getResource("/white_fou.png"));
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(58);
 		chessBoard.getComponent(58).setName("white_fou");
 		panel.add(piece);
-		
+
 		piece = new JLabel(fou);
 		panel = (JPanel) chessBoard.getComponent(61);
 		chessBoard.getComponent(61).setName("white_fou");
 		panel.add(piece);
-		
+
 		pion = new ImageIcon(getClass().getResource("/white_pion.png"));
-		for(int i=48; i< 56; i++)
-		{
+		for (int i = 48; i < 56; i++) {
 			piece = new JLabel(pion);
 			panel = (JPanel) chessBoard.getComponent(i);
 			chessBoard.getComponent(i).setName("white_pion");
 			panel.add(piece);
 		}
-	
-		// debug purpose only
-		for(int i=0;i<64; i++)
-			System.out.println(chessBoard.getComponent(i).getName());
 	}
 
-		
-	public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
+	public void connexion(String _url) throws JsonParseException,
+			JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.Connexion(_url);
 		ObjectMapper mapper = new ObjectMapper();
-//		Export export = mapper.readValue("ia.json"), Export.class);
 		Export export = mapper.readValue(s, Export.class);
-		
 		List<PieceEx> piece = export.getListPiece();
-		
-		for(PieceEx res : piece) {
-			
+
+		for (PieceEx res : piece) {
 			String pos = res.getLocation();
 			int location = 0;
-			if ((pos.charAt(0) == 'a')) location = 0;
-			if ((pos.charAt(0) == 'b')) location = 8;
-			if ((pos.charAt(0) == 'c')) location = 16;
-			if ((pos.charAt(0) == 'd')) location = 24;
-			if ((pos.charAt(0) == 'e')) location = 32;
-			if ((pos.charAt(0) == 'f')) location = 40;
-			if ((pos.charAt(0) == 'g')) location = 48;
-			if ((pos.charAt(0) == 'h')) location = 56;
-		
-			if ((pos.charAt(1) == '1')) location += 0;
-			if ((pos.charAt(1) == '2')) location += 1;
-			if ((pos.charAt(1) == '3')) location += 2;
-			if ((pos.charAt(1) == '4')) location += 3;
-			if ((pos.charAt(1) == '5')) location += 4;
-			if ((pos.charAt(1) == '6')) location += 5;
-			if ((pos.charAt(1) == '7')) location += 6;
-			if ((pos.charAt(1) == '8')) location += 7;
-			
-			ImageIcon somePiece = new ImageIcon(getClass().getResource("/"+res.getColor()+"_"+res.getName()+".png"));
+			if ((pos.charAt(0) == 'a'))
+				location = 0;
+			if ((pos.charAt(0) == 'b'))
+				location = 8;
+			if ((pos.charAt(0) == 'c'))
+				location = 16;
+			if ((pos.charAt(0) == 'd'))
+				location = 24;
+			if ((pos.charAt(0) == 'e'))
+				location = 32;
+			if ((pos.charAt(0) == 'f'))
+				location = 40;
+			if ((pos.charAt(0) == 'g'))
+				location = 48;
+			if ((pos.charAt(0) == 'h'))
+				location = 56;
+
+			if ((pos.charAt(1) == '1'))
+				location += 0;
+			if ((pos.charAt(1) == '2'))
+				location += 1;
+			if ((pos.charAt(1) == '3'))
+				location += 2;
+			if ((pos.charAt(1) == '4'))
+				location += 3;
+			if ((pos.charAt(1) == '5'))
+				location += 4;
+			if ((pos.charAt(1) == '6'))
+				location += 5;
+			if ((pos.charAt(1) == '7'))
+				location += 6;
+			if ((pos.charAt(1) == '8'))
+				location += 7;
+
+			ImageIcon somePiece = new ImageIcon(getClass().getResource(
+					"/" + res.getColor() + "_" + res.getName() + ".png"));
 			JLabel myPiece = new JLabel(somePiece);
-			JPanel panel = (JPanel) chessBoard.getComponent(location); // à modifier selon le format renvoyé par getLocation()
+			JPanel panel = (JPanel) chessBoard.getComponent(location);
 			panel.add(myPiece);
-        }
+		}
 	}
-	
+
 	/**
 	 * Permet de récupèrer la liste des pièces et de le renvoyer a l'ia
 	 */
 	public String reponse() {
 		List<PieceEx> listPiece = new ArrayList<PieceEx>();
 		String pieceName;
-		for(int i=0; i<64; i++) {
+		for (int i = 0; i < 64; i++) {
 			pieceName = chessBoard.getComponent(i).getName();
-			
-			if(null != pieceName) {
-				int columnPosition = i%8;
+
+			if (null != pieceName) {
+				int columnPosition = i % 8;
 				PieceEx piece = new PieceEx();
-				
+
 				StringBuilder location = new StringBuilder();
-				if(i>=0 && i<=7) location.append("a");
-				if(i>=8 && i<=15) location.append("b");
-				if(i>=16 && i<=23) location.append("c");
-				if(i>=24 && i<=31) location.append("d");
-				if(i>=32 && i<=39) location.append("e");
-				if(i>=40 && i<=47) location.append("f");
-				if(i>=48 && i<=55) location.append("g");
-				if(i>=56 && i<=63) location.append("h");				
-							
-				location.append(columnPosition+1);
-				
+				if (i >= 0 && i <= 7)
+					location.append("a");
+				if (i >= 8 && i <= 15)
+					location.append("b");
+				if (i >= 16 && i <= 23)
+					location.append("c");
+				if (i >= 24 && i <= 31)
+					location.append("d");
+				if (i >= 32 && i <= 39)
+					location.append("e");
+				if (i >= 40 && i <= 47)
+					location.append("f");
+				if (i >= 48 && i <= 55)
+					location.append("g");
+				if (i >= 56 && i <= 63)
+					location.append("h");
+
+				location.append(columnPosition + 1);
 
 				// Determines the color of the piece
-				String color = chessBoard.getComponent(i).getName().startsWith("black_") ? "black" : "white";				
-				
+				String color = chessBoard.getComponent(i).getName()
+						.startsWith("black_") ? "black" : "white";
+
 				piece.setColor(color);
 				piece.setLocation(location.toString());
 				piece.setName(chessBoard.getComponent(i).getName().substring(6));
-				
+
 				listPiece.add(piece);
-				
+
 			}
 		}
-		
+
 		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
-		String tab[] = url.split("/");
-		for (PieceEx maPiece : listPiece) 
-		{
-			if(maPiece.getColor() == "black")
-			{
-				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
-				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
-				if (maPiece.getName().equals("fou")) {					
-					if(tab[5] == "bCrazy")
-					{
-						tab[5] = maPiece.getLocation();
-					} else {
-						tab[5] += ":" + maPiece.getLocation();
-					}
+		
+		StringBuilder strBlackPion = new StringBuilder();
+		StringBuilder strWhitePion = new StringBuilder();
+		StringBuilder strBlackTour = new StringBuilder();
+		StringBuilder strWhiteTour = new StringBuilder();
+		StringBuilder strBlackCavalier = new StringBuilder();
+		StringBuilder strWhiteCavalier = new StringBuilder();
+		StringBuilder strBlackFou = new StringBuilder();
+		StringBuilder strWhiteFou = new StringBuilder();
+
+		Boolean foundBlackKing = false;
+		Boolean foundWhiteKing = false;
+		Boolean foundBlackQueen = false;
+		Boolean foundWhiteQueen = false;
+		
+		List<PieceEx> listBlackFou = new ArrayList<PieceEx>();
+		List<PieceEx> listBlackPion = new ArrayList<PieceEx>();
+		List<PieceEx> listBlackCavalier = new ArrayList<PieceEx>();
+		List<PieceEx> listBlackTour = new ArrayList<PieceEx>();
+		List<PieceEx> listWhiteFou = new ArrayList<PieceEx>();
+		List<PieceEx> listWhitePion = new ArrayList<PieceEx>();
+		List<PieceEx> listWhiteCavalier = new ArrayList<PieceEx>();
+		List<PieceEx> listWhiteTour = new ArrayList<PieceEx>();
+
+		for (PieceEx maPiece : listPiece) {
+			if (maPiece.getColor().equals("black")) {
+				// King + Queen
+				if (maPiece.getName().equals("roi")) {
+					foundBlackKing = true;
+					url = url.replace("bKing", maPiece.getLocation());
 				}
-				if (maPiece.getName().equals("bKnight")){
-					if(tab[6] == "bKnight")
-					{
-						tab[6] = maPiece.getLocation();
-					} else {
-						tab[6] += ":" + maPiece.getLocation();
-					}
+				if (maPiece.getName().equals("reine")) {
+					foundBlackQueen = true;
+					url = url.replace("bQueen", maPiece.getLocation());
 				}
-				if (maPiece.getName().equals("tour")) {
-					if(tab[7] == "bTower")
-					{
-						tab[7] = maPiece.getLocation();
-					} else {
-						tab[7] += ":" + maPiece.getLocation();
-					}
+
+				// Counting pieces for "Fou"
+				if (maPiece.getName().equals("fou"))
+					listBlackFou.add(maPiece);
+
+				// Counting pieces for "Pion"
+				if (maPiece.getName().equals("pion"))
+					listBlackPion.add(maPiece);
+
+				// Counting pieces for "Cavalier"
+				if (maPiece.getName().equals("cavalier"))
+					listBlackCavalier.add(maPiece);
+
+				// Counting pieces for "Tour"
+				if (maPiece.getName().equals("tour"))
+					listBlackTour.add(maPiece);				
+			} else if (maPiece.getColor().equals("white")) {
+				if (maPiece.getName().equals("roi")) {
+					foundWhiteKing = true;
+					url = url.replace("wKing", maPiece.getLocation());
 				}
-				if (maPiece.getName().equals("pion")) {
-					if(tab[8] == "bPawn")
-					{
-						tab[8] = maPiece.getLocation();
-					} else {
-						tab[8] += ":" + maPiece.getLocation();
-					}
+				if (maPiece.getName().equals("reine")) {
+					foundWhiteQueen = true;
+					url = url.replace("wQueen", maPiece.getLocation());
 				}
+
+				// Counting pieces for "Fou"
+				if (maPiece.getName().equals("fou"))
+					listWhiteFou.add(maPiece);
+
+				// Counting pieces for "Pion"
+				if (maPiece.getName().equals("pion"))
+					listWhitePion.add(maPiece);
+
+				// Counting pieces for "Cavalier"
+				if (maPiece.getName().equals("cavalier"))
+					listWhiteCavalier.add(maPiece);
+
+				// Counting pieces for "Tour"
+				if (maPiece.getName().equals("tour"))
+					listWhiteTour.add(maPiece);
 			}
-			else if(maPiece.getColor() == "white")
-			{
-				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
-				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
-				
-				if (maPiece.getName().equals("fou")) {				
-					if(tab[12] == "wCrazy")
-					{
-						tab[12] = maPiece.getLocation();
-					} else {
-						tab[12] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("cavalier")){
-					if(tab[13] == "wKnight")
-					{
-						tab[13] = maPiece.getLocation();
-					} else {
-						tab[13] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("tour")) {
-					if(tab[14] == "wTower")
-					{
-						tab[14] = maPiece.getLocation();
-					} else {
-						tab[14] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("pion")) {
-					if(tab[15] == "wPawn")
-					{
-						tab[15] = maPiece.getLocation();
-					} else {
-						tab[15] += ":" + maPiece.getLocation();
-					}
-				}
-			}
-			
-			url.replace("bCrazy", tab[5]);
-			url.replace("bKnight", tab[6]);
-			url.replace("bTower", tab[7]);
-			url.replace("bPawn", tab[8]);
-			url.replace("wCrazy", tab[12]);
-			url.replace("wKnight", tab[13]);
-			url.replace("wTower", tab[14]);
-			url.replace("wPawn", tab[15]);
 		}
 		
-		System.out.println("l url est: "+url);
+		if (!listBlackFou.isEmpty()) {
+			for (PieceEx fou : listBlackFou)
+				strBlackFou.append(fou.getLocation()).append(":");
+			strBlackFou.deleteCharAt(strBlackFou.length()-1);
+		} else
+			strBlackFou.append("null");
+
+		if (!listBlackPion.isEmpty()) {
+			for (PieceEx pion : listBlackPion)
+				strBlackPion.append(pion.getLocation()).append(":");
+			strBlackPion.deleteCharAt(strBlackPion.length()-1);
+		} else
+			strBlackPion.append("null");
+
+		if (!listBlackCavalier.isEmpty()) {
+			for (PieceEx cavalier : listBlackCavalier)
+				strBlackCavalier.append(cavalier.getLocation()).append(":");
+			strBlackCavalier.deleteCharAt(strBlackCavalier.length()-1);
+		} else
+			strBlackCavalier.append("null");
+
+		if (!listBlackTour.isEmpty()) {
+			for (PieceEx tour : listBlackTour)
+				strBlackTour.append(tour.getLocation()).append(":");
+			strBlackTour.deleteCharAt(strBlackTour.length()-1);
+		} else
+			strBlackTour.append("null");
+		
+		if (!listWhiteFou.isEmpty()) {
+			for (PieceEx fou : listWhiteFou)
+				strWhiteFou.append(fou.getLocation()).append(":");
+			strWhiteFou.deleteCharAt(strWhiteFou.length()-1);
+		} else
+			strWhiteFou.append("null");
+
+		if (!listWhitePion.isEmpty()) {
+			for (PieceEx pion : listWhitePion)
+				strWhitePion.append(pion.getLocation()).append(":");
+			strWhitePion.deleteCharAt(strWhitePion.length()-1);
+		} else
+			strWhitePion.append("null");
+
+		if (!listWhiteCavalier.isEmpty()) {
+			for (PieceEx cavalier : listWhiteCavalier)
+				strWhiteCavalier.append(cavalier.getLocation()).append(":");
+			strWhiteCavalier.deleteCharAt(strWhiteCavalier.length()-1);
+		} else
+			strWhiteCavalier.append("null");
+
+		if (!listWhiteTour.isEmpty()) {
+			for (PieceEx tour : listWhiteTour)
+				strWhiteTour.append(tour.getLocation()).append(":");
+			strWhiteTour.deleteCharAt(strWhiteTour.length()-1);
+		} else
+			strWhiteTour.append("null");
+		
+		if (!foundBlackKing)			
+			url = url.replace("bKing", "null");
+		if (!foundBlackQueen)
+			url = url.replace("bQueen", "null");
+		if (!foundWhiteKing)
+			url = url.replace("wKing", "null");
+		if (!foundWhiteQueen)
+			url = url.replace("wQueen", "null");
+		
+		url = url.replace("bKnight", strBlackCavalier.toString());
+		url = url.replace("bCrazy", strBlackFou.toString());
+		url = url.replace("bPawn", strBlackPion.toString());
+		url = url.replace("bTower", strBlackTour.toString());
+		
+		url = url.replace("wKnight", strWhiteCavalier.toString());
+		url = url.replace("wCrazy", strWhiteFou.toString());
+		url = url.replace("wPawn", strWhitePion.toString());
+		url = url.replace("wTower", strWhiteTour.toString());		
 		return url;
 	}
 
@@ -431,7 +514,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			parent.remove(0);
 			parent.add(chessPiece);
 			parent.setName(movingPiece);
-			parent.validate();			
+			parent.validate();
 		} else {
 			Container parent = (Container) c;
 			parent.add(chessPiece);
