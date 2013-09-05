@@ -199,23 +199,23 @@ public class ChessBoard extends JPanel implements MouseListener,
 			
 			String pos = res.getLocation();
 			int location = 0;
-			if ((pos.charAt(0) == 'a')) location = 0;
-			if ((pos.charAt(0) == 'b')) location = 8;
-			if ((pos.charAt(0) == 'c')) location = 16;
-			if ((pos.charAt(0) == 'd')) location = 24;
-			if ((pos.charAt(0) == 'e')) location = 32;
-			if ((pos.charAt(0) == 'f')) location = 40;
-			if ((pos.charAt(0) == 'g')) location = 48;
-			if ((pos.charAt(0) == 'h')) location = 56;
-		
-			if ((pos.charAt(1) == '1')) location += 0;
-			if ((pos.charAt(1) == '2')) location += 1;
-			if ((pos.charAt(1) == '3')) location += 2;
-			if ((pos.charAt(1) == '4')) location += 3;
-			if ((pos.charAt(1) == '5')) location += 4;
-			if ((pos.charAt(1) == '6')) location += 5;
-			if ((pos.charAt(1) == '7')) location += 6;
-			if ((pos.charAt(1) == '8')) location += 7;
+			if ((pos.charAt(1) == '1')) location = 0;
+			if ((pos.charAt(1) == '2')) location = 8;
+			if ((pos.charAt(1) == '3')) location = 16;
+			if ((pos.charAt(1) == '4')) location = 24;
+			if ((pos.charAt(1) == '5')) location = 32;
+			if ((pos.charAt(1) == '6')) location = 40;
+			if ((pos.charAt(1) == '7')) location = 48;
+			if ((pos.charAt(1) == '8')) location = 56;
+			
+			if ((pos.charAt(0) == 'a')) location += 0;
+			if ((pos.charAt(0) == 'b')) location += 1;
+			if ((pos.charAt(0) == 'c')) location += 2;
+			if ((pos.charAt(0) == 'd')) location += 3;
+			if ((pos.charAt(0) == 'e')) location += 4;
+			if ((pos.charAt(0) == 'f')) location += 5;
+			if ((pos.charAt(0) == 'g')) location += 6;
+			if ((pos.charAt(0) == 'h')) location += 7;
 			
 			ImageIcon somePiece = new ImageIcon(getClass().getResource("/"+res.getColor()+"_"+res.getName()+".png"));
 			JLabel myPiece = new JLabel(somePiece);
