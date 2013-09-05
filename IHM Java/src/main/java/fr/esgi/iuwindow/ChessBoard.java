@@ -235,21 +235,32 @@ public class ChessBoard extends JPanel implements MouseListener,
 			
 			if(null != pieceName) {
 				int columnPosition = i%8;
-				PieceEx piece = new PieceEx();
 				
 				StringBuilder location = new StringBuilder();
-				if(i>=0 && i<=7) location.append("a");
-				if(i>=8 && i<=15) location.append("b");
-				if(i>=16 && i<=23) location.append("c");
-				if(i>=24 && i<=31) location.append("d");
-				if(i>=32 && i<=39) location.append("e");
-				if(i>=40 && i<=47) location.append("f");
-				if(i>=48 && i<=55) location.append("g");
-				if(i>=56 && i<=63) location.append("h");				
-							
-				location.append(columnPosition+1);
 				
-
+				/* Determines the column */
+				if(columnPosition == 0) location.append("a");
+				if(columnPosition == 1) location.append("b");
+				if(columnPosition == 2) location.append("c");
+				if(columnPosition == 3) location.append("d");
+				if(columnPosition == 4) location.append("e");
+				if(columnPosition == 5) location.append("f");
+				if(columnPosition == 6) location.append("g");
+				if(columnPosition == 7) location.append("h");
+				
+				/* Determines the line */
+				if(i>=0 && i<=7) location.append("1");
+				if(i>=8 && i<=15) location.append("2");
+				if(i>=16 && i<=23) location.append("3");
+				if(i>=24 && i<=31) location.append("4");
+				if(i>=32 && i<=39) location.append("5");
+				if(i>=40 && i<=47) location.append("6");
+				if(i>=48 && i<=55) location.append("7");
+				if(i>=56 && i<=63) location.append("8");				
+							
+//				location.append(columnPosition+1);
+				
+				PieceEx piece = new PieceEx();
 				// Determines the color of the piece
 				String color = chessBoard.getComponent(i).getName().startsWith("black_") ? "black" : "white";				
 				
@@ -264,95 +275,97 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		String tab[] = url.split("/");
+		String url8 = "";
 		for (PieceEx maPiece : listPiece) 
 		{
 			if(maPiece.getColor() == "black")
 			{
 				if (maPiece.getName().equals("roi")) url = url.replace("bKing", maPiece.getLocation());
 				if (maPiece.getName().equals("reine")) url = url.replace("bQueen", maPiece.getLocation());
-				if (maPiece.getName().equals("fou")) {					
-					if(tab[5] == "bCrazy")
-					{
-						tab[5] = maPiece.getLocation();
-					} else {
-						tab[5] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("bKnight")){
-					if(tab[6] == "bKnight")
-					{
-						tab[6] = maPiece.getLocation();
-					} else {
-						tab[6] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("tour")) {
-					if(tab[7] == "bTower")
-					{
-						tab[7] = maPiece.getLocation();
-					} else {
-						tab[7] += ":" + maPiece.getLocation();
-					}
-				}
-				if (maPiece.getName().equals("pion")) {
-					if(tab[8] == "bPawn")
+				if (maPiece.getName().equals("fou")) {	
+					if(tab[8].equals("bCrazy"))
 					{
 						tab[8] = maPiece.getLocation();
 					} else {
 						tab[8] += ":" + maPiece.getLocation();
 					}
 				}
-			}
-			else if(maPiece.getColor() == "white")
-			{
-				if (maPiece.getName().equals("roi")) url = url.replace("wKing", maPiece.getLocation());
-				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
 				
-				if (maPiece.getName().equals("fou")) {				
-					if(tab[12] == "wCrazy")
-					{
-						tab[12] = maPiece.getLocation();
-					} else {
-						tab[12] += ":" + maPiece.getLocation();
-					}
-				}
 				if (maPiece.getName().equals("cavalier")){
-					if(tab[13] == "wKnight")
+					if(tab[9].equals("bKnight"))
 					{
-						tab[13] = maPiece.getLocation();
+						tab[9] = maPiece.getLocation();
 					} else {
-						tab[13] += ":" + maPiece.getLocation();
+						tab[9] += ":" + maPiece.getLocation();
 					}
 				}
 				if (maPiece.getName().equals("tour")) {
-					if(tab[14] == "wTower")
+					if(tab[10].equals("bTower"))
 					{
-						tab[14] = maPiece.getLocation();
+						tab[10] = maPiece.getLocation();
 					} else {
-						tab[14] += ":" + maPiece.getLocation();
+						tab[10] += ":" + maPiece.getLocation();
 					}
 				}
 				if (maPiece.getName().equals("pion")) {
-					if(tab[15] == "wPawn")
+					if(tab[11].equals("bPawn"))
+					{
+						tab[11] = maPiece.getLocation();
+					} else {
+						tab[11] += ":" + maPiece.getLocation();
+					}
+				}
+			}
+			else if(maPiece.getColor() == "white")
+			{
+				if (maPiece.getName().equals("roi")) System.out.println("par la");url = url.replace("wKing", maPiece.getLocation());
+				if (maPiece.getName().equals("reine")) url = url.replace("wQueen", maPiece.getLocation());
+				
+				if (maPiece.getName().equals("fou")) {	
+					if(tab[15].equals("wCrazy"))
 					{
 						tab[15] = maPiece.getLocation();
 					} else {
 						tab[15] += ":" + maPiece.getLocation();
 					}
 				}
+				if (maPiece.getName().equals("cavalier")){
+					if(tab[16].equals("wKnight"))
+					{
+						tab[16] = maPiece.getLocation();
+					} else {
+						tab[16] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("tour")) {
+					if(tab[17].equals("wTower"))
+					{
+						tab[17] = maPiece.getLocation();
+					} else {
+						tab[17] += ":" + maPiece.getLocation();
+					}
+				}
+				if (maPiece.getName().equals("pion")) {
+					if(tab[18].equals("wPawn"))
+					{
+						tab[18] = maPiece.getLocation();
+					} else {
+						tab[18] += ":" + maPiece.getLocation();
+					}
+				}
 			}
 			
-			url.replace("bCrazy", tab[5]);
-			url.replace("bKnight", tab[6]);
-			url.replace("bTower", tab[7]);
-			url.replace("bPawn", tab[8]);
-			url.replace("wCrazy", tab[12]);
-			url.replace("wKnight", tab[13]);
-			url.replace("wTower", tab[14]);
-			url.replace("wPawn", tab[15]);
+			String url1 = url.replace("bCrazy", tab[8]);
+			String url2 = url1.replace("bKnight", tab[9]);
+			String url3 = url2.replace("bTower", tab[10]);
+			String url4 = url3.replace("bPawn", tab[11]);
+			String url5 = url4.replace("wCrazy", tab[15]);
+			String url6 = url5.replace("wKnight", tab[16]);
+			String url7 = url6.replace("wTower", tab[17]);
+			url8 = url7.replace("wPawn", tab[18]);
 		}
 		
-		System.out.println("l url est: "+url);
+		System.out.println("l url est: "+url8);
 		return url;
 	}
 
