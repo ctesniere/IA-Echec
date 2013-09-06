@@ -197,7 +197,8 @@ public class ChessBoard extends JPanel implements MouseListener,
 		int destination = ((bestMove.getEndY())*8)+(bestMove.getEndX());
 			
 		System.out.println(bestMove.getStartX() + ":" + bestMove.getStartY() + " -> " + bestMove.getEndX() + ":" + bestMove.getEndY());
-				
+		System.out.println(initialPosition + " -> " + destination);
+		
 		JPanel square = (JPanel) chessBoard.getComponent(initialPosition);
 		movingPiece = square.getName();
 		square.setName("null");
@@ -206,15 +207,6 @@ public class ChessBoard extends JPanel implements MouseListener,
 		square = (JPanel) chessBoard.getComponent(destination);
 		square.setName(movingPiece);
 		square.add(icon);
-		
-//		JPanel component = (JPanel) chessBoard.getComponent(1);
-//		movingPiece = component.getName();
-//		chessPiece = (JLabel) component.getComponent(0);
-//		chessPiece.setVisible(false);
-//		component.getParent().remove(chessPiece);
-//		chessPiece.setVisible(true);
-//		chessBoard.getComponent(destination).setName(movingPiece);
-//		chessBoard.add(chessPiece);
 		chessBoard.revalidate();
 		chessBoard.repaint();
 	}
@@ -267,14 +259,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		
-		StringBuilder strBlackPion = new StringBuilder();
-		StringBuilder strWhitePion = new StringBuilder();
-		StringBuilder strBlackTour = new StringBuilder();
-		StringBuilder strWhiteTour = new StringBuilder();
-		StringBuilder strBlackCavalier = new StringBuilder();
-		StringBuilder strWhiteCavalier = new StringBuilder();
-		StringBuilder strBlackFou = new StringBuilder();
-		StringBuilder strWhiteFou = new StringBuilder();
+		StringBuilder str = new StringBuilder();
 
 		Boolean foundBlackKing = false;
 		Boolean foundWhiteKing = false;
@@ -346,60 +331,84 @@ public class ChessBoard extends JPanel implements MouseListener,
 		}
 		
 		if (!listBlackFou.isEmpty()) {
-			for (PieceEx fou : listBlackFou)
-				strBlackFou.append(fou.getLocation()).append(":");
-			strBlackFou.deleteCharAt(strBlackFou.length()-1);
+			str.setLength(0);
+			for (PieceEx fou : listBlackFou)				
+				str.append(fou.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strBlackFou.append("null");
+			str.append("null");
+		
+		url = url.replace("bCrazy", str.toString());
 
 		if (!listBlackPion.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx pion : listBlackPion)
-				strBlackPion.append(pion.getLocation()).append(":");
-			strBlackPion.deleteCharAt(strBlackPion.length()-1);
+				str.append(pion.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strBlackPion.append("null");
+			str.append("null");
 
+		url = url.replace("bPawn", str.toString());
+		
 		if (!listBlackCavalier.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx cavalier : listBlackCavalier)
-				strBlackCavalier.append(cavalier.getLocation()).append(":");
-			strBlackCavalier.deleteCharAt(strBlackCavalier.length()-1);
+				str.append(cavalier.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strBlackCavalier.append("null");
+			str.append("null");
+		
+		url = url.replace("bKnight", str.toString());
 
 		if (!listBlackTour.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx tour : listBlackTour)
-				strBlackTour.append(tour.getLocation()).append(":");
-			strBlackTour.deleteCharAt(strBlackTour.length()-1);
+				str.append(tour.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strBlackTour.append("null");
+			str.append("null");
+		
+		url = url.replace("bTower", str.toString());
 		
 		if (!listWhiteFou.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx fou : listWhiteFou)
-				strWhiteFou.append(fou.getLocation()).append(":");
-			strWhiteFou.deleteCharAt(strWhiteFou.length()-1);
+				str.append(fou.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strWhiteFou.append("null");
+			str.append("null");
 
+		url = url.replace("wCrazy", str.toString());
+		
 		if (!listWhitePion.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx pion : listWhitePion)
-				strWhitePion.append(pion.getLocation()).append(":");
-			strWhitePion.deleteCharAt(strWhitePion.length()-1);
+				str.append(pion.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strWhitePion.append("null");
+			str.append("null");
 
+		url = url.replace("wPawn", str.toString());
+		
 		if (!listWhiteCavalier.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx cavalier : listWhiteCavalier)
-				strWhiteCavalier.append(cavalier.getLocation()).append(":");
-			strWhiteCavalier.deleteCharAt(strWhiteCavalier.length()-1);
+				str.append(cavalier.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strWhiteCavalier.append("null");
+			str.append("null");
 
+		url = url.replace("wKnight", str.toString());
+		
 		if (!listWhiteTour.isEmpty()) {
+			str.setLength(0);
 			for (PieceEx tour : listWhiteTour)
-				strWhiteTour.append(tour.getLocation()).append(":");
-			strWhiteTour.deleteCharAt(strWhiteTour.length()-1);
+				str.append(tour.getLocation()).append(":");
+			str.deleteCharAt(str.length()-1);
 		} else
-			strWhiteTour.append("null");
+			str.append("null");
+		
+		url = url.replace("wTower", str.toString());
 		
 		if (!foundBlackKing)			
 			url = url.replace("bKing", "null");
@@ -410,15 +419,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		if (!foundWhiteQueen)
 			url = url.replace("wQueen", "null");
 		
-		url = url.replace("bKnight", strBlackCavalier.toString());
-		url = url.replace("bCrazy", strBlackFou.toString());
-		url = url.replace("bPawn", strBlackPion.toString());
-		url = url.replace("bTower", strBlackTour.toString());
-		
-		url = url.replace("wKnight", strWhiteCavalier.toString());
-		url = url.replace("wCrazy", strWhiteFou.toString());
-		url = url.replace("wPawn", strWhitePion.toString());
-		url = url.replace("wTower", strWhiteTour.toString());		
+		System.out.println(url);	
 		return url;
 	}
 
