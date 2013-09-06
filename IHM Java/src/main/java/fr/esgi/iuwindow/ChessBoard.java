@@ -196,7 +196,11 @@ public class ChessBoard extends JPanel implements MouseListener,
 		int initialPosition = ((bestMove.getStartX())*8)+(bestMove.getStartY());
 		int destination = ((bestMove.getEndX())*8)+(bestMove.getEndY());
 		
-		JPanel square = (JPanel) chessBoard.getComponent(initialPosition);
+		JPanel square = (JPanel) chessBoard.getComponent(destination);
+		if (null != square.getName())
+			square.removeAll();
+		
+		square = (JPanel) chessBoard.getComponent(initialPosition);
 		movingPiece = square.getName();
 		square.setName(null);
 		JLabel icon = (JLabel) square.getComponent(0);
