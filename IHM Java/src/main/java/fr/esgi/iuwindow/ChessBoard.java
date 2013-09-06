@@ -193,18 +193,30 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		MoveEx bestMove = export.getBestMovePiece();
 		
-		int initialPosition = ((bestMove.getStartY()-1)*8)+bestMove.getStartX();
-		int destination = ((bestMove.getEndY()-1)*8)+bestMove.getEndX();
+		int initialPosition = ((bestMove.getStartY()-1)*8)+(bestMove.getStartX()+1);
+		int destination = ((bestMove.getEndY())*8)+(bestMove.getEndX());
 			
-		JPanel component = (JPanel) chessBoard.getComponent(initialPosition);
-		movingPiece = component.getName();
-		chessPiece = (JLabel) component.getComponent(0);
-		chessPiece.setVisible(false);
-		chessBoard.getParent().remove(chessPiece);
-		chessPiece.setVisible(true);
-		chessBoard.getComponent(destination).setName(movingPiece);
+		System.out.println(bestMove.getStartX() + ":" + bestMove.getStartY() + " -> " + bestMove.getEndX() + ":" + bestMove.getEndY());
+				
+		JPanel square = (JPanel) chessBoard.getComponent(initialPosition);
+		movingPiece = square.getName();
+		square.setName("null");
+		JLabel icon = (JLabel) square.getComponent(0);
+		square.removeAll();
+		square = (JPanel) chessBoard.getComponent(destination);
+		square.setName(movingPiece);
+		square.add(icon);
+		
+//		JPanel component = (JPanel) chessBoard.getComponent(1);
+//		movingPiece = component.getName();
+//		chessPiece = (JLabel) component.getComponent(0);
+//		chessPiece.setVisible(false);
+//		component.getParent().remove(chessPiece);
+//		chessPiece.setVisible(true);
+//		chessBoard.getComponent(destination).setName(movingPiece);
 //		chessBoard.add(chessPiece);
-		chessBoard.validate();
+		chessBoard.revalidate();
+		chessBoard.repaint();
 	}
 
 	/**
