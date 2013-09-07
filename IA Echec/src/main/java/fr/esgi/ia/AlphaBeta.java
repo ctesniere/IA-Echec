@@ -69,8 +69,7 @@ public class AlphaBeta extends Algorithm {
 
 		for (Move thisMove : allPossibleMove) {
 
-			// Nouvelle valeur de l'échiquier qui ont mon fils (déplacé) et mon
-			// chemin
+			// Definie une valeur au noeud
 			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
 					thisMove, chessValue.getMoves());
 
