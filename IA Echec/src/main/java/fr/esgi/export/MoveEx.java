@@ -10,7 +10,7 @@ import fr.esgi.ia.Helper;
 public final class MoveEx {
 
 	private String pieceName;
-	
+
 	private String start;
 
 	private String end;
