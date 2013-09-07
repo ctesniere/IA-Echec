@@ -133,15 +133,15 @@ public class AlphaBeta extends Algorithm {
 		ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
 
 		// Création de la variable l'alpha
-		ChessboardValue min = new ChessboardValue(chessboard, null, null);
-		min.setValue(Integer.MIN_VALUE);
+		ChessboardValue alpha = new ChessboardValue(chessboard, null, null);
+		alpha.setValue(Integer.MIN_VALUE);
 
 		// Création de la variable beta
-		ChessboardValue max = new ChessboardValue(chessboard, null, null);
-		max.setValue(Integer.MAX_VALUE);
+		ChessboardValue beta = new ChessboardValue(chessboard, null, null);
+		beta.setValue(Integer.MAX_VALUE);
 
 		// AlphaBeta pruning
-		ChessboardValue choice = alphaBetaAlg(chessboardValue, min, max, color, 0);
+		ChessboardValue choice = alphaBetaAlg(chessboardValue, alpha, beta, color, 0);
 
 		return choice.getBestMove();
 	}

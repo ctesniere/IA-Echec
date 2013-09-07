@@ -39,9 +39,10 @@ public class Export {
 				}
 			}
 		}
-		
+
 		// Ajout du meilleur coups
-		bestMovePiece = new MoveEx(move.getStartX(), move.getStartY(), move.getEndX(), move.getEndY(), getColorInString(move.isColor()));
+		bestMovePiece = new MoveEx(move.getStartX(), move.getStartY(), move.getEndX(),
+				move.getEndY(), getColorInString(move.isColor()));
 	}
 
 	// =========================================================================
@@ -49,12 +50,12 @@ public class Export {
 	// =========================================================================
 
 	public String getColorInString(boolean color) {
-		if(Helper.isColorWhite(color))
+		if (Helper.isColorWhite(color))
 			return "White";
 		else
 			return "Black";
 	}
-	
+
 	// =========================================================================
 	// OVERRIDES
 	// =========================================================================

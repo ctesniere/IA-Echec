@@ -72,6 +72,7 @@ public class IA {
 				} catch (IOException e) {
 					output = e.getMessage();
 				}
+				System.out.println(output);
 				break;
 			}
 		}
