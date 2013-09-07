@@ -69,8 +69,6 @@ public class Pion extends Piece {
 		int getY = Helper.getYfromString(positionPiece);
 		int toX = getX, toY = getY;
 
-		int nbCaseLimite = 1;
-
 		// Avance d'une case
 		toY += directionMovementY();
 		ArrayList<Move> moves = new ArrayList<Move>();
@@ -84,7 +82,6 @@ public class Pion extends Piece {
 			// initial
 			if ((!Helper.isColorWhite(isColor()) && getY == 6)
 					|| (Helper.isColorWhite(isColor()) && getY == 1)) {
-				nbCaseLimite++;
 				toY += directionMovementY(); // Avance d'une deuxieme case
 				move = checkThis(toX, toY, chessboard, false);
 
