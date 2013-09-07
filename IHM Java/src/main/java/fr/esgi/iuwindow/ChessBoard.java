@@ -263,7 +263,7 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
 
     public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
         Connexion c = new Connexion();
-        String s = c.Connexion(_url);
+        String s = c.connexion(_url);
 
         if (!s.equals("ERROR: Pas de mouvement possible.")) {
             ObjectMapper mapper = new ObjectMapper();
@@ -274,20 +274,20 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
             int initialPosition = ((bestMove.getStartX()) * 8) + (bestMove.getStartY());
             int destination = ((bestMove.getEndX()) * 8) + (bestMove.getEndY());
 
-            JPanel square = (JPanel) chessBoard.getComponent(destination);
+            JPanel square = (JPanel) this.chessBoard.getComponent(destination);
             if (null != square.getName())
                 square.removeAll();
 
-            square = (JPanel) chessBoard.getComponent(initialPosition);
-            movingPiece = square.getName();
+            square = (JPanel) this.chessBoard.getComponent(initialPosition);
+            this.movingPiece = square.getName();
             square.setName(null);
             JLabel icon = (JLabel) square.getComponent(0);
             square.removeAll();
-            square = (JPanel) chessBoard.getComponent(destination);
-            square.setName(movingPiece);
+            square = (JPanel) this.chessBoard.getComponent(destination);
+            square.setName(this.movingPiece);
             square.add(icon);
-            chessBoard.revalidate();
-            chessBoard.repaint();
+            this.chessBoard.revalidate();
+            this.chessBoard.repaint();
         }
         else
             JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
