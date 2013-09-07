@@ -124,60 +124,18 @@ public class Chessboard implements Cloneable {
 	 */
 	public boolean doMove(Move thisMove) {
 
-		int fromX, fromY, toX, toY;
-		ArrayList<Move> moves;
-		Piece piece;
+		Piece piece = getPiece(thisMove.getStartX(), thisMove.getStartY());
 
-		fromX = thisMove.getStartX();
-		fromY = thisMove.getStartY();
-		toX = thisMove.getEndX();
-		toY = thisMove.getEndY();
+		/*
+		 * TODO Retirez l'indicateur de inDanger si une pièce n'est plus en
+		 * danger
+		 */
 
-		// Get piece
-		piece = getPiece(fromX, fromY);
+		// Générer tous les coups possibles pour cette pièce
+		ArrayList<Move> moves = piece.generateMovesForThisPiece(this);
 
-		/* Remove the inDanger flag if a piece is no more in Danger */
-
-		// Generate all possible moves for this piece
-		moves = piece.generateMovesForThisPiece(this);
-		// For each move find if it eats something
-		for (Move move : moves) {
-			int y = (move.getEndY());
-			int x = (move.getEndX());
-			System.out.println("Coordonnée Move " + piece.getClass().getSimpleName() + " "
-					+ Helper.getStringFromPosition(move.getStartX(), move.getStartY()) + " ("
-					+ Helper.getStringFromPosition(x, y) + ")");
-			Piece enemyPiece = chessboard[y][x];
-			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
-				enemyPiece.noMoreInDanger(); // I will no longer set it in
-				// danger
-			}
-		}
-
-		/* Apply changes */
-
-		// Corriger
-		// piece.setPosition(toX, toY);
-
-		if (piece.isColor() && (chessboard[toY][toX] != null)) {
-			blacks.remove(chessboard[toY][toX]);
-		}
-		if (!(piece.isColor()) && (chessboard[toY][toX] != null)) {
-			whites.remove(chessboard[toY][toX]);
-		}
-
-		chessboard[toY][toX] = piece;
-		chessboard[fromY][fromX] = null;
-
-		// I moved
-		piece.setMoved(true);
-
-		/* Find if now there are pieces in danger */
-
-		// Generate all possible moves for this piece
-		moves = piece.generateMovesForThisPiece(this);
-
-		// For each move find if it eats something
+		// Pour chaque mouvement trouver si elle mange quelque chose et la
+		// mettre en etat de danger
 		for (Move move : moves) {
 			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
@@ -185,7 +143,37 @@ public class Chessboard implements Cloneable {
 			}
 		}
 
-		return (true);
+		// Supprime la pièce qui va ce faire manger de la liste des pieces
+		// (blacks/whites) de sa couleur
+		if (chessboard[thisMove.getEndY()][thisMove.getEndX()] != null) {
+			if (Helper.isColorWhite(piece.isColor()))
+				blacks.remove(chessboard[thisMove.getEndY()][thisMove.getEndX()]);
+			else
+				whites.remove(chessboard[thisMove.getEndY()][thisMove.getEndX()]);
+		}
+
+		// Déplacement de la pièce
+		chessboard[thisMove.getEndY()][thisMove.getEndX()] = piece;
+		chessboard[thisMove.getStartY()][thisMove.getStartX()] = null;
+
+		// Modifie l'etat moved de la pièce
+		piece.setMoved(true);
+
+		/* Trouvez si maintenant il ya des morceaux en danger */
+
+		// Generate all possible moves for this piece
+		moves = piece.generateMovesForThisPiece(this);
+		//
+		// // For each move find if it eats something
+		// for (Move move : moves) {
+		// Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+		// if ((enemyPiece != null) && (enemyPiece.isColor() !=
+		// piece.isColor())) {
+		// enemyPiece.inDanger();
+		// }
+		// }
+
+		return true;
 	}
 
 	/**
