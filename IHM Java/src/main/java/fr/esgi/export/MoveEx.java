@@ -1,5 +1,6 @@
 package fr.esgi.export;
 
+
 /**
  * Classe pour le meilleur mouvement à exporter
  * 
@@ -7,13 +8,9 @@ package fr.esgi.export;
  */
 public final class MoveEx {
 
-	private int startX;
+	private String start;
 
-	private int endX;
-
-	private int startY;
-
-	private int endY;
+	private String end;
 
 	private String color;
 
@@ -22,7 +19,7 @@ public final class MoveEx {
 	// =========================================================================
 
 	public MoveEx() {
-		
+
 	}
 
 	// =========================================================================
@@ -37,23 +34,15 @@ public final class MoveEx {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public int getStartX() {
-		return startX;
-	}
-
-	public int getEndX() {
-		return endX;
-	}
-
-	public int getStartY() {
-		return startY;
-	}
-
-	public int getEndY() {
-		return endY;
-	}
-
 	public String getColor() {
 		return color;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public String getEnd() {
+		return end;
 	}
 }
