@@ -5,7 +5,7 @@ import fr.esgi.service.Color;
 import fr.esgi.service.Position;
 
 /**
-
+ * 
  * 
  * @author Cédric TESNIERE
  * @since 1

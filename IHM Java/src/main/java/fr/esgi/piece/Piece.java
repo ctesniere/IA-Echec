@@ -12,22 +12,22 @@ import fr.esgi.service.Position;
  */
 public class Piece implements PieceRule {
 
-        @Override
-        public void setColor(Color c) {
-                // TODO Auto-generated method stub
+	@Override
+	public void setColor(Color c) {
+		// TODO Auto-generated method stub
 
-        }
+	}
 
-        @Override
-        public void setPosition(Position p) {
-                // TODO Auto-generated method stub
+	@Override
+	public void setPosition(Position p) {
+		// TODO Auto-generated method stub
 
-        }
+	}
 
-        @Override
-        public void setPosition(Position p, boolean b) {
-                // TODO Auto-generated method stub
+	@Override
+	public void setPosition(Position p, boolean b) {
+		// TODO Auto-generated method stub
 
-        }
+	}
 
 }

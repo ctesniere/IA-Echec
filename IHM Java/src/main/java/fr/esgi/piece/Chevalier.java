@@ -6,7 +6,6 @@ import fr.esgi.service.Position;
 
 public class Chevalier implements PieceRule {
 
-
 	@Override
 	public void setColor(Color c) {
 		// TODO Auto-generated method stub

@@ -36,10 +36,9 @@ public class Import {
 	public List<PieceEx> getListPiece() {
 		return listPiece;
 	}
-	
+
 	public MoveEx getBestMovePiece() {
 		return bestMovePiece;
 	}
-
 
 }

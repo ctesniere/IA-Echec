@@ -10,10 +10,10 @@ import fr.esgi.iuwindow.MainGraphique;
  */
 public class App {
 
-    // launcher
-    // --------------------------------------------------------------------------------------------
+	// launcher
+	// --------------------------------------------------------------------------------------------
 
-    public static void main(String[] args) {
-        new MainGraphique();
-    }
+	public static void main(String[] args) {
+		new MainGraphique();
+	}
 }

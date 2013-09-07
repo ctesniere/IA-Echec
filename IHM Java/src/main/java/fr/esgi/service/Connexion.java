@@ -9,55 +9,52 @@ import java.util.Scanner;
 
 public class Connexion {
 
-    // constructors
-    // --------------------------------------------------------------------------------------------
+	// constructors
+	// --------------------------------------------------------------------------------------------
 
-    public Connexion() {
-    }
+	public Connexion() {
+	}
 
-    // instance methods
-    // --------------------------------------------------------------------------------------------
+	// instance methods
+	// --------------------------------------------------------------------------------------------
 
-    public String connexion(String stringUrl) {
-        String response = null;
+	public String connexion(String stringUrl) {
+		String response = null;
 
-        try {
-            URL url = new URL(stringUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
+		try {
+			URL url = new URL(stringUrl);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Accept", "application/json");
 
-            if (connection.getResponseCode() != 200)
-                throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseCode());
+			if (connection.getResponseCode() != 200)
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ connection.getResponseCode());
 
-            response = this.getInputStreamAsString(connection.getInputStream());
+			response = this.getInputStreamAsString(connection.getInputStream());
 
-            connection.disconnect();
-        }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+			connection.disconnect();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        return response;
-    }
+		return response;
+	}
 
-    /**
-     * Convertit le flux sous forme de chaînes de caractères.
-     * 
-     * @param input
-     *            Le flux
-     * 
-     * @throws IOException
-     *             si une erreur I/O intervient
-     */
-    private String getInputStreamAsString(InputStream input) {
-        Scanner scanner = new Scanner(input);
-        String response = scanner.next();
-        scanner.close();
+	/**
+	 * Convertit le flux sous forme de chaînes de caractères.
+	 * 
+	 * @param input Le flux
+	 * 
+	 * @throws IOException si une erreur I/O intervient
+	 */
+	private String getInputStreamAsString(InputStream input) {
+		Scanner scanner = new Scanner(input);
+		String response = scanner.next();
+		scanner.close();
 
-        return response;
-    }
+		return response;
+	}
 }

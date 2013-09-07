@@ -7,15 +7,15 @@ package fr.esgi.service;
  * @since 5 janv. 2013
  */
 public class Position {
-	
+
 	public int x, y;
 
 	public Position(int x, int y) {
-	
+
 	}
 
 	public void set(int x, int y) {
-		
+
 	}
 
 	public boolean isSameCol(Position p) {
@@ -43,7 +43,7 @@ public class Position {
 	}
 
 	public void go(Position p) {
-		
+
 	}
 
 }

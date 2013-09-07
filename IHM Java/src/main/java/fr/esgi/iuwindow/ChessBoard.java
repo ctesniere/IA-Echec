@@ -16,26 +16,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import fr.esgi.export.Export;
-import fr.esgi.export.MoveEx;
-import fr.esgi.export.PieceEx;
+import fr.esgi.importJson.Import;
+import fr.esgi.importJson.MoveEx;
+import fr.esgi.importJson.PieceEx;
 import fr.esgi.service.Connexion;
 import fr.esgi.service.Helper;
 
-public class ChessBoard extends JPanel implements MouseListener,
-		MouseMotionListener {
+public class ChessBoard extends JPanel implements MouseListener, MouseMotionListener {
 
 	// fields
 	// --------------------------------------------------------------------------------------------
@@ -67,8 +64,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				JPanel square = new JPanel(new BorderLayout());
-				square.setBackground(((i + j) % 2 == 0) ? Color.white
-						: Color.gray);
+				square.setBackground(((i + j) % 2 == 0) ? Color.white : Color.gray);
 
 				this.chessBoard.add(square);
 			}
@@ -83,7 +79,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		super.add(this.layeredPane);
 
-		this.initPieces();		
+		this.initPieces();
 	}
 
 	// implemented methods
@@ -247,18 +243,15 @@ public class ChessBoard extends JPanel implements MouseListener,
 	/**
 	 * Place une pièce sur l'échiquier.
 	 * 
-	 * @param index
-	 *            L'index de l'échiquier où placer la pièce
-	 * @param name
-	 *            Le nom de la pièce
+	 * @param index L'index de l'échiquier où placer la pièce
+	 * @param name Le nom de la pièce
 	 */
 	private void placerPiece(String name, int... indexArray) {
 		if (indexArray == null)
 			return;
 
 		for (int index : indexArray) {
-			ImageIcon image = new ImageIcon(this.getClass().getResource(
-					"/" + name + ".png"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("/" + name + ".png"));
 
 			JLabel piece = new JLabel(image);
 
@@ -268,14 +261,13 @@ public class ChessBoard extends JPanel implements MouseListener,
 		}
 	}
 
-	public void connexion(String _url) throws JsonParseException,
-			JsonMappingException, IOException {
+	public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.connexion(_url);
-		
+
 		if (!s.equals("ERROR: Pas de mouvement possible.")) {
 			ObjectMapper mapper = new ObjectMapper();
-			Export export = mapper.readValue(s, Export.class);
+			Import export = mapper.readValue(s, Import.class);
 
 			MoveEx bestMove = export.getBestMovePiece();
 
@@ -284,18 +276,18 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 			int endX = Helper.getXfromString(bestMove.getEnd());
 			int endY = Helper.getYfromString(bestMove.getEnd());
-			
+
 			int initialPosition = ((startY) * 8) + (startX);
 			int destination = ((endY) * 8) + (endX);
-			
+
 			System.out.println(initialPosition + " -> " + destination);
 
 			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
 			if (null != square.getName())
 				square.removeAll();
-				
+
 			square = (JPanel) this.chessBoard.getComponent(initialPosition);
-			this.movingPiece = square.getName();			
+			this.movingPiece = square.getName();
 			square.setName(null);
 			this.chessPiece = (JLabel) square.getComponent(0);
 			square.removeAll();
@@ -304,10 +296,9 @@ public class ChessBoard extends JPanel implements MouseListener,
 			square.add(this.chessPiece);
 			this.chessBoard.revalidate();
 			this.chessBoard.repaint();
-			
+
 		} else
-			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");		
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 	}
 
 	/**
@@ -327,39 +318,39 @@ public class ChessBoard extends JPanel implements MouseListener,
 				location.setLength(0);
 
 				switch (columnPosition) {
-				case 0:
-					location.append("a");
-					break;
-				case 1:
-					location.append("b");
-					break;
-				case 2:
-					location.append("c");
-					break;
-				case 3:
-					location.append("d");
-					break;
-				case 4:
-					location.append("e");
-					break;
-				case 5:
-					location.append("f");
-					break;
-				case 6:
-					location.append("g");
-					break;
-				case 7:
-					location.append("h");
-					break;
-				default:
-					break;
+					case 0:
+						location.append("a");
+						break;
+					case 1:
+						location.append("b");
+						break;
+					case 2:
+						location.append("c");
+						break;
+					case 3:
+						location.append("d");
+						break;
+					case 4:
+						location.append("e");
+						break;
+					case 5:
+						location.append("f");
+						break;
+					case 6:
+						location.append("g");
+						break;
+					case 7:
+						location.append("h");
+						break;
+					default:
+						break;
 				}
 
-				location.append((i/8)+1);
+				location.append((i / 8) + 1);
 
 				// Determines the color of the piece
-				String color = chessBoard.getComponent(i).getName()
-						.startsWith("black_") ? "black" : "white";
+				String color = chessBoard.getComponent(i).getName().startsWith("black_") ? "black"
+						: "white";
 
 				piece.setColor(color);
 				piece.setLocation(location.toString());
@@ -373,7 +364,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		// Change player's turn
 		if (null != isWhiteTurn)
 			isWhiteTurn = !isWhiteTurn;
-		
+
 		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/isWhiteTurn/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 
 		StringBuilder str = new StringBuilder();
@@ -528,41 +519,38 @@ public class ChessBoard extends JPanel implements MouseListener,
 		url = url.replace("wTower", str.toString());
 
 		if (!foundBlackKing) {
-			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 			url = url.replace("bKing", "null");
 		}
 		if (!foundWhiteKing) {
-			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 			url = url.replace("wKing", "null");
 		}
 		if (!foundBlackQueen)
 			url = url.replace("bQueen", "null");
 		if (!foundWhiteQueen)
 			url = url.replace("wQueen", "null");
-		
+
 		// Force the user to select an option
 		while (null == isWhiteTurn) {
-		    JPanel askWhosTurn = new JPanel();
-		    JRadioButton blackRadio = new JRadioButton("Black");
-		    JRadioButton whiteRadio = new JRadioButton("White");
-		    askWhosTurn.add(blackRadio);
-		    askWhosTurn.add(whiteRadio);
-		    JOptionPane.showOptionDialog(null, askWhosTurn,  
-		        "Who's turn ?", JOptionPane.OK_OPTION,  
-		        JOptionPane.QUESTION_MESSAGE, null, null, null);
-		    
-		    // Both test are here to make sure one option is selected
-		    // otherwise, isWhiteTurn must remain null
-		    if(whiteRadio.isSelected())
-		    	this.isWhiteTurn = true;
-		    if(blackRadio.isSelected())
-		    	this.isWhiteTurn = false;
+			JPanel askWhosTurn = new JPanel();
+			JRadioButton blackRadio = new JRadioButton("Black");
+			JRadioButton whiteRadio = new JRadioButton("White");
+			askWhosTurn.add(blackRadio);
+			askWhosTurn.add(whiteRadio);
+			JOptionPane.showOptionDialog(null, askWhosTurn, "Who's turn ?", JOptionPane.OK_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+			// Both test are here to make sure one option is selected
+			// otherwise, isWhiteTurn must remain null
+			if (whiteRadio.isSelected())
+				this.isWhiteTurn = true;
+			if (blackRadio.isSelected())
+				this.isWhiteTurn = false;
 		}
 
 		url = url.replace("isWhiteTurn", String.valueOf(this.isWhiteTurn));
-		
+
 		System.out.println(url);
 		return url;
 	}

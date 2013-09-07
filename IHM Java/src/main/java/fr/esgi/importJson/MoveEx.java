@@ -1,13 +1,12 @@
 package fr.esgi.importJson;
 
-
 /**
  * Classe pour le meilleur mouvement à exporter
  * 
  * @author Cédric TESNIERE
  */
 public final class MoveEx {
-	
+
 	private String pieceName;
 
 	private String start;
