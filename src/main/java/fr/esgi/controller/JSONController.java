@@ -31,7 +31,7 @@ public class JSONController {
 				wTower, wPawn);
 
 		// Retourne le meilleur coup sous forme de JSON
-		return ia.play(roundPlayer, 2, chessboard);
+		return ia.play(roundPlayer, 3, chessboard);
 	}
 
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
