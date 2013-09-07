@@ -1,5 +1,7 @@
 package fr.esgi.export;
 
+import fr.esgi.ia.Helper;
+
 /**
  * Classe pour le meilleur mouvement à exporter
  * 
@@ -7,13 +9,9 @@ package fr.esgi.export;
  */
 public final class MoveEx {
 
-	private int startX;
+	private String start;
 
-	private int endX;
-
-	private int startY;
-
-	private int endY;
+	private String end;
 
 	private String color;
 
@@ -22,10 +20,8 @@ public final class MoveEx {
 	// =========================================================================
 
 	public MoveEx(int startX, int startY, int endX, int endY, String color) {
-		setStartX(startX);
-		setEndX(endX);
-		setStartY(startY);
-		setEndY(endY);
+		setStart(Helper.getStringFromPosition(startX, startY));
+		setEnd(Helper.getStringFromPosition(endX, endY));
 		setColor(color);
 	}
 
@@ -41,43 +37,27 @@ public final class MoveEx {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public int getStartX() {
-		return startX;
-	}
-
-	public void setStartX(int startX) {
-		this.startX = startX;
-	}
-
-	public int getEndX() {
-		return endX;
-	}
-
-	public void setEndX(int endX) {
-		this.endX = endX;
-	}
-
-	public int getStartY() {
-		return startY;
-	}
-
-	public void setStartY(int startY) {
-		this.startY = startY;
-	}
-
-	public int getEndY() {
-		return endY;
-	}
-
-	public void setEndY(int endY) {
-		this.endY = endY;
-	}
-
 	public String getColor() {
 		return color;
 	}
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
 	}
 }

@@ -33,7 +33,6 @@ abstract public class Piece {
 	// =========================================================================
 
 	public Piece() {
-		setInDanger(false);
 		setInDanger(false); // No one is in danger at the start
 		setMoved(false);
 		setEnemy(0);
