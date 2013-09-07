@@ -1,21 +1,5 @@
 package fr.esgi.iuwindow;
 
-import fr.esgi.export.Export;
-import fr.esgi.export.MoveEx;
-import fr.esgi.export.PieceEx;
-import fr.esgi.service.Connexion;
-import fr.esgi.service.Helper;
-
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -31,6 +15,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JRadioButton;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import fr.esgi.export.Export;
+import fr.esgi.export.MoveEx;
+import fr.esgi.export.PieceEx;
+import fr.esgi.service.Connexion;
+import fr.esgi.service.Helper;
+
 public class ChessBoard extends JPanel implements MouseListener,
 		MouseMotionListener {
 
@@ -43,6 +46,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 	private int xAdjustment;
 	private int yAdjustment;
 	private String movingPiece;
+	private Boolean isWhiteTurn;
 
 	// static fields
 	// --------------------------------------------------------------------------------------------
@@ -79,7 +83,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		super.add(this.layeredPane);
 
-		this.initPieces();
+		this.initPieces();		
 	}
 
 	// implemented methods
@@ -366,7 +370,11 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 
-		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/true/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		// Change player's turn
+		if (null != isWhiteTurn)
+			isWhiteTurn = !isWhiteTurn;
+		
+		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/isWhiteTurn/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 
 		StringBuilder str = new StringBuilder();
 
@@ -526,7 +534,28 @@ public class ChessBoard extends JPanel implements MouseListener,
 			url = url.replace("bQueen", "null");
 		if (!foundWhiteQueen)
 			url = url.replace("wQueen", "null");
+		
+		// Force the user to select an option
+		while (null == isWhiteTurn) {
+		    JPanel askWhosTurn = new JPanel();
+		    JRadioButton blackRadio = new JRadioButton("Black");
+		    JRadioButton whiteRadio = new JRadioButton("White");
+		    askWhosTurn.add(blackRadio);
+		    askWhosTurn.add(whiteRadio);
+		    JOptionPane.showOptionDialog(null, askWhosTurn,  
+		        "Who's turn ?", JOptionPane.OK_OPTION,  
+		        JOptionPane.QUESTION_MESSAGE, null, null, null);
+		    
+		    // Both test are here to make sure one option is selected
+		    // otherwise, isWhiteTurn must remain null
+		    if(whiteRadio.isSelected())
+		    	this.isWhiteTurn = true;
+		    if(blackRadio.isSelected())
+		    	this.isWhiteTurn = false;
+		}
 
+		url = url.replace("isWhiteTurn", String.valueOf(this.isWhiteTurn));
+		
 		System.out.println(url);
 		return url;
 	}
