@@ -220,7 +220,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		this.placerPiece("white_fou", 2, 5);
 
 		// placement des pions
-		this.placerPiece("white_pion", 8, 9, 10, 27, 12, 13, 14, 15);
+		this.placerPiece("white_pion", 8, 9, 10, 11, 12, 13, 14, 15);
 
 		/*
 		 * ************ PLACEMENT PIECES NOIRES ***************
@@ -241,7 +241,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		this.placerPiece("black_fou", 58, 61);
 
 		// placements des pions
-		this.placerPiece("black_pion", 48, 49, 50, 51, 36, 53, 54, 55);
+		this.placerPiece("black_pion", 48, 49, 50, 51, 52, 53, 54, 55);
 	}
 
 	/**
@@ -527,9 +527,16 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		url = url.replace("wTower", str.toString());
 
-		if (!foundBlackKing || !foundWhiteKing)
+		if (!foundBlackKing) {
 			JOptionPane.showMessageDialog(null,
 					"Jeu terminé ! Il n'y a plus de coup possible.");
+			url = url.replace("bKing", "null");
+		}
+		if (!foundWhiteKing) {
+			JOptionPane.showMessageDialog(null,
+					"Jeu terminé ! Il n'y a plus de coup possible.");
+			url = url.replace("wKing", "null");
+		}
 		if (!foundBlackQueen)
 			url = url.replace("bQueen", "null");
 		if (!foundWhiteQueen)
