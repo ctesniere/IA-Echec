@@ -9,6 +9,8 @@ import fr.esgi.ia.Helper;
  */
 public final class MoveEx {
 
+	private String pieceName;
+	
 	private String start;
 
 	private String end;
@@ -19,7 +21,8 @@ public final class MoveEx {
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public MoveEx(int startX, int startY, int endX, int endY, String color) {
+	public MoveEx(String pieceNAme, int startX, int startY, int endX, int endY, String color) {
+		setPieceName(pieceNAme);
 		setStart(Helper.getStringFromPosition(startX, startY));
 		setEnd(Helper.getStringFromPosition(endX, endY));
 		setColor(color);
@@ -39,6 +42,14 @@ public final class MoveEx {
 
 	public String getColor() {
 		return color;
+	}
+
+	public String getPieceName() {
+		return pieceName;
+	}
+
+	public void setPieceName(String pieceName) {
+		this.pieceName = pieceName;
 	}
 
 	public void setColor(String color) {

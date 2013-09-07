@@ -6,6 +6,8 @@ package fr.esgi.ia;
  * @author Cédric TESNIERE
  */
 public final class Move {
+	
+	private String pieceName;
 
 	private int startX;
 
@@ -29,7 +31,8 @@ public final class Move {
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Move(int startX, int startY, int endX, int endY, boolean color) {
+	public Move(String pieceName, int startX, int startY, int endX, int endY, boolean color) {
+		setPieceName(pieceName);
 		setStartX(startX);
 		setEndX(endX);
 		setStartY(startY);
@@ -115,6 +118,14 @@ public final class Move {
 	// GETTERS & SETTERS
 	// =========================================================================
 
+	public String getPieceName() {
+		return pieceName;
+	}
+
+	public void setPieceName(String pieceName) {
+		this.pieceName = pieceName;
+	}
+	
 	public boolean getMangia() {
 		return isEating;
 	}

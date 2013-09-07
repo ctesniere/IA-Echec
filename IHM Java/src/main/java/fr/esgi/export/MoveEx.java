@@ -7,6 +7,8 @@ package fr.esgi.export;
  * @author Cédric TESNIERE
  */
 public final class MoveEx {
+	
+	private String pieceName;
 
 	private String start;
 
@@ -44,5 +46,9 @@ public final class MoveEx {
 
 	public String getEnd() {
 		return end;
+	}
+
+	public String getPieceName() {
+		return pieceName;
 	}
 }
