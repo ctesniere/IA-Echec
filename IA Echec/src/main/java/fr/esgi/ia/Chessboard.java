@@ -247,7 +247,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Roi(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Roi(generateID(), color);
 			}
 		}
 
@@ -257,7 +258,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Reine(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Reine(generateID(), color);
 			}
 		}
 
@@ -267,7 +269,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Fou(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Fou(generateID(), color);
 			}
 		}
 
@@ -277,7 +280,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Chevalier(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Chevalier(generateID(), color);
 			}
 		}
 
@@ -287,7 +291,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Tour(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Tour(generateID(), color);
 			}
 		}
 
@@ -297,7 +302,8 @@ public class Chessboard implements Cloneable {
 			for (int i = 0; i < listLocation.length; i++) {
 				y = Helper.getYfromString(listLocation[i]);
 				x = Helper.getXfromString(listLocation[i]);
-				chessboard[y][x] = new Pion(generateID(), color);
+				if (Helper.getStringFromPosition(x, y) != null)
+					chessboard[y][x] = new Pion(generateID(), color);
 			}
 		}
 	}
