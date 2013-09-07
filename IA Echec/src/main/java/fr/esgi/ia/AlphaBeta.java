@@ -55,23 +55,15 @@ public class AlphaBeta extends Algorithm {
 		// couleur sur cet échiquier)
 		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
 				.generateAllPossibleMoves(Helper.isColorWhite(color));
-
-		// INFO Ce bloc de code existe a titre d'information pour le debug
-		// Affichage des mouvements possible avant de continuer
-		for (Move thisMove : allPossibleMove) {
-			Piece piece = chessValue.getActualChessboardClone().getPiece(thisMove.getStartX(),
-					thisMove.getStartY());
-			System.out.println("Piece : " + piece.getClass().getSimpleName() + "("
-					+ thisMove.getStartX() + ":" + thisMove.getStartY() + ") vers " + "("
-					+ thisMove.getEndX() + ":" + thisMove.getEndY() + ")");
-		}
-		System.out.println("-----");
+		printAllPossibleMove(allPossibleMove, counter, chessValue);
 
 		for (Move thisMove : allPossibleMove) {
 
 			// Definie une valeur au noeud
 			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
 					thisMove, chessValue.getMoves());
+
+			printThisMoveNoeuds(thisMove, thisSon, counter);
 
 			if (thisSon.isLastMoveValid()) {
 				if (Helper.isColorWhite(color)) {
@@ -93,6 +85,41 @@ public class AlphaBeta extends Algorithm {
 			else
 				return beta;
 		}
+	}
+
+	/**
+	 * INFO Ce bloc de code existe a titre d'information pour le debug Affichage
+	 * des mouvements possible avant de continuer
+	 * 
+	 * @param allPossibleMove
+	 * @param counter
+	 */
+	public void printAllPossibleMove(ArrayList<Move> allPossibleMove, int counter,
+			ChessboardValue chessValue) {
+
+		// Affiche les mouvements possible du premier noeud
+		if (counter == 1) {
+			for (Move thisMove : allPossibleMove) {
+				Piece piece = chessValue.getActualChessboardClone().getPiece(thisMove.getStartX(),
+						thisMove.getStartY());
+				System.out.println(piece.getClass().getSimpleName() + "("
+						+ Helper.getStringFromPosition(thisMove.getStartX(), thisMove.getStartY())
+						+ ") -> " + "("
+						+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndX())
+						+ ")");
+			}
+			System.out.println("-----");
+		}
+	}
+
+	public void printThisMoveNoeuds(Move thisMove, ChessboardValue thisSon, int counter) {
+		for (int i = 10; i < (counter * 10); i++) {
+			System.out.print(" ");
+		}
+		System.out.println("Depth: " + counter + "; Mouv: "
+				+ Helper.getStringFromPosition(thisMove.getStartX(), thisMove.getStartY()) + " -> "
+				+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndY())
+				+ "; valeur: " + thisSon.getValue());
 	}
 
 	// =========================================================================
