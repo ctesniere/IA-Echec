@@ -1,4 +1,4 @@
-package fr.esgi.export;
+package fr.esgi.importJson;
 
 
 /**

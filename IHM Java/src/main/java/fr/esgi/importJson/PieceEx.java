@@ -1,23 +1,22 @@
-package fr.esgi.export;
+package fr.esgi.importJson;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Export {
+public class PieceEx {
 
 	// =========================================================================
 	// ATTRIBUTES
 	// =========================================================================
 
-	private List<PieceEx> listPiece = new ArrayList<PieceEx>();
+	private String location;
 
-	private MoveEx bestMovePiece;
+	private String color;
+
+	private String name;
 
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
 
-	public Export() {
+	public PieceEx() {
 
 	}
 
@@ -33,13 +32,27 @@ public class Export {
 	// GETTERS & SETTERS
 	// =========================================================================
 
-	public List<PieceEx> getListPiece() {
-		return listPiece;
-	}
-	
-	public MoveEx getBestMovePiece() {
-		return bestMovePiece;
+	public String getLocation() {
+		return location;
 	}
 
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
