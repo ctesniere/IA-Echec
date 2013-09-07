@@ -1,10 +1,10 @@
 package fr.esgi.iuwindow;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
 
 /**
  * MainGraphique
@@ -14,20 +14,36 @@ import javax.swing.border.EmptyBorder;
  */
 public class MainGraphique extends JFrame {
 
-	private JPanel contentPane;
-	
-	public MainGraphique() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
-		PanelButtons panelButtons = new PanelButtons();
-		contentPane.add(panelButtons, BorderLayout.NORTH);
-		
-		ChessBoard chessBoard = new ChessBoard();
-		contentPane.add(chessBoard, BorderLayout.CENTER);
-	}
+    // fields
+    // --------------------------------------------------------------------------------------------
+
+    private JPanel           contentPane;
+
+    // static fields
+    // --------------------------------------------------------------------------------------------
+
+    public static final long serialVersionUID = 1L;
+
+    // constructors
+    // --------------------------------------------------------------------------------------------
+
+    public MainGraphique() {
+        super("IAEchec");
+        super.setBounds(100, 100, 450, 500);
+
+        this.contentPane = new JPanel();
+        this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.contentPane.setLayout(new BorderLayout(0, 0));
+
+        this.contentPane.add(new PanelButtons(), BorderLayout.NORTH);
+        this.contentPane.add(new ChessBoard(), BorderLayout.CENTER);
+
+        super.setContentPane(this.contentPane);
+
+        super.pack();
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setResizable(true);
+        super.setLocationRelativeTo(null);
+        super.setVisible(true);
+    }
 }
