@@ -74,7 +74,7 @@ public class Pion extends Piece {
 		// Avance d'une case
 		toY += directionMovementY();
 		ArrayList<Move> moves = new ArrayList<Move>();
-		Move move = checkThis(toX, toY, chessboard);
+		Move move = checkThis(toX, toY, chessboard, false);
 
 		// Si aucune piece au nouvelle position du pion
 		if (move != null) {
@@ -86,7 +86,7 @@ public class Pion extends Piece {
 					|| (Helper.isColorWhite(isColor()) && getY == 1)) {
 				nbCaseLimite++;
 				toY += directionMovementY(); // Avance d'une deuxieme case
-				move = checkThis(toX, toY, chessboard);
+				move = checkThis(toX, toY, chessboard, false);
 
 				if (move != null) {
 					moves.add(move);
@@ -95,47 +95,20 @@ public class Pion extends Piece {
 			}
 		}
 
-		// Probleme car ces ligne ne seront affecter seulement au deuxieme
-		// deplacement
-
 		for (int lenght = -1; lenght < 2; lenght++) {
-			for (int nbCase = 1; nbCase <= nbCaseLimite; nbCase++) {
-				if (lenght != 0) {
-					toX = getX + lenght; // -1 ou 1
-					toY = getY + (directionMovementY() * nbCase); // 1 ou 2
+			if (lenght != 0) {
+				toX = getX + lenght; // -1 ou 1
+				toY = getY + directionMovementY(); // 1 ou 2
 
-					move = checkThis(toX, toY, chessboard);
+				move = checkThis(toX, toY, chessboard, true);
 
-					if ((move != null) && (move.isColor() != isColor())) {
-						if (move.checkValidity())
-							moves.add(move);
-					}
+				if (move != null) {
+					moves.add(move);
 				}
 			}
 		}
 
 		return moves;
-	}
-
-	@Override
-	public Move checkThis(int toX, int toY, Chessboard chessboard) {
-
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
-
-		Piece destination = chessboard.getPiece(toX, toY);
-
-		// Si la case est vide
-		if (destination == null) {
-			Move move = new Move(getX, getY, toX, toY, isColor());
-
-			// Si le mouvement est valide, on le retourne
-			if (move.checkValidity())
-				return move;
-		}
-
-		return null;
 	}
 
 	// =========================================================================
