@@ -118,9 +118,11 @@ public class Reine extends Piece {
 
 				// Si déplacement est nul, plus possible de ce déplacer dans
 				// cette direction pour la reine
-				if (move != null)
+				if (move != null) {
 					moves.add(move);
-				else
+					if (move.isAttack())
+						break;
+				} else
 					break;
 			}
 
