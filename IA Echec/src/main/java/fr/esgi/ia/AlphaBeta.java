@@ -54,7 +54,7 @@ public class AlphaBeta extends Algorithm {
 		// Génère tous les fils de ce noeud (tous les coups possibles pour cette
 		// couleur sur cet échiquier)
 		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
-				.generateAllPossibleMoves(Helper.isColorWhite(color));
+				.generateAllPossibleMoves(color);
 		printAllPossibleMove(allPossibleMove, counter, chessValue);
 
 		for (Move thisMove : allPossibleMove) {
@@ -105,7 +105,7 @@ public class AlphaBeta extends Algorithm {
 				System.out.println(piece.getClass().getSimpleName() + "("
 						+ Helper.getStringFromPosition(thisMove.getStartX(), thisMove.getStartY())
 						+ ") -> " + "("
-						+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndX())
+						+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndY())
 						+ ")");
 			}
 			System.out.println("-----");
