@@ -41,7 +41,7 @@ public class Export {
 		}
 
 		// Ajout du meilleur coups
-		bestMovePiece = new MoveEx(move.getStartX(), move.getStartY(), move.getEndX(),
+		bestMovePiece = new MoveEx(move.getPieceName(), move.getStartX(), move.getStartY(), move.getEndX(),
 				move.getEndY(), getColorInString(move.isColor()));
 	}
 

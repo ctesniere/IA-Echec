@@ -97,7 +97,7 @@ abstract public class Piece {
 		int getY = Helper.getYfromString(positionPiece);
 
 		// Création du mouvement
-		Move move = new Move(getX, getY, toX, toY, isColor());
+		Move move = new Move(this.getClass().getSimpleName(), getX, getY, toX, toY, isColor());
 
 		// Si c'est une pièce enemie ou si la case est vide
 		boolean validationMouv = false;
