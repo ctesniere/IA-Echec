@@ -268,7 +268,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.connexion(_url);
-
+		
 		if (!s.equals("ERROR: Pas de mouvement possible.")) {
 			ObjectMapper mapper = new ObjectMapper();
 			Export export = mapper.readValue(s, Export.class);
@@ -281,26 +281,29 @@ public class ChessBoard extends JPanel implements MouseListener,
 			int endX = Helper.getXfromString(bestMove.getEnd());
 			int endY = Helper.getYfromString(bestMove.getEnd());
 			
-			int initialPosition = ((startX) * 8) + (startY);
-			int destination = ((endX) * 8) + (endY);
+			int initialPosition = ((startY) * 8) + (startX);
+			int destination = ((endY) * 8) + (endX);
+			
+			System.out.println(initialPosition + " -> " + destination);
 
 			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
 			if (null != square.getName())
 				square.removeAll();
-
+				
 			square = (JPanel) this.chessBoard.getComponent(initialPosition);
-			this.movingPiece = square.getName();
+			this.movingPiece = square.getName();			
 			square.setName(null);
-			JLabel icon = (JLabel) square.getComponent(0);
+			this.chessPiece = (JLabel) square.getComponent(0);
 			square.removeAll();
 			square = (JPanel) this.chessBoard.getComponent(destination);
-			square.setName(movingPiece);
-			square.add(icon);
+			square.setName(this.movingPiece);
+			square.add(this.chessPiece);
 			this.chessBoard.revalidate();
 			this.chessBoard.repaint();
+			
 		} else
 			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");
+					"Jeu terminé ! Il n'y a plus de coup possible.");		
 	}
 
 	/**
@@ -363,7 +366,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 
-		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/false/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/true/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 
 		StringBuilder str = new StringBuilder();
 
@@ -525,7 +528,6 @@ public class ChessBoard extends JPanel implements MouseListener,
 			url = url.replace("wQueen", "null");
 
 		System.out.println(url);
-
 		return url;
 	}
 
