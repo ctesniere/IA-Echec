@@ -4,6 +4,7 @@ import fr.esgi.export.Export;
 import fr.esgi.export.MoveEx;
 import fr.esgi.export.PieceEx;
 import fr.esgi.service.Connexion;
+import fr.esgi.service.Helper;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -30,8 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChessBoard extends JPanel implements MouseListener,
-		MouseMotionListener {
+public class ChessBoard extends JPanel implements MouseListener, MouseMotionListener {
 
 	// fields
 	// --------------------------------------------------------------------------------------------
@@ -62,8 +62,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				JPanel square = new JPanel(new BorderLayout());
-				square.setBackground(((i + j) % 2 == 0) ? Color.white
-						: Color.gray);
+				square.setBackground(((i + j) % 2 == 0) ? Color.white : Color.gray);
 
 				this.chessBoard.add(square);
 			}
@@ -242,18 +241,15 @@ public class ChessBoard extends JPanel implements MouseListener,
 	/**
 	 * Place une pièce sur l'échiquier.
 	 * 
-	 * @param index
-	 *            L'index de l'échiquier où placer la pièce
-	 * @param name
-	 *            Le nom de la pièce
+	 * @param index L'index de l'échiquier où placer la pièce
+	 * @param name Le nom de la pièce
 	 */
 	private void placerPiece(String name, int... indexArray) {
 		if (indexArray == null)
 			return;
 
 		for (int index : indexArray) {
-			ImageIcon image = new ImageIcon(this.getClass().getResource(
-					"/" + name + ".png"));
+			ImageIcon image = new ImageIcon(this.getClass().getResource("/" + name + ".png"));
 
 			JLabel piece = new JLabel(image);
 
@@ -263,8 +259,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		}
 	}
 
-	public void connexion(String _url) throws JsonParseException,
-			JsonMappingException, IOException {
+	public void connexion(String _url) throws JsonParseException, JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.connexion(_url);
 
@@ -274,9 +269,10 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 			MoveEx bestMove = export.getBestMovePiece();
 
-			int initialPosition = ((bestMove.getStartX()) * 8)
-					+ (bestMove.getStartY());
-			int destination = ((bestMove.getEndX()) * 8) + (bestMove.getEndY());
+			int initialPosition = ((Helper.getXfromString(bestMove.getStart()) * 8) + (Helper
+					.getYfromString(bestMove.getStart())));
+			int destination = ((Helper.getXfromString(bestMove.getEnd())) * 8)
+					+ (Helper.getYfromString(bestMove.getEnd()));
 
 			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
 			if (null != square.getName())
@@ -293,8 +289,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			this.chessBoard.revalidate();
 			this.chessBoard.repaint();
 		} else
-			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 	}
 
 	/**
@@ -314,39 +309,39 @@ public class ChessBoard extends JPanel implements MouseListener,
 				location.setLength(0);
 
 				switch (columnPosition) {
-				case 0:
-					location.append("a");
-					break;
-				case 1:
-					location.append("b");
-					break;
-				case 2:
-					location.append("c");
-					break;
-				case 3:
-					location.append("d");
-					break;
-				case 4:
-					location.append("e");
-					break;
-				case 5:
-					location.append("f");
-					break;
-				case 6:
-					location.append("g");
-					break;
-				case 7:
-					location.append("h");
-					break;
-				default:
-					break;
+					case 0:
+						location.append("a");
+						break;
+					case 1:
+						location.append("b");
+						break;
+					case 2:
+						location.append("c");
+						break;
+					case 3:
+						location.append("d");
+						break;
+					case 4:
+						location.append("e");
+						break;
+					case 5:
+						location.append("f");
+						break;
+					case 6:
+						location.append("g");
+						break;
+					case 7:
+						location.append("h");
+						break;
+					default:
+						break;
 				}
 
-				location.append((i/8)+1);
+				location.append((i / 8) + 1);
 
 				// Determines the color of the piece
-				String color = chessBoard.getComponent(i).getName()
-						.startsWith("black_") ? "black" : "white";
+				String color = chessBoard.getComponent(i).getName().startsWith("black_") ? "black"
+						: "white";
 
 				piece.setColor(color);
 				piece.setLocation(location.toString());
@@ -511,8 +506,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		url = url.replace("wTower", str.toString());
 
 		if (!foundBlackKing || !foundWhiteKing)
-			JOptionPane.showMessageDialog(null,
-					"Jeu terminé ! Il n'y a plus de coup possible.");
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 		if (!foundBlackQueen)
 			url = url.replace("bQueen", "null");
 		if (!foundWhiteQueen)
