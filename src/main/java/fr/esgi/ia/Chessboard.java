@@ -122,24 +122,23 @@ public class Chessboard implements Cloneable {
 	 * @param thisMove
 	 * @return Retourne faux dans un cas d'erreurs
 	 */
-	public boolean doMove(Move thisMove) {
+	public void doMove(Move thisMove) {
 
 		Piece piece = getPiece(thisMove.getStartX(), thisMove.getStartY());
 
-		/*
-		 * TODO Retirez l'indicateur de inDanger si une pièce n'est plus en
-		 * danger
-		 */
+		/* Supprime l'etat de danger */
+		// TODO VERIFIER SI CES PIECES PEUVENT ETRE EN DANGER PAR UNE AUTRE DE
+		// MES PIECES
 
 		// Générer tous les coups possibles pour cette pièce
 		ArrayList<Move> moves = piece.generateMovesForThisPiece(this);
 
-		// Pour chaque mouvement trouver si elle mange quelque chose et la
-		// mettre en etat de danger
+		// Pour chaque mouvement avant le deplacement, trouver si elle mange
+		// quelque chose et la mettre en etat de hors de danger
 		for (Move move : moves) {
 			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
-				enemyPiece.inDanger();
+				enemyPiece.noMoreInDanger();
 			}
 		}
 
@@ -161,19 +160,16 @@ public class Chessboard implements Cloneable {
 
 		/* Trouvez si maintenant il ya des morceaux en danger */
 
-		// Generate all possible moves for this piece
+		// Générer tous les coups possibles pour cette pièce
 		moves = piece.generateMovesForThisPiece(this);
-		//
-		// // For each move find if it eats something
-		// for (Move move : moves) {
-		// Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
-		// if ((enemyPiece != null) && (enemyPiece.isColor() !=
-		// piece.isColor())) {
-		// enemyPiece.inDanger();
-		// }
-		// }
 
-		return true;
+		// For each move find if it eats something
+		for (Move move : moves) {
+			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
+				enemyPiece.inDanger();
+			}
+		}
 	}
 
 	/**
