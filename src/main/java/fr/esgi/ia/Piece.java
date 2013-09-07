@@ -105,7 +105,8 @@ abstract public class Piece {
 			if (!diagonalAttackPion)
 				validationMouv = true;
 		} else {
-			if(destination.isColor() != isColor() && (!this.getClass().equals(Pion.class) || diagonalAttackPion)) {
+			if (destination.isColor() != isColor()
+					&& (!this.getClass().equals(Pion.class) || diagonalAttackPion)) {
 				validationMouv = true;
 				move.setAttack(true); // Mouvement d'attaque
 			}

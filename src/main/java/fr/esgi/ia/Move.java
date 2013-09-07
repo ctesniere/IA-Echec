@@ -6,7 +6,7 @@ package fr.esgi.ia;
  * @author Cédric TESNIERE
  */
 public final class Move {
-	
+
 	private String pieceName;
 
 	private int startX;
@@ -125,7 +125,7 @@ public final class Move {
 	public void setPieceName(String pieceName) {
 		this.pieceName = pieceName;
 	}
-	
+
 	public boolean getMangia() {
 		return isEating;
 	}
