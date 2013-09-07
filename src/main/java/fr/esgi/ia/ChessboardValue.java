@@ -46,12 +46,15 @@ public class ChessboardValue {
 			color = move.isColor();
 			lastMove = move;
 
-			// Let's copy the moves
+			actualChessboardClone.doMove(move);
+
+			// Copie des mouvements
 			if (earlyMoves != null && earlyMoves.size() > 0) {
 				for (Move thisMove : earlyMoves)
 					moves.add(thisMove);
 			}
-			// Ajout de ce mouvement
+
+			// Ajout du mouvement
 			moves.add(move);
 		}
 
