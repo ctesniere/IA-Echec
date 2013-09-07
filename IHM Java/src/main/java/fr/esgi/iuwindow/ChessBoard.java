@@ -220,7 +220,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		this.placerPiece("white_fou", 2, 5);
 
 		// placement des pions
-		this.placerPiece("white_pion", 8, 9, 10, 27, 12, 13, 14, 15);
+		this.placerPiece("white_pion", 8, 9, 10, 11, 12, 13, 14, 15);
 
 		/*
 		 * ************ PLACEMENT PIECES NOIRES ***************
@@ -241,7 +241,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 		this.placerPiece("black_fou", 58, 61);
 
 		// placements des pions
-		this.placerPiece("black_pion", 48, 49, 50, 51, 36, 53, 54, 55);
+		this.placerPiece("black_pion", 48, 49, 50, 51, 52, 53, 54, 55);
 	}
 
 	/**
