@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.codehaus.jackson.JsonParseException;
@@ -188,28 +189,33 @@ public class ChessBoard extends JPanel implements MouseListener,
 			JsonMappingException, IOException {
 		Connexion c = new Connexion();
 		String s = c.Connexion(_url);
-		ObjectMapper mapper = new ObjectMapper();
-		Export export = mapper.readValue(s, Export.class);
 		
-		MoveEx bestMove = export.getBestMovePiece();
-		
-		int initialPosition = ((bestMove.getStartX())*8)+(bestMove.getStartY());
-		int destination = ((bestMove.getEndX())*8)+(bestMove.getEndY());
-		
-		JPanel square = (JPanel) chessBoard.getComponent(destination);
-		if (null != square.getName())
+		if(!s.equals("ERROR: Pas de mouvement possible.")) {
+			ObjectMapper mapper = new ObjectMapper();
+			Export export = mapper.readValue(s, Export.class);
+				
+			MoveEx bestMove = export.getBestMovePiece();
+			
+			int initialPosition = ((bestMove.getStartX())*8)+(bestMove.getStartY());
+			int destination = ((bestMove.getEndX())*8)+(bestMove.getEndY());
+			
+			JPanel square = (JPanel) chessBoard.getComponent(destination);
+			if (null != square.getName())
+				square.removeAll();
+			
+			square = (JPanel) chessBoard.getComponent(initialPosition);
+			movingPiece = square.getName();
+			square.setName(null);
+			JLabel icon = (JLabel) square.getComponent(0);
 			square.removeAll();
-		
-		square = (JPanel) chessBoard.getComponent(initialPosition);
-		movingPiece = square.getName();
-		square.setName(null);
-		JLabel icon = (JLabel) square.getComponent(0);
-		square.removeAll();
-		square = (JPanel) chessBoard.getComponent(destination);
-		square.setName(movingPiece);
-		square.add(icon);
-		chessBoard.revalidate();
-		chessBoard.repaint();
+			square = (JPanel) chessBoard.getComponent(destination);
+			square.setName(movingPiece);
+			square.add(icon);
+			chessBoard.revalidate();
+			chessBoard.repaint();
+		}
+		else
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 	}
 
 	/**
@@ -258,7 +264,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 			}
 		}
 
-		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
+		String url = "http://127.0.0.1:8080/IA_Echec/alphabeta/false/black/bKing/bQueen/bCrazy/bKnight/bTower/bPawn/white/wKing/wQueen/wCrazy/wKnight/wTower/wPawn";
 		
 		StringBuilder str = new StringBuilder();
 
@@ -411,16 +417,15 @@ public class ChessBoard extends JPanel implements MouseListener,
 		
 		url = url.replace("wTower", str.toString());
 		
-		if (!foundBlackKing)			
-			url = url.replace("bKing", "null");
+		if (!foundBlackKing || !foundWhiteKing)
+			JOptionPane.showMessageDialog(null, "Jeu terminé ! Il n'y a plus de coup possible.");
 		if (!foundBlackQueen)
 			url = url.replace("bQueen", "null");
-		if (!foundWhiteKing)
-			url = url.replace("wKing", "null");
 		if (!foundWhiteQueen)
 			url = url.replace("wQueen", "null");
 		
-		System.out.println(url);	
+		System.out.println(url);
+		
 		return url;
 	}
 
