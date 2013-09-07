@@ -47,6 +47,6 @@ public class JSONController {
 				"a1:h1", "a2:b2:c2:d2:e2:f2:g2:h2");
 
 		// Retourne le meilleur coup
-		return ia.play(Algorithm.isWhite(), 2, chessboard);
+		return ia.play(Algorithm.isWhite(), 3, chessboard);
 	}
 }
