@@ -72,7 +72,6 @@ public class IA {
 				} catch (IOException e) {
 					output = e.getMessage();
 				}
-				//output += myMove.moveOutputString() + " ";
 				break;
 			}
 		}
