@@ -83,12 +83,13 @@ abstract public class Piece {
 	 * Test le possible mouvement, si il est correcte alors on retourne un objet
 	 * 'Move' sinon on retourne null
 	 * 
-	 * @param toX
-	 * @param toY
+	 * @param toX Coordonnée X de la cible
+	 * @param toY Coordonnée Y de la cible
+	 * @param diagonalAttackPion Ative les attaque en diagonale pour les pions
 	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	public Move checkThis(int toX, int toY, Chessboard chessboard) {
+	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion) {
 
 		Piece destination = chessboard.getPiece(toX, toY);
 
@@ -96,16 +97,33 @@ abstract public class Piece {
 		int getX = Helper.getXfromString(positionPiece);
 		int getY = Helper.getYfromString(positionPiece);
 
-		// Si c'est une pièce enemie ou si la case est vide
-		if (destination == null || destination.isColor() != isColor()) {
-			Move move = new Move(getX, getY, toX, toY, isColor());
+		// Création du mouvement
+		Move move = new Move(getX, getY, toX, toY, isColor());
 
-			// Si le mouvement est valide, on le retourne
-			if (move.checkValidity())
-				return move;
+		// Si c'est une pièce enemie ou si la case est vide
+		boolean validationMouv = false;
+		if (destination == null) {
+			if (!diagonalAttackPion)
+				validationMouv = true;
+		} else {
+			if(destination.isColor() != isColor() && (!this.getClass().equals(Pion.class) || diagonalAttackPion)) {
+				validationMouv = true;
+				move.setAttack(true); // Mouvement d'attaque
+			}
 		}
 
-		return null;
+		// Si le mouvement est valide, on le retourne
+		if (move.checkValidity() && validationMouv)
+			return move;
+		else
+			return null;
+	}
+
+	/**
+	 * @see Piece#checkThis(int, int, Chessboard, boolean, boolean)
+	 */
+	public Move checkThis(int toX, int toY, Chessboard chessboard) {
+		return checkThis(toX, toY, chessboard, false);
 	}
 
 	/**

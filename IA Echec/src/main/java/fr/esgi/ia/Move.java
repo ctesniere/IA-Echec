@@ -23,6 +23,8 @@ public final class Move {
 
 	private String promotion = null;
 
+	private boolean attack = false;
+
 	// =========================================================================
 	// CONSTRUCTORS
 	// =========================================================================
@@ -179,5 +181,13 @@ public final class Move {
 
 	public void setPromo(boolean promo) {
 		this.promo = promo;
+	}
+
+	public boolean isAttack() {
+		return attack;
+	}
+
+	public void setAttack(boolean attack) {
+		this.attack = attack;
 	}
 }
