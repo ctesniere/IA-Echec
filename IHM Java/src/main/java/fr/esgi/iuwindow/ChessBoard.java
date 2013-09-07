@@ -266,7 +266,7 @@ public class ChessBoard extends JPanel implements MouseListener,
 	public void connexion(String _url) throws JsonParseException,
 			JsonMappingException, IOException {
 		Connexion c = new Connexion();
-		String s = c.Connexion(_url);
+		String s = c.connexion(_url);
 
 		if (!s.equals("ERROR: Pas de mouvement possible.")) {
 			ObjectMapper mapper = new ObjectMapper();
@@ -278,20 +278,20 @@ public class ChessBoard extends JPanel implements MouseListener,
 					+ (bestMove.getStartY());
 			int destination = ((bestMove.getEndX()) * 8) + (bestMove.getEndY());
 
-			JPanel square = (JPanel) chessBoard.getComponent(destination);
+			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
 			if (null != square.getName())
 				square.removeAll();
 
-			square = (JPanel) chessBoard.getComponent(initialPosition);
-			movingPiece = square.getName();
+			square = (JPanel) this.chessBoard.getComponent(initialPosition);
+			this.movingPiece = square.getName();
 			square.setName(null);
 			JLabel icon = (JLabel) square.getComponent(0);
 			square.removeAll();
-			square = (JPanel) chessBoard.getComponent(destination);
+			square = (JPanel) this.chessBoard.getComponent(destination);
 			square.setName(movingPiece);
 			square.add(icon);
-			chessBoard.revalidate();
-			chessBoard.repaint();
+			this.chessBoard.revalidate();
+			this.chessBoard.repaint();
 		} else
 			JOptionPane.showMessageDialog(null,
 					"Jeu terminé ! Il n'y a plus de coup possible.");
@@ -305,37 +305,37 @@ public class ChessBoard extends JPanel implements MouseListener,
 		StringBuilder location = new StringBuilder();
 		String pieceName;
 		for (int i = 0; i < 64; i++) {
-			pieceName = chessBoard.getComponent(i).getName();
+			pieceName = this.chessBoard.getComponent(i).getName();
 
 			if (null != pieceName) {
-				int columnPosition = (i % 8) + 1;
+				int columnPosition = (i % 8);
 				PieceEx piece = new PieceEx();
 
 				location.setLength(0);
 
 				switch (columnPosition) {
-				case 1:
+				case 0:
 					location.append("a");
 					break;
-				case 2:
+				case 1:
 					location.append("b");
 					break;
-				case 3:
+				case 2:
 					location.append("c");
 					break;
-				case 4:
+				case 3:
 					location.append("d");
 					break;
-				case 5:
+				case 4:
 					location.append("e");
 					break;
-				case 6:
+				case 5:
 					location.append("f");
 					break;
-				case 7:
+				case 6:
 					location.append("g");
 					break;
-				case 8:
+				case 7:
 					location.append("h");
 					break;
 				default:
