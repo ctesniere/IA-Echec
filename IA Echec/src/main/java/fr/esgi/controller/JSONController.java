@@ -14,24 +14,24 @@ import fr.esgi.ia.IA;
 @RequestMapping("/alphabeta")
 public class JSONController {
 
-	@RequestMapping(value = "/player1/{p1King}/{p1Queen}/{p1Crazy}/{p1Knight}/{p1Tower}/{p1Pawn}/player2/{p2King}/{p2Queen}/{p2Crazy}/{p2Knight}/{p2Tower}/{p2Pawn}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{roundPlayer}/black/{bKing}/{bQueen}/{bCrazy}/{bKnight}/{bTower}/{bPawn}/white/{wKing}/{wQueen}/{wCrazy}/{wKnight}/{wTower}/{wPawn}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getShopInJSON(@PathVariable String p1King, @PathVariable String p1Queen,
-			@PathVariable String p1Crazy, @PathVariable String p1Knight, @PathVariable String p1Tower,
-			@PathVariable String p1Pawn, @PathVariable String p2King, @PathVariable String p2Queen,
-			@PathVariable String p2Crazy, @PathVariable String p2Knight, @PathVariable String p2Tower,
-			@PathVariable String p2Pawn) {
+	public String getShopInJSON(@PathVariable boolean roundPlayer, @PathVariable String bKing,
+			@PathVariable String bQueen, @PathVariable String bCrazy, @PathVariable String bKnight,
+			@PathVariable String bTower, @PathVariable String bPawn, @PathVariable String wKing,
+			@PathVariable String wQueen, @PathVariable String wCrazy, @PathVariable String wKnight,
+			@PathVariable String wTower, @PathVariable String wPawn) {
 
 		IA ia = new IA();
 
 		Chessboard chessboard = new Chessboard();
-		chessboard.insertPieceChessboard(Algorithm.isBlack(), p1King, p1Queen, p1Crazy, p1Knight,
-				p1Tower, p1Pawn);
-		chessboard.insertPieceChessboard(Algorithm.isWhite(), p2King, p2Queen, p2Crazy, p2Knight,
-				p2Tower, p2Pawn);
+		chessboard.insertPieceChessboard(Algorithm.isBlack(), bKing, bQueen, bCrazy, bKnight,
+				bTower, bPawn);
+		chessboard.insertPieceChessboard(Algorithm.isWhite(), wKing, wQueen, wCrazy, wKnight,
+				wTower, wPawn);
 
 		// Retourne le meilleur coup sous forme de JSON
-		return ia.play(Algorithm.isWhite(), 3, chessboard);
+		return ia.play(roundPlayer, 2, chessboard);
 	}
 
 	@RequestMapping(value = "/init", method = RequestMethod.GET)
@@ -47,6 +47,6 @@ public class JSONController {
 				"a1:h1", "a2:b2:c2:d2:e2:f2:g2:h2");
 
 		// Retourne le meilleur coup
-		return ia.play(Algorithm.isWhite(), 3, chessboard);
+		return ia.play(Algorithm.isWhite(), 2, chessboard);
 	}
 }
