@@ -92,9 +92,11 @@ public class Fou extends Piece {
 
 				// Si déplacement est nul, plus possible de ce déplacer dans
 				// cette direction pour le fou
-				if (move != null)
+				if (move != null) {
 					moves.add(move);
-				else
+					if (move.isAttack())
+						break;
+				} else
 					break;
 			}
 
