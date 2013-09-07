@@ -527,9 +527,16 @@ public class ChessBoard extends JPanel implements MouseListener,
 
 		url = url.replace("wTower", str.toString());
 
-		if (!foundBlackKing || !foundWhiteKing)
+		if (!foundBlackKing) {
 			JOptionPane.showMessageDialog(null,
 					"Jeu terminé ! Il n'y a plus de coup possible.");
+			url = url.replace("bKing", "null");
+		}
+		if (!foundWhiteKing) {
+			JOptionPane.showMessageDialog(null,
+					"Jeu terminé ! Il n'y a plus de coup possible.");
+			url = url.replace("wKing", "null");
+		}
 		if (!foundBlackQueen)
 			url = url.replace("bQueen", "null");
 		if (!foundWhiteQueen)
