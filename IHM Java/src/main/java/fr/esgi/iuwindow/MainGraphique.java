@@ -45,32 +45,7 @@ public class MainGraphique extends JFrame {
 		this.contentPane.add(new JScrollPane(new JTextArea()), BorderLayout.EAST);
 		
 		super.setContentPane(this.contentPane);
-		
-		Dimension indexSize = new Dimension(20, 10);
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(indexSize);
-		contentPane.add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(8, 1));
-		for(int i = 0; i < 8; i++) {
-			JPanel indexSquare = new JPanel();
-			JLabel indexLabel = new JLabel(String.valueOf(i+1));
-			indexSquare.add(indexLabel);
-			panel.add(indexSquare);
-		}
-		
-		indexSize.setSize(10, 20);
-		String[] columns = {"a", "b", "c", "d", "e", "f", "g", "g"};
-		panel = new JPanel();
-		panel.setPreferredSize(indexSize);
-		contentPane.add(panel, BorderLayout.SOUTH);
-		panel.setLayout(new GridLayout(1, 8));
-		for(int i = 0; i < 8; i++) {
-			JPanel indexSquare = new JPanel();
-			JLabel indexLabel = new JLabel(columns[i]);
-			indexSquare.add(indexLabel);
-			panel.add(indexSquare);
-		}
-		
+					
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setResizable(true);
 		super.setLocationRelativeTo(null);
