@@ -164,8 +164,8 @@ public class ChessboardValue {
 							val = val + temp;
 						} else {
 							// Si Tour ou Roi
-							if (piece.getClass().getSimpleName().equals(TypePiece.KING)
-									|| piece.getClass().getSimpleName().equals(TypePiece.ROOK)) {
+							if (piece.getClass().equals(Roi.class)
+									|| piece.getClass().equals(Tour.class)) {
 								// Note normale
 								temp = piece.getValue();
 								val = val + temp;
