@@ -21,6 +21,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -280,6 +281,10 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
 			int initialPosition = ((startY) * 8) + (startX);
 			int destination = ((endY) * 8) + (endX);
 
+			JTextArea histo = (JTextArea) getParent().getComponent(2);
+			histo.append(bestMove.getColor() + " " + bestMove.getPieceName() 
+					+ " : " + bestMove.getStart() + " -> " + bestMove.getEnd());
+			
 			System.out.println(initialPosition + " -> " + destination);
 
 			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
