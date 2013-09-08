@@ -30,7 +30,7 @@ public class Roi extends Piece {
 	 * @param color
 	 */
 	public Roi(int id, boolean color) {
-		super(id, color, 200);
+		super(id, color, 10000);
 	}
 
 	// =========================================================================
