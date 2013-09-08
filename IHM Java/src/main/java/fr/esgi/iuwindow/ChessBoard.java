@@ -82,7 +82,7 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
 
 		super.add(this.layeredPane);
 
-		this.initPieces();
+		this.initPieces();		
 	}
 
 	// implemented methods
@@ -292,9 +292,10 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
 			System.out.println(initialPosition + " -> " + destination);
 
 			JPanel square = (JPanel) this.chessBoard.getComponent(destination);
-			if (null != square.getName())
+			if (null != square.getName()) {
 				square.removeAll();
-
+				histo.append(square.getName() + " est mangé\n");
+			}
 			square = (JPanel) this.chessBoard.getComponent(initialPosition);
 			this.movingPiece = square.getName();
 			square.setName(null);
