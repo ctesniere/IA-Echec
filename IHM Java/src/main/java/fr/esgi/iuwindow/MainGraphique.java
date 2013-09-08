@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -29,7 +30,7 @@ public class MainGraphique extends JFrame {
 
 	public MainGraphique() {
 		super("IAEchec");
-		super.setBounds(100, 100, 450, 500);
+		super.setBounds(100, 100, 600, 500);
 
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -37,10 +38,10 @@ public class MainGraphique extends JFrame {
 
 		this.contentPane.add(new PanelButtons(), BorderLayout.NORTH);
 		this.contentPane.add(new ChessBoard(), BorderLayout.CENTER);
+		this.contentPane.add(new JTextArea(), BorderLayout.EAST);
 
 		super.setContentPane(this.contentPane);
 
-		super.pack();
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setResizable(true);
 		super.setLocationRelativeTo(null);
