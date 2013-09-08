@@ -36,7 +36,7 @@ public class Reine extends Piece {
 	 * @param color
 	 */
 	public Reine(int id, boolean color) {
-		super(id, color, 900);
+		super(id, color, 880);
 	}
 
 	// =========================================================================

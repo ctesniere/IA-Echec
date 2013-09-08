@@ -26,7 +26,7 @@ public class Chevalier extends Piece {
 	// =========================================================================
 
 	public Chevalier(int id, boolean color) {
-		super(id, color, 300);
+		super(id, color, 320);
 	}
 
 	// =========================================================================
