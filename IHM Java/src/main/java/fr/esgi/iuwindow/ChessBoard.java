@@ -21,7 +21,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JViewport;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -281,9 +283,11 @@ public class ChessBoard extends JPanel implements MouseListener, MouseMotionList
 			int initialPosition = ((startY) * 8) + (startX);
 			int destination = ((endY) * 8) + (endX);
 
-			JTextArea histo = (JTextArea) getParent().getComponent(2);
+			JScrollPane scrollPane = (JScrollPane) getParent().getComponent(2);
+			JViewport viewPort = (JViewport) scrollPane.getComponent(0);
+			JTextArea histo = (JTextArea) viewPort.getComponent(0);
 			histo.append(bestMove.getColor() + " " + bestMove.getPieceName() 
-					+ " : " + bestMove.getStart() + " -> " + bestMove.getEnd());
+					+ " : " + bestMove.getStart() + " -> " + bestMove.getEnd() + "\n");
 			
 			System.out.println(initialPosition + " -> " + destination);
 

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -38,7 +39,7 @@ public class MainGraphique extends JFrame {
 
 		this.contentPane.add(new PanelButtons(), BorderLayout.NORTH);
 		this.contentPane.add(new ChessBoard(), BorderLayout.CENTER);
-		this.contentPane.add(new JTextArea(), BorderLayout.EAST);
+		this.contentPane.add(new JScrollPane(new JTextArea()), BorderLayout.EAST);
 
 		super.setContentPane(this.contentPane);
 
