@@ -27,7 +27,7 @@ public class Tour extends Piece {
 	 * @param color
 	 */
 	public Tour(int id, boolean color) {
-		super(id, color, 500);
+		super(id, color, 510);
 	}
 
 	// =========================================================================

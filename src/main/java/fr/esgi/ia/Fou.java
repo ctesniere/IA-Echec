@@ -29,7 +29,7 @@ public class Fou extends Piece {
 	 * @param color
 	 */
 	public Fou(int id, boolean color) {
-		super(id, color, 325);
+		super(id, color, 333);
 	}
 
 	// =========================================================================
