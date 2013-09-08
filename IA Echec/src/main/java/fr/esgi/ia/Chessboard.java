@@ -203,9 +203,13 @@ public class Chessboard implements Cloneable {
 		} else {
 			listPiece = blacks;
 		}
-
+		
 		// Parcours les pièces afin de lister les mouvements possibles
+		boolean existRoi = false;
 		for (Piece piece : listPiece) {
+			if (piece.getClass().equals(Roi.class)) {
+				existRoi = true;
+			}
 			ArrayList<Move> movesForThisPiece = piece.generateMovesForThisPiece(this);
 			if (!(movesForThisPiece.isEmpty())) {
 				for (Move move : movesForThisPiece) {
@@ -213,6 +217,10 @@ public class Chessboard implements Cloneable {
 				}
 			}
 		}
+		
+		// Si il n'y a plus de roi alors la partie s'arrete
+		if (!existRoi)
+			moves = new ArrayList<Move>();
 
 		if (Helper.isColorWhite(color)) {
 			setNbWhiteMoves(moves.size());
