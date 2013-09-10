@@ -1,4 +1,5 @@
-# PRESENTATION DU PROJET :
+# IA Echec
+[![Build Status](https://travis-ci.org/ctesniere/IA-Echec.png?branch=master)](https://travis-ci.org/ctesniere/IA-Echec)
 
 ## Équipe
 
