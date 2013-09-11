@@ -1,0 +1,5 @@
+# kickstart travis.
+language: java
+
+script
+	- travis.sh
