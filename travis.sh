@@ -1,2 +1,4 @@
-cd IA\ Echec/
+#!/bin/bash
+
+echo "Bonjour"
 mvn install test
