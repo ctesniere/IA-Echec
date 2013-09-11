@@ -1,4 +1,4 @@
 # kickstart travis.
 language: java
 
-script: bash ./IA\ Echec/travis.sh
+script: ./travis.sh

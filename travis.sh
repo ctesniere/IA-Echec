@@ -1,4 +1,6 @@
 #!/bin/bash
 
-echo "Bonjour"
+echo "Test"
+cd "IA Echec"
+
 mvn install test
