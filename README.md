@@ -1,5 +1,6 @@
 # IA Echec
 [![Build Status](https://travis-ci.org/ctesniere/IA-Echec.png?branch=master)](https://travis-ci.org/ctesniere/IA-Echec)
+[![Dependency Status](https://gemnasium.com/ctesniere/IA-Echec.png)](https://gemnasium.com/ctesniere/IA-Echec)
 
 ## Présentation
 
