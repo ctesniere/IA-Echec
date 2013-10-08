@@ -11,5 +11,5 @@ L'IA jouera jusqu'à ce que le coté blanc ou noir ait gagné ou que plus aucun 
 
 ## Installation
 
-Executer l'IA dans le teminal avec la commande ``mvn clean install tomca:run``
+Executer l'IA dans le teminal avec la commande ``mvn clean install tomcat:run``
 Executer dans eclipse l'IHM avec ``Java Application`` sur App.java
