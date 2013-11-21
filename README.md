@@ -6,7 +6,7 @@
 
 ## Présentation
 
-Nous souhaitons créer une application swing JAVA (partie IHM) et un webService qui sera l'Intelligence Artificielle (partie Serveur) qui gérera les déplacement des pions d'un échiquiers. Le but est de permettre à l'utilisateur d'apprendre à jouer, de façon ludique et interactive, aux échecs.
+Le projet est constituer d'une application swing JAVA (partie IHM) et un webService qui sera l'Intelligence Artificielle (partie Serveur) qui gérera les déplacement des pions d'un échiquiers.
   
 A chaque coup de l'IA, le joueur aura la possibilité de revoir le coup d'avant ou suivant grâce a l'historique des coups.
   
