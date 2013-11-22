@@ -1,8 +1,8 @@
 # IA Echec
 [![Build Status](https://travis-ci.org/ctesniere/IA-Echec.png?branch=master)](https://travis-ci.org/ctesniere/IA-Echec)
 [![Dependency Status](https://gemnasium.com/ctesniere/IA-Echec.png)](https://gemnasium.com/ctesniere/IA-Echec)
-[![Coverage Status](https://coveralls.io/repos/ctesniere/IA-Echec/badge.png)](https://coveralls.io/r/ctesniere/IA-Echec)
-
+[![Coverage Status](https://coveralls.io/repos/ctesniere/IA-Echec/badge.png)](https://coveralls.io/r/ctesniere/IA-Echec)  
+![Codeship Status](https://www.codeship.io/projects/1cba7b50-3595-0131-8c4c-4ace70bdb565/status)]
 
 ## Présentation
 
