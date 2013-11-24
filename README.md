@@ -14,4 +14,7 @@ L'IA jouera jusqu'à ce que le coté blanc ou noir ait gagné ou que plus aucun 
 ## Installation
 
 Executer l'IA dans le teminal avec la commande ``mvn clean install tomcat:run``
-Executer dans eclipse l'IHM avec ``Java Application`` sur App.java
+
+## IHM Swing
+
+Une IHM est disponible via le fork suivant : [https://github.com/pyuen/IA-Echec-UI](https://github.com/pyuen/IA-Echec-UI)
