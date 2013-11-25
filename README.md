@@ -5,11 +5,11 @@
 
 ## Présentation
 
-Le projet est constituer d'une application swing JAVA (partie IHM) et un webService qui sera l'Intelligence Artificielle (partie Serveur) qui gérera les déplacement des pions d'un échiquiers.
+Le projet est constitué d'une application swing JAVA (partie IHM) et un WebService qui sera l'Intelligence Artificielle (partie Serveur) qui gérera les déplacements des pions d'un échiquiers.
   
-A chaque coup de l'IA, le joueur aura la possibilité de revoir le coup d'avant ou suivant grâce a l'historique des coups.
+A chaque coup de l'IA, le joueur aura la possibilité de revoir le coup d'avant ou suivant grâce à l'historique des coups.
   
-L'IA jouera jusqu'à ce que le coté blanc ou noir ait gagné ou que plus aucun coup ne soit possible. Le joueur aura la possibilité de recommencer une autre partie. 
+L'IA jouera jusqu'à ce que le côté blanc ou noir ait gagné ou que plus aucun coup ne soit possible. Le joueur aura la possibilité de recommencer une autre partie. 
 
 ## Installation
 
