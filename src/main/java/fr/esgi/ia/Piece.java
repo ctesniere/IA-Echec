@@ -88,7 +88,7 @@ abstract public class Piece {
 	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion) {
+	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion, boolean inDanger, Boolean color) {
 
 		Piece destination = chessboard.getPiece(toX, toY);
 
@@ -111,6 +111,10 @@ abstract public class Piece {
 				move.setAttack(true); // Mouvement d'attaque
 			}
 		}
+		
+		if(validationMouv) {
+			chessboard.generateAllPossibleMoves(!color);
+		}
 
 		// Si le mouvement est valide, on le retourne
 		if (move.checkValidity() && validationMouv)
@@ -118,18 +122,104 @@ abstract public class Piece {
 		else
 			return null;
 	}
+	
+	/**
+	 * @see Piece#checkThis(int, int, Chessboard, boolean, boolean, Boolean)
+	 */
+	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion) {
+		return checkThis(toX, toY, chessboard, false, true, null);
+	}
 
 	/**
-	 * @see Piece#checkThis(int, int, Chessboard, boolean, boolean)
+	 * @see Piece#checkThis(int, int, Chessboard, boolean, boolean, Boolean)
 	 */
 	public Move checkThis(int toX, int toY, Chessboard chessboard) {
-		return checkThis(toX, toY, chessboard, false);
+		return checkThis(toX, toY, chessboard, false, true, null);
 	}
 
 	/**
 	 * Cette fonction doit être mise en oeuvre dans chaque sous-classe.
 	 */
 	abstract public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard);
+
+	public boolean pieceInDanger(int toX, int toY, Chessboard chessboard) {
+		ArrayList<Move> moves = new ArrayList<Move>();
+
+		String positionPiece = chessboard.getPositionPiece(this);
+		int getX = Helper.getXfromString(positionPiece);
+		int getY = Helper.getYfromString(positionPiece);
+
+		for (int i = 0; i < 8; i++) {
+			switch (i) {
+				// Déplacement d'un cavalier
+				case 0:
+					toX = getX + 2;
+					toY = getY + 1;
+					break;
+				case 1:
+					toX = getX + 2;
+					toY = getY - 1;
+					break;
+				case 2:
+					toX = getX - 2;
+					toY = getY + 1;
+					break;
+				case 3:
+					toX = getX - 2;
+					toY = getY - 1;
+					break;
+				case 4:
+					toX = getX + 1;
+					toY = getY + 2;
+					break;
+				case 5:
+					toX = getX - 1;
+					toY = getY + 2;
+					break;
+				case 6:
+					toX = getX - 1;
+					toY = getY + 2;
+					break;
+				case 7:
+					toX = getX - 1;
+					toY = getY + 2;
+					break;
+	
+				default:
+					break;
+			}
+		
+
+			if (i == 0) {
+				
+			}
+			if (i == 1) {
+			}
+			if (i == 2) {
+			}
+			if (i == 3) {
+			}
+			if (i == 4) {
+			}
+			if (i == 5) {
+			}
+			if (i == 6) {
+				toX = getX - 1;
+				toY = getY - 2;
+			}
+			if (i == 7) {
+				toX = getX + 1;
+				toY = getY - 2;
+			}
+
+			Move move = checkThis(toX, toY, chessboard);
+
+			if (move != null)
+				moves.add(move);
+
+		}
+		return false;
+	}
 
 	// =========================================================================
 	// OVERRIDES

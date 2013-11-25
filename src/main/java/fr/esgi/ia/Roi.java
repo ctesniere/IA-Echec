@@ -104,7 +104,7 @@ public class Roi extends Piece {
 				toY = getY - 1;
 			}
 
-			Move move = checkThis(toX, toY, chessboard);
+			Move move = checkThis(toX, toY, chessboard, false);
 
 			if (move != null)
 				moves.add(move);
