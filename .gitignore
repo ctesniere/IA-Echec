@@ -1,5 +1,5 @@
 # Divers
-*/target/
+target/
 *.buildpath
 *.settings
 *.classpath
