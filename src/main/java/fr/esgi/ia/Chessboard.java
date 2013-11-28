@@ -203,7 +203,7 @@ public class Chessboard implements Cloneable {
 		} else {
 			listPiece = blacks;
 		}
-		
+
 		// Parcours les pièces afin de lister les mouvements possibles
 		boolean existRoi = false;
 		for (Piece piece : listPiece) {
@@ -217,7 +217,7 @@ public class Chessboard implements Cloneable {
 				}
 			}
 		}
-		
+
 		// Si il n'y a plus de roi alors la partie s'arrete
 		if (!existRoi)
 			moves = new ArrayList<Move>();
