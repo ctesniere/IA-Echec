@@ -88,7 +88,8 @@ abstract public class Piece {
 	 * @param chessboard Actuel chessboard
 	 * @return A Move or NULL.
 	 */
-	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion, boolean inDanger, Boolean color) {
+	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion,
+			boolean inDanger, Boolean color) {
 
 		Piece destination = chessboard.getPiece(toX, toY);
 
@@ -111,8 +112,8 @@ abstract public class Piece {
 				move.setAttack(true); // Mouvement d'attaque
 			}
 		}
-		
-		if(validationMouv) {
+
+		if (validationMouv) {
 			chessboard.generateAllPossibleMoves(!color);
 		}
 
@@ -122,7 +123,7 @@ abstract public class Piece {
 		else
 			return null;
 	}
-	
+
 	/**
 	 * @see Piece#checkThis(int, int, Chessboard, boolean, boolean, Boolean)
 	 */
@@ -151,7 +152,7 @@ abstract public class Piece {
 
 		for (int i = 0; i < 8; i++) {
 			switch (i) {
-				// Déplacement d'un cavalier
+			// Déplacement d'un cavalier
 				case 0:
 					toX = getX + 2;
 					toY = getY + 1;
@@ -184,14 +185,13 @@ abstract public class Piece {
 					toX = getX - 1;
 					toY = getY + 2;
 					break;
-	
+
 				default:
 					break;
 			}
-		
 
 			if (i == 0) {
-				
+
 			}
 			if (i == 1) {
 			}
