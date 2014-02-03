@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ctesniere/ia-echec.png?label=ready)](https://waffle.io/ctesniere/ia-echec)
 # IA Echec
 [![Build Status](https://travis-ci.org/ctesniere/IA-Echec.png?branch=master)](https://travis-ci.org/ctesniere/IA-Echec)
 
