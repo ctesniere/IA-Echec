@@ -5,29 +5,17 @@ package fr.esgi.ia;
  * 
  * @author Cédric TESNIERE
  */
-abstract public class Algorithm {
-
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
+public abstract class Algorithm {
 
 	protected int profondeur;
 
-	private static boolean black = false;
+	public static final boolean BLACK = false;
 
-	private static boolean white = true;
-
-	// =========================================================================
-	// CONSTRUCTORS
-	// =========================================================================
+	public static final boolean WHITE = true;
 
 	public Algorithm(int profondeur) {
 		setProfondeur(profondeur);
 	}
-
-	// =========================================================================
-	// METHODS
-	// =========================================================================
 
 	/**
 	 * Return to me the best move that can be done.
@@ -36,15 +24,7 @@ abstract public class Algorithm {
 	 * @param color
 	 * @return The best move or NULL if no move is possible
 	 */
-	abstract public Move chooseMove(Chessboard chessboard, boolean color);
-
-	// =========================================================================
-	// OVERRIDES
-	// =========================================================================
-
-	// =========================================================================
-	// GETTERS & SETTERS
-	// =========================================================================
+	public abstract Move chooseMove(Chessboard chessboard, boolean color);
 
 	public int getProfondeur() {
 		return profondeur;
@@ -52,22 +32,6 @@ abstract public class Algorithm {
 
 	public void setProfondeur(int profondeur) {
 		this.profondeur = profondeur;
-	}
-
-	public static boolean isBlack() {
-		return black;
-	}
-
-	public static void setBlack(boolean black) {
-		Algorithm.black = black;
-	}
-
-	public static boolean isWhite() {
-		return white;
-	}
-
-	public static void setWhite(boolean white) {
-		Algorithm.white = white;
 	}
 
 }

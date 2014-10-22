@@ -42,7 +42,7 @@ public class Chevalier extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Chevalier myClone = new Chevalier(getId(), isColor());
+		final Chevalier myClone = new Chevalier(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
@@ -59,11 +59,11 @@ public class Chevalier extends Piece {
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = -1, toY = -1;
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		for (int i = 0; i < 8; i++) {
 
@@ -100,10 +100,11 @@ public class Chevalier extends Piece {
 				toY = getY - 2;
 			}
 
-			Move move = checkThis(toX, toY, chessboard);
+			final Move move = checkThis(toX, toY, chessboard);
 
-			if (move != null)
+			if (move != null) {
 				moves.add(move);
+			}
 
 		}
 

@@ -1,5 +1,8 @@
 package fr.esgi.ia;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -9,13 +12,7 @@ import java.util.ArrayList;
  */
 public class AlphaBeta extends Algorithm {
 
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
-
-	// =========================================================================
-	// CONSTRUCTORS
-	// =========================================================================
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Constructeur par défaut
@@ -25,10 +22,6 @@ public class AlphaBeta extends Algorithm {
 	public AlphaBeta(int profondeur) {
 		super(profondeur);
 	}
-
-	// =========================================================================
-	// METHODS
-	// =========================================================================
 
 	/**
 	 * Algorithme Alpha beta
@@ -53,14 +46,14 @@ public class AlphaBeta extends Algorithm {
 
 		// Génère tous les fils de ce noeud (tous les coups possibles pour cette
 		// couleur sur cet échiquier)
-		ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
+		final ArrayList<Move> allPossibleMove = chessValue.getActualChessboardClone()
 				.generateAllPossibleMoves(color);
 		printAllPossibleMove(allPossibleMove, counter, chessValue);
 
-		for (Move thisMove : allPossibleMove) {
+		for (final Move thisMove : allPossibleMove) {
 
 			// Definie une valeur au noeud
-			ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
+			final ChessboardValue thisSon = new ChessboardValue(chessValue.getActualChessboardClone(),
 					thisMove, chessValue.getMoves());
 
 			printThisMoveNoeuds(thisMove, thisSon, counter);
@@ -75,15 +68,9 @@ public class AlphaBeta extends Algorithm {
 		}
 
 		if (Helper.isColorWhite(color)) {
-			if (beta.getValue() <= alpha.getValue())
-				return beta;
-			else
-				return alpha;
+			return beta.getValue() <= alpha.getValue() ? beta : alpha;
 		} else { // Retourne le minimum (Alpha)
-			if (beta.getValue() <= alpha.getValue())
-				return alpha;
-			else
-				return beta;
+			return beta.getValue() <= alpha.getValue() ? alpha : beta;
 		}
 	}
 
@@ -99,54 +86,46 @@ public class AlphaBeta extends Algorithm {
 
 		// Affiche les mouvements possible du premier noeud
 		if (counter == 1) {
-			for (Move thisMove : allPossibleMove) {
-				Piece piece = chessValue.getActualChessboardClone().getPiece(thisMove.getStartX(),
+			for (final Move thisMove : allPossibleMove) {
+				final Piece piece = chessValue.getActualChessboardClone().getPiece(thisMove.getStartX(),
 						thisMove.getStartY());
-				System.out.println(piece.getClass().getSimpleName() + "("
+				LOGGER.info(piece.getClass().getSimpleName() + "("
 						+ Helper.getStringFromPosition(thisMove.getStartX(), thisMove.getStartY())
 						+ ") -> " + "("
 						+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndY())
 						+ ")");
 			}
-			System.out.println("-----");
+			LOGGER.info("-----");
 		}
 	}
 
 	public void printThisMoveNoeuds(Move thisMove, ChessboardValue thisSon, int counter) {
 		for (int i = 10; i < (counter * 10); i++) {
-			System.out.print(" ");
+			LOGGER.info(" ");
 		}
-		System.out.println("Depth: " + counter + "; Mouv: "
+		LOGGER.info("Depth: " + counter + "; Mouv: "
 				+ Helper.getStringFromPosition(thisMove.getStartX(), thisMove.getStartY()) + " -> "
 				+ Helper.getStringFromPosition(thisMove.getEndX(), thisMove.getEndY())
 				+ "; valeur: " + thisSon.getValue());
 	}
 
-	// =========================================================================
-	// OVERRIDES
-	// =========================================================================
-
 	@Override
 	public Move chooseMove(Chessboard chessboard, boolean color) {
 
 		// Démarrage de l'échiquier
-		ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
+		final ChessboardValue chessboardValue = new ChessboardValue(chessboard, null, null);
 
 		// Création de la variable l'alpha
-		ChessboardValue alpha = new ChessboardValue(chessboard, null, null);
+		final ChessboardValue alpha = new ChessboardValue(chessboard, null, null);
 		alpha.setValue(Integer.MIN_VALUE);
 
 		// Création de la variable beta
-		ChessboardValue beta = new ChessboardValue(chessboard, null, null);
+		final ChessboardValue beta = new ChessboardValue(chessboard, null, null);
 		beta.setValue(Integer.MAX_VALUE);
 
 		// AlphaBeta pruning
-		ChessboardValue choice = alphaBetaAlg(chessboardValue, alpha, beta, color, 0);
+		final ChessboardValue choice = alphaBetaAlg(chessboardValue, alpha, beta, color, 0);
 
 		return choice.getBestMove();
 	}
-
-	// =========================================================================
-	// GETTERS & SETTERS
-	// =========================================================================
 }

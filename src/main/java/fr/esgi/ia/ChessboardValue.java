@@ -49,9 +49,10 @@ public class ChessboardValue {
 			actualChessboardClone.doMove(move);
 
 			// Copie des mouvements
-			if (earlyMoves != null && earlyMoves.size() > 0) {
-				for (Move thisMove : earlyMoves)
+			if (earlyMoves != null && !earlyMoves.isEmpty()) {
+				for (final Move thisMove : earlyMoves) {
 					moves.add(thisMove);
+				}
 			}
 
 			// Ajout du mouvement
@@ -72,10 +73,11 @@ public class ChessboardValue {
 	 * @return The best possible move
 	 */
 	public Move getBestMove() {
-		if (getMoves().isEmpty())
+		if (getMoves().isEmpty()) {
 			return null;
-		else
+		} else {
 			return getMoves().get(0);
+		}
 	}
 
 	/**
@@ -86,22 +88,27 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmin(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
-			if (getValue() < elseVChessboard.getValue())
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null)) {
+			if (getValue() < elseVChessboard.getValue()) {
 				return this;
-			else
+			} else {
 				return elseVChessboard;
+			}
+		}
 
-		if (lastMove == null)
+		if (lastMove == null) {
 			return elseVChessboard;
+		}
 
-		if (elseVChessboard.getLastMove() == null)
+		if (elseVChessboard.getLastMove() == null) {
 			return this;
+		}
 
-		if (getValue() < elseVChessboard.getValue())
+		if (getValue() < elseVChessboard.getValue()) {
 			return this;
-		else
+		} else {
 			return elseVChessboard;
+		}
 	}
 
 	/**
@@ -112,29 +119,31 @@ public class ChessboardValue {
 	 */
 	public ChessboardValue VSmax(ChessboardValue elseVChessboard) {
 
-		if ((lastMove == null) && (elseVChessboard.getLastMove() == null))
-			if (getValue() > elseVChessboard.getValue())
+		if ((lastMove == null) && (elseVChessboard.getLastMove() == null)) {
+			if (getValue() > elseVChessboard.getValue()) {
 				return this;
-			else
+			} else {
 				return elseVChessboard;
+			}
+		}
 
-		if (lastMove == null)
+		if (lastMove == null) {
 			return elseVChessboard;
+		}
 
-		if (elseVChessboard.getLastMove() == null)
+		if (elseVChessboard.getLastMove() == null) {
 			return this;
+		}
 
-		if (getValue() > elseVChessboard.getValue())
+		if (getValue() > elseVChessboard.getValue()) {
 			return this;
-		else
+		} else {
 			return elseVChessboard;
+		}
 	}
 
 	public boolean isLastMoveValid() {
-		if (lastMove != null)
-			return lastMove.checkValidity();
-		else
-			return false;
+		return lastMove != null && lastMove.checkValidity();
 	}
 
 	/**
@@ -154,7 +163,7 @@ public class ChessboardValue {
 
 				// Si la case n'est pas un vide
 				if (getActualChessboardClone().getPiece(x, y) != null) {
-					Piece piece = getActualChessboardClone().getPiece(x, y);
+					final Piece piece = getActualChessboardClone().getPiece(x, y);
 
 					// Si la pièce n'est pas en danger et il est ma couleur
 					if ((!piece.isInDanger()) && (piece.isColor() == color)) {
@@ -170,7 +179,7 @@ public class ChessboardValue {
 								temp = piece.getValue();
 								val = val + temp;
 							} else { // Si une pièce est un autre
-								if (piece.isColor() == Algorithm.isBlack()) {
+								if (piece.isColor() == Algorithm.BLACK) {
 									// D'un avantage pour le blanc 10
 									temp = piece.getValue();
 									val = val + temp + 10;

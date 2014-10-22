@@ -43,7 +43,7 @@ public class Tour extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Tour myClone = new Tour(getId(), isColor());
+		final Tour myClone = new Tour(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
@@ -61,15 +61,16 @@ public class Tour extends Piece {
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = -1, toY = -1;
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		// 4 direction
 		for (int direction = 0; direction < 4; direction++)
 			// Max 8 moves
+		{
 			for (int length = 1; length < 9; length++) {
 
 				if (direction == 0) {
@@ -89,17 +90,20 @@ public class Tour extends Piece {
 					toY = getY - length;
 				}
 
-				Move move = checkThis(toX, toY, chessboard);
+				final Move move = checkThis(toX, toY, chessboard);
 
 				// Si déplacement est nul, plus possible de ce déplacer dans
 				// cette direction pour la tour
 				if (move != null) {
 					moves.add(move);
-					if (move.isAttack())
+					if (move.isAttack()) {
 						break;
-				} else
+					}
+				} else {
 					break;
+				}
 			}
+		}
 
 		return moves;
 	}

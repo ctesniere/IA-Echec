@@ -50,10 +50,11 @@ public class Export {
 	// =========================================================================
 
 	public String getColorInString(boolean color) {
-		if (Helper.isColorWhite(color))
+		if (Helper.isColorWhite(color)) {
 			return "White";
-		else
+		} else {
 			return "Black";
+		}
 	}
 
 	// =========================================================================

@@ -13,25 +13,9 @@ import fr.esgi.export.Export;
  */
 public class IA {
 
-	// =========================================================================
-	// ATTRIBUTES
-	// =========================================================================
-
 	private boolean myColor;
 
 	private Chessboard globalChessboard;
-
-	// =========================================================================
-	// CONSTRUCTORS
-	// =========================================================================
-
-	public IA() {
-
-	}
-
-	// =========================================================================
-	// METHODS
-	// =========================================================================
 
 	/**
 	 * Appel un algorithme est lui donne la profondeur (difficulté de l'ia) et
@@ -46,24 +30,24 @@ public class IA {
 	public String play(boolean myColor, int depth, Chessboard chessboard) {
 
 		String output = "";
-		Algorithm anAlgorithm = new AlphaBeta(depth);
+		final Algorithm anAlgorithm = new AlphaBeta(depth);
 
 		setGlobalChessboard(chessboard);
 		setMyColor(myColor);
 
 		// Boucle principale
 		while (true) {
-			Move myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
+			final Move myMove = anAlgorithm.chooseMove(getGlobalChessboard(), isMyColor());
 
 			if (myMove == null) {
 				output += "ERROR: Pas de mouvement possible.";
 				break; // Sort de la boucle
 			} else {
 				getGlobalChessboard().doMove(myMove);
-				Export export = new Export(getGlobalChessboard(), myMove);
+				final Export export = new Export(getGlobalChessboard(), myMove);
 
 				try {
-					ObjectMapper mapper = new ObjectMapper();
+					final ObjectMapper mapper = new ObjectMapper();
 					output = mapper.writeValueAsString(export);
 				} catch (JsonGenerationException e) {
 					output = e.getMessage();
@@ -78,10 +62,6 @@ public class IA {
 		}
 		return output;
 	}
-
-	// =========================================================================
-	// GETTERS & SETTERS
-	// =========================================================================
 
 	public boolean isMyColor() {
 		return myColor;

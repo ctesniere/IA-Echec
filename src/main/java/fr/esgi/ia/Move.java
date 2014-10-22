@@ -50,12 +50,8 @@ public final class Move {
 	 * @return true si c'est valide, sinon false
 	 */
 	public boolean checkValidity() {
-
-		if (Helper.getStringFromPosition(startX, startY) != null
-				&& Helper.getStringFromPosition(endX, endY) != null)
-			return true;
-		else
-			return false;
+		return Helper.getStringFromPosition(startX, startY) != null
+				&& Helper.getStringFromPosition(endX, endY) != null;
 	}
 
 	/**
@@ -65,28 +61,37 @@ public final class Move {
 	 */
 	public String moveOutputString() {
 
-		String positionStart;
-		String positionEnd;
+		final String positionStart;
+		final String positionEnd;
 
 		positionStart = Helper.getStringFromPosition(startX, startY);
 		positionEnd = Helper.getStringFromPosition(endX, endY);
 
 		if (checkValidity()) {
-			if (promo == true)
-				return "move " + positionStart + positionEnd + getPromotion();
-			else
-				return "move " + positionStart + positionEnd;
-		} else
-			return "Illegal move";
+			if (promo) {
+				{
+					return "move " + positionStart + positionEnd + getPromotion();
+				}
+			} else {
+				{
+					return "move " + positionStart + positionEnd;
+				}
+			}
+		} else {
+			{
+				return "Illegal move";
+			}
+		}
 	}
 
 	// TODO : revoir cette méthode
 	public void setPromo() {
 
-		if (isColor() == true)
+		if (isColor()) {
 			promo = true;
-		else
+		} else {
 			setPromotion("q");
+		}
 	}
 
 	public static Move movePromotion(Move move, Chessboard chessboard) {
@@ -94,11 +99,12 @@ public final class Move {
 		// Si le mouvement me faut pour y = 7 ou y = 0
 		if ((move.isColor() && move.getEndY() == 7) || (!move.isColor() && move.getEndY() == 0)) {
 
-			Piece piece = chessboard.getPiece(move.getStartX(), move.getStartY());
+			final Piece piece = chessboard.getPiece(move.getStartX(), move.getStartY());
 
 			// Si c'était un gage de faire un geste
-			if ((piece != null) && (piece.getClass().equals(Pion.class)))
+			if ((piece != null) && (piece.getClass().equals(Pion.class))) {
 				move.setPromo();
+			}
 		}
 		return move;
 	}

@@ -46,7 +46,7 @@ public class Roi extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Roi myClone = new Roi(getId(), isColor());
+		final Roi myClone = new Roi(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
@@ -63,11 +63,11 @@ public class Roi extends Piece {
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = -1, toY = -1;
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		for (int direction = 0; direction < 8; direction++) {
 
@@ -104,10 +104,11 @@ public class Roi extends Piece {
 				toY = getY - 1;
 			}
 
-			Move move = checkThis(toX, toY, chessboard);
+			final Move move = checkThis(toX, toY, chessboard, false);
 
-			if (move != null)
+			if (move != null) {
 				moves.add(move);
+			}
 
 		}
 

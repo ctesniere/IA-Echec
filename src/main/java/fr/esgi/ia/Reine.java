@@ -52,7 +52,7 @@ public class Reine extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Reine myClone = new Reine(getId(), isColor());
+		final Reine myClone = new Reine(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
@@ -70,15 +70,16 @@ public class Reine extends Piece {
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
 		int toX = -1, toY = -1;
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		// 8 direction
 		for (int direction = 0; direction < 8; direction++)
 			// Max 8 moves
+		{
 			for (int length = 1; length < 9; length++) {
 
 				if (direction == 0) {
@@ -114,17 +115,20 @@ public class Reine extends Piece {
 					toY = getY - length;
 				}
 
-				Move move = checkThis(toX, toY, chessboard);
+				final Move move = checkThis(toX, toY, chessboard);
 
 				// Si déplacement est nul, plus possible de ce déplacer dans
 				// cette direction pour la reine
 				if (move != null) {
 					moves.add(move);
-					if (move.isAttack())
+					if (move.isAttack()) {
 						break;
-				} else
+					}
+				} else {
 					break;
+				}
 			}
+		}
 
 		return moves;
 	}

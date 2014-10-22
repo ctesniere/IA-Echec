@@ -48,7 +48,7 @@ public class Pion extends Piece {
 	 */
 	@Override
 	public Object clone() {
-		Pion myClone = new Pion(getId(), isColor());
+		final Pion myClone = new Pion(getId(), isColor());
 		myClone.setInDanger(isInDanger());
 		myClone.setEnemy(getEnemy());
 		myClone.setMoved(isMoved());
@@ -64,14 +64,14 @@ public class Pion extends Piece {
 	@Override
 	public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard) {
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 		int toX = getX, toY = getY;
 
 		// Avance d'une case
 		toY += directionMovementY();
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 		Move move = checkThis(toX, toY, chessboard, false);
 
 		// Si aucune piece au nouvelle position du pion

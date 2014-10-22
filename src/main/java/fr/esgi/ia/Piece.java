@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Cédric TESNIERE
  */
-abstract public class Piece {
+public abstract class Piece {
 
 	// =========================================================================
 	// ATTRIBUTES
@@ -44,10 +44,11 @@ abstract public class Piece {
 		setId(id);
 		setColor(color);
 
-		if (isColor() == false)
-			setValue(value * (-1));
-		else
+		if (isColor()) {
 			setValue(value);
+		} else {
+			setValue(value * (-1));
+		}
 
 	}
 
@@ -57,8 +58,9 @@ abstract public class Piece {
 
 	public void noMoreInDanger() {
 		setEnemy(getEnemy() - 1);
-		if (getEnemy() == 0)
+		if (getEnemy() == 0) {
 			setInDanger(false);
+		}
 	}
 
 	public void inDanger() {
@@ -72,10 +74,11 @@ abstract public class Piece {
 	 * @return Retourne -1 ou 1 selon la couleur de la piece
 	 */
 	public int directionMovementY() {
-		if (Helper.isColorWhite(isColor()))
+		if (Helper.isColorWhite(isColor())) {
 			return 1;
-		else
+		} else {
 			return -1;
+		}
 	}
 
 	/**
@@ -91,23 +94,24 @@ abstract public class Piece {
 	public Move checkThis(int toX, int toY, Chessboard chessboard, boolean diagonalAttackPion,
 			boolean inDanger, Boolean color) {
 
-		Piece destination = chessboard.getPiece(toX, toY);
+		final Piece destination = chessboard.getPiece(toX, toY);
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		// Création du mouvement
-		Move move = new Move(this.getClass().getSimpleName(), getX, getY, toX, toY, isColor());
+		final Move move = new Move(getClass().getSimpleName(), getX, getY, toX, toY, isColor());
 
 		// Si c'est une pièce enemie ou si la case est vide
 		boolean validationMouv = false;
 		if (destination == null) {
-			if (!diagonalAttackPion)
+			if (!diagonalAttackPion) {
 				validationMouv = true;
+			}
 		} else {
 			if (destination.isColor() != isColor()
-					&& (!this.getClass().equals(Pion.class) || diagonalAttackPion)) {
+					&& (!getClass().equals(Pion.class) || diagonalAttackPion)) {
 				validationMouv = true;
 				move.setAttack(true); // Mouvement d'attaque
 			}
@@ -118,10 +122,11 @@ abstract public class Piece {
 		}
 
 		// Si le mouvement est valide, on le retourne
-		if (move.checkValidity() && validationMouv)
+		if (move.checkValidity() && validationMouv) {
 			return move;
-		else
+		} else {
 			return null;
+		}
 	}
 
 	/**
@@ -141,14 +146,14 @@ abstract public class Piece {
 	/**
 	 * Cette fonction doit être mise en oeuvre dans chaque sous-classe.
 	 */
-	abstract public ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard);
+	public abstract ArrayList<Move> generateMovesForThisPiece(Chessboard chessboard);
 
 	public boolean pieceInDanger(int toX, int toY, Chessboard chessboard) {
-		ArrayList<Move> moves = new ArrayList<Move>();
+		final ArrayList<Move> moves = new ArrayList<Move>();
 
-		String positionPiece = chessboard.getPositionPiece(this);
-		int getX = Helper.getXfromString(positionPiece);
-		int getY = Helper.getYfromString(positionPiece);
+		final String positionPiece = chessboard.getPositionPiece(this);
+		final int getX = Helper.getXfromString(positionPiece);
+		final int getY = Helper.getYfromString(positionPiece);
 
 		for (int i = 0; i < 8; i++) {
 			switch (i) {
@@ -212,10 +217,11 @@ abstract public class Piece {
 				toY = getY - 2;
 			}
 
-			Move move = checkThis(toX, toY, chessboard);
+			final Move move = checkThis(toX, toY, chessboard);
 
-			if (move != null)
+			if (move != null) {
 				moves.add(move);
+			}
 
 		}
 		return false;
@@ -253,9 +259,8 @@ abstract public class Piece {
 		return inDanger;
 	}
 
-	protected boolean setColor(boolean color) {
+	protected void setColor(boolean color) {
 		this.color = color;
-		return color;
 	}
 
 	public boolean isColor() {

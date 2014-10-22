@@ -72,13 +72,15 @@ public class Chessboard implements Cloneable {
 		setWhites(new ArrayList<Piece>());
 
 		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++)
-				if (chessboard[y][x] != null)
+			for (int x = 0; x < 8; x++) {
+				if (chessboard[y][x] != null) {
 					if (chessboard[y][x].isColor()) {
 						whites.add(chessboard[y][x]);
 					} else {
 						blacks.add(chessboard[y][x]);
 					}
+				}
+			}
 		}
 	}
 
@@ -89,7 +91,8 @@ public class Chessboard implements Cloneable {
 	 */
 	public int generateID() {
 
-		int min = 1, max = 40;
+		final int min = 1;
+		final int max = 40;
 		int randomNumber;
 
 		// Continue jusqu'a trouver un nombre unique
@@ -97,7 +100,7 @@ public class Chessboard implements Cloneable {
 			boolean numberExist = false;
 
 			// Genére un nombre aleatoire
-			Random rand = new Random();
+			final Random rand = new Random();
 			randomNumber = rand.nextInt(max - min + 1) + min;
 
 			// Vérifie que le nombre aleatoire generer n'est pas deja utiliser
@@ -109,8 +112,9 @@ public class Chessboard implements Cloneable {
 				}
 			}
 
-			if (!numberExist)
+			if (!numberExist) {
 				break;
+			}
 		}
 
 		return randomNumber;
@@ -124,7 +128,7 @@ public class Chessboard implements Cloneable {
 	 */
 	public void doMove(Move thisMove) {
 
-		Piece piece = getPiece(thisMove.getStartX(), thisMove.getStartY());
+		final Piece piece = getPiece(thisMove.getStartX(), thisMove.getStartY());
 
 		/* Supprime l'etat de danger */
 		// TODO VERIFIER SI CES PIECES PEUVENT ETRE EN DANGER PAR UNE AUTRE DE
@@ -135,8 +139,8 @@ public class Chessboard implements Cloneable {
 
 		// Pour chaque mouvement avant le deplacement, trouver si elle mange
 		// quelque chose et la mettre en etat de hors de danger
-		for (Move move : moves) {
-			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+		for (final Move move : moves) {
+			final Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.noMoreInDanger();
 			}
@@ -145,10 +149,11 @@ public class Chessboard implements Cloneable {
 		// Supprime la pièce qui va ce faire manger de la liste des pieces
 		// (blacks/whites) de sa couleur
 		if (chessboard[thisMove.getEndY()][thisMove.getEndX()] != null) {
-			if (Helper.isColorWhite(piece.isColor()))
+			if (Helper.isColorWhite(piece.isColor())) {
 				blacks.remove(chessboard[thisMove.getEndY()][thisMove.getEndX()]);
-			else
+			} else {
 				whites.remove(chessboard[thisMove.getEndY()][thisMove.getEndX()]);
+			}
 		}
 
 		// Déplacement de la pièce
@@ -164,8 +169,8 @@ public class Chessboard implements Cloneable {
 		moves = piece.generateMovesForThisPiece(this);
 
 		// For each move find if it eats something
-		for (Move move : moves) {
-			Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
+		for (final Move move : moves) {
+			final Piece enemyPiece = chessboard[move.getEndY()][move.getEndX()];
 			if ((enemyPiece != null) && (enemyPiece.isColor() != piece.isColor())) {
 				enemyPiece.inDanger();
 			}
@@ -195,7 +200,7 @@ public class Chessboard implements Cloneable {
 	 */
 	public ArrayList<Move> generateAllPossibleMoves(boolean color) {
 		ArrayList<Move> moves = new ArrayList<Move>();
-		List<Piece> listPiece;
+		final List<Piece> listPiece;
 
 		// Sélectionne la liste des pièces selon la couleur
 		if (Helper.isColorWhite(color)) {
@@ -206,21 +211,22 @@ public class Chessboard implements Cloneable {
 
 		// Parcours les pièces afin de lister les mouvements possibles
 		boolean existRoi = false;
-		for (Piece piece : listPiece) {
+		for (final Piece piece : listPiece) {
 			if (piece.getClass().equals(Roi.class)) {
 				existRoi = true;
 			}
-			ArrayList<Move> movesForThisPiece = piece.generateMovesForThisPiece(this);
+			final ArrayList<Move> movesForThisPiece = piece.generateMovesForThisPiece(this);
 			if (!(movesForThisPiece.isEmpty())) {
-				for (Move move : movesForThisPiece) {
+				for (final Move move : movesForThisPiece) {
 					moves.add(move);
 				}
 			}
 		}
 
 		// Si il n'y a plus de roi alors la partie s'arrete
-		if (!existRoi)
+		if (!existRoi) {
 			moves = new ArrayList<Move>();
+		}
 
 		if (Helper.isColorWhite(color)) {
 			setNbWhiteMoves(moves.size());
@@ -238,9 +244,9 @@ public class Chessboard implements Cloneable {
 	 * @param king
 	 * @param queen
 	 * @param crazy
-	 * @param _knight
-	 * @param _tower
-	 * @param _pawn
+	 * @param knight
+	 * @param tower
+	 * @param pawn
 	 * @return
 	 */
 	public void insertPieceChessboard(boolean color, String king, String queen, String crazy,
@@ -250,68 +256,74 @@ public class Chessboard implements Cloneable {
 		int y, x;
 
 		// Traitement pour le roi
-		if (!king.equals("null")) {
+		if (!"null".equals(king)) {
 			listLocation = king.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Roi(generateID(), color);
+				}
 			}
 		}
 
 		// Traitement pour la reine
-		if (!queen.equals("null")) {
+		if (!"null".equals(queen)) {
 			listLocation = queen.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Reine(generateID(), color);
+				}
 			}
 		}
 
 		// Traitement pour le fou
-		if (!crazy.equals("null")) {
+		if (!"null".equals(crazy)) {
 			listLocation = crazy.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Fou(generateID(), color);
+				}
 			}
 		}
 
 		// Traitement pour le cavalier
-		if (!knight.equals("null")) {
+		if (!"null".equals(knight)) {
 			listLocation = knight.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Chevalier(generateID(), color);
+				}
 			}
 		}
 
 		// Traitement pour la tour
-		if (!tower.equals("null")) {
+		if (!"null".equals(tower)) {
 			listLocation = tower.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Tour(generateID(), color);
+				}
 			}
 		}
 
 		// Traitement pour le pion
-		if (!pawn.equals("null")) {
+		if (!"null".equals(pawn)) {
 			listLocation = pawn.split(":");
-			for (int i = 0; i < listLocation.length; i++) {
-				y = Helper.getYfromString(listLocation[i]);
-				x = Helper.getXfromString(listLocation[i]);
-				if (Helper.getStringFromPosition(x, y) != null)
+			for (final String aListLocation : listLocation) {
+				y = Helper.getYfromString(aListLocation);
+				x = Helper.getXfromString(aListLocation);
+				if (Helper.getStringFromPosition(x, y) != null) {
 					chessboard[y][x] = new Pion(generateID(), color);
+				}
 			}
 		}
 	}
@@ -339,12 +351,12 @@ public class Chessboard implements Cloneable {
 
 	@Override
 	public Object clone() {
-		Chessboard chessboardClone = new Chessboard(getNbWhiteMoves(), getNbBlackMoves());
+		final Chessboard chessboardClone = new Chessboard(getNbWhiteMoves(), getNbBlackMoves());
 
 		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++)
+			for (int y = 0; y < 8; y++) {
 				if (chessboard[y][x] != null) {
-					Piece pieceClone = (Piece) chessboard[y][x].clone();
+					final Piece pieceClone = (Piece) chessboard[y][x].clone();
 					chessboardClone.chessboard[y][x] = pieceClone;
 					if (Helper.isColorWhite(pieceClone.isColor())) {
 						chessboardClone.whites.add(pieceClone);
@@ -354,6 +366,7 @@ public class Chessboard implements Cloneable {
 				} else {
 					chessboardClone.chessboard[y][x] = null;
 				}
+			}
 		}
 		return chessboardClone;
 	}
