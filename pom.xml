@@ -9,7 +9,7 @@
 	<url>https://bitbucket.org/ctesniere/iaechec</url>
 
 	<properties>
-		<spring.version>3.2.2.RELEASE</spring.version>
+		<spring.version>4.3.15.RELEASE</spring.version>
 		<jackson.version>1.9.10</jackson.version>
 		<jdk.version>1.6</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
